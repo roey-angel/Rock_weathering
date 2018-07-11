@@ -5,7 +5,6 @@ author: "Roey Angel"
 date: "`r Sys.Date()`"
 bibliography: references.bib
 link-citations: yes
-csl: fems-microbiology-ecology.csl
 output:
   rmarkdown::html_document:
     toc: true
