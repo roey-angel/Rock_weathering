@@ -50,6 +50,7 @@ repo <- "http://cran.wu.ac.at"
   "doParallel", # parallel backend for the foreach/%dopar% function
   "BiodiversityR", # Package for Community Ecology and Suitability Analysis
   # "ade4", # Analysis of Ecological Data
+  "hexbin", # Hexagonal Binning Routines
   "ggtern" # An Extension to 'ggplot2', for the Creation of Ternary Diagrams
 ) 
 
@@ -96,7 +97,7 @@ if (any(!.github_inst)) {
 # Load packages into session, and print package version
 (loaded.libs <- sapply(c(.cran_libs, .bioc_libs, .github_lib_names), require, character.only = TRUE))
 if (!all(loaded.libs)) {stop(paste("Package(s):", names(loaded.libs[loaded.libs == FALSE]), "could not be loaded"))}
-sapply(c(.cran_libs, .bioc_libs, .github_lib_names), packageVersion)
+# sapply(c(.cran_libs, .bioc_libs, .github_lib_names), packageVersion)
 ```
 
 ```{r style settings, include=F}
@@ -108,10 +109,10 @@ opts_chunk$set(
   cache = TRUE,
   dev = graphic_device,
   fig.ext = "svg",
-  #  fig.width = 12,
-  #  fig.height = 8,
-  cache.path = "Arid_rock_weathering_cache/",
-  fig.path = "Arid_rock_weathering_figures/"
+  #  fig.width=12,
+  #  fig.height=8,
+  cache.path = "Rock_weathering_cache/",
+  fig.path = "Rock_weathering_figures/"
 )
 
 f_name <- "DejaVu Sans" #sub("\\s//", "", f_name)
@@ -691,7 +692,7 @@ sort_order <- as.numeric(gsub("OTU([0-9]+)", "\\1", colnames(Rock_weathering_OTU
 Rock_weathering_OTUmat <- Rock_weathering_OTUmat[, order(sort_order)]
 row.names(Rock_weathering_OTUmat) <- gsub("(.*)Nimrod[0-9]+|Osnat[0-9]+", "\\1", row.names(Rock_weathering_OTUmat))
 
-Metadata <- read.csv("Data/Arid_rock_weathering_metadata_RA.csv", row.names = 1, header = TRUE)
+Metadata <- read.csv("Data/Rock_weathering_metadata_RA.csv", row.names = 1, header = TRUE)
 # Order abundance_mat samples according to the metadata
 sample_order <- match(row.names(Rock_weathering_OTUmat), row.names(Metadata))
 Rock_weathering_OTUmat %<>% arrange(., sample_order)
@@ -884,7 +885,7 @@ ggplot(prevdf_order_filt2,
 ```
 
 #### Unsupervised filtering by prevalence
-I'll remove all sequences which appear in less than 10% of the samples
+We'll remove all sequences which appear in less than 10% of the samples
 ```{r}
 # Define prevalence threshold as 10% of total samples
 prevalenceThreshold <- 0.1 * nsamples(Rock_weathering_filt)
@@ -913,7 +914,7 @@ sample_data(Rock_weathering_filt3) %>%
 ```
 The figure and table indicate only a small deviation in the number of reads per samples.
 
-```{r mod abundance, cache=T, fig.width=2, fig.asp=.8}
+```{r mod abundance, cache=T, fig.asp=.8}
 (mod1 <- adonis(
   otu_table(Rock_weathering_filt3) ~ Lib.size,
   data = as(sample_data(Rock_weathering_filt3), "data.frame"), 
@@ -954,7 +955,7 @@ adonis(
 )
 PlotLibDist(Rock_weathering_filt3_GMPR)
 ```
-```{r GMPR diag plots, cache=T, fig.width=2, fig.asp=.8}
+```{r GMPR diag plots, cache=T, fig.asp=.8}
 PlotReadHist(as(otu_table(Rock_weathering_filt3_GMPR), "matrix"))
 notAllZero <- (rowSums(t(otu_table(Rock_weathering_filt3_GMPR))) > 0)
 meanSdPlot(as.matrix(log2(t(otu_table(Rock_weathering_filt3_GMPR))[notAllZero, ] + 1)))
@@ -1142,24 +1143,6 @@ Richness_Diversity_long2plot %>%
             SE_PL = sd(Estimate)/sqrt(n())) %>% # calculates the standard error of each group
   kable(.) %>%
   kable_styling(bootstrap_options = c("striped", "hover", "condensed", "responsive"), full_width = F)
-```
-
-```{r print alpha, echo=F}
-p_alpha_file <- "Violin_plot"
-svglite(paste0(p_alpha_file, ".svg"),
-        width = 10, height = 8)
-
-print(p_alpha)
-dev.off()
-
-ggsave(
-  paste0(p_alpha_file, ".png"),
-  p_alpha,
-  device = "png",
-  width = 10,
-  height = 8
-)
-gz(paste0(p_alpha_file, ".svg"), paste0(p_alpha_file, ".svgz"))
 ```
 
 ### Beta diversity
@@ -1463,7 +1446,7 @@ print(p_ternary_hyperarid)
 
 #### Combine plots
 Combine all sequence analysis plots to make Fig. 3
-```{r combine plots}
+```{r combined plots, fig.width=11.69, fig.height=8.27}
 ternary_legend <-
   get_legend(p_ternary_arid)# + theme(legend.direction = "horizontal"))
 ord_legend <- get_legend(p_ord)
@@ -1585,7 +1568,8 @@ Label_text <- bind_cols(
   unique(ALDEx2plot_all[c("Var1", "Var2")]),
   Label = Labels
   )
-
+```
+```{r ALDEx2_combined_plot, cache=T,  fig.width=12, fig.height=10}
 p_aldex2_all <- GGPlotALDExTax(ALDEx2plot_all) +
   facet_grid(Var2 ~ Var1, scales = "free_y") +
   # theme(strip.background = element_blank(), strip.placement = "outside") +
@@ -1595,7 +1579,7 @@ p_aldex2_all <- GGPlotALDExTax(ALDEx2plot_all) +
     hjust   = 1.1,
     vjust   = 1.6
   ) 
-p_aldex2_all
+print(p_aldex2_all)
 ```
 
 ## Other plots
@@ -1669,7 +1653,7 @@ read_csv("Data/desiccation_data.csv") %>%
   select(-c(`Capped Marly dolomite`, `Bare Marly dolomite`)) %>%
   gather(., Sample, `Residual water content (%)`, -`Time (h)`) %>%
   cbind(., str_split(.$Sample, "\\s", simplify = TRUE)) %>%
-  rename("1" = "Crust", "2" = "Rock") ->
+  dplyr::rename("Crust" = "1" , "Rock" = "2") ->
   Desiccation_long
 
 Desiccation_long$Rock %<>% fct_relevel(., "Limestone")
@@ -1718,15 +1702,9 @@ mod_all <- lm(`Residual water content (%)` ~ poly(`Time (h)`, 2, raw = TRUE), da
 mod_treatment <- lm(`Residual water content (%)` ~ poly(`Time (h)`, 2, raw = TRUE) * Crust, data = Desiccation_long[Desiccation_long$Rock == "Dolomite", ])
 anova(mod_all, mod_treatment)
 
-
 kable(Desiccation_mods, 
       digits = 1, 
       caption = "Model coefficients")
-
-p_dessication_file <-
-  "~/Dropbox/Nimrod/rock_soil_dust_paper/Fig_4_desiccation/Fig_4_desiccation"
-svglite(paste0(p_dessication_file, ".svg"),
-        width = 6, height = 5)
 
 p_dessication <-
   ggplot(
@@ -1746,20 +1724,9 @@ p_dessication <-
   scale_x_continuous(limits = c(0, 50), expand = c(0.01, 0.01)) +
   scale_color_manual(values = pom4)
 print(p_dessication)
-dev.off()
-
-ggsave(
-  paste0(p_dessication_file, ".png"),
-  p_dessication,
-  device = "png",
-  width = 6,
-  height = 5
-)
-gz(paste0(p_dessication_file, ".svg"),
-   paste0(p_dessication_file, ".svgz"))
 ```
 
-```{r session_info, echo=T}
+```{r session_info, echo=T, results="markdown"}
 devtools::session_info()
 ```
 
