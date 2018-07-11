@@ -17,7 +17,7 @@ Overview
     │   ├── Rock_weathering_new2_otuTab.txt
     │   └── Rock_weathering_new2_silva.nrv119.taxonomy
     ├── LICENCE.txt          # Copyright information
-    ├── packrat/          # R packages needed by the RMD file
+    ├── packrat.tgz          # R packages needed by the RMD file (needs to be unpacked before running the script)
     ├── README.md          # Overview of the repo
     ├── references.bib          # Bibtex formatted refereces cited in the RMD file
     ├── Results         # Result files generated while running the RMD file
