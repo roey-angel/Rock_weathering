@@ -1,18 +1,18 @@
-#$-N Arid_rock_weathering_generateOTU
+#$-N Rock_weathering_generateOTU
 #$-cwd
 #$-l vf=5G
 #$-m beas
-#$-M angel@microbial-ecology.net
+#$-M roey.angel@bc.cas.cz
 #$-p -1
 #$-pe parallel 8
 
 #!/bin/bash
-#title          :Nimrod_rock_weathering_analysis.sh
-#description    :Analysis of Nimrod_rock_weathering samples
+#title          :Rock_weathering_analysis.sh
+#description    :Analysis of rock_weathering MiSeq sequences
 #author         :Roey Angel
 #date           :20160315
 #version        :1.0    
-#usage          :qsub Nimrod_rock_weathering_analysis.sh ${DATASET} ${PLATFORM} ${DATAFILETYPE} ${AMPLENGTH}
+#usage          :qsub Rock_weathering_analysis.sh ${DATASET} ${PLATFORM} ${DATAFILETYPE} ${AMPLENGTH}
 #notes          :       
 #bash_version   :4.3.30(1)-release
 #============================================================================
@@ -41,9 +41,9 @@ CHIMCHECK="Y"
 # Set paths
 MOTHUR=/home/newapps/mothur/1.36.1/
 USEARCH=/home/newapps/usearch/8.1.1861/
-DBS=~/DBs/		       	
+DBS=~/DBs/ # needs to contains: uchime - gold.fa, Silva.seed_v119.tgz
 SCRIPTS=~/Scripts/MiSeq/
-RUNDIR=/scratch/angel/Hyperarid_erosion/rock_weathering_front_samples/
+RUNDIR=./Rock_weathering/rock_weathering_front_samples/
 # RUNDIR=`pwd`"/"
 WORKDIR=/tmp/${DATASET}_work/
 RESULTSDIR=/tmp/${DATASET}_results/
@@ -195,14 +195,14 @@ echo -e "------------------" >> ${RUNDIR}${DATASET}_Log.txt
 if [[ $CLASSIFY == "Y" ]]
 then
  echo -e "Classifying OTUs:" >> ${RUNDIR}${DATASET}_Log.txt
- cp ${DBS}silva.nr_v119_classifier.zip ./
- unzip silva.nr_v119_classifier.zip
+ cp ${DBS}Silva.seed_v119.tgz ./
+ tar -xzf Silva.seed_v119.tgz
  cp ${RESULTSDIR}/${DATASET}_otuReps.fa ${DATASET}_otuReps.fa
- ${MOTHUR}mothur "#classify.seqs(fasta=${DATASET}_otuReps.fa,template=silva.nr_v119.align, taxonomy=silva.nr_v119.tax, processors=10)" > tmp.log
+ ${MOTHUR}mothur "#classify.seqs(fasta=${DATASET}_otuReps.fa,template=silva.seed_v119.align, taxonomy=silva.seed_v119.tax, processors=10)" > tmp.log
  grep -m 1 'mothur >' tmp.log >> ${RUNDIR}${DATASET}_Log.txt 
  grep -m 1 -A1000 'Output File Names:' tmp.log | head -n -3  >> ${RUNDIR}${DATASET}_Log.txt   
  echo -e "-- \n" >> ${RUNDIR}${DATASET}_Log.txt
- cp ${DATASET}_otuReps.nr_v119.wang.taxonomy ${RESULTSDIR}${DATASET}_silva.nrv119.taxonomy
+ cp ${DATASET}_otuReps.nr_v119.wang.taxonomy ${RESULTSDIR}${DATASET}_silva.v119.taxonomy
 fi
 
 # Creat singleton table
