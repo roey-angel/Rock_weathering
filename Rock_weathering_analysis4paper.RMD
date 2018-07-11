@@ -27,6 +27,7 @@ output:
 repo <- "http://cran.wu.ac.at"
 
 .cran_libs <- c(
+  "devtools", # Tools to Make Developing R Packages Easier
   "knitr", # A General-Purpose Package for Dynamic Report Generation in R
   "kableExtra", # Construct Complex Table with 'kable' and Pipe Syntax
   "rmarkdown", # Dynamic Documents for R
@@ -38,7 +39,6 @@ repo <- "http://cran.wu.ac.at"
   # "gridExtra", # Miscellaneous Functions for "Grid" Graphics
   "cowplot", # wrappers for ggplot
   # "ggsci", # Scientific Journal and Sci-Fi Themed Color Palettes for 'ggplot2'
-  # "artyfarty", # Themes for ggplot2
   # "ggrepel", # Repulsive Text and Label Geoms for 'ggplot2'
   "magrittr", # pipes
   "scales", # Generic plot scaling methods
@@ -53,15 +53,16 @@ repo <- "http://cran.wu.ac.at"
   "ggtern" # An Extension to 'ggplot2', for the Creation of Ternary Diagrams
 ) 
 
-.inst <- .cran_libs %in% installed.packages()
-if (any(!.inst)) {
-  install.packages(.cran_libs[!.inst],
-                   repos = repo)
-}
+# .inst <- .cran_libs %in% installed.packages()
+# if (any(!.inst)) {
+#   install.packages(.cran_libs[!.inst],
+#                    repos = repo)
+# }
 
 .bioc_libs <- c(
   "phyloseq", # Handling and analysis of high-throughput phylogenetic sequence data
-  "ALDEx2" # Analysis Of Differential Abundance Taking Sample Variation Into Account
+  "ALDEx2", # Analysis Of Differential Abundance Taking Sample Variation Into Account
+  "vsn" # Variance stabilization and calibration for microarray data
 )
 
 if (!"phyloseq" %in% installed.packages()) {
@@ -71,16 +72,17 @@ if (!"phyloseq" %in% installed.packages()) {
  )
 }
 
-.inst <- .bioc_libs %in% installed.packages()
-if (any(!.inst)) {
-  source("http://bioconductor.org/biocLite.R")
-  biocLite(ask = F, lib = Sys.getenv("R_LIBS_USER")) # upgrade bioC packages
-  biocLite(.bioc_libs[!.inst], ask = F, lib = lib.loc)
-}
+# .inst <- .bioc_libs %in% installed.packages()
+# if (any(!.inst)) {
+#   source("http://bioconductor.org/biocLite.R")
+#   biocLite(ask = F, lib = Sys.getenv("R_LIBS_USER")) # upgrade bioC packages
+#   biocLite(.bioc_libs[!.inst], ask = F)
+# }
 
 .github_libs <- c(
   "pmartinezarbizu/pairwiseAdonis/pairwiseAdonis", # pairwise adonis test
-  "ggpomological" # Pomological plot themes for ggplot2
+  "gadenbuie/ggpomological", # Pomological plot themes for ggplot2
+  "datarootsio/artyfarty" # Themes for ggplot2
 )
 
 .github_lib_names <- stringr::str_replace(.github_libs, ".*/(.*)$", "\\1")
@@ -88,7 +90,6 @@ if (any(!.inst)) {
 .github_inst <- .github_lib_names %in% installed.packages()
 if (any(!.github_inst)) {
   devtools::install_github(.github_libs[!.github_inst],
-                           lib = lib.loc,
                            dependencies = TRUE)
 }
 
@@ -109,8 +110,8 @@ opts_chunk$set(
   fig.ext = "svg",
   #  fig.width = 12,
   #  fig.height = 8,
-  cache.path = "Rock_soil_dust_cache/",
-  fig.path = "Rock_soil_dust_figures/"
+  cache.path = "Arid_rock_weathering_cache/",
+  fig.path = "Arid_rock_weathering_figures/"
 )
 
 f_name <- "DejaVu Sans" #sub("\\s//", "", f_name)
@@ -149,6 +150,7 @@ PlotReadHist <- function(OTUmat, b.width = 10) {
     geom_freqpoly(binwidth = b.width) +
     scale_y_log10()
 }
+
 GMPR <- function(comm,
                   intersect.no = 4,
                   ct.min = 4) {
@@ -223,7 +225,6 @@ GMPR <- function(comm,
   names(gmpr) <- names(comm.no) <- colnames(comm)
   return(list(gmpr = gmpr, nss = comm.no))
 }
-
 
 PlotLmResid <- function(lm.df, which = c(1:6), mfrow = c(3, 2)){
   require(grid)
@@ -409,7 +410,6 @@ TestAlpha <-
     return(mod_data)
   }
 
-
 PairwiseAdonis <- function(x, factors, sim.function = "vegdist", sim.method = "bray", 
     p.adjust.m = "BH", reduce = NULL) 
 {
@@ -459,1055 +459,6 @@ PairwiseAdonis <- function(x, factors, sim.function = "vegdist", sim.method = "b
     return(pairw.res)
 }
 
-CalcALDEx <- function(physeq_obj = Rock_dust_filt3_Rocks, sig_level = 0.05, LFC = 0.322) {
-  physeq_obj <- filter_taxa(physeq_obj, function(x) sum(x) > 0, TRUE)
-  # physeq_obj <- prune_taxa(sig_taxa, physeq_obj) # remove taxa not significant under the full model
-  data2test <- t(otu_table(physeq_obj))
-  comparison <- as.character(unlist(sample_data(physeq_obj)[, "Climate.Source"]))
-  ALDEx <- aldex.clr(
-    data2test,
-    comparison,
-    mc.samples = 128,
-    denom = "iqlr", # iqlr for slight assymetry in composition
-    verbose = TRUE,
-    useMC = TRUE
-  ) 
-  ALDEx_tt <- aldex.ttest(ALDEx, comparison, paired.test = FALSE) # for two conditions
-  ALDEx_effect <- aldex.effect(
-    ALDEx,
-    comparison,
-    include.sample.summary = TRUE,
-    verbose = TRUE,
-    useMC = TRUE
-  ) # estimate effect sizes
-  ALDEx2plot <- PrepAlDExData(ALDEx_tt, ALDEx_effect, physeq_obj, sig_level, LFC, Taxa_rank)
-  return(ALDEx2plot)
-}
-
-PrepAlDExData <- function(ALDEx_tt, ALDEx_effect, physeq_obj = Rock_dust_filt3_Rocks, sig_level, LFC, Taxa_rank) {
-  ALDEx2plot <- data.frame(ALDEx_tt, ALDEx_effect) # merge results
-  # group dataframe by OTU, calculate median rel. abundance
-  physeq_obj %>%
-    transform_sample_counts(., function(x) x / sum(x) * 100) %>% 
-    psmelt() %>%
-    group_by(OTU) %>%
-    # filter(OTU %in% sig_taxa) %>%
-    summarise(baseMean = mean(Abundance)) ->
-    baseMean
-  
-  ALDEx2plot$OTU <- rownames(ALDEx2plot)
-  ALDEx2plot %<>% left_join(., baseMean, by = "OTU") # add mean abundance to results table
-  ALDEx2plot$Phylum <-
-    tax_table(physeq_obj)[taxa_names(physeq_obj) %in% ALDEx2plot$OTU, "Phylum"] # add phylum data
-  # change their name to "Rare"
-  ALDEx2plot[ALDEx2plot$Phylum %in% Rare_phyla,]$Phylum <- 'Rare' # Rare_phyla is calcuted for the taxa box plots
-  ALDEx2plot$Significance <- factor("Fail", levels = c("Fail", "Pass")) # define significance factor
-  ALDEx2plot$Significance[ALDEx2plot$wi.eBH < sig_level &
-                            !is.na(ALDEx2plot$wi.eBH) &
-                            abs(ALDEx2plot$effect) > LFC] <- "Pass"
-  # ALDEx2plot$Significance <- as.factor(sapply(ALDEx2plot$wi.eBH, function(x) if (is.na(x) | x > 0.05) {x <- "Fail"} else {x <- "Pass"}))
-  # Rank by taxa abundance
-  ALDEx2plot$Phylum %<>%
-    factor(., levels = Taxa_rank$Phylum) %>%  # Taxa_rank is calcuted for the taxa box plots
-    fct_relevel(., "Rare", after = Inf)
-  return(ALDEx2plot)
-}
-
-GGPlotALDExTax <- function(ALDEx2plot, OTU_labels = FALSE, Taxa = "Phylum", Y_val = "effect", sig_level = 0.05) {
-  p <-
-    ggplot(ALDEx2plot) +
-    geom_jitter(aes_string(
-             x = Taxa,
-             y = Y_val,
-             colour = "Significance",
-             size = "baseMean"),
-             alpha = 2 / 3, 
-             width = 0.3,
-             stroke = 0) +
-    xlab("") +
-    ylab(expression(paste("Effect size (lo", g[2], " fold change)"))) +
-    # ylab("Fold change") +
-    labs(colour = paste("Significance at \n p <", sig_level), size = "Mean count (%)") +
-    theme_grey(base_size = 18,  base_family = f_name) +
-    theme(axis.text.x = element_text(angle = 45.0, vjust = 1, hjust = 1)) +
-    guides(colour = guide_legend(override.aes = list(size = 5))) +
-    scale_colour_manual(values = pom2) +
-    scale_size_continuous(range = c(1, 5), breaks = c(1, 2.5, 5, 10))
-  
-  if (OTU_labels) {
-    p <- p + geom_text_repel(
-      aes_string(x = Taxa, y = Y_val),
-      size = 8,
-      label = sub("OTU_([0-9]+)", "\\1", rownames(ALDEx2plot[ALDEx2plot$Significance == "Pass", ])),
-      data = ALDEx2plot[ALDEx2plot$Significance == "Pass", ],
-      nudge_x = 0.4,
-      colour = "#707070"
-    )
-  }
-  return(p)
-}
-```
-## New insights into the role of epilithic biological crust in arid rock weathering
-This script reproduces all sequence analysis steps and plots included in the paper.
-
-
-```{r general parameters}
-# wd <- "./Data/"
-# setwd(wd)
-set.seed(123456789)
-bootstraps <- 1000
-min_lib_size <- 1000
-```
-
-**Load data**
-```{r load data, cache=T}
-read.csv("Data/Rock_dust_new2_otuTab.txt", header = TRUE, row.names = 1, sep = "\t") %>%
-  t() %>% 
-  as.data.frame() ->
-  Rock_dust_OTUmat
-
-sort_order <- as.numeric(gsub("OTU([0-9]+)", "\\1", colnames(Rock_dust_OTUmat)))
-Rock_dust_OTUmat <- Rock_dust_OTUmat[, order(sort_order)]
-row.names(Rock_dust_OTUmat) <- gsub("(.*)Nimrod[0-9]+|Osnat[0-9]+", "\\1", row.names(Rock_dust_OTUmat))
-
-Metadata <- read.csv("Data/rock_dust_soil_metadata_RA.csv", row.names = 1, header = TRUE)
-# Order abundance_mat samples according to the metadata
-sample_order <- match(row.names(Rock_dust_OTUmat), row.names(Metadata))
-Rock_dust_OTUmat %<>% arrange(., sample_order)
-Metadata$sample_names <- row.names(Metadata)
-Metadata$Uni.Source <- fct_collapse(Metadata$Source, Rock = c("Dolomite", "Limestone"))
-# Metadata$Uni.Source <- fct_recode(Metadata$Uni.Source, Soil = "Loess soil")
-Metadata$Climate.Source <-
-  factor(
-    paste(
-      Metadata$Climate,
-      Metadata$Source
-    ),
-    levels = c(
-      "Arid Limestone",
-      "Arid Dust",
-      "Arid Loess soil",
-      "Hyperarid Dolomite",
-      "Hyperarid Dust",
-      "Hyperarid Loess soil"
-    ),
-    labels = c(
-      "Arid limestone",
-      "Arid dust",
-      "Arid loess soil",
-      "Hyperarid dolomite",
-      "Hyperarid dust",
-      "Hyperarid loess soil"
-    )
-  )
-
-Metadata$Climate.UniSource <-
-  factor(
-    paste(
-      Metadata$Climate,
-      Metadata$Uni.Source
-    ),
-    levels = c(
-      "Arid Rock",
-      "Arid Dust",
-      "Arid Loess soil",
-      "Hyperarid Rock",
-      "Hyperarid Dust",
-      "Hyperarid Loess soil"
-    ),
-    labels = c(
-      "Arid rock",
-      "Arid dust",
-      "Arid loess soil",
-      "Hyperarid rock",
-      "Hyperarid dust",
-      "Hyperarid loess soil"
-    )
-  )
-# calculate sample size
-Metadata$Lib.size = rowSums(Rock_dust_OTUmat)
-row.names(Rock_dust_OTUmat) <- row.names(Metadata)
-
-# Load taxonomy data
-tax.file <- "Rock_dust_new2_silva.nrv119.taxonomy"
-Taxonomy <- read.table(tax.file,  stringsAsFactors = FALSE) # read taxonomy file
-
-# count how many ';' in each cell and add up to 6
-for (i in 1:nrow(Taxonomy)) {
-  semicolons <- length(gregexpr(";", Taxonomy$V2[i])[[1]])
-  if (semicolons < 6) {
-    x <- paste0(rep("Unclassified;", 6 - semicolons), collapse = "")
-    Taxonomy$V2[i] <- paste0(Taxonomy$V2[i], x, sep = "")
-  }
-}
-
-do.call( "rbind", strsplit( Taxonomy$V1, ";", fixed = TRUE)) %>% 
-  gsub( "size=([0-9]+)", "\\1", .) %>%
-  data.frame( ., do.call( "rbind", strsplit( Taxonomy$V2, ";", fixed = TRUE)), stringsAsFactors = F) %>% 
-  apply(., 2, function(x) gsub( "\\(.*\\)", "", x)) %>% 
-  replace(., . == "unclassified", "Unclassified") -> 
-  Taxonomy
-
-colnames( Taxonomy ) <- c( "OTU", "Frequency", "Domain", "Phylum", "Class", "Order", "Family", "Genus" )
-# rownames(Taxonomy) <- colnames(Rock_dust_OTUmat)
-rownames(Taxonomy) <- Taxonomy[, 1]
-
-# generate phyloseq object
-Rock_dust <- phyloseq(otu_table(Rock_dust_OTUmat, taxa_are_rows = FALSE),
-                        tax_table(Taxonomy[, -c(1, 2)]),
-                        sample_data(Metadata)
-                        )
-
-# Reorder factors for plotting
-# sample_data(Rock_dust)$Source %<>% fct_relevel("Glomeris pustulata", after = Inf)
-sample_data(Rock_dust)$Source %<>% fct_relevel("Limestone", "Dolomite", "Dust", "Loess soil")
-```
-
-Remove samples not for analysis
-```{r remove samples, cache=T}
-# remove 9 of the hyperarid soil samples
-# which(sample_data(Rock_dust)$Source == "Loess soil" & sample_data(Rock_dust)$Climate == "Hyper Arid") %>%
-  # sample(., 9, prob = c(1/9, 1/9, 1/9, 100, 1/9, 100, 1/9, 100, 1/9, 1/9, 1/9, 1/9)) ->
-  # samples2remove
-samples2remove <- c(2, 3, 4, 5, 6, 7, 8, 10, 12) 
-Rock_dust <- subset_samples(Rock_dust, !grepl(paste(c(sample_names(Rock_dust)[samples2remove]), collapse = "|"), sample_names(Rock_dust)))
-Rock_dust <- filter_taxa(Rock_dust, function(x) sum(x) > 0, TRUE)
-
-domains2remove <- c("", "Eukaryota", "Unclassified")
-classes2remove <- c("Chloroplast")
-families2remove <- c("Mitochondria")
-
-Rock_dust_filt <- subset_taxa(Rock_dust, !is.na(Phylum) &
-                        !Domain %in% domains2remove &
-                      !Class %in% classes2remove &
-                      !Family %in% families2remove)
-```
-
-Now let's explore the prevalence of different taxa in the database.
-Prevalence is the number of samples in which a taxa appears at least once. So "Mean prevalence" refers to in how many samples does a sequence belonging to the phylum appears on average, and "Sum prevalence" is the sum of all samples where any sequence from the pyhlum appears.
-
-```{r explore prevalence, cache=T}
-prevdf <- apply(X = otu_table(Rock_dust_filt),
-                 MARGIN = ifelse(taxa_are_rows(Rock_dust_filt), yes = 1, no = 2),
-                 FUN = function(x){sum(x > 0)})
-# Add taxonomy and total read counts to this data.frame
-prevdf <- data.frame(Prevalence = prevdf,
-                      TotalAbundance = taxa_sums(Rock_dust_filt),
-                      tax_table(Rock_dust_filt))
-
-prevdf %>%
-  group_by(Phylum) %>%
-  summarise(`Mean prevalence` = mean(Prevalence),
-            `Sum prevalence` = sum(Prevalence)) ->
-  Prevalence_phylum_summary
-
-Prevalence_phylum_summary %>% 
-  kable(., digits = c(0, 1, 0)) %>%
-  kable_styling(bootstrap_options = c("striped", "hover", "condensed", "responsive"), full_width = F)
-
-prevdf %>%
-  group_by(Order) %>%
-  summarise(`Mean prevalence` = mean(Prevalence),
-            `Sum prevalence` = sum(Prevalence)) ->
-  Prevalence_Order_summary
-
-Prevalence_Order_summary %>% 
-  kable(., digits = c(0, 1, 0)) %>%
-  kable_styling(bootstrap_options = c("striped", "hover", "condensed", "responsive"), full_width = F)
-```
-
-Based on that I'll remove all phyla with a prevalence of under 7
-```{r remove rare taxa, cache=T}
-Prevalence_phylum_summary %>% 
-  filter(`Sum prevalence` < 7) %>% 
-  select(Phylum) %>% 
-  map(as.character) %>% 
-  unlist() ->
-  filterPhyla
-
-Rock_dust_filt2 <- subset_taxa(Rock_dust_filt, !Phylum %in% filterPhyla)
-sample_data(Rock_dust_filt2)$Lib.size <- rowSums(otu_table(Rock_dust_filt2))
-print(Rock_dust_filt)
-print(Rock_dust_filt2)
-```
-
-Plot general prevalence features of the phyla
-```{r prevalence phylum, cahce=T, fig.height=12, fig.width=10}
-# Subset to the remaining phyla
-prevdf_phylum_filt <- subset(prevdf, Phylum %in% get_taxa_unique(Rock_dust_filt2, "Phylum"))
-ggplot(prevdf_phylum_filt,
-       aes(TotalAbundance, Prevalence / nsamples(Rock_dust_filt2), color = Phylum)) +
-  # Include a guess for parameter
-  geom_hline(yintercept = 0.05,
-             alpha = 0.5,
-             linetype = 2) + geom_point(size = 2, alpha = 0.7) +
-  scale_x_log10() +  xlab("Total Abundance") + ylab("Prevalence [Frac. Samples]") +
-  facet_wrap( ~ Phylum) + theme(legend.position = "none")
-```
-
-Plot general prevalence features of the top 20 orders
-```{r prevalence order, cache=T, fig.height=12, fig.width=10}
-# Subset to the remaining phyla
-prevdf_order_filt <- subset(prevdf, Order %in% get_taxa_unique(Rock_dust_filt2, "Order"))
-
-# grab the top 30 most abundant orders
-prevdf_order_filt %>% 
-  group_by(Order) %>%
-  summarise(Combined.abundance = sum(TotalAbundance)) %>% 
-  arrange(desc(Combined.abundance)) %>% 
-  .[1:30, "Order"]  ->
-  Orders2plot
-
-prevdf_order_filt2 <- subset(prevdf, Order %in% Orders2plot$Order)
-
-ggplot(prevdf_order_filt2,
-       aes(TotalAbundance, Prevalence / nsamples(Rock_dust_filt2), color = Order)) +
-  # Include a guess for parameter
-  geom_hline(yintercept = 0.05,
-             alpha = 0.5,
-             linetype = 2) + geom_point(size = 2, alpha = 0.7) +
-  scale_x_log10() +  xlab("Total Abundance") + ylab("Prevalence [Frac. Samples]") +
-  facet_wrap( ~ Order) + theme(legend.position = "none")
-```
-
-#### Unsupervised filtering by prevalence
-I'll remove all sequences which appear in less than 10% of the samples
-```{r}
-# Define prevalence threshold as 10% of total samples
-prevalenceThreshold <- 0.1 * nsamples(Rock_dust_filt)
-prevalenceThreshold
-
-# Execute prevalence filter, using `prune_taxa()` function
-keepTaxa <-
-  row.names(prevdf_phylum_filt)[(prevdf_phylum_filt$Prevalence >= prevalenceThreshold)]
-Rock_dust_filt3 <- prune_taxa(keepTaxa, Rock_dust_filt2)
-sample_data(Rock_dust_filt3)$Lib.size <- rowSums(otu_table(Rock_dust_filt3))
-print(Rock_dust_filt2)
-print(Rock_dust_filt3)
-```
-This removed `r ntaxa(Rock_dust_filt2) - ntaxa(Rock_dust_filt3)` or `r percent(1 - (ntaxa(Rock_dust_filt3) /  ntaxa(Rock_dust_filt2)))` of the sequences.
-
-### Exploring Rock_dust dataset features
-First let's look at the count data distribution
-```{r plot abundance, cache=T}
-PlotLibDist(Rock_dust_filt3)
-sample_data(Rock_dust_filt3) %>% 
-  remove_rownames %>% 
-  select(sample_title, Lib.size) %>% 
-  as(., "data.frame") %>% 
-  kable(.) %>%
-  kable_styling(bootstrap_options = c("striped", "hover", "condensed", "responsive"), full_width = F)
-```
-The figure and table indicate only a small deviation in the number of reads per samples.
-
-```{r mod abundance, cache=T, fig.width=2, fig.asp=.8}
-(mod1 <- adonis(
-  otu_table(Rock_dust_filt3) ~ Lib.size,
-  data = as(sample_data(Rock_dust_filt3), "data.frame"), 
-  method = "bray",
-  permutations = 9999
-))
-
-PlotReadHist(as(otu_table(Rock_dust_filt3), "matrix"))
-notAllZero <- (rowSums(t(otu_table(Rock_dust_filt3))) > 0)
-meanSdPlot(as.matrix(log2(t(otu_table(Rock_dust_filt3))[notAllZero, ] + 1)))
-```
-
-
-### Account for variation in library read-depth
-#### Rarefaction
-```{r test rarefaction, cache=T}
-Rock_dust_filt3_rared <-
-  rarefy_even_depth(
-  Rock_dust_filt3,
-  sample.size = min(sample_sums(Rock_dust_filt3)),
-  rngseed = FALSE,
-  replace = FALSE
-  )
-sample_data(Rock_dust_filt3_rared)$Lib.size <- sample_sums(Rock_dust_filt3_rared)
-
-# adonis(
-#   otu_table(Rock_dust_filt3_rared) ~ Lib.size,
-#   data = as(sample_data(Rock_dust_filt3_rared), "data.frame"), 
-#   method = "bray",
-#   permutations = 9999
-# )
-
-PlotLibDist(Rock_dust_filt3_rared)
-```
-```{r test rarefaction diag plots, cache=T, fig.width=2, fig.asp=.8}
-PlotReadHist(as(otu_table(Rock_dust_filt3_rared), "matrix"))
-notAllZero <- (rowSums(t(otu_table(Rock_dust_filt3_rared))) > 0)
-meanSdPlot(as.matrix(log2(t(otu_table(Rock_dust_filt3_rared))[notAllZero, ] + 1)))
-```
-
-```{r rarefaction - ordinate, cache=T, fig.width=8, fig.aspect=.5}
-adonis(
-  otu_table(Rock_dust_filt3_rared) ~ Climate * Source,
-  data = as(sample_data(Rock_dust_filt3_rared), "data.frame"),
-  method = "bray",
-  permutations = 9999
-)
-rared_ord <- ordinate(Rock_dust_filt3_rared, "CAP", "bray", formula = Rock_dust_filt3_rared ~ Climate * Source)
-evals <- eigenvals(rared_ord) # /sum(eigenvals(Millipedes3_ord)) * 100
-
-plot_ordination(Rock_dust_filt3_rared, rared_ord, type = "samples", shape = "Climate", color = "Source") +
-  geom_point(size = 5) +
-  scale_colour_locuszoom() +
-  stat_ellipse(aes(x = CAP1, y = CAP2, group = Climate), color = "black", alpha = 0.5, type = "norm", level = 0.95, linetype = 2) +
-  coord_fixed(sqrt(evals[2] / evals[1]))
-```
-
-#### GMPR [@chen_gmpr:_2017]
-```{r GMPR, cache=T}
-Rock_dust_filt3_GMPR <- Rock_dust_filt3
-Rock_dust_filt3 %>%
-  otu_table(.) %>%
-  t() %>%
-  as(., "matrix") %>%
-  GMPR() ->
-  GMPR_factors
-
-Rock_dust_filt3 %>%
-  otu_table(.) %>%
-  t() %*% diag(1 / GMPR_factors$gmpr) %>%
-  t() %>%
-  as.data.frame(., row.names = sample_names(Rock_dust_filt3)) %>%
-  otu_table(., taxa_are_rows = FALSE) ->
-  otu_table(Rock_dust_filt3_GMPR)
-sample_data(Rock_dust_filt3_GMPR)$Lib.size <- sample_sums(Rock_dust_filt3_GMPR)
-
-adonis(
-  otu_table(Rock_dust_filt3_GMPR) ~ Lib.size,
-  data = as(sample_data(Rock_dust_filt3_GMPR), "data.frame"),
-  method = "bray",
-  permutations = 9999
-)
-PlotLibDist(Rock_dust_filt3_GMPR)
-```
-```{r GMPR diag plots, cache=T, fig.width=2, fig.asp=.8}
-PlotReadHist(as(otu_table(Rock_dust_filt3_GMPR), "matrix"))
-notAllZero <- (rowSums(t(otu_table(Rock_dust_filt3_GMPR))) > 0)
-meanSdPlot(as.matrix(log2(t(otu_table(Rock_dust_filt3_GMPR))[notAllZero, ] + 1)))
-```
-
-```{r GMPR - ordinate, cache=T, fig.width=8, fig.aspect=.5}
-Rock_dust_filt3_GMPR_rel <- transform_sample_counts(Rock_dust_filt3_GMPR, function(x) x / sum(x)) # relative abundances are important for BC similarity (see )
-adonis(
-  otu_table(Rock_dust_filt3_GMPR_rel) ~ Climate * Source,
-  data = as(sample_data(Rock_dust_filt3_GMPR_rel), "data.frame"),
-  method = "bray",
-  permutations = 9999
-)
-
-GMPR_ord <- ordinate(Rock_dust_filt3_GMPR_rel, "CAP", "bray", formula = Rock_dust_filt3_GMPR_rel ~ Climate * Source)
-evals <- eigenvals(GMPR_ord) # /sum(eigenvals(Millipedes3_ord)) * 100
-plot_ordination(Rock_dust_filt3_GMPR_rel, GMPR_ord, type = "samples", shape = "Climate", color = "Source") +
-  geom_point(size = 5) +
-  scale_colour_locuszoom() +
-  stat_ellipse(aes(x = CAP1, y = CAP2, group = Climate), color = "black", alpha = 0.5, type = "norm", level = 0.95, linetype = 2) +
-  coord_fixed(sqrt(evals[2] / evals[1]))
-```
-
-#### Standardize abundances to the median sequencing depth (and convert to proportion)
-```{r median, cache=T}
-Rock_dust_filt3 %>%
-  otu_table(.) %>%
-  as(., "matrix") %>%
-  rowSums() %>% 
-  median() ->
-  total
-standf = function(x, t=total) round(t * (x / sum(x)))
-Rock_dust_filt3_median <- transform_sample_counts(Rock_dust_filt3, standf) # Standardize abundances to median sequencing depth
-sample_data(Rock_dust_filt3_median)$Lib.size <- sample_sums(Rock_dust_filt3_median)
-
-adonis(
-  otu_table(Rock_dust_filt3_median) ~ Lib.size,
-  data = as(sample_data(Rock_dust_filt3_median), "data.frame"),
-  method = "bray",
-  permutations = 9999
-)
-PlotLibDist(Rock_dust_filt3_median)
-```
-```{r median diag plots, cache=T, fig.width=2, fig.asp=.8}
-PlotReadHist(as(otu_table(Rock_dust_filt3_median), "matrix"))
-notAllZero <- (rowSums(t(otu_table(Rock_dust_filt3_median))) > 0)
-meanSdPlot(as(log2(t(otu_table(Rock_dust_filt3_median))[notAllZero, ] + 1), "matrix"))
-```
-
-```{r median - ordinate, cache=T, fig.width=8, fig.aspect=.5}
-adonis(
-  otu_table(Rock_dust_filt3_median) ~ Climate * Source,
-  data = as(sample_data(Rock_dust_filt3_median), "data.frame"),
-  method = "bray",
-  permutations = 9999
-)
-median_ord <- ordinate(Rock_dust_filt3_median, "CAP", "bray", formula = Rock_dust_filt3_median ~ Climate * Source)
-evals <- eigenvals(median_ord) # /sum(eigenvals(Millipedes3_ord)) * 100
-plot_ordination(Rock_dust_filt3_median, GMPR_ord, type = "samples", shape = "Climate", color = "Source") +
-  geom_point(size = 5) +
-  scale_colour_locuszoom() +
-  stat_ellipse(aes(x = CAP1, y = CAP2, group = Climate), color = "black", alpha = 0.5, type = "norm", level = 0.95, linetype = 2) +
-  coord_fixed(sqrt(evals[2] / evals[1]))
-```
-
-#### Standardize abundances using log transformation for variance stabilisation
-```{r log, cache=T}
-Rock_dust_filt3_log <- transform_sample_counts(Rock_dust_filt3, function(x) log(1 + x))
-sample_data(Rock_dust_filt3_log)$Lib.size <- sample_sums(Rock_dust_filt3_log)
-
-# Rock_dust_filt3_rlog <- Rock_dust_filt3
-# Rock_dust_filt3 %>%
-#   transform_sample_counts(., function(x) (1 + x)) %>% # add pseudocount
-#   phyloseq_to_deseq2(., ~ Spill) %>%
-#   rlog(., blind = TRUE , fitType = "parametric") %>%
-#   assay() %>%
-#   otu_table(, taxa_are_rows = TRUE) ->
-#   otu_table(Rock_dust_filt3_rlog)
-sample_data(Rock_dust_filt3_log)$Lib.size <- sample_sums(Rock_dust_filt3_log)
-
-adonis(
-  otu_table(Rock_dust_filt3_log) ~ Lib.size,
-  data = as(sample_data(Rock_dust_filt3_log), "data.frame"),
-  method = "bray",
-  permutations = 9999
-)
-PlotLibDist(Rock_dust_filt3_log)
-```
-```{r log diag plots, cache=T, fig.width=2, fig.asp=.8}
-PlotReadHist(as(otu_table(Rock_dust_filt3_log), "matrix"), b.width = 0.1)
-notAllZero <- (rowSums(t(otu_table(Rock_dust_filt3_log))) > 0)
-meanSdPlot(as(log2(t(otu_table(Rock_dust_filt3_log))[notAllZero, ] + 1), "matrix"))
-```
-
-```{r log - ordinate, cache=T, fig.width=8, fig.aspect=.5}
-adonis(
-  otu_table(Rock_dust_filt3_log) ~ Climate * Source,
-  data = as(sample_data(Rock_dust_filt3_log), "data.frame"),
-  method = "bray",
-  permutations = 9999
-)
-log_ord <- ordinate(Rock_dust_filt3_log, "CAP", "bray", formula = Rock_dust_filt3_log ~ Climate * Source)
-evals <- eigenvals(median_ord) # /sum(eigenvals(Millipedes3_ord)) * 100
-plot_ordination(Rock_dust_filt3_log, log_ord, type = "samples", shape = "Climate", color = "Source") +
-  geom_point(size = 5) +
-  scale_colour_locuszoom() +
-  stat_ellipse(aes(x = CAP1, y = CAP2, group = Climate), color = "black", alpha = 0.5, type = "norm", level = 0.95, linetype = 2) +
-  coord_fixed(sqrt(evals[2] / evals[1]))
-```
-
-### Alpha diversity 
-```{r alpha-div, cache=T, fig.width=20, fig.height=10}
-# non-parametric richness estimates
-rarefaction.mat <- matrix(0, nrow = nsamples(Rock_dust_filt3), ncol = bootstraps)
-rownames(rarefaction.mat) <- sample_names(Rock_dust_filt3)
-rich.ests <- list(S.obs = rarefaction.mat, S.chao1 = rarefaction.mat, se.chao1 = rarefaction.mat,
-                   S.ACE = rarefaction.mat, se.ACE = rarefaction.mat)
-
-for (i in seq(bootstraps)) {
-  sub.OTUmat <- rrarefy(otu_table(Rock_dust_filt3), min(rowSums(otu_table(Rock_dust_filt3))))
-  for (j in seq(length(rich.ests))) {
-    rich.ests[[j]][, i] <- t(estimateR(sub.OTUmat))[, j]
-  }
-}
-
-Richness <- data.frame(row.names = row.names(rich.ests[[1]]))
-for (i in c(1, seq(2, length(rich.ests), 2))) {
-  S <- apply(rich.ests[[i]], 1, mean)
-  if (i == 1) { 
-    se <- apply(rich.ests[[i]], 1, function(x) (mean(x)/sqrt(length(x))))
-    } else se <- apply(rich.ests[[i + 1]], 1, mean)
-  Richness <- cbind(Richness, S, se)
-}
-colnames(Richness) <- c("S.obs", "S.obs.se", "S.chao1", "S.chao1.se", "S.ACE", "S.ACE.se")
-
-# # parametric richness estimates
-# OTUmat.freqs <- apply(Rock_dust_OTUmat, 1, table)
-# parametric <- data.frame(matrix(0, nrow = nsamples(Rock_dust_filt3), ncol = 4), 
-#                          row.names = sample_names(Rock_dust_filt3))
-# colnames(parametric) <- c("bway.est", "bway.se", "bway_nof1.est", "bway_nof1.se")
-# 
-# rownames(rarefaction.mat) <- rownames(Rock_dust_OTUmat)
-# for (i in seq(length(OTUmat.freqs))) {
-#   breakaway.mod <- breakaway(data.frame(OTUmat.freqs[[i]])[-1, ], print = FALSE, plot = FALSE, answers = TRUE)
-#   if (is.null(breakaway.mod)) {
-#     parametric[i, 1] <- 0
-#     parametric[i, 2] <- 0
-#   } else {
-#     parametric[i, 1] <- breakaway.mod$est
-#     parametric[i, 2] <- breakaway.mod$seest
-#   }
-#   breakaway_nof1.mod <- breakaway_nof1(data.frame(OTUmat.freqs[[i]])[-c(1,2), ], print = FALSE, plot = FALSE, answers = TRUE)
-#   if (is.null(breakaway_nof1.mod)) {
-#     parametric[i, 3] <- 0
-#     parametric[i, 4] <- 0
-#   } else {
-#     parametric[i, 3] <- breakaway_nof1.mod$est
-#     parametric[i, 4] <- breakaway_nof1.mod$seest
-#   }
-# }
-# 
-# Richness <- cbind(Richness, parametric)
-saveRDS(Richness, file = "Rock_dust_Richness.Rds")
-write.csv(Richness, file = "Rock_dust_Richness.csv")
-# Richness$bway.est[c(5,21,25,33,42)] <- 0
-# Richness$bway.se[c(4, 12, 14, 17, 26, 29, 31, 32, 34, 40)] <- 0
-
-# Richness$bway.se <- Richness$bway.est
-# Richness$bway_nof1.se <- Richness$bway_nof1.est
-
-ses <- grep("\\.se", colnames(Richness))
-Richness[, ses] %>% 
-  gather(key = "est.se") -> se.dat
-Richness[, -unique(ses)] %>% 
-  gather(key = "est") -> mean.dat
-
-n <- length(unique(mean.dat$est))
-Rock_dust_Metadata_long <- do.call("rbind", replicate(n, sample_data(Rock_dust_filt3), simplify = FALSE))
-
-Richness_long <- cbind(rep(rownames(Richness), times = length(unique(mean.dat$est))), mean.dat, mean.dat$value - se.dat$value, mean.dat$value + se.dat$value, Rock_dust_Metadata_long)
-colnames(Richness_long) <- c("Sample","Metric","Estimate","lerr","herr")
-Richness_long$Metric <- factor(Richness_long$Metric, levels = c("S.obs", "S.chao1", "S.ACE", "bway.est", "bway_nof1.est"), labels = c("Observed S", "Chao1", "ACE", "Breakaway", "bway_nof1.est"))
-Richness_long <- Richness_long[Richness_long$Metric != "bway_nof1.est", ]
-Richness_long <- Richness_long[Richness_long$Metric != "Breakaway", ]
-
-Richness_long$lerr[Richness_long$lerr < 0] <- 0
-
-PlotSummarySingle_overlay(Richness_long)
-
-# diversity indices
-diversity.inds <- list(Shannon = rarefaction.mat, inv.simpson = rarefaction.mat, BP = rarefaction.mat)
-for (i in seq(bootstraps)) {
-  sub.OTUmat <- rrarefy(otu_table(Rock_dust_filt3), min(rowSums(otu_table(Rock_dust_filt3))))
-  diversity.inds$Shannon[, i] <- diversityresult(sub.OTUmat, index = 'Shannon', method = 'each site', digits = 3)[, 1]
-  diversity.inds$inv.simpson[, i] <- diversityresult(sub.OTUmat, index = 'inverseSimpson', method = 'each site', digits = 3)[, 1]
-  diversity.inds$BP[, i] <- diversityresult(sub.OTUmat, index = 'Berger', method = 'each site', digits = 3)[, 1]
-}
-
-Diversity <- data.frame(row.names = row.names(diversity.inds[[1]]))
-for (i in seq(length(diversity.inds))) {
-  S <- apply(diversity.inds[[i]], 1, mean)
-  se <- apply(diversity.inds[[i]], 1, function(x) (mean(x)/sqrt(length(x))))
-  Diversity <- cbind(Diversity, S, se)
-}
-colnames(Diversity) <- c("Shannon", "Shannon.se", "Inv.simpson", "Inv.simpson.se", "BP", "BP.se")
-
-ses <- grep("\\.se", colnames(Diversity))
-Diversity[, ses] %>% gather(key = "est.se") -> se.dat
-Diversity[, -unique(ses)] %>% gather(key = "est") -> mean.dat
-
-Diversity_long <- cbind(rep(rownames(Diversity), times = length(unique(mean.dat$est))), mean.dat, mean.dat$value - se.dat$value, mean.dat$value + se.dat$value)
-colnames(Diversity_long) <- c("Sample","Metric","Estimate","lerr","herr")
-
-Diversity_long$Metric <- factor(Diversity_long$Metric, levels = c("Shannon","Inv.simpson", "BP"), labels = c("Shannon", "Inv. Simpson" ,"Berger Parker"))
-
-
-# metrics2plot <- Categorise(metrics2plot)
-# metrics2plot$ElevationBelt <- factor(paste(metrics2plot$Elevation, metrics2plot$Belt))
-# metrics2plot %>% group_by(Metric, ElevationBelt) %>% summarise(Estimated = mean(Estimate, na.rm = TRUE),
-                                                          # Lower = mean(Estimate, na.rm = TRUE) - sd(Estimate)/sqrt(length(Estimate)),
-                                                          # Upper = mean(Estimate, na.rm = TRUE) + sd(Estimate)/sqrt(length(Estimate))) -> data2plot
-saveRDS(Diversity, file = "Rock_dust_Diversity.Rds")
-write.csv(Diversity, file = "Rock_dust_Diversity.csv")
-PlotSummarySingle(Diversity_long, x = "Sample", y = "Estimate", ymin = "lerr", ymax = "herr", colour = "Metric")
-```
-
-```{r test alpha, cache=T, include=F}
-# make combined richness diversity
-Richness_Diversity <- cbind(Richness, Diversity)
-ses <- grep("\\.se", colnames(Richness_Diversity))
-Richness_Diversity[, ses] %>% 
-  gather(key = "est.se") -> 
-  se.dat
-Richness_Diversity[, -unique(ses)] %>% 
-  gather(key = "Metric", 
-         value = "Estimate") -> 
-  mean.dat
-
-Richness_Diversity_long <-
-  cbind(
-    Sample = rep(rownames(Richness_Diversity), times = length(unique(mean.dat$Metric))),
-    mean.dat,
-    lerr = mean.dat$Estimate - se.dat$value,
-    herr = mean.dat$Estimate + se.dat$value
-  )
-
-Richness_Diversity_long$Metric <-
-  factor(
-    Richness_Diversity_long$Metric,
-    levels = c("S.obs", "S.chao1", "S.ACE", "Shannon", "Inv.simpson", "BP"),
-    labels = c("S obs.", "Chao1", "ACE", "Shannon", "Inv. Simpson" , "Berger Parker")
-  )
-
-Richness_Diversity_long %<>%
-  cbind(., 
-        sample_data(Rock_dust_filt3))
-
-data2test <- Richness_Diversity_long[Richness_Diversity_long$Metric == "S obs.", ] 
-mod_data <- TestAlpha(data = data2test, boxcox.trans = TRUE)
-TukeyHSD(mod_data)
-factors2test <- c("Climate", "Uni.Source")
-(ph_Sobs <- HSD.test(mod_data, factors2test, group = TRUE, console = TRUE))
-# Richness_Diversity_long$groups[Richness_Diversity_long$Metric == "S obs."] <- ph_Sobs$groups$groups
-
-#But the problem is that Tukey assumes varience homogeneity. If we doubt that we should use something like the Games-Howell method. 
-#However, I couldn't find an implementation of this method of a multi-way anova.
-posthocTGH(y = data2test$Estimate, x = data2test$Climate.Source)
-
-data2test <- Richness_Diversity_long[Richness_Diversity_long$Metric == "Shannon", ] 
-mod_data <- TestAlpha(data = data2test, boxcox.trans = TRUE)
-TukeyHSD(mod_data)
-(ph_Shannon <- HSD.test(mod_data, factors2test, group = TRUE, console = TRUE))
-posthocTGH(y = data2test$Estimate, x = data2test$Climate.Source)
-
-data2test <- Richness_Diversity_long[Richness_Diversity_long$Metric == "ACE", ] 
-mod_data <- TestAlpha(data = data2test, boxcox.trans = FALSE)
-TukeyHSD(mod_data)
-(ph_ACE <- HSD.test(mod_data, factors2test, group = TRUE, console = TRUE))
-posthocTGH(y = data2test$Estimate, x = data2test$Climate.Source)
-
-data2test <- Richness_Diversity_long[Richness_Diversity_long$Metric == "Berger Parker", ] 
-mod_data <- TestAlpha(data = data2test, boxcox.trans = TRUE)
-TukeyHSD(mod_data)
-(ph_BP <- HSD.test(mod_data, factors2test, group = TRUE, console = TRUE))
-posthocTGH(y = data2test$Estimate, x = data2test$Climate.Source)
-```
-
-#### Plot all alphas together
-```{r plot alpha, cache=T, fig.width=10, fig.height=6, fig.cap=""}
-Richness_Diversity_long[Richness_Diversity_long$Metric != "Chao1" &
-                          Richness_Diversity_long$Metric != "Inv. Simpson" &
-                          Richness_Diversity_long$Metric != "Berger Parker", ] %>% 
-  droplevels() ->
-  Richness_Diversity_long2plot
-
-p_alpha <- ggplot(Richness_Diversity_long2plot, aes(
-  x = Source,
-  y = Estimate
-)) +
-  geom_violin(aes(colour = Climate, fill = Climate), alpha = 1/3) +
-  geom_jitter(aes(colour = Climate, fill = Climate), shape = 16, size = 2, width = 0.2, alpha = 2/3) +
-  scale_colour_manual(values = pom4, name = "") +
-  scale_fill_manual(values = pom4, name = "") +
-  theme_cowplot(font_size = 11, font_family = f_name) +
-  # geom_errorbar(alpha = 1 / 2, width = 0.3) +
-  xlab("") +
-  ylab("") +
-  theme(axis.text.x = element_text(
-    angle = 45,
-    vjust = 0.9,
-    hjust = 0.9
-  )) +
-  facet_grid(Metric ~ Climate, shrink = FALSE, scale = "free") +
-  background_grid(major = "y",
-                  minor = "none") +
-  theme(panel.spacing = unit(2, "lines"))
-
-# my_comparisons <- list( c("Arid limestone", "Hyperarid dolomite"), c("Arid limestone", "Arid loess soil"), c("Hyperarid dolomite", "Hyperarid loess soil") )
-# p_alpha + stat_compare_means(comparisons = my_comparisons, label = "p.signif") + # Add pairwise comparisons p-value
-  # stat_compare_means(label.y = 50)                   # Add global p-value
-
-
-dat_text <- data.frame(
-  label = as.character(fct_c(ph_Sobs$groups$groups, ph_ACE$groups$groups, ph_Shannon$groups$groups)),
-  Metric   = rep(levels(Richness_Diversity_long2plot$Metric), each = 6),
-  Climate = str_split(rownames(ph_Sobs$groups), ":", simplify = TRUE)[, 1], 
-  x = c("Loess soil", "Loess soil", "Limestone", "Dust", "Dolomite", "Dust"),
-  # x     = as.factor(levels(Richness_Diversity_long2plot$Climate.Source)),
-  y = rep(c(460, 850, 6.5), each = 6)
-  # y = rep(c(40, 140, 0.5), each = 6)
-)
-
-
-p_alpha <- p_alpha + geom_text(
-  data    = dat_text,
-  mapping = aes(x = x, y = y, label = label),
-  nudge_x = -0.2,
-  nudge_y = -0.1
-)
-
-print(p_alpha)
-
-Richness_Diversity_long2plot %>%
-  group_by(Metric, Climate.Source) %>%   # the grouping variable
-  summarise(mean_PL = mean(Estimate),  # calculates the mean of each group
-            sd_PL = sd(Estimate), # calculates the standard deviation of each group
-            n_PL = n(),  # calculates the sample size per group
-            SE_PL = sd(Estimate)/sqrt(n())) %>% # calculates the standard error of each group
-  kable(.) %>%
-  kable_styling(bootstrap_options = c("striped", "hover", "condensed", "responsive"), full_width = F)
-```
-
-```{r print alpha, echo=F}
-p_alpha_file <- "Violin_plot"
-svglite(paste0(p_alpha_file, ".svg"),
-        width = 10, height = 8)
-
-print(p_alpha)
-dev.off()
-
-ggsave(
-  paste0(p_alpha_file, ".png"),
-  p_alpha,
-  device = "png",
-  width = 10,
-  height = 8
-)
-gz(paste0(p_alpha_file, ".svg"), paste0(p_alpha_file, ".svgz"))
-```
-
-### Beta diversity
-Transform to relative abundances. This is important for BC similarities (see: [@magurran_chapter_2011]) and also later for taxonomical analysis.
-
-```{r rel-abund, cache=T}
-Rock_dust_filt3_GMPR_rel <- transform_sample_counts(Rock_dust_filt3_GMPR, function(x) x / sum(x) )
-```
-
-#### 1. Possible changes in biofilm arid vs hyper arid
-Is there a difference between the two sites. However, since we know that that samples are of different nature we'll have to control for rock type, source and location:
-
-```{r ADONIS full, cache=T}
-(mod1 <-  adonis(
-  otu_table(Rock_dust_filt3_GMPR) ~ Climate * Source * Location,
-  data = as(sample_data(Rock_dust_filt3_GMPR), "data.frame"),
-  method = "horn",
-  permutations = 9999
-))
-
-Rock_dust_filt3_GMPR_Arid <- subset_samples(Rock_dust_filt3_GMPR, Climate == "Arid")
-Rock_dust_filt3_GMPR_Arid <- filter_taxa(Rock_dust_filt3_GMPR_Arid, function(x) sum(x) > 0, TRUE)
-(mod2 <-  adonis(
-  otu_table(Rock_dust_filt3_GMPR_Arid) ~ Source * Location,
-  data = as(sample_data(Rock_dust_filt3_GMPR_Arid), "data.frame"),
-  method = "horn",
-  permutations = 9999
-))
-
-Rock_dust_filt3_GMPR_Hyperarid <- subset_samples(Rock_dust_filt3_GMPR, Climate == "Hyperarid")
-Rock_dust_filt3_GMPR_Hyperarid <- filter_taxa(Rock_dust_filt3_GMPR_Hyperarid, function(x) sum(x) > 0, TRUE)
-(mod3 <-  adonis(
-  otu_table(Rock_dust_filt3_GMPR_Hyperarid) ~ Source * Location,
-  data = as(sample_data(Rock_dust_filt3_GMPR_Hyperarid), "data.frame"),
-  method = "horn",
-  permutations = 9999
-))
-```
-#According to this model we see that indeed there's an effect of site on the community (p = 0.001), and that effect accounts for about 17% of the variance. Also, considering that Location is only borderline significant and explains very little of the data, we could probably take it out of the model to make a minimal adequate model.
-
-```{r ADONIS reduced, cache=T}
-(mod4 <-  adonis(
-  otu_table(Rock_dust_filt3_GMPR) ~ Climate * Source,
-  data = as(sample_data(Rock_dust_filt3_GMPR), "data.frame"),
-  method = "horn",
-  permutations = 9999
-))
-
-(mod5 <-  adonis(
-  otu_table(Rock_dust_filt3_GMPR_Arid) ~ Source,
-  data = as(sample_data(Rock_dust_filt3_GMPR_Arid), "data.frame"),
-  method = "horn",
-  permutations = 9999
-))
-
-(mod6 <-  adonis(
-  otu_table(Rock_dust_filt3_GMPR_Hyperarid) ~ Source,
-  data = as(sample_data(Rock_dust_filt3_GMPR_Hyperarid), "data.frame"),
-  method = "horn",
-  permutations = 9999
-))
-```
-
-Final model
-```{r ADONIS final, cache=T, fig.width=8, fig.aspect=.5}
-print(mod4)
-
-mod4_pairwise <- PairwiseAdonis(
-  otu_table(Rock_dust_filt3_GMPR),
-  sample_data(Rock_dust_filt3_GMPR)$Climate.Source,
-  sim.function = "vegdist",
-  sim.method = "horn",
-  p.adjust.m = "BH"
-)
-print(mod4_pairwise)
-sig_pairs <- as.character(mod4_pairwise$pairs[mod4_pairwise$p.adjusted < 0.05])
-  
-simper(otu_table(Rock_dust_filt3_GMPR), sample_data(Rock_dust_filt3_GMPR)$Climate.Source, parallel = 4)
-```
-```{r final ordination, cache=T, fig.width=8, fig.aspect=.5}
-GMPR_ord <- ordinate(Rock_dust_filt3_GMPR, "CAP", "horn", formula = Rock_dust_filt3_GMPR ~ Climate * Source)
-explained <- eigenvals(GMPR_ord)/sum( eigenvals(GMPR_ord)) * 100
-explained <- as.numeric(format(round(explained, 1), nsmall = 1))
-data2plot <- cbind(scores(GMPR_ord, display = "sites"), sample_data(Rock_dust_filt3_GMPR))
-p_ord <- ggplot(data2plot) +
-  geom_point(aes(x = CAP1, y = CAP2, colour = Source, shape = Climate), size = 3, alpha = 2/3 ) +
-  scale_colour_manual(values = pom4) +
-  stat_ellipse(aes(x = CAP1, y = CAP2, group = Climate), color = "black", alpha = 0.5, type = "norm", level = 0.95, linetype = 2) +
-  xlab(label = paste0("CAP1", " (", explained[1],"%)")) + 
-  ylab(label = paste0("CAP2", " (", explained[2],"%)")) +
-  coord_fixed(sqrt(explained[2] / explained[1])) 
-  
-# p_ord <- plot_ordination(Rock_dust_filt3_GMPR, GMPR_ord, type = "samples", shape = "Climate", color = "Source") +
-#   geom_point(size = 5, alpha = 1/2) +
-#   scale_colour_manual(values = pom4) +
-#   stat_ellipse(aes(x = CAP1, y = CAP2, group = Climate), color = "black", alpha = 0.5, type = "norm", level = 0.95, linetype = 2) +
-#   coord_fixed(sqrt(evals[2] / evals[1]))
-print(p_ord)
-```
-
-```{r save ordinate, cache=F}
-p_ord_file <- "PCoA_bray"
-svglite(paste0(p_ord_file, ".svg"),
-        width = 10, height = 7.2)
-print(p_ord)
-dev.off()
-
-ggsave(
-  paste0(p_ord_file, ".png"),
-  p_ord,
-  device = "png",
-  width = 10,
-  height = 6
-)
-gz(paste0(p_ord_file, ".svg"), paste0(p_ord_file, ".svgz"))
-```
-
-### Taxonomic features
-```{r seqs heatmaps, cache=T}
-Rock_dust_filt3_GMPR_rel %>% 
-  sample_data() %>% 
-  arrange(Climate, Source) %>% 
-  .$sample_names ->
-  Sample_order
-
-Rock_dust_filt3_100 <-
-  prune_taxa(names(sort(taxa_sums(Rock_dust_filt3_GMPR_rel), TRUE)[1:100]), Rock_dust_filt3_GMPR_rel)
-plot_heatmap(
-  Rock_dust_filt3_100,
-  method = NULL,
-  distance = NULL,
-  sample.label = "sample_title",
-  taxa.label = "Order",
-  sample_order = Sample_order,
-  low = "#000033",
-  high = "#FF3300"
-) #+ theme_bw(base_size = 20) + theme(axis.text.x = element_text(hjust = 0, angle = -90.0))
-```
-
-Let's look at the agglomerated taxa
-```{r agglomerated taxa heatmap, cache=T}
-Rock_dust_filt3_glom <- tax_glom(Rock_dust_filt3_GMPR, 
-                             "Phylum", 
-                             NArm = TRUE)
-Rock_dust_filt3_glom_rel <- transform_sample_counts(Rock_dust_filt3_glom, function(x) x / sum(x)) 
-plot_heatmap(
-  Rock_dust_filt3_glom_rel,
-  # method = "NMDS",
-  # distance = "bray",
-  sample_order = Sample_order,
-  sample.label = "sample_title",
-  taxa.label = "Phylum",
-  taxa_order = "Phylum",
-  low = "#000033",
-  high = "#FF3300"
-) + theme_bw(base_size = 20) + 
-  theme(axis.text.x = element_text(hjust = 0, angle = -90.0))
-```
-
-```{r agglomerated taxa box plot, fig.width=15, fig.height=10, cache=T}
-Rock_dust_filt3_glom_rel_DF <- psmelt(Rock_dust_filt3_glom_rel)
-Rock_dust_filt3_glom_rel_DF$Phylum %<>% as.character()
-
-# group dataframe by Phylum, calculate median rel. abundance
-Rock_dust_filt3_glom_rel_DF %>%
-  group_by(Phylum) %>%
-  summarise(median = median(Abundance)) ->
-  medians
-
-# find Phyla whose rel. abund. is less than 0.5%
-Rare_phyla <- medians[medians$median <= 0.005, ]$Phylum
-
-# change their name to "Rare"
-Rock_dust_filt3_glom_rel_DF[Rock_dust_filt3_glom_rel_DF$Phylum %in% Rare_phyla, ]$Phylum <- 'Rare'
-# re-group
-Rock_dust_filt3_glom_rel_DF %>%
-  group_by(Sample, Climate, Phylum, Rock.type, Source) %>%
-  summarise(Abundance = sum(Abundance)) ->
-  Rock_dust_filt3_glom_rel_DF_2plot
-
-# ab.taxonomy$Freq <- sqrt(ab.taxonomy$Freq)
-Rock_dust_filt3_glom_rel_DF_2plot$Phylum %<>% sub("unclassified", "Unclassified", .)
-Rock_dust_filt3_glom_rel_DF_2plot$Phylum %<>% sub("uncultured", "Unclassified", .)
-
-Rock_dust_filt3_glom_rel_DF_2plot %>% 
-  group_by(Sample) %>% 
-  filter(Phylum == "Rare") %>% 
-  summarise(`Rares (%)` = sum(Abundance * 100)) -> 
-  Rares
-# Percentage of reads classified as rare 
-kable(Rares, 
-      digits = 2, 
-      caption = "Percentage of reads per sample classified as rare:")
-
-sample_order <- match(Rares$Sample, row.names(sample_data(Rock_dust_filt3_glom)))
-Rares %<>% arrange(., sample_order)
-
-Rares %>% 
-  cbind(., sample_data(Rock_dust_filt3_glom)) %>% 
-  group_by(Climate.Source) %>% 
-  summarise(`Rares (%)` = mean(`Rares (%)`)) -> 
-  Rares_merged
-
-# Percentage of reads classified as rare 
-kable(Rares, 
-      digits = 2, 
-      caption = "Percentage of reads per sample type classified as rare:")
-
-Rock_dust_filt3_glom_rel_DF_2plot %>% 
-  group_by(Phylum) %>% 
-  summarise(sum.Taxa = sum(Abundance)) %>% 
-  arrange(desc(sum.Taxa)) -> Taxa_rank
-Rock_dust_filt3_glom_rel_DF_2plot$Phylum %<>% 
-  factor(., levels = Taxa_rank$Phylum) %>% 
-  fct_relevel(., "Rare", after = Inf)
-  
-p_taxa_box <-
-  ggplot(Rock_dust_filt3_glom_rel_DF_2plot, aes(x = Phylum, y = (Abundance * 100))) +
-  geom_boxplot(aes(group = interaction(Phylum, Source)), position = position_dodge(width = 0.9), fatten = 1) +
-  geom_point(
-    aes(colour = Source),
-    position = position_jitterdodge(dodge.width = 1),
-    alpha = 1 / 2,
-    stroke = 0,
-    size = 2
-  ) +
-  scale_colour_manual(values = pom4, name = "") +
-  theme_cowplot(font_size = 11, font_family = f_name) +
-  labs(x = NULL, y = "Relative abundance (%)") +
-  guides(colour = guide_legend(override.aes = list(size = 5))) +
-  facet_grid(Climate ~ .) +
-  background_grid(major = "xy",
-                  minor = "none") +
-  theme(axis.text.x = element_text(
-    angle = 45,
-    vjust = 0.9,
-    hjust = 0.9
-  ))
-print(p_taxa_box)
-```
-```{r save boxplot, cache=F}
-p_taxa_box_file <- "Taxa_boxplot"
-svglite(paste0(p_taxa_box_file, ".svg"),
-        width = 15, height = 10)
-p_taxa_box
-dev.off()
-
-ggsave(paste0(p_taxa_box_file, ".png"), p_taxa_box, device = "png", width = 15, height = 10)
-gz(paste0(p_taxa_box_file, ".svg"), paste0(p_taxa_box_file, ".svgz"))
-```
-
-#### Test differences between samples on the phylum level
-Basically what STAMP does
-```{r test phylum, fig.width=15, fig.height=10, cache=T}
 STAMPR <- function(physeq_obj, rank = "Phylum", sig_pairs, threshold = 0.005) {
   # run a STAMP-like analysis: compare relative abundance differences using two-way analysis, then run a post-hoc test and correct for multiple comparisons
   
@@ -1614,33 +565,826 @@ STAMPR <- function(physeq_obj, rank = "Phylum", sig_pairs, threshold = 0.005) {
     # qvalue(p = pull(taxa_test_results[, pair]))
   }
   
-  write.csv(taxa_test_results, file = paste0(deparse(substitute(physeq_obj)), "_", rank, "_Pvals.csv"))
-  write.csv(taxa_test_stats, file = paste0(deparse(substitute(physeq_obj)), "_", rank, "_CI.csv"))
+  write.csv(taxa_test_results, file = paste0("Results/", deparse(substitute(physeq_obj)), "_", rank, "_Pvals.csv"))
+  write.csv(taxa_test_stats, file = paste0("Results/", deparse(substitute(physeq_obj)), "_", rank, "_CI.csv"))
   Taxa_tests <- list(taxa_test_results, taxa_test_stats)
   return(Taxa_tests)
 }
 
-Taxa_tests_phylum <- STAMPR(Rock_dust_filt3_GMPR, "Phylum", sig_pairs)
-Taxa_tests_order <- STAMPR(Rock_dust_filt3_GMPR, "Order", sig_pairs)
+CalcALDEx <- function(physeq_obj = Rock_weathering_filt3_Rocks, sig_level = 0.05, LFC = 0.322) {
+  physeq_obj <- filter_taxa(physeq_obj, function(x) sum(x) > 0, TRUE)
+  # physeq_obj <- prune_taxa(sig_taxa, physeq_obj) # remove taxa not significant under the full model
+  data2test <- t(otu_table(physeq_obj))
+  comparison <- as.character(unlist(sample_data(physeq_obj)[, "Climate.Source"]))
+  ALDEx <- aldex.clr(
+    data2test,
+    comparison,
+    mc.samples = 128,
+    denom = "iqlr", # iqlr for slight assymetry in composition
+    verbose = TRUE,
+    useMC = TRUE
+  ) 
+  ALDEx_tt <- aldex.ttest(ALDEx, comparison, paired.test = FALSE) # for two conditions
+  ALDEx_effect <- aldex.effect(
+    ALDEx,
+    comparison,
+    include.sample.summary = TRUE,
+    verbose = TRUE,
+    useMC = TRUE
+  ) # estimate effect sizes
+  ALDEx2plot <- PrepAlDExData(ALDEx_tt, ALDEx_effect, physeq_obj, sig_level, LFC, Taxa_rank)
+  return(ALDEx2plot)
+}
+
+PrepAlDExData <- function(ALDEx_tt, ALDEx_effect, physeq_obj = Rock_weathering_filt3_Rocks, sig_level, LFC, Taxa_rank) {
+  ALDEx2plot <- data.frame(ALDEx_tt, ALDEx_effect) # merge results
+  # group dataframe by OTU, calculate median rel. abundance
+  physeq_obj %>%
+    transform_sample_counts(., function(x) x / sum(x) * 100) %>% 
+    psmelt() %>%
+    group_by(OTU) %>%
+    # filter(OTU %in% sig_taxa) %>%
+    summarise(baseMean = mean(Abundance)) ->
+    baseMean
+  
+  ALDEx2plot$OTU <- rownames(ALDEx2plot)
+  ALDEx2plot %<>% left_join(., baseMean, by = "OTU") # add mean abundance to results table
+  ALDEx2plot$Phylum <-
+    tax_table(physeq_obj)[taxa_names(physeq_obj) %in% ALDEx2plot$OTU, "Phylum"] # add phylum data
+  # change their name to "Rare"
+  ALDEx2plot[ALDEx2plot$Phylum %in% Rare_phyla,]$Phylum <- 'Rare' # Rare_phyla is calcuted for the taxa box plots
+  ALDEx2plot$Significance <- factor("Fail", levels = c("Fail", "Pass")) # define significance factor
+  ALDEx2plot$Significance[ALDEx2plot$wi.eBH < sig_level &
+                            !is.na(ALDEx2plot$wi.eBH) &
+                            abs(ALDEx2plot$effect) > LFC] <- "Pass"
+  # ALDEx2plot$Significance <- as.factor(sapply(ALDEx2plot$wi.eBH, function(x) if (is.na(x) | x > 0.05) {x <- "Fail"} else {x <- "Pass"}))
+  # Rank by taxa abundance
+  ALDEx2plot$Phylum %<>%
+    factor(., levels = Taxa_rank$Phylum) %>%  # Taxa_rank is calcuted for the taxa box plots
+    fct_relevel(., "Rare", after = Inf)
+  return(ALDEx2plot)
+}
+
+GGPlotALDExTax <- function(ALDEx2plot, OTU_labels = FALSE, Taxa = "Phylum", Y_val = "effect", sig_level = 0.05) {
+  p <-
+    ggplot(ALDEx2plot) +
+    geom_jitter(aes_string(
+             x = Taxa,
+             y = Y_val,
+             colour = "Significance",
+             size = "baseMean"),
+             alpha = 2 / 3, 
+             width = 0.3,
+             stroke = 0) +
+    xlab("") +
+    ylab(expression(paste("Effect size (lo", g[2], " fold change)"))) +
+    # ylab("Fold change") +
+    labs(colour = paste("Significance at \n p <", sig_level), size = "Mean count (%)") +
+    theme_grey(base_size = 18,  base_family = f_name) +
+    theme(axis.text.x = element_text(angle = 45.0, vjust = 1, hjust = 1)) +
+    guides(colour = guide_legend(override.aes = list(size = 5))) +
+    scale_colour_manual(values = pom2) +
+    scale_size_continuous(range = c(1, 5), breaks = c(1, 2.5, 5, 10))
+  
+  if (OTU_labels) {
+    p <- p + geom_text_repel(
+      aes_string(x = Taxa, y = Y_val),
+      size = 8,
+      label = sub("OTU_([0-9]+)", "\\1", rownames(ALDEx2plot[ALDEx2plot$Significance == "Pass", ])),
+      data = ALDEx2plot[ALDEx2plot$Significance == "Pass", ],
+      nudge_x = 0.4,
+      colour = "#707070"
+    )
+  }
+  return(p)
+}
+
+gz <- function(in_path, out_path = tempfile()) {
+  # Compress a file using gz and delete the uncompressed file
+  out <- gzfile(out_path, "w")
+  writeLines(readLines(in_path), out)
+  close(out)
+
+  file.remove(in_path)
+  invisible(out_path)
+}
+
+```
+## New insights into the role of epilithic biological crust in arid rock weathering
+This script reproduces all sequence analysis steps and plots included in the paper plus some additional exploratory analyses.
+The analysis is heavily based on the phyloseq package [@mcmurdie_phyloseq_2013], but also on many other R packages.
+
+```{r general parameters}
+set.seed(123456789)
+bootstraps <- 1000
+min_lib_size <- 1000
+```
+
+**Load data**
+```{r load data, cache=T}
+read.csv("Data/Rock_weathering_new2_otuTab.txt", header = TRUE, row.names = 1, sep = "\t") %>%
+  t() %>% 
+  as.data.frame() ->
+  Rock_weathering_OTUmat
+
+sort_order <- as.numeric(gsub("OTU([0-9]+)", "\\1", colnames(Rock_weathering_OTUmat)))
+Rock_weathering_OTUmat <- Rock_weathering_OTUmat[, order(sort_order)]
+row.names(Rock_weathering_OTUmat) <- gsub("(.*)Nimrod[0-9]+|Osnat[0-9]+", "\\1", row.names(Rock_weathering_OTUmat))
+
+Metadata <- read.csv("Data/Arid_rock_weathering_metadata_RA.csv", row.names = 1, header = TRUE)
+# Order abundance_mat samples according to the metadata
+sample_order <- match(row.names(Rock_weathering_OTUmat), row.names(Metadata))
+Rock_weathering_OTUmat %<>% arrange(., sample_order)
+Metadata$sample_names <- row.names(Metadata)
+Metadata$Uni.Source <- fct_collapse(Metadata$Source, Rock = c("Dolomite", "Limestone"))
+Metadata$Climate.Source <-
+  factor(
+    paste(
+      Metadata$Climate,
+      Metadata$Source
+    ),
+    levels = c(
+      "Arid Limestone",
+      "Arid Dust",
+      "Arid Loess soil",
+      "Hyperarid Dolomite",
+      "Hyperarid Dust",
+      "Hyperarid Loess soil"
+    ),
+    labels = c(
+      "Arid limestone",
+      "Arid dust",
+      "Arid loess soil",
+      "Hyperarid dolomite",
+      "Hyperarid dust",
+      "Hyperarid loess soil"
+    )
+  )
+
+Metadata$Climate.UniSource <-
+  factor(
+    paste(
+      Metadata$Climate,
+      Metadata$Uni.Source
+    ),
+    levels = c(
+      "Arid Rock",
+      "Arid Dust",
+      "Arid Loess soil",
+      "Hyperarid Rock",
+      "Hyperarid Dust",
+      "Hyperarid Loess soil"
+    ),
+    labels = c(
+      "Arid rock",
+      "Arid dust",
+      "Arid loess soil",
+      "Hyperarid rock",
+      "Hyperarid dust",
+      "Hyperarid loess soil"
+    )
+  )
+# calculate sample size
+Metadata$Lib.size = rowSums(Rock_weathering_OTUmat)
+row.names(Rock_weathering_OTUmat) <- row.names(Metadata)
+
+# Load taxonomy data
+tax.file <- "Data/Rock_weathering_new2_silva.nrv119.taxonomy"
+Taxonomy <- read.table(tax.file,  stringsAsFactors = FALSE) # read taxonomy file
+
+# count how many ';' in each cell and add up to 6
+for (i in 1:nrow(Taxonomy)) {
+  semicolons <- length(gregexpr(";", Taxonomy$V2[i])[[1]])
+  if (semicolons < 6) {
+    x <- paste0(rep("Unclassified;", 6 - semicolons), collapse = "")
+    Taxonomy$V2[i] <- paste0(Taxonomy$V2[i], x, sep = "")
+  }
+}
+
+do.call( "rbind", strsplit( Taxonomy$V1, ";", fixed = TRUE)) %>% 
+  gsub( "size=([0-9]+)", "\\1", .) %>%
+  data.frame( ., do.call( "rbind", strsplit( Taxonomy$V2, ";", fixed = TRUE)), stringsAsFactors = F) %>% 
+  apply(., 2, function(x) gsub( "\\(.*\\)", "", x)) %>% 
+  replace(., . == "unclassified", "Unclassified") -> 
+  Taxonomy
+
+colnames( Taxonomy ) <- c( "OTU", "Frequency", "Domain", "Phylum", "Class", "Order", "Family", "Genus" )
+# rownames(Taxonomy) <- colnames(Rock_weathering_OTUmat)
+rownames(Taxonomy) <- Taxonomy[, 1]
+
+# generate phyloseq object
+Rock_dust <- phyloseq(otu_table(Rock_weathering_OTUmat, taxa_are_rows = FALSE),
+                        tax_table(Taxonomy[, -c(1, 2)]),
+                        sample_data(Metadata)
+                        )
+
+# Reorder factors for plotting
+sample_data(Rock_dust)$Source %<>% fct_relevel("Limestone", "Dolomite", "Dust", "Loess soil")
+```
+
+Remove samples not for analysis
+```{r remove samples, cache=T}
+samples2remove <- c(2, 3, 4, 5, 6, 7, 8, 10, 12) 
+Rock_dust <- subset_samples(Rock_dust, !grepl(paste(c(sample_names(Rock_dust)[samples2remove]), collapse = "|"), sample_names(Rock_dust)))
+Rock_dust <- filter_taxa(Rock_dust, function(x) sum(x) > 0, TRUE)
+
+domains2remove <- c("", "Eukaryota", "Unclassified")
+classes2remove <- c("Chloroplast")
+families2remove <- c("Mitochondria")
+
+Rock_weathering_filt <- subset_taxa(Rock_dust, !is.na(Phylum) &
+                        !Domain %in% domains2remove &
+                      !Class %in% classes2remove &
+                      !Family %in% families2remove)
+```
+
+First let's explore the prevalence of different taxa in the database.
+```{r explore prevalence, cache=T}
+prevdf <- apply(X = otu_table(Rock_weathering_filt),
+                 MARGIN = ifelse(taxa_are_rows(Rock_weathering_filt), yes = 1, no = 2),
+                 FUN = function(x){sum(x > 0)})
+# Add taxonomy and total read counts to this data.frame
+prevdf <- data.frame(Prevalence = prevdf,
+                      TotalAbundance = taxa_sums(Rock_weathering_filt),
+                      tax_table(Rock_weathering_filt))
+
+prevdf %>%
+  group_by(Phylum) %>%
+  summarise(`Mean prevalence` = mean(Prevalence),
+            `Sum prevalence` = sum(Prevalence)) ->
+  Prevalence_phylum_summary
+
+Prevalence_phylum_summary %>% 
+  kable(., digits = c(0, 1, 0)) %>%
+  kable_styling(bootstrap_options = c("striped", "hover", "condensed", "responsive"), full_width = F)
+
+prevdf %>%
+  group_by(Order) %>%
+  summarise(`Mean prevalence` = mean(Prevalence),
+            `Sum prevalence` = sum(Prevalence)) ->
+  Prevalence_Order_summary
+
+Prevalence_Order_summary %>% 
+  kable(., digits = c(0, 1, 0)) %>%
+  kable_styling(bootstrap_options = c("striped", "hover", "condensed", "responsive"), full_width = F)
+```
+
+Based on that we'll remove all phyla with a prevalence of under 7
+```{r remove rare taxa, cache=T}
+Prevalence_phylum_summary %>% 
+  filter(`Sum prevalence` < 7) %>% 
+  select(Phylum) %>% 
+  map(as.character) %>% 
+  unlist() ->
+  filterPhyla
+
+Rock_weathering_filt2 <- subset_taxa(Rock_weathering_filt, !Phylum %in% filterPhyla)
+sample_data(Rock_weathering_filt2)$Lib.size <- rowSums(otu_table(Rock_weathering_filt2))
+print(Rock_weathering_filt)
+print(Rock_weathering_filt2)
+```
+
+Plot general prevalence features of the phyla
+```{r prevalence phylum, cahce=T, fig.height=12, fig.width=10}
+# Subset to the remaining phyla
+prevdf_phylum_filt <- subset(prevdf, Phylum %in% get_taxa_unique(Rock_weathering_filt2, "Phylum"))
+ggplot(prevdf_phylum_filt,
+       aes(TotalAbundance, Prevalence / nsamples(Rock_weathering_filt2), color = Phylum)) +
+  # Include a guess for parameter
+  geom_hline(yintercept = 0.05,
+             alpha = 0.5,
+             linetype = 2) + geom_point(size = 2, alpha = 0.7) +
+  scale_x_log10() +  xlab("Total Abundance") + ylab("Prevalence [Frac. Samples]") +
+  facet_wrap( ~ Phylum) + theme(legend.position = "none")
+```
+
+Plot general prevalence features of the top 20 orders
+```{r prevalence order, cache=T, fig.height=12, fig.width=10}
+# Subset to the remaining phyla
+prevdf_order_filt <- subset(prevdf, Order %in% get_taxa_unique(Rock_weathering_filt2, "Order"))
+
+# grab the top 30 most abundant orders
+prevdf_order_filt %>% 
+  group_by(Order) %>%
+  summarise(Combined.abundance = sum(TotalAbundance)) %>% 
+  arrange(desc(Combined.abundance)) %>% 
+  .[1:30, "Order"]  ->
+  Orders2plot
+
+prevdf_order_filt2 <- subset(prevdf, Order %in% Orders2plot$Order)
+
+ggplot(prevdf_order_filt2,
+       aes(TotalAbundance, Prevalence / nsamples(Rock_weathering_filt2), color = Order)) +
+  # Include a guess for parameter
+  geom_hline(yintercept = 0.05,
+             alpha = 0.5,
+             linetype = 2) + geom_point(size = 2, alpha = 0.7) +
+  scale_x_log10() +  xlab("Total Abundance") + ylab("Prevalence [Frac. Samples]") +
+  facet_wrap( ~ Order) + theme(legend.position = "none")
+```
+
+#### Unsupervised filtering by prevalence
+I'll remove all sequences which appear in less than 10% of the samples
+```{r}
+# Define prevalence threshold as 10% of total samples
+prevalenceThreshold <- 0.1 * nsamples(Rock_weathering_filt)
+prevalenceThreshold
+
+# Execute prevalence filter, using `prune_taxa()` function
+keepTaxa <-
+  row.names(prevdf_phylum_filt)[(prevdf_phylum_filt$Prevalence >= prevalenceThreshold)]
+Rock_weathering_filt3 <- prune_taxa(keepTaxa, Rock_weathering_filt2)
+sample_data(Rock_weathering_filt3)$Lib.size <- rowSums(otu_table(Rock_weathering_filt3))
+print(Rock_weathering_filt2)
+print(Rock_weathering_filt3)
+```
+This removed `r ntaxa(Rock_weathering_filt2) - ntaxa(Rock_weathering_filt3)` or `r percent(1 - (ntaxa(Rock_weathering_filt3) /  ntaxa(Rock_weathering_filt2)))` of the sequences.
+
+### Exploring Rock_dust dataset features
+First let's look at the count data distribution
+```{r plot abundance, cache=T}
+PlotLibDist(Rock_weathering_filt3)
+sample_data(Rock_weathering_filt3) %>% 
+  remove_rownames %>% 
+  select(sample_title, Lib.size) %>% 
+  as(., "data.frame") %>% 
+  kable(.) %>%
+  kable_styling(bootstrap_options = c("striped", "hover", "condensed", "responsive"), full_width = F)
+```
+The figure and table indicate only a small deviation in the number of reads per samples.
+
+```{r mod abundance, cache=T, fig.width=2, fig.asp=.8}
+(mod1 <- adonis(
+  otu_table(Rock_weathering_filt3) ~ Lib.size,
+  data = as(sample_data(Rock_weathering_filt3), "data.frame"), 
+  method = "bray",
+  permutations = 9999
+))
+
+PlotReadHist(as(otu_table(Rock_weathering_filt3), "matrix"))
+notAllZero <- (rowSums(t(otu_table(Rock_weathering_filt3))) > 0)
+meanSdPlot(as.matrix(log2(t(otu_table(Rock_weathering_filt3))[notAllZero, ] + 1)))
+```
+
+### Account for variation in library read-depth
+We'll use the GMPR method [@chen_gmpr:_2017]
+```{r GMPR, cache=T}
+Rock_weathering_filt3_GMPR <- Rock_weathering_filt3
+Rock_weathering_filt3 %>%
+  otu_table(.) %>%
+  t() %>%
+  as(., "matrix") %>%
+  GMPR() ->
+  GMPR_factors
+
+Rock_weathering_filt3 %>%
+  otu_table(.) %>%
+  t() %*% diag(1 / GMPR_factors$gmpr) %>%
+  t() %>%
+  as.data.frame(., row.names = sample_names(Rock_weathering_filt3)) %>%
+  otu_table(., taxa_are_rows = FALSE) ->
+  otu_table(Rock_weathering_filt3_GMPR)
+sample_data(Rock_weathering_filt3_GMPR)$Lib.size <- sample_sums(Rock_weathering_filt3_GMPR)
+
+adonis(
+  otu_table(Rock_weathering_filt3_GMPR) ~ Lib.size,
+  data = as(sample_data(Rock_weathering_filt3_GMPR), "data.frame"),
+  method = "bray",
+  permutations = 9999
+)
+PlotLibDist(Rock_weathering_filt3_GMPR)
+```
+```{r GMPR diag plots, cache=T, fig.width=2, fig.asp=.8}
+PlotReadHist(as(otu_table(Rock_weathering_filt3_GMPR), "matrix"))
+notAllZero <- (rowSums(t(otu_table(Rock_weathering_filt3_GMPR))) > 0)
+meanSdPlot(as.matrix(log2(t(otu_table(Rock_weathering_filt3_GMPR))[notAllZero, ] + 1)))
+```
+
+### Alpha diversity 
+Calculate and plot alpha diversity mertrics.
+```{r alpha-div, cache=T, fig.width=20, fig.height=10}
+# non-parametric richness estimates
+rarefaction.mat <- matrix(0, nrow = nsamples(Rock_weathering_filt3), ncol = bootstraps)
+rownames(rarefaction.mat) <- sample_names(Rock_weathering_filt3)
+rich.ests <- list(S.obs = rarefaction.mat, S.chao1 = rarefaction.mat, se.chao1 = rarefaction.mat,
+                   S.ACE = rarefaction.mat, se.ACE = rarefaction.mat)
+
+for (i in seq(bootstraps)) {
+  sub.OTUmat <- rrarefy(otu_table(Rock_weathering_filt3), min(rowSums(otu_table(Rock_weathering_filt3))))
+  for (j in seq(length(rich.ests))) {
+    rich.ests[[j]][, i] <- t(estimateR(sub.OTUmat))[, j]
+  }
+}
+
+Richness <- data.frame(row.names = row.names(rich.ests[[1]]))
+for (i in c(1, seq(2, length(rich.ests), 2))) {
+  S <- apply(rich.ests[[i]], 1, mean)
+  if (i == 1) { 
+    se <- apply(rich.ests[[i]], 1, function(x) (mean(x)/sqrt(length(x))))
+    } else se <- apply(rich.ests[[i + 1]], 1, mean)
+  Richness <- cbind(Richness, S, se)
+}
+colnames(Richness) <- c("S.obs", "S.obs.se", "S.chao1", "S.chao1.se", "S.ACE", "S.ACE.se")
+
+
+saveRDS(Richness, file = "Results/Rock_weathering_Richness.Rds")
+write.csv(Richness, file = "Results/Rock_weathering_Richness.csv")
+
+ses <- grep("\\.se", colnames(Richness))
+Richness[, ses] %>% 
+  gather(key = "est.se") -> se.dat
+Richness[, -unique(ses)] %>% 
+  gather(key = "est") -> mean.dat
+
+n <- length(unique(mean.dat$est))
+
+# diversity indices
+diversity.inds <- list(Shannon = rarefaction.mat, inv.simpson = rarefaction.mat, BP = rarefaction.mat)
+for (i in seq(bootstraps)) {
+  sub.OTUmat <- rrarefy(otu_table(Rock_weathering_filt3), min(rowSums(otu_table(Rock_weathering_filt3))))
+  diversity.inds$Shannon[, i] <- diversityresult(sub.OTUmat, index = 'Shannon', method = 'each site', digits = 3)[, 1]
+  diversity.inds$inv.simpson[, i] <- diversityresult(sub.OTUmat, index = 'inverseSimpson', method = 'each site', digits = 3)[, 1]
+  diversity.inds$BP[, i] <- diversityresult(sub.OTUmat, index = 'Berger', method = 'each site', digits = 3)[, 1]
+}
+
+Diversity <- data.frame(row.names = row.names(diversity.inds[[1]]))
+for (i in seq(length(diversity.inds))) {
+  S <- apply(diversity.inds[[i]], 1, mean)
+  se <- apply(diversity.inds[[i]], 1, function(x) (mean(x)/sqrt(length(x))))
+  Diversity <- cbind(Diversity, S, se)
+}
+colnames(Diversity) <- c("Shannon", "Shannon.se", "Inv.simpson", "Inv.simpson.se", "BP", "BP.se")
+
+ses <- grep("\\.se", colnames(Diversity))
+Diversity[, ses] %>% gather(key = "est.se") -> se.dat
+Diversity[, -unique(ses)] %>% gather(key = "est") -> mean.dat
+
+saveRDS(Diversity, file = "Results/Rock_weathering_Diversity.Rds")
+write.csv(Diversity, file = "Results/Rock_weathering_Diversity.csv")
+```
+
+Test the differences in alpha diversity.
+```{r test alpha, cache=T, include=F}
+# make combined richness diversity
+Richness_Diversity <- cbind(Richness, Diversity)
+ses <- grep("\\.se", colnames(Richness_Diversity))
+Richness_Diversity[, ses] %>% 
+  gather(key = "est.se") -> 
+  se.dat
+Richness_Diversity[, -unique(ses)] %>% 
+  gather(key = "Metric", 
+         value = "Estimate") -> 
+  mean.dat
+
+Richness_Diversity_long <-
+  cbind(
+    Sample = rep(rownames(Richness_Diversity), times = length(unique(mean.dat$Metric))),
+    mean.dat,
+    lerr = mean.dat$Estimate - se.dat$value,
+    herr = mean.dat$Estimate + se.dat$value
+  )
+
+Richness_Diversity_long$Metric <-
+  factor(
+    Richness_Diversity_long$Metric,
+    levels = c("S.obs", "S.chao1", "S.ACE", "Shannon", "Inv.simpson", "BP"),
+    labels = c("S obs.", "Chao1", "ACE", "Shannon", "Inv. Simpson" , "Berger Parker")
+  )
+
+Richness_Diversity_long %<>%
+  cbind(., 
+        sample_data(Rock_weathering_filt3))
+
+data2test <- Richness_Diversity_long[Richness_Diversity_long$Metric == "S obs.", ] 
+mod_data <- TestAlpha(data = data2test, boxcox.trans = TRUE)
+TukeyHSD(mod_data)
+factors2test <- c("Climate", "Uni.Source")
+(ph_Sobs <- HSD.test(mod_data, factors2test, group = TRUE, console = TRUE))
+# Richness_Diversity_long$groups[Richness_Diversity_long$Metric == "S obs."] <- ph_Sobs$groups$groups
+
+#But the problem is that Tukey assumes varience homogeneity. If we doubt that we should use something like the Games-Howell method. 
+posthocTGH(y = data2test$Estimate, x = data2test$Climate.Source)
+
+data2test <- Richness_Diversity_long[Richness_Diversity_long$Metric == "Shannon", ] 
+mod_data <- TestAlpha(data = data2test, boxcox.trans = TRUE)
+TukeyHSD(mod_data)
+(ph_Shannon <- HSD.test(mod_data, factors2test, group = TRUE, console = TRUE))
+posthocTGH(y = data2test$Estimate, x = data2test$Climate.Source)
+
+data2test <- Richness_Diversity_long[Richness_Diversity_long$Metric == "ACE", ] 
+mod_data <- TestAlpha(data = data2test, boxcox.trans = FALSE)
+TukeyHSD(mod_data)
+(ph_ACE <- HSD.test(mod_data, factors2test, group = TRUE, console = TRUE))
+posthocTGH(y = data2test$Estimate, x = data2test$Climate.Source)
+
+data2test <- Richness_Diversity_long[Richness_Diversity_long$Metric == "Berger Parker", ] 
+mod_data <- TestAlpha(data = data2test, boxcox.trans = TRUE)
+TukeyHSD(mod_data)
+(ph_BP <- HSD.test(mod_data, factors2test, group = TRUE, console = TRUE))
+posthocTGH(y = data2test$Estimate, x = data2test$Climate.Source)
+```
+
+#### Plot all alpha diversity metrics together
+```{r plot alpha, cache=T, fig.width=10, fig.height=6, fig.cap=""}
+Richness_Diversity_long[Richness_Diversity_long$Metric != "Chao1" &
+                          Richness_Diversity_long$Metric != "Inv. Simpson" &
+                          Richness_Diversity_long$Metric != "Berger Parker", ] %>% 
+  droplevels() ->
+  Richness_Diversity_long2plot
+
+p_alpha <- ggplot(Richness_Diversity_long2plot, aes(
+  x = Source,
+  y = Estimate
+)) +
+  geom_violin(aes(colour = Climate, fill = Climate), alpha = 1/3) +
+  geom_jitter(aes(colour = Climate, fill = Climate), shape = 16, size = 2, width = 0.2, alpha = 2/3) +
+  scale_colour_manual(values = pom4, name = "") +
+  scale_fill_manual(values = pom4, name = "") +
+  theme_cowplot(font_size = 11, font_family = f_name) +
+  # geom_errorbar(alpha = 1 / 2, width = 0.3) +
+  xlab("") +
+  ylab("") +
+  theme(axis.text.x = element_text(
+    angle = 45,
+    vjust = 0.9,
+    hjust = 0.9
+  )) +
+  facet_grid(Metric ~ Climate, shrink = FALSE, scale = "free") +
+  background_grid(major = "y",
+                  minor = "none") +
+  theme(panel.spacing = unit(2, "lines"))
+
+dat_text <- data.frame(
+  label = as.character(fct_c(ph_Sobs$groups$groups, ph_ACE$groups$groups, ph_Shannon$groups$groups)),
+  Metric   = rep(levels(Richness_Diversity_long2plot$Metric), each = 6),
+  Climate = str_split(rownames(ph_Sobs$groups), ":", simplify = TRUE)[, 1], 
+  x = c("Loess soil", "Loess soil", "Limestone", "Dust", "Dolomite", "Dust"),
+  # x     = as.factor(levels(Richness_Diversity_long2plot$Climate.Source)),
+  y = rep(c(460, 850, 6.5), each = 6)
+  # y = rep(c(40, 140, 0.5), each = 6)
+)
+
+
+p_alpha <- p_alpha + geom_text(
+  data    = dat_text,
+  mapping = aes(x = x, y = y, label = label),
+  nudge_x = -0.2,
+  nudge_y = -0.1
+)
+
+print(p_alpha)
+
+Richness_Diversity_long2plot %>%
+  group_by(Metric, Climate.Source) %>%   # the grouping variable
+  summarise(mean_PL = mean(Estimate),  # calculates the mean of each group
+            sd_PL = sd(Estimate), # calculates the standard deviation of each group
+            n_PL = n(),  # calculates the sample size per group
+            SE_PL = sd(Estimate)/sqrt(n())) %>% # calculates the standard error of each group
+  kable(.) %>%
+  kable_styling(bootstrap_options = c("striped", "hover", "condensed", "responsive"), full_width = F)
+```
+
+```{r print alpha, echo=F}
+p_alpha_file <- "Violin_plot"
+svglite(paste0(p_alpha_file, ".svg"),
+        width = 10, height = 8)
+
+print(p_alpha)
+dev.off()
+
+ggsave(
+  paste0(p_alpha_file, ".png"),
+  p_alpha,
+  device = "png",
+  width = 10,
+  height = 8
+)
+gz(paste0(p_alpha_file, ".svg"), paste0(p_alpha_file, ".svgz"))
+```
+
+### Beta diversity
+Calculate and plot beta diversity mertrics. 
+
+#### 1. Possible changes in biofilm arid vs hyper arid
+Is there a difference between the two sites. However, since we know that that samples are of different nature we'll have to control for rock type, source and location:
+
+```{r ADONIS full, cache=T}
+(mod1 <-  adonis(
+  otu_table(Rock_weathering_filt3_GMPR) ~ Climate * Source * Location,
+  data = as(sample_data(Rock_weathering_filt3_GMPR), "data.frame"),
+  method = "horn",
+  permutations = 9999
+))
+
+Rock_weathering_filt3_GMPR_Arid <- subset_samples(Rock_weathering_filt3_GMPR, Climate == "Arid")
+Rock_weathering_filt3_GMPR_Arid <- filter_taxa(Rock_weathering_filt3_GMPR_Arid, function(x) sum(x) > 0, TRUE)
+(mod2 <-  adonis(
+  otu_table(Rock_weathering_filt3_GMPR_Arid) ~ Source * Location,
+  data = as(sample_data(Rock_weathering_filt3_GMPR_Arid), "data.frame"),
+  method = "horn",
+  permutations = 9999
+))
+
+Rock_weathering_filt3_GMPR_Hyperarid <- subset_samples(Rock_weathering_filt3_GMPR, Climate == "Hyperarid")
+Rock_weathering_filt3_GMPR_Hyperarid <- filter_taxa(Rock_weathering_filt3_GMPR_Hyperarid, function(x) sum(x) > 0, TRUE)
+(mod3 <-  adonis(
+  otu_table(Rock_weathering_filt3_GMPR_Hyperarid) ~ Source * Location,
+  data = as(sample_data(Rock_weathering_filt3_GMPR_Hyperarid), "data.frame"),
+  method = "horn",
+  permutations = 9999
+))
+```
+#According to this model we see that indeed there's an effect of site on the community (p = 0.001), and that effect accounts for about 17% of the variance. Also, considering that Location is only borderline significant and explains very little of the data, we could probably take it out of the model to make a minimal adequate model.
+
+```{r ADONIS reduced, cache=T}
+(mod4 <-  adonis(
+  otu_table(Rock_weathering_filt3_GMPR) ~ Climate * Source,
+  data = as(sample_data(Rock_weathering_filt3_GMPR), "data.frame"),
+  method = "horn",
+  permutations = 9999
+))
+
+(mod5 <-  adonis(
+  otu_table(Rock_weathering_filt3_GMPR_Arid) ~ Source,
+  data = as(sample_data(Rock_weathering_filt3_GMPR_Arid), "data.frame"),
+  method = "horn",
+  permutations = 9999
+))
+
+(mod6 <-  adonis(
+  otu_table(Rock_weathering_filt3_GMPR_Hyperarid) ~ Source,
+  data = as(sample_data(Rock_weathering_filt3_GMPR_Hyperarid), "data.frame"),
+  method = "horn",
+  permutations = 9999
+))
+```
+
+Final model
+```{r ADONIS final, cache=T, fig.width=8, fig.aspect=.5}
+print(mod4)
+
+mod4_pairwise <- PairwiseAdonis(
+  otu_table(Rock_weathering_filt3_GMPR),
+  sample_data(Rock_weathering_filt3_GMPR)$Climate.Source,
+  sim.function = "vegdist",
+  sim.method = "horn",
+  p.adjust.m = "BH"
+)
+print(mod4_pairwise)
+sig_pairs <- as.character(mod4_pairwise$pairs[mod4_pairwise$p.adjusted < 0.05])
+  
+simper(otu_table(Rock_weathering_filt3_GMPR), sample_data(Rock_weathering_filt3_GMPR)$Climate.Source, parallel = 4)
+```
+```{r ordination final, cache=T, fig.width=8, fig.aspect=.5}
+GMPR_ord <- ordinate(Rock_weathering_filt3_GMPR, "CAP", "horn", formula = Rock_weathering_filt3_GMPR ~ Climate * Source)
+explained <- eigenvals(GMPR_ord)/sum( eigenvals(GMPR_ord)) * 100
+explained <- as.numeric(format(round(explained, 1), nsmall = 1))
+data2plot <- cbind(scores(GMPR_ord, display = "sites"), sample_data(Rock_weathering_filt3_GMPR))
+p_ord <- ggplot(data2plot) +
+  geom_point(aes(x = CAP1, y = CAP2, colour = Source, shape = Climate), size = 3, alpha = 2/3 ) +
+  scale_colour_manual(values = pom4) +
+  stat_ellipse(aes(x = CAP1, y = CAP2, group = Climate), color = "black", alpha = 0.5, type = "norm", level = 0.95, linetype = 2) +
+  xlab(label = paste0("CAP1", " (", explained[1],"%)")) + 
+  ylab(label = paste0("CAP2", " (", explained[2],"%)")) +
+  coord_fixed(sqrt(explained[2] / explained[1])) 
+  
+print(p_ord)
+```
+
+### Taxonomic features
+Explore and plot the taxonomic distribution of the sequences
+
+```{r seqs heatmaps, cache=T}
+Rock_weathering_filt3_GMPR_rel <- transform_sample_counts(Rock_weathering_filt3_GMPR, function(x) x / sum(x) )
+
+Rock_weathering_filt3_GMPR_rel %>% 
+  sample_data() %>% 
+  arrange(Climate, Source) %>% 
+  .$sample_names ->
+  Sample_order
+
+Rock_weathering_filt3_100 <-
+  prune_taxa(names(sort(taxa_sums(Rock_weathering_filt3_GMPR_rel), TRUE)[1:100]), Rock_weathering_filt3_GMPR_rel)
+plot_heatmap(
+  Rock_weathering_filt3_100,
+  method = NULL,
+  distance = NULL,
+  sample.label = "sample_title",
+  taxa.label = "Order",
+  sample_order = Sample_order,
+  low = "#000033",
+  high = "#FF3300"
+) #+ theme_bw(base_size = 20) + theme(axis.text.x = element_text(hjust = 0, angle = -90.0))
+```
+
+Let's look at the agglomerated taxa
+
+```{r agglomerated taxa box plot, fig.width=15, fig.height=10, cache=T}
+Rock_weathering_filt3_glom <- tax_glom(Rock_weathering_filt3_GMPR, 
+                             "Phylum", 
+                             NArm = TRUE)
+Rock_weathering_filt3_glom_rel <- transform_sample_counts(Rock_weathering_filt3_glom, function(x) x / sum(x)) 
+Rock_weathering_filt3_glom_rel_DF <- psmelt(Rock_weathering_filt3_glom_rel)
+Rock_weathering_filt3_glom_rel_DF$Phylum %<>% as.character()
+
+# group dataframe by Phylum, calculate median rel. abundance
+Rock_weathering_filt3_glom_rel_DF %>%
+  group_by(Phylum) %>%
+  summarise(median = median(Abundance)) ->
+  medians
+
+# find Phyla whose rel. abund. is less than 0.5%
+Rare_phyla <- medians[medians$median <= 0.005, ]$Phylum
+
+# change their name to "Rare"
+Rock_weathering_filt3_glom_rel_DF[Rock_weathering_filt3_glom_rel_DF$Phylum %in% Rare_phyla, ]$Phylum <- 'Rare'
+# re-group
+Rock_weathering_filt3_glom_rel_DF %>%
+  group_by(Sample, Climate, Phylum, Rock.type, Source) %>%
+  summarise(Abundance = sum(Abundance)) ->
+  Rock_weathering_filt3_glom_rel_DF_2plot
+
+# ab.taxonomy$Freq <- sqrt(ab.taxonomy$Freq)
+Rock_weathering_filt3_glom_rel_DF_2plot$Phylum %<>% sub("unclassified", "Unclassified", .)
+Rock_weathering_filt3_glom_rel_DF_2plot$Phylum %<>% sub("uncultured", "Unclassified", .)
+
+Rock_weathering_filt3_glom_rel_DF_2plot %>% 
+  group_by(Sample) %>% 
+  filter(Phylum == "Rare") %>% 
+  summarise(`Rares (%)` = sum(Abundance * 100)) -> 
+  Rares
+# Percentage of reads classified as rare 
+kable(Rares, 
+      digits = 2, 
+      caption = "Percentage of reads per sample classified as rare:")
+
+sample_order <- match(Rares$Sample, row.names(sample_data(Rock_weathering_filt3_glom)))
+Rares %<>% arrange(., sample_order)
+
+Rares %>% 
+  cbind(., sample_data(Rock_weathering_filt3_glom)) %>% 
+  group_by(Climate.Source) %>% 
+  summarise(`Rares (%)` = mean(`Rares (%)`)) -> 
+  Rares_merged
+
+# Percentage of reads classified as rare 
+kable(Rares, 
+      digits = 2, 
+      caption = "Percentage of reads per sample type classified as rare:")
+
+Rock_weathering_filt3_glom_rel_DF_2plot %>% 
+  group_by(Phylum) %>% 
+  summarise(sum.Taxa = sum(Abundance)) %>% 
+  arrange(desc(sum.Taxa)) -> Taxa_rank
+Rock_weathering_filt3_glom_rel_DF_2plot$Phylum %<>% 
+  factor(., levels = Taxa_rank$Phylum) %>% 
+  fct_relevel(., "Rare", after = Inf)
+  
+p_taxa_box <-
+  ggplot(Rock_weathering_filt3_glom_rel_DF_2plot, aes(x = Phylum, y = (Abundance * 100))) +
+  geom_boxplot(aes(group = interaction(Phylum, Source)), position = position_dodge(width = 0.9), fatten = 1) +
+  geom_point(
+    aes(colour = Source),
+    position = position_jitterdodge(dodge.width = 1),
+    alpha = 1 / 2,
+    stroke = 0,
+    size = 2
+  ) +
+  scale_colour_manual(values = pom4, name = "") +
+  theme_cowplot(font_size = 11, font_family = f_name) +
+  labs(x = NULL, y = "Relative abundance (%)") +
+  guides(colour = guide_legend(override.aes = list(size = 5))) +
+  facet_grid(Climate ~ .) +
+  background_grid(major = "xy",
+                  minor = "none") +
+  theme(axis.text.x = element_text(
+    angle = 45,
+    vjust = 0.9,
+    hjust = 0.9
+  ))
+print(p_taxa_box)
+```
+
+#### Test differences between samples on the phylum level
+```{r test phylum, fig.width=15, fig.height=10, cache=T}
+Taxa_tests_phylum <- STAMPR(Rock_weathering_filt3_GMPR, "Phylum", sig_pairs)
+Taxa_tests_order <- STAMPR(Rock_weathering_filt3_GMPR, "Order", sig_pairs)
 ```
 
 #### Ternary plots
-
-Arid
+For the arid samples
 ```{r arid ternary, fig.width=11.69, fig.height=8.27}
-# Rock_dust_filt3_GMPR_Arid_rel <- transform_sample_counts(Rock_dust_filt3_GMPR_Arid, function(x) x / sum(x) )
-
-Rock_dust_filt3_GMPR_Arid_rel <- transform_sample_counts(Rock_dust_filt3_GMPR_Arid, function(x) x / sum(x) ) # rel abundance
-Rock_dust_filt3_GMPR_Arid_merged <- merge_samples(Rock_dust_filt3_GMPR_Arid_rel, "Source", fun = mean) # merge by source
-Rock_dust_filt3_GMPR_Arid_merged_rel <- transform_sample_counts(Rock_dust_filt3_GMPR_Arid_merged, function(x) x / sum(x) ) # rel abundance per source
-meandf <- as(otu_table(Rock_dust_filt3_GMPR_Arid_merged_rel), "matrix")
-if (!taxa_are_rows(Rock_dust_filt3_GMPR_Arid_merged_rel)) { meandf <- t(meandf) }
+Rock_weathering_filt3_GMPR_Arid_rel <- transform_sample_counts(Rock_weathering_filt3_GMPR_Arid, function(x) x / sum(x) ) # rel abundance
+Rock_weathering_filt3_GMPR_Arid_merged <- merge_samples(Rock_weathering_filt3_GMPR_Arid_rel, "Source", fun = mean) # merge by source
+Rock_weathering_filt3_GMPR_Arid_merged_rel <- transform_sample_counts(Rock_weathering_filt3_GMPR_Arid_merged, function(x) x / sum(x) ) # rel abundance per source
+meandf <- as(otu_table(Rock_weathering_filt3_GMPR_Arid_merged_rel), "matrix")
+if (!taxa_are_rows(Rock_weathering_filt3_GMPR_Arid_merged_rel)) { meandf <- t(meandf) }
 abundance <- rowSums(meandf) / sum(meandf) * 100
 
 Arid4Ternary <- data.frame(
   meandf,
   Abundance = abundance,
-  Phylum = tax_table(Rock_dust_filt3_GMPR_Arid_merged_rel)[, "Phylum"]
+  Phylum = tax_table(Rock_weathering_filt3_GMPR_Arid_merged_rel)[, "Phylum"]
 )
 # Arid4Ternary <- dplyr::rename(Arid4Ternary, Loess_soil = Loess.soil)
 
@@ -1666,39 +1410,26 @@ p_ternary_arid <-
     name = "Abundance (%)"
   ) +
   theme_arrownormal() +
-  scale_color_manual(values = pal("d3js")) +
+    scale_color_manual(values = pal("d3js")) +
   guides(colour = guide_legend(override.aes = list(size = 3))) +
   labs(x = "Loess soil") + 
   theme(axis.title = element_blank())
 print(p_ternary_arid)
 ```
 
-```{r save arid ternary, cache=F}
-p_ternary_arid_file <- "Ternary_Arid"
-svglite(paste0(p_ternary_arid_file, ".svg"),
-        width = 4, height = 4)
-p_ternary_arid + theme(legend.position = "none")
-dev.off()
-
-ggsave(paste0(p_ternary_arid_file, ".png"), p_ternary_arid, device = "png", width = 3, height = 3)
-gz(paste0(p_ternary_arid_file, ".svg"), paste0(p_ternary_arid_file, ".svgz"))
-```
-
-Hyperarid
+For the hyperarid samples
 ```{r hyperarid ternary, fig.width=11.69, fig.height=8.27}
-# Rock_dust_filt3_GMPR_Hyperarid_rel <- transform_sample_counts(Rock_dust_filt3_GMPR_Hyperarid, function(x) x / sum(x) )
-
-Rock_dust_filt3_GMPR_Hyperarid_rel <- transform_sample_counts(Rock_dust_filt3_GMPR_Hyperarid, function(x) x / sum(x) ) # rel abundance
-Rock_dust_filt3_GMPR_Hyperarid_merged <- merge_samples(Rock_dust_filt3_GMPR_Hyperarid_rel, "Source", fun = mean) # merge by source
-Rock_dust_filt3_GMPR_Hyperarid_merged_rel <- transform_sample_counts(Rock_dust_filt3_GMPR_Hyperarid_merged, function(x) x / sum(x) ) # rel abundance per source
-meandf <- as(otu_table(Rock_dust_filt3_GMPR_Hyperarid_merged_rel), "matrix")
-if (!taxa_are_rows(Rock_dust_filt3_GMPR_Hyperarid_merged_rel)) { meandf <- t(meandf) }
+Rock_weathering_filt3_GMPR_Hyperarid_rel <- transform_sample_counts(Rock_weathering_filt3_GMPR_Hyperarid, function(x) x / sum(x) ) # rel abundance
+Rock_weathering_filt3_GMPR_Hyperarid_merged <- merge_samples(Rock_weathering_filt3_GMPR_Hyperarid_rel, "Source", fun = mean) # merge by source
+Rock_weathering_filt3_GMPR_Hyperarid_merged_rel <- transform_sample_counts(Rock_weathering_filt3_GMPR_Hyperarid_merged, function(x) x / sum(x) ) # rel abundance per source
+meandf <- as(otu_table(Rock_weathering_filt3_GMPR_Hyperarid_merged_rel), "matrix")
+if (!taxa_are_rows(Rock_weathering_filt3_GMPR_Hyperarid_merged_rel)) { meandf <- t(meandf) }
 abundance <- rowSums(meandf) / sum(meandf) * 100
 
 Hyperarid4Ternary <- data.frame(
   meandf,
   Abundance = abundance,
-  Phylum = tax_table(Rock_dust_filt3_GMPR_Hyperarid_merged_rel)[, "Phylum"]
+  Phylum = tax_table(Rock_weathering_filt3_GMPR_Hyperarid_merged_rel)[, "Phylum"]
 )
 
 Hyperarid4Ternary$Phylum <-
@@ -1729,18 +1460,9 @@ p_ternary_hyperarid <-
   theme(axis.title = element_blank())
 print(p_ternary_hyperarid)
 ```
-```{r save hyperarid ternary, cache=F}
-p_ternary_hyperarid_file <- "Ternary_Hyperarid"
-svglite(paste0(p_ternary_hyperarid_file, ".svg"),
-        width = 4, height = 4)
- p_ternary_hyperarid + theme(legend.position = "none")
-dev.off()
 
-ggsave(paste0(p_ternary_hyperarid_file, ".png"), p_ternary_hyperarid, device = "png", width = 3, height = 3)
-gz(paste0(p_ternary_hyperarid_file, ".svg"), paste0(p_ternary_hyperarid_file, ".svgz"))
-```
-
-Combine plots
+#### Combine plots
+Combine all sequence analysis plots to make Fig. 3
 ```{r combine plots}
 ternary_legend <-
   get_legend(p_ternary_arid)# + theme(legend.direction = "horizontal"))
@@ -1797,236 +1519,16 @@ bottom_rows <- plot_grid(bottom_l,
                          ncol = 3)
 p_all <- plot_grid(top_row, bottom_rows, align = 'v', axis = 'l', nrow = 2, rel_heights = c(0.43, 0.6)) # aligning vertically along the left axis
 print(p_all)
-
-
-# ggarrange(p_alpha, p_ord, p_taxa_box, p_ternary_arid, p_ternary_hyperarid)
-# saveRDS(p_alpha, file = "p_alpha.Rds")
-# saveRDS(p_ord, file = "p_ord.Rds")
-# saveRDS(p_taxa_box, file = "p_taxa_box.Rds")
-# saveRDS(p_ternary_arid, file = "p_ternary_arid.Rds")
-# saveRDS(p_ternary_hyperarid, file = "p_ternary_hyperarid.Rds")
-```
-
-```{r save combined plot, cache=F}
-p_combined_file <- "Combined_plot"
-svglite(paste0(p_combined_file, ".svg"), width = 11.69, height = 8.27)
-p_all
-dev.off()
-
-ggsave(paste0(p_combined_file, ".png"), p_all, device = "png", width = 11.69, height = 8.27)
-gz(paste0(p_combined_file, ".svg"), paste0(p_combined_file, ".svgz"))
-```
-
-
-### Main contributors to the biofilm i.e., soil or dust
-I'll try to answer that by clustering the samples to metacommunities according to (Holmes et al., 2012).
-
-```{r, meta-communities, cache=T}
-k = 7 # fit model with k metacommunities
-possibleError <- tryCatch(load(file = "Rock_dust_dmn_fit.RData"), error = function(e) e)
-
-if (inherits(possibleError, 'error')) {# no file found, calculate model
- dmn.mod1 <- mclapply(1:k, dmn, count = otu_table(Rock_dust_filt3_GMPR), verbose = TRUE)
-save(dmn.mod1, file = "Rock_dust_dmn_fit.RData")
-} 
-
-# for Avdat
-possibleError <- tryCatch(load(file = "Arid_dmn_fit.RData"), error = function(e) e)
-if (inherits(possibleError, 'error')) {  # no file found, calculate model
-  dmn.mod2 <- mclapply(1:k, dmn, count = otu_table(Rock_dust_filt3_GMPR_Arid), verbose = TRUE)
-save(dmn.mod2, file = "Arid_dmn_fit.RData")
-} 
-
-# for Uvda
-possibleError <- tryCatch(load(file = "Hyperarid_dmn_fit.RData"), error = function(e) e)
-if (inherits(possibleError, 'error')) {  # no file found, calculate model
-  dmn.mod2 <- mclapply(1:k, dmn, count = otu_table(Rock_dust_filt3_GMPR_Hyperarid), verbose = TRUE)
-save(dmn.mod2, file = "Hyperarid_dmn_fit.RData")
-} 
-```
-
-**Evaluate model fit:**
-```{r, cache=T}
-# Access model components
-lplc <- sapply(dmn.mod1, laplace) # laplace goodness of fit
-
-lplc2plot <- data.frame(component = seq(length(lplc)), fit = (lplc))
-PlotLaplace(lplc2plot)
-(best1 <- dmn.mod1[[which.min(lplc)]]) # best model
-# best <- dmn.mod1[[3]]
-mixturewt(best1) # pi (weight/ abundance of community members) and theta (homogeneity/ variability) of the model components
-# mixture with assign=FALSE returns a matrix of sample x Dirichlet component estimates. With assign=TRUE mixture returns a named vector indexing the maximal Dirichlet component of each sample.
-mod.mixture <- mixture(best1, assign = F)
-mod.assign <- mixture(best1, assign = T)
-mod.fitted <- fitted(best1) # The fitted function describes the contribution of each taxonomic group to the Dirichlet components
-
-lplc <- sapply(dmn.mod2, laplace) # laplace goodness of fit
-lplc2plot <- data.frame(component = seq(length(lplc)), fit = (lplc))
-PlotLaplace(lplc2plot)
-(best2 <- dmn.mod2[[which.min(lplc)]]) # best model
-mixturewt(best2) # 
-mod.mixture <- mixture(best2, assign = F)
-mod.assign <- mixture(best2, assign = T)
-mod.fitted <- fitted(best2) 
-
-lplc <- sapply(dmn.mod3, laplace) # laplace goodness of fit
-lplc2plot <- data.frame(component = seq(length(lplc)), fit = (lplc))
-PlotLaplace(lplc2plot)
-(best3 <- dmn.mod3[[which.min(lplc)]]) # best model
-mixturewt(best3) # 
-mod.mixture <- mixture(best3, assign = F)
-mod.assign <- mixture(best3, assign = T)
-mod.fitted <- fitted(best3) 
-```
-
-```{r, cache=T}
-# The posterior mean difference between the best and single-component Dirichlet multinomial model measures how each component differs from the population average; the sum is a measure of total difference from the mean.
-#  deviation}
-p0 <- fitted(dmn.mod1[[1]], scale = TRUE) # k = 1 (population average) scale by theta (variability)
-p2 <- fitted(best1, scale = TRUE)
-colnames(p2) <- paste("m", seq(ncol(best1@group)), sep = "")
-(meandiff <- colSums(abs(p2 - as.vector(p0))))
-sum(meandiff)
-
-# summarize taxonomic contributions to each Dirichlet component
-diff <- rowSums(abs(p2 - as.vector(p0)))
-o <- order(diff, decreasing = TRUE)
-cdiff <- cumsum(diff[o]) / sum(diff)
-(df <- head(cbind(Mean = p0[o], p2[o,], diff = diff[o], cdiff), 30))
-p.df <- df * 100
-write.table(x = p.df, file = "DMMcontribution.csv", quote = F, sep = ",", col.names = NA)
-
-p0 <- fitted(dmn.mod1[[1]], scale = TRUE) # k = 1 (population average) scale by theta (variability)
-p2 <- fitted(best2, scale = TRUE)
-colnames(p2) <- paste("m", seq(ncol(best2@group)), sep = "")
-(meandiff <- colSums(abs(p2 - as.vector(p0))))
-sum(meandiff)
-
-## Avdat
-p0 <- fitted(dmn.mod2[[1]], scale = TRUE) # k = 1 (population average) scale by theta (variability)
-p2 <- fitted(best2, scale = TRUE)
-colnames(p2) <- paste("m", seq(ncol(best2@group)), sep = "")
-(meandiff <- colSums(abs(p2 - as.vector(p0))))
-sum(meandiff)
-# summarize taxonomic contributions to each Dirichlet component model - Avdat
-diff <- rowSums(abs(p2 - as.vector(p0)))
-o <- order(diff, decreasing = TRUE)
-cdiff <- cumsum(diff[o]) / sum(diff)
-(df <- head(cbind(Mean = p0[o], p2[o,], diff = diff[o], cdiff), 30))
-p.df <- df * 100
-write.table(x = p.df, file = "DMMcontribution_Avdat.csv", quote = F, sep = ",", col.names = NA)
-
-
-## Uvda
-p0 <- fitted(dmn.mod3[[1]], scale = TRUE) # k = 1 (population average) scale by theta (variability)
-p2 <- fitted(best3, scale = TRUE)
-colnames(p2) <- paste("m", seq(ncol(best3@group)), sep = "")
-(meandiff <- colSums(abs(p2 - as.vector(p0))))
-sum(meandiff)
-# summarize taxonomic contributions to each Dirichlet component model - Avdat
-diff <- rowSums(abs(p2 - as.vector(p0)))
-o <- order(diff, decreasing = TRUE)
-cdiff <- cumsum(diff[o]) / sum(diff)
-(df <- head(cbind(Mean = p0[o], p2[o,], diff = diff[o], cdiff), 30))
-p.df <- df * 100
-write.table(x = p.df, file = "DMMcontribution_Uvda.csv", quote = F, sep = ",", col.names = NA)
-```
-
-```{r, cache=T}
-# heatmap
-heatmapdmn(as(otu_table(Rock_dust_filt3_GMPR), "matrix"), dmn.mod1[[1]], best1, 30)
-# Members of metacommunity 1
-names(best1@group[best1@group[, 1] == 1,1])
-
-# Members of metacommunity 2
-names(best1@group[best1@group[, 2] == 1,2])
-
-# Members of metacommunity 3
-# names(best1@group[best1@group[, 3] == 1,3])
-
-## Avdat
-# heatmap
-heatmapdmn(as(otu_table(Rock_dust_filt3_GMPR_Arid), "matrix"), dmn.mod2[[1]], best2, 30)
-# Members of metacommunity 1
-names(best2@group[best2@group[, 1] == 1,1])
-# Members of metacommunity 2
-names(best2@group[best2@group[, 2] == 1,2])
-
-## Uvda
-# heatmap
-heatmapdmn(as(otu_table(Rock_dust_filt3_GMPR_Hyperarid), "matrix"), dmn.mod3[[1]], best3, 30)
-# Members of metacommunity 1
-names(best3@group[best3@group[, 1] == 1,1])
-# Members of metacommunity 2
-names(best3@group[best3@group[, 2] == 1,2])
 ```
 
 ### Differential abundance models
-```{r DESeq2, cache=T}
-alpha.thresh <- 0.1
-lfcThresh <- 0.322
-# Rock_dust_filt3 <- subset_samples(Rock_dust_filt3, Rock.type != "Loess soil")
-# Rock_dust_filt32 <- prune_taxa(taxa_sums(Rock_dust_filt3) > 10, Rock_dust_filt3) # remove all OTUs with less than 10 counts in total
-# Rock_dust_filt32 <- filter_taxa(Rock_dust_filt3, function(x) mean(x) > 10, TRUE) # remove all OTUs with a mean of less than 10 counts
-
-Climate_Source_dds <- phyloseq_to_deseq2(Rock_dust_filt3, ~ Climate.Source)
-gm_mean = function(x, na.rm = TRUE){
-  exp(sum(log(x[x > 0]), na.rm = na.rm) / length(x))
-}
-geoMeans <- apply(counts(Climate_Source_dds), 1, gm_mean)
-Climate_Source_dds = estimateSizeFactors(Climate_Source_dds, geoMeans = geoMeans)
-Climate_Source_dds <- DESeq(Climate_Source_dds, fitType = "local")
-
-resultsNames(Climate_Source_dds)
-
-Results.all <- results(Climate_Source_dds, lfcThreshold = lfcThresh, alpha = alpha.thresh)
-Results.limestone_dolomite <- results(Climate_Source_dds, lfcThreshold = lfcThresh, alpha = alpha.thresh, contrast = c("Climate.Source", "Hyperarid dolomite", "Arid limestone")) # Extract results from a DESeq analysis
-summary(Results.limestone_dolomite) # summarise results
-(Labelled.limestone_dolomite <- subset(Results.limestone_dolomite, padj < alpha.thresh & log2FoldChange > lfcThresh))
-Labelled.limestone_dolomite <- Labelled.limestone_dolomite[ order(-Labelled.limestone_dolomite$baseMean), ] # order by mean count
-write.table(Labelled.limestone_dolomite, file = "Labelled.limestone_dolomite.tsv", quote = FALSE, sep = "\t") 
-
-pvals2plot.limestone_dolomite  <- data.frame(Results.limestone_dolomite)
-pvals2plot.limestone_dolomite$Significance <- as.factor(sapply(pvals2plot.limestone_dolomite$padj, function(x) if (is.na(x) | x > 0.1) {x <- "Fail"} else {x <- "Pass"}))
-pvals2plot.limestone_dolomite$Phylum <- tax_table(Rock_dust_filt3)[taxa_names(Rock_dust_filt3) %in% rownames(pvals2plot.limestone_dolomite), "Phylum"]
-# change their name to "Rare"
-pvals2plot.limestone_dolomite[pvals2plot.limestone_dolomite$Phylum %in% Rare_phyla, ]$Phylum <- 'Rare' # Rare_phyla is calcuted for the taxa box plots
-
-pvals2plot.limestone_dolomite$baseMeanAll <- Results.all$baseMean
-# pvals2plot.limestone_dolomite %>% 
-#   group_by(Phylum) %>% 
-#   dplyr::count() %>% 
-#   arrange(desc(n)) -> Taxa_rank
-
-pvals2plot.limestone_dolomite$Phylum %<>% 
-  factor(., levels = Taxa_rank$Phylum) %>%  # Taxa_rank is calcuted for the taxa box plots
-  fct_relevel(., "Rare", after = Inf)
-
-GGPlotMATax(pvals2plot.limestone_dolomite) + 
-  ggtitle("Hyperarid dolomite vs. Arid limestone")
-
-# p1.file <- "Dolomite_limestone_TaxMAPlot"
-```
-
-```{r ANCOM, cache=T}
-Rock_dust_filt3_s <- prune_taxa(names(sort(taxa_sums(Rock_dust_filt3), TRUE))[1:100], Rock_dust_filt3)
-
-data4ANCOM <- data.frame(otu_table(Rock_dust_filt3_s), 
-                    Treatment = as.factor(sample_data(Rock_dust_filt3)$Climate.Source))
-data4ANCOM %<>% 
-  mutate(Treatment = fct_recode(Treatment,
-         "Oil" = "Tilled"))
-
-ancom.out <- ANCOM(data4ANCOM, sig = 0.05, multcorr = 3)
-plot_ancom(ancom.out)
-```
-
+Detect differentially abundant OTUs using ALDEx2 [@fernandes_anova-like_2013]
 ```{r ALDEx2, cache=T}
-# Rock_dust_filt3_s <- prune_taxa(names(sort(taxa_sums(Rock_dust_filt3), TRUE))[1:100], Rock_dust_filt3)
+# Rock_weathering_filt3_s <- prune_taxa(names(sort(taxa_sums(Rock_weathering_filt3), TRUE))[1:100], Rock_weathering_filt3)
 
 # run full model 
-data2test <- t(otu_table(Rock_dust_filt3))
-comparison <- as.character(unlist(sample_data(Rock_dust_filt3)[, "Climate.Source"]))
+data2test <- t(otu_table(Rock_weathering_filt3))
+comparison <- as.character(unlist(sample_data(Rock_weathering_filt3)[, "Climate.Source"]))
 ALDEx_full <- aldex.clr(data2test, comparison, mc.samples = 128, denom = "iqlr", verbose = TRUE, useMC = TRUE) # iqlr for slight assymetry in composition
 ALDEx_full_glm <- aldex.glm(ALDEx_full, comparison, useMC = TRUE) # for more than two conditions
 sig_taxa <- rownames(ALDEx_full_glm)[ALDEx_full_glm$glm.eBH < 0.05] # save names of taxa that are significant under the full model
@@ -2034,28 +1536,28 @@ sig_taxa <- rownames(ALDEx_full_glm)[ALDEx_full_glm$glm.eBH < 0.05] # save names
 # Pairwise comparisons
 # 
 # dolomite - limestone
-Rock_dust_filt3_Rocks <- subset_samples(Rock_dust_filt3, Uni.Source == "Rock")
-ALDEx2plot_Rocks <- CalcALDEx(Rock_dust_filt3_Rocks, sig_level = 0.1, LFC = 0)
+Rock_weathering_filt3_Rocks <- subset_samples(Rock_weathering_filt3, Uni.Source == "Rock")
+ALDEx2plot_Rocks <- CalcALDEx(Rock_weathering_filt3_Rocks, sig_level = 0.1, LFC = 0)
 GGPlotALDExTax(ALDEx2plot_Rocks) + 
   ggtitle("Hyperarid dolomite vs. Arid limestone")
 # dolomite - soil
-Rock_dust_filt3_DolSoil <- subset_samples(Rock_dust_filt3, Climate == "Hyperarid" & Source != "Dust")
-ALDEx2plot_DolSoil <- CalcALDEx(Rock_dust_filt3_DolSoil, sig_level = 0.1, LFC = 0)
+Rock_weathering_filt3_DolSoil <- subset_samples(Rock_weathering_filt3, Climate == "Hyperarid" & Source != "Dust")
+ALDEx2plot_DolSoil <- CalcALDEx(Rock_weathering_filt3_DolSoil, sig_level = 0.1, LFC = 0)
 GGPlotALDExTax(ALDEx2plot_DolSoil) + 
   ggtitle("Hyperarid dolomite vs. Hyperarid soil")
 # dolomite - dust
-Rock_dust_filt3_DolDust <- subset_samples(Rock_dust_filt3, Climate == "Hyperarid" & Source != "Loess soil")
-ALDEx2plot_DolDust <- CalcALDEx(Rock_dust_filt3_DolDust, sig_level = 0.3, LFC = 0)
+Rock_weathering_filt3_DolDust <- subset_samples(Rock_weathering_filt3, Climate == "Hyperarid" & Source != "Loess soil")
+ALDEx2plot_DolDust <- CalcALDEx(Rock_weathering_filt3_DolDust, sig_level = 0.3, LFC = 0)
 GGPlotALDExTax(ALDEx2plot_DolDust) + 
   ggtitle("Hyperarid dolomite vs. Hyperarid dust")
 # limestone - soil
-Rock_dust_filt3_LimeSoil <- subset_samples(Rock_dust_filt3, Climate == "Arid" & Source != "Dust")
-ALDEx2plot_LimeSoil <- CalcALDEx(Rock_dust_filt3_LimeSoil, sig_level = 0.1, LFC = 0)
+Rock_weathering_filt3_LimeSoil <- subset_samples(Rock_weathering_filt3, Climate == "Arid" & Source != "Dust")
+ALDEx2plot_LimeSoil <- CalcALDEx(Rock_weathering_filt3_LimeSoil, sig_level = 0.1, LFC = 0)
 GGPlotALDExTax(ALDEx2plot_LimeSoil) + 
   ggtitle("Arid limestone vs. Arid soil")
 # limestone - dust
-Rock_dust_filt3_LimeDust <- subset_samples(Rock_dust_filt3, Climate == "Arid" & Source != "Loess soil")
-ALDEx2plot_LimeDust <- CalcALDEx(Rock_dust_filt3_LimeDust, sig_level = 0.3, LFC = 0)
+Rock_weathering_filt3_LimeDust <- subset_samples(Rock_weathering_filt3, Climate == "Arid" & Source != "Loess soil")
+ALDEx2plot_LimeDust <- CalcALDEx(Rock_weathering_filt3_LimeDust, sig_level = 0.3, LFC = 0)
 GGPlotALDExTax(ALDEx2plot_LimeDust) + 
   ggtitle("Arid limestone vs. Arid dust")
 
@@ -2096,21 +1598,13 @@ p_aldex2_all <- GGPlotALDExTax(ALDEx2plot_all) +
 p_aldex2_all
 ```
 
-```{r save combined ALDEx2 plot, cache=F}
-p_aldex_file <- "ALDEx2_combined_plot"
-svglite(paste0(p_aldex_file, ".svg"), width = 15, height = 11)
-p_aldex2_all
-dev.off()
-
-ggsave(paste0(p_aldex_file, ".png"), p_aldex2_all, device = "png", width = 15, height = 11)
-gz(paste0(p_aldex_file, ".svg"), paste0(p_aldex_file, ".svgz"))
-```
-
+## Other plots
+Other plots in the paper which are not based on sequence data
 ### Isotopes profile
 ```{r isotopes, cache=T}
 Isotopes <-
   read_csv(
-    "~/Dropbox/Nimrod/rock_soil_dust_paper/Fig 2_FTIR_isotopes/Isotopes_data.csv"
+    "Data/Isotopes_data.csv"
   )
 
 Isotopes %<>% 
@@ -2146,14 +1640,6 @@ Isotopes2plot <- data.frame(
   mean = c(Isotopes$Mean.Arid, Isotopes$Mean.Hyperarid)
 )
 
-# Isotopes2plot$Isotope <- factor(Isotopes2plot$Isotope,
-#                                 labels = c(expression(paste(delta ^ {
-#                                   13
-#                                 }, "C")),
-#                                 expression(paste(delta ^ {
-#                                   18
-#                                 }, "O"))))
-
 p_isotopes <-
   ggplot(Isotopes2plot, aes(y = mean, x = Depth, colour = Isotope)) +
   geom_point(size = 4, alpha = 1 / 2) +
@@ -2175,55 +1661,11 @@ p_isotopes <-
 
 p_isotopes <- plot_grid(p_isotopes, labels = "b", label_size = 20)
 print(p_isotopes)
-# Isotopes_long <-
-#   gather(Isotopes, Sample, delta, -`Depth (mm)`, -Isotope)
-# Isotopes_long$Sample %>%
-#   sub("^(.*?)\\s.*", "\\1", .) %>%
-#   factor(., levels = c("Limestone", "Dolomite")) -> Isotopes_long$Rock
-# Isotopes_long$Sample %>%
-#   sub(".*\\s(.*)$", "\\1", .) %>%
-#   as_factor() %>%
-#   fct_recode(
-#     "1" = "NWSH1",
-#     "2" = "NWSH2",
-#     "1" = "Fm.UVSL5",
-#     "2" = "Fm.UVSL6"
-#   ) ->
-#   Isotopes_long$Replicate
-# Isotopes_long$Isotope <- factor(Isotopes_long$Isotope,
-#                                 labels = c(expression(paste(delta ^ {
-#                                   13
-#                                 }, "C")),
-#                                 expression(paste(delta ^ {
-#                                   18
-#                                 }, "O"))))
-
-
-
-# p <- ggplot(Isotopes_long, aes(y = `delta`, x = `Depth (mm)`, colour = Rock, shape = Replicate)) +
-# geom_point(size = 4, alpha = 1/2) + 
-# geom_line(alpha = 1/2) +
-# coord_flip() +
-# scale_x_reverse(limits = c(4, 0), expand = c(0.01, 0.01)) + 
-# # scale_x_continuous(limits = c(0, 50), expand = c(0.01, 0.01)) +
-# facet_grid(. ~ Isotope , scales = "free_x", labeller = label_parsed) +
-# scale_color_manual(values =  pal("d3js")[c(3,1)]) +
-# ylab(expression(paste(delta ^{13}, "C / ", delta ^{18}, "O", " (", "\u2030", ")")))
-# 
-# p  
-
-p_isotopes_file <- "~/Dropbox/Nimrod/rock_soil_dust_paper/Fig 2_FTIR_isotopes/Fig_2b_Isotopes"
-svglite(paste0(p_isotopes_file, ".svg"),
-width = 6, height = 8)
-print(p_isotopes)
-dev.off()
-
-ggsave(paste0(p_isotopes_file, ".png"), p_isotopes, device = "png", width = 6, height = 8)
-gz(paste0(p_isotopes_file, ".svg"), paste0(p_isotopes_file, ".svgz"))
 ```
+
 ### Desiccation experiment
 ```{r desiccation, cache=T}
-read_csv("~/Dropbox/Nimrod/rock_soil_dust_paper/Fig_4_desiccation/desiccation_data.csv") %>%
+read_csv("Data/desiccation_data.csv") %>%
   select(-c(`Capped Marly dolomite`, `Bare Marly dolomite`)) %>%
   gather(., Sample, `Residual water content (%)`, -`Time (h)`) %>%
   cbind(., str_split(.$Sample, "\\s", simplify = TRUE)) %>%
@@ -2316,3 +1758,9 @@ ggsave(
 gz(paste0(p_dessication_file, ".svg"),
    paste0(p_dessication_file, ".svgz"))
 ```
+
+```{r session_info, echo=T}
+devtools::session_info()
+```
+
+## References
