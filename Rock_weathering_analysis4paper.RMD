@@ -1556,6 +1556,7 @@ print(p_aldex2_all)
 
 ## Other plots
 Other plots in the paper which are not based on sequence data
+
 ### Isotopes profile
 ```{r isotopes, cache=T}
 Isotopes <-
@@ -1675,7 +1676,7 @@ mod_treatment <- lm(`Residual water content (%)` ~ poly(`Time (h)`, 2, raw = TRU
 anova(mod_all, mod_treatment)
 
 Desiccation_mods %>% 
-  kable(., digits = 1, caption = "Model coefficients") %>%
+  kable(., digits = 5, caption = "Model coefficients") %>%
   kable_styling(bootstrap_options = c("striped", "hover", "condensed", "responsive"), full_width = F)
 
 

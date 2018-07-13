@@ -6404,6 +6404,7 @@ print(p_aldex2_all)
 
 ## Other plots
 Other plots in the paper which are not based on sequence data
+
 ### Isotopes profile
 
 ```r
@@ -6712,7 +6713,7 @@ anova(mod_all, mod_treatment)
 
 ```r
 Desiccation_mods %>% 
-  kable(., digits = 1, caption = "Model coefficients") %>%
+  kable(., digits = 5, caption = "Model coefficients") %>%
   kable_styling(bootstrap_options = c("striped", "hover", "condensed", "responsive"), full_width = F)
 ```
 
@@ -6731,35 +6732,35 @@ Desiccation_mods %>%
 <tbody>
   <tr>
    <td style="text-align:left;"> Capped Dolomite </td>
-   <td style="text-align:right;"> 99.0 </td>
-   <td style="text-align:right;"> -0.4 </td>
-   <td style="text-align:right;"> 0.0 </td>
-   <td style="text-align:right;"> 0 </td>
-   <td style="text-align:right;"> 1.0 </td>
+   <td style="text-align:right;"> 98.97708 </td>
+   <td style="text-align:right;"> -0.41316 </td>
+   <td style="text-align:right;"> 0.00046 </td>
+   <td style="text-align:right;"> 0.00429 </td>
+   <td style="text-align:right;"> 0.97427 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> Bare Dolomite </td>
-   <td style="text-align:right;"> 90.8 </td>
-   <td style="text-align:right;"> -3.0 </td>
-   <td style="text-align:right;"> 0.0 </td>
-   <td style="text-align:right;"> 0 </td>
-   <td style="text-align:right;"> 0.9 </td>
+   <td style="text-align:right;"> 90.82621 </td>
+   <td style="text-align:right;"> -2.97827 </td>
+   <td style="text-align:right;"> 0.03703 </td>
+   <td style="text-align:right;"> 0.00156 </td>
+   <td style="text-align:right;"> 0.93394 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> Capped Limestone </td>
-   <td style="text-align:right;"> 97.9 </td>
-   <td style="text-align:right;"> -0.8 </td>
-   <td style="text-align:right;"> 0.0 </td>
-   <td style="text-align:right;"> 0 </td>
-   <td style="text-align:right;"> 1.0 </td>
+   <td style="text-align:right;"> 97.87726 </td>
+   <td style="text-align:right;"> -0.75521 </td>
+   <td style="text-align:right;"> 0.00168 </td>
+   <td style="text-align:right;"> 0.00109 </td>
+   <td style="text-align:right;"> 0.98441 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> Bare Limestone </td>
-   <td style="text-align:right;"> 91.9 </td>
-   <td style="text-align:right;"> -5.0 </td>
-   <td style="text-align:right;"> 0.1 </td>
-   <td style="text-align:right;"> 0 </td>
-   <td style="text-align:right;"> 0.9 </td>
+   <td style="text-align:right;"> 91.91519 </td>
+   <td style="text-align:right;"> -5.04253 </td>
+   <td style="text-align:right;"> 0.06835 </td>
+   <td style="text-align:right;"> 0.00057 </td>
+   <td style="text-align:right;"> 0.94833 </td>
   </tr>
 </tbody>
 </table>
