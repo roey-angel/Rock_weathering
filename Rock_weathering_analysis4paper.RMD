@@ -34,11 +34,7 @@ repo <- "http://cran.wu.ac.at"
   "MASS", # Support Functions and Datasets for Venables and Ripley's MASS
   "rcompanion", #Functions to Support Extension Education Program Evaluation
   "tidyverse", # for dplyr forcats ggplot2 readr tibble
-  # "broom", # Convert Statistical Analysis Objects into Tidy Data Frames (should be part of tidyverse)
-  # "gridExtra", # Miscellaneous Functions for "Grid" Graphics
   "cowplot", # wrappers for ggplot
-  # "ggsci", # Scientific Journal and Sci-Fi Themed Color Palettes for 'ggplot2'
-  # "ggrepel", # Repulsive Text and Label Geoms for 'ggplot2'
   "magrittr", # pipes
   "scales", # Generic plot scaling methods
   "svglite", # for svg files
@@ -48,16 +44,15 @@ repo <- "http://cran.wu.ac.at"
   "vegan", # community ecology methods
   "doParallel", # parallel backend for the foreach/%dopar% function
   "BiodiversityR", # Package for Community Ecology and Suitability Analysis
-  # "ade4", # Analysis of Ecological Data
   "hexbin", # Hexagonal Binning Routines
   "ggtern" # An Extension to 'ggplot2', for the Creation of Ternary Diagrams
 ) 
 
-# .inst <- .cran_libs %in% installed.packages()
-# if (any(!.inst)) {
-#   install.packages(.cran_libs[!.inst],
-#                    repos = repo)
-# }
+.inst <- .cran_libs %in% installed.packages()
+if (any(!.inst)) {
+  install.packages(.cran_libs[!.inst],
+                   repos = repo)
+}
 
 .bioc_libs <- c(
   "phyloseq", # Handling and analysis of high-throughput phylogenetic sequence data
@@ -72,12 +67,12 @@ if (!"phyloseq" %in% installed.packages()) {
  )
 }
 
-# .inst <- .bioc_libs %in% installed.packages()
-# if (any(!.inst)) {
-#   source("http://bioconductor.org/biocLite.R")
-#   biocLite(ask = F, lib = Sys.getenv("R_LIBS_USER")) # upgrade bioC packages
-#   biocLite(.bioc_libs[!.inst], ask = F)
-# }
+.inst <- .bioc_libs %in% installed.packages()
+if (any(!.inst)) {
+  source("http://bioconductor.org/biocLite.R")
+  biocLite(ask = F, lib = Sys.getenv("R_LIBS_USER")) # upgrade bioC packages
+  biocLite(.bioc_libs[!.inst], ask = F)
+}
 
 .github_libs <- c(
   "pmartinezarbizu/pairwiseAdonis/pairwiseAdonis", # pairwise adonis test
@@ -1024,7 +1019,7 @@ write.csv(Diversity, file = "Results/Rock_weathering_Diversity.csv")
 ```
 
 Test the differences in alpha diversity.
-```{r test alpha, cache=T, include=F}
+```{r test alpha, cache=T}
 # make combined richness diversity
 Richness_Diversity <- cbind(Richness, Diversity)
 ses <- grep("\\.se", colnames(Richness_Diversity))
@@ -1157,26 +1152,8 @@ Is there a difference between the two sites. However, since we know that that sa
   method = "horn",
   permutations = 9999
 ))
-
-Rock_weathering_filt3_GMPR_Arid <- subset_samples(Rock_weathering_filt3_GMPR, Climate == "Arid")
-Rock_weathering_filt3_GMPR_Arid <- filter_taxa(Rock_weathering_filt3_GMPR_Arid, function(x) sum(x) > 0, TRUE)
-(mod2 <-  adonis(
-  otu_table(Rock_weathering_filt3_GMPR_Arid) ~ Source * Location,
-  data = as(sample_data(Rock_weathering_filt3_GMPR_Arid), "data.frame"),
-  method = "horn",
-  permutations = 9999
-))
-
-Rock_weathering_filt3_GMPR_Hyperarid <- subset_samples(Rock_weathering_filt3_GMPR, Climate == "Hyperarid")
-Rock_weathering_filt3_GMPR_Hyperarid <- filter_taxa(Rock_weathering_filt3_GMPR_Hyperarid, function(x) sum(x) > 0, TRUE)
-(mod3 <-  adonis(
-  otu_table(Rock_weathering_filt3_GMPR_Hyperarid) ~ Source * Location,
-  data = as(sample_data(Rock_weathering_filt3_GMPR_Hyperarid), "data.frame"),
-  method = "horn",
-  permutations = 9999
-))
 ```
-#According to this model we see that indeed there's an effect of site on the community (p = 0.001), and that effect accounts for about 17% of the variance. Also, considering that Location is only borderline significant and explains very little of the data, we could probably take it out of the model to make a minimal adequate model.
+According to this model we see that indeed there's an effect of site (climate) on the community (p = 0.001), and that effect accounts for about 22% of the variance. Also, considering that Location is only borderline significant and explains very little of the data, we could probably take it out of the model to make a minimal adequate model.
 
 ```{r ADONIS reduced, cache=T}
 (mod4 <-  adonis(

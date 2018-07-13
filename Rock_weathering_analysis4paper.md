@@ -2,10 +2,9 @@
 title: "Role of BRC in arid rock weathering"
 subtitle: "Data analysis and plotting for publication"
 author: "Roey Angel"
-date: "2018-07-11"
+date: "2018-07-13"
 bibliography: references.bib
 link-citations: yes
-csl: fems-microbiology-ecology.csl
 output:
   rmarkdown::html_document:
     toc: true
@@ -1435,6 +1434,863 @@ write.csv(Diversity, file = "Results/Rock_weathering_Diversity.csv")
 
 Test the differences in alpha diversity.
 
+```r
+# make combined richness diversity
+Richness_Diversity <- cbind(Richness, Diversity)
+ses <- grep("\\.se", colnames(Richness_Diversity))
+Richness_Diversity[, ses] %>% 
+  gather(key = "est.se") -> 
+  se.dat
+Richness_Diversity[, -unique(ses)] %>% 
+  gather(key = "Metric", 
+         value = "Estimate") -> 
+  mean.dat
+
+Richness_Diversity_long <-
+  cbind(
+    Sample = rep(rownames(Richness_Diversity), times = length(unique(mean.dat$Metric))),
+    mean.dat,
+    lerr = mean.dat$Estimate - se.dat$value,
+    herr = mean.dat$Estimate + se.dat$value
+  )
+
+Richness_Diversity_long$Metric <-
+  factor(
+    Richness_Diversity_long$Metric,
+    levels = c("S.obs", "S.chao1", "S.ACE", "Shannon", "Inv.simpson", "BP"),
+    labels = c("S obs.", "Chao1", "ACE", "Shannon", "Inv. Simpson" , "Berger Parker")
+  )
+
+Richness_Diversity_long %<>%
+  cbind(., 
+        sample_data(Rock_weathering_filt3))
+
+data2test <- Richness_Diversity_long[Richness_Diversity_long$Metric == "S obs.", ] 
+mod_data <- TestAlpha(data = data2test, boxcox.trans = TRUE)
+```
+
+```
+## Levene's Test for Homogeneity of Variance (center = median)
+##       Df F value Pr(>F)  
+## group  5    2.13  0.092 .
+##       28                 
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## [1] "Performing Box-Cox transformation of the data"
+```
+
+![](Rock_weathering_figures/test alpha-1.svg)<!-- -->
+
+```
+## [1] 0.73 1.00
+## [1] 1
+## Call:
+##    aov(formula = as.formula(paste("Estimate.box", paste(factor_names[1], 
+##     factor_names[2], sep = " * "), sep = " ~ ")), data = data2test)
+## 
+## Terms:
+##                 Climate Uni.Source Climate:Uni.Source Residuals
+## Sum of Squares    53211     136228              24788     65358
+## Deg. of Freedom       1          2                  2        28
+## 
+## Residual standard error: 48.3
+## Estimated effects may be unbalanced
+```
+
+![](Rock_weathering_figures/test alpha-2.svg)<!-- -->
+
+```
+##                    Df Sum Sq Mean Sq F value  Pr(>F)    
+## Climate             1  53211   53211   22.80 5.1e-05 ***
+## Uni.Source          2 136228   68114   29.18 1.4e-07 ***
+## Climate:Uni.Source  2  24788   12394    5.31   0.011 *  
+## Residuals          28  65358    2334                    
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## Tables of means
+## Grand mean
+##     
+## 181 
+## 
+##  Climate 
+##     Arid Hyperarid
+##      221       141
+## rep   17        17
+## 
+##  Uni.Source 
+##     Rock Dust Loess soil
+##      154  137        317
+## rep   24    4          6
+## 
+##  Climate:Uni.Source 
+##            Uni.Source
+## Climate     Rock Dust Loess soil
+##   Arid      181  168  415       
+##   rep        12    2    3       
+##   Hyperarid 128  106  219       
+##   rep        12    2    3
+```
+
+```r
+TukeyHSD(mod_data)
+```
+
+```
+##   Tukey multiple comparisons of means
+##     95% family-wise confidence level
+## 
+## Fit: aov(formula = as.formula(paste("Estimate.box", paste(factor_names[1], factor_names[2], sep = " * "), sep = " ~ ")), data = data2test)
+## 
+## $Climate
+##                 diff  lwr   upr p adj
+## Hyperarid-Arid -79.1 -113 -45.2     0
+## 
+## $Uni.Source
+##                  diff   lwr   upr p adj
+## Dust-Rock       -16.9 -81.5  47.6 0.794
+## Loess soil-Rock 163.0 108.5 217.6 0.000
+## Loess soil-Dust 180.0 102.8 257.1 0.000
+## 
+## $`Climate:Uni.Source`
+##                                        diff     lwr    upr p adj
+## Hyperarid:Rock-Arid:Rock              -52.9 -113.13   7.42 0.111
+## Arid:Dust-Arid:Rock                   -12.4 -125.13 100.40 0.999
+## Hyperarid:Dust-Arid:Rock              -74.4 -187.12  38.41 0.359
+## Arid:Loess soil-Arid:Rock             234.4  139.10 329.70 0.000
+## Hyperarid:Loess soil-Arid:Rock         38.8  -56.51 134.09 0.812
+## Arid:Dust-Hyperarid:Rock               40.5  -72.27 153.25 0.878
+## Hyperarid:Dust-Hyperarid:Rock         -21.5 -134.26  91.26 0.991
+## Arid:Loess soil-Hyperarid:Rock        287.3  191.95 382.56 0.000
+## Hyperarid:Loess soil-Hyperarid:Rock    91.6   -3.66 186.95 0.065
+## Hyperarid:Dust-Arid:Dust              -62.0 -209.63  85.65 0.792
+## Arid:Loess soil-Arid:Dust             246.8  111.99 381.54 0.000
+## Hyperarid:Loess soil-Arid:Dust         51.2  -83.62 185.93 0.852
+## Arid:Loess soil-Hyperarid:Dust        308.8  173.98 443.53 0.000
+## Hyperarid:Loess soil-Hyperarid:Dust   113.1  -21.63 247.92 0.140
+## Hyperarid:Loess soil-Arid:Loess soil -195.6 -316.16 -75.06 0.000
+```
+
+```r
+factors2test <- c("Climate", "Uni.Source")
+(ph_Sobs <- HSD.test(mod_data, factors2test, group = TRUE, console = TRUE))
+```
+
+```
+## 
+## Study: mod_data ~ factors2test
+## 
+## HSD Test for Estimate.box 
+## 
+## Mean Square Error:  2334 
+## 
+## Climate:Uni.Source,  means
+## 
+##                      Estimate.box    std  r   Min Max
+## Arid:Dust                     168 109.02  2  91.2 245
+## Arid:Loess soil               415   8.28  3 406.8 423
+## Arid:Rock                     181  51.17 12  42.8 223
+## Hyperarid:Dust                106  88.73  2  43.5 169
+## Hyperarid:Loess soil          219  54.40  3 158.2 262
+## Hyperarid:Rock                128  31.26 12  74.1 165
+## 
+## Alpha: 0.05 ; DF Error: 28 
+## Critical Value of Studentized Range: 4.32 
+## 
+## Groups according to probability of means differences and alpha level( 0.05 )
+## 
+## Treatments with the same letter are not significantly different.
+## 
+##                      Estimate.box groups
+## Arid:Loess soil               415      a
+## Hyperarid:Loess soil          219      b
+## Arid:Rock                     181      b
+## Arid:Dust                     168      b
+## Hyperarid:Rock                128      b
+## Hyperarid:Dust                106      b
+```
+
+```
+## $statistics
+##   MSerror Df Mean   CV
+##      2334 28  181 26.7
+## 
+## $parameters
+##    test             name.t ntr StudentizedRange alpha
+##   Tukey Climate:Uni.Source   6             4.32  0.05
+## 
+## $means
+##                      Estimate.box    std  r   Min Max   Q25 Q50 Q75
+## Arid:Dust                     168 109.02  2  91.2 245 129.7 168 207
+## Arid:Loess soil               415   8.28  3 406.8 423 410.8 415 419
+## Arid:Rock                     181  51.17 12  42.8 223 166.4 192 216
+## Hyperarid:Dust                106  88.73  2  43.5 169  74.9 106 138
+## Hyperarid:Loess soil          219  54.40  3 158.2 262 197.9 238 250
+## Hyperarid:Rock                128  31.26 12  74.1 165 100.1 134 153
+## 
+## $comparison
+## NULL
+## 
+## $groups
+##                      Estimate.box groups
+## Arid:Loess soil               415      a
+## Hyperarid:Loess soil          219      b
+## Arid:Rock                     181      b
+## Arid:Dust                     168      b
+## Hyperarid:Rock                128      b
+## Hyperarid:Dust                106      b
+## 
+## attr(,"class")
+## [1] "group"
+```
+
+```r
+# Richness_Diversity_long$groups[Richness_Diversity_long$Metric == "S obs."] <- ph_Sobs$groups$groups
+
+#But the problem is that Tukey assumes varience homogeneity. If we doubt that we should use something like the Games-Howell method. 
+posthocTGH(y = data2test$Estimate, x = data2test$Climate.Source)
+```
+
+```
+##                       n means variances
+## Arid limestone       12   182      2618
+## Arid dust             2   169     11884
+## Arid loess soil       3   416        69
+## Hyperarid dolomite   12   129       977
+## Hyperarid dust        2   107      7872
+## Hyperarid loess soil  3   220      2959
+## 
+##                                         diff ci.lo  ci.hi     t   df    p
+## Arid dust-Arid limestone                 -12   NaN    NaN  0.16  1.1 <NA>
+## Arid loess soil-Arid limestone           234   183  286.1 15.10 12.7 <.01
+## Hyperarid dolomite-Arid limestone        -53  -108    2.1  3.05 18.2  .06
+## Hyperarid dust-Arid limestone            -74   NaN    NaN  1.15  1.1 <NA>
+## Hyperarid loess soil-Arid limestone       39  -161  238.2  1.12  3.0  .85
+## Arid loess soil-Arid dust                247   NaN    NaN  3.20  1.0 <NA>
+## Hyperarid dolomite-Arid dust             -40   NaN    NaN  0.52  1.0 <NA>
+## Hyperarid dust-Arid dust                 -62   NaN    NaN  0.62  1.9 <NA>
+## Hyperarid loess soil-Arid dust            51   NaN    NaN  0.61  1.3 <NA>
+## Hyperarid dolomite-Arid loess soil      -287  -321 -253.2 28.13 12.6 <.01
+## Hyperarid dust-Arid loess soil          -309   NaN    NaN  4.91  1.0 <NA>
+## Hyperarid loess soil-Arid loess soil    -196  -446   54.8  6.16  2.1  .08
+## Hyperarid dust-Hyperarid dolomite        -21   NaN    NaN  0.34  1.0 <NA>
+## Hyperarid loess soil-Hyperarid dolomite   92  -138  320.9  2.80  2.3  .31
+## Hyperarid loess soil-Hyperarid dust      113   NaN    NaN  1.61  1.5 <NA>
+```
+
+```r
+data2test <- Richness_Diversity_long[Richness_Diversity_long$Metric == "Shannon", ] 
+mod_data <- TestAlpha(data = data2test, boxcox.trans = TRUE)
+```
+
+```
+## Levene's Test for Homogeneity of Variance (center = median)
+##       Df F value Pr(>F)
+## group  5    1.18   0.35
+##       28               
+## [1] "Performing Box-Cox transformation of the data"
+```
+
+![](Rock_weathering_figures/test alpha-3.svg)<!-- -->
+
+```
+## [1] 0.86 1.00
+## [1] 1
+## Call:
+##    aov(formula = as.formula(paste("Estimate.box", paste(factor_names[1], 
+##     factor_names[2], sep = " * "), sep = " ~ ")), data = data2test)
+## 
+## Terms:
+##                 Climate Uni.Source Climate:Uni.Source Residuals
+## Sum of Squares     5.71      14.53               2.77     18.64
+## Deg. of Freedom       1          2                  2        28
+## 
+## Residual standard error: 0.816
+## Estimated effects may be unbalanced
+```
+
+![](Rock_weathering_figures/test alpha-4.svg)<!-- -->
+
+```
+##                    Df Sum Sq Mean Sq F value  Pr(>F)    
+## Climate             1   5.71    5.71    8.57 0.00672 ** 
+## Uni.Source          2  14.53    7.27   10.91 0.00031 ***
+## Climate:Uni.Source  2   2.77    1.39    2.08 0.14368    
+## Residuals          28  18.64    0.67                    
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## Tables of means
+## Grand mean
+##     
+## 2.6 
+## 
+##  Climate 
+##      Arid Hyperarid
+##      3.01      2.19
+## rep 17.00     17.00
+## 
+##  Uni.Source 
+##      Rock Dust Loess soil
+##      2.56 1.24       3.69
+## rep 24.00 4.00       6.00
+## 
+##  Climate:Uni.Source 
+##            Uni.Source
+## Climate     Rock  Dust  Loess soil
+##   Arid       2.78  2.00  4.59     
+##   rep       12.00  2.00  3.00     
+##   Hyperarid  2.33  0.48  2.78     
+##   rep       12.00  2.00  3.00
+```
+
+```r
+TukeyHSD(mod_data)
+```
+
+```
+##   Tukey multiple comparisons of means
+##     95% family-wise confidence level
+## 
+## Fit: aov(formula = as.formula(paste("Estimate.box", paste(factor_names[1], factor_names[2], sep = " * "), sep = " ~ ")), data = data2test)
+## 
+## $Climate
+##                  diff   lwr    upr p adj
+## Hyperarid-Arid -0.819 -1.39 -0.246 0.007
+## 
+## $Uni.Source
+##                  diff   lwr    upr p adj
+## Dust-Rock       -1.31 -2.41 -0.224 0.016
+## Loess soil-Rock  1.13  0.21  2.053 0.014
+## Loess soil-Dust  2.45  1.14  3.750 0.000
+## 
+## $`Climate:Uni.Source`
+##                                          diff     lwr     upr p adj
+## Hyperarid:Rock-Arid:Rock             -0.45435 -1.4723  0.5636 0.747
+## Arid:Dust-Arid:Rock                  -0.78460 -2.6891  1.1199 0.804
+## Hyperarid:Dust-Arid:Rock             -2.29925 -4.2037 -0.3948 0.011
+## Arid:Loess soil-Arid:Rock             1.81237  0.2028  3.4220 0.020
+## Hyperarid:Loess soil-Arid:Rock       -0.00311 -1.6127  1.6065 1.000
+## Arid:Dust-Hyperarid:Rock             -0.33024 -2.2347  1.5742 0.994
+## Hyperarid:Dust-Hyperarid:Rock        -1.84490 -3.7494  0.0596 0.062
+## Arid:Loess soil-Hyperarid:Rock        2.26672  0.6571  3.8763 0.002
+## Hyperarid:Loess soil-Hyperarid:Rock   0.45124 -1.1583  2.0608 0.954
+## Hyperarid:Dust-Arid:Dust             -1.51466 -4.0082  0.9789 0.448
+## Arid:Loess soil-Arid:Dust             2.59697  0.3207  4.8733 0.018
+## Hyperarid:Loess soil-Arid:Dust        0.78148 -1.4948  3.0578 0.897
+## Arid:Loess soil-Hyperarid:Dust        4.11163  1.8353  6.3879 0.000
+## Hyperarid:Loess soil-Hyperarid:Dust   2.29614  0.0198  4.5724 0.047
+## Hyperarid:Loess soil-Arid:Loess soil -1.81549 -3.8515  0.2205 0.102
+```
+
+```r
+(ph_Shannon <- HSD.test(mod_data, factors2test, group = TRUE, console = TRUE))
+```
+
+```
+## 
+## Study: mod_data ~ factors2test
+## 
+## HSD Test for Estimate.box 
+## 
+## Mean Square Error:  0.666 
+## 
+## Climate:Uni.Source,  means
+## 
+##                      Estimate.box    std  r    Min  Max
+## Arid:Dust                   1.998 1.5634  2  0.892 3.10
+## Arid:Loess soil             4.595 0.0319  3  4.563 4.63
+## Arid:Rock                   2.783 1.0940 12 -0.509 3.61
+## Hyperarid:Dust              0.483 0.8891  2 -0.145 1.11
+## Hyperarid:Loess soil        2.779 0.8513  3  1.811 3.41
+## Hyperarid:Rock              2.328 0.2684 12  1.856 2.66
+## 
+## Alpha: 0.05 ; DF Error: 28 
+## Critical Value of Studentized Range: 4.32 
+## 
+## Groups according to probability of means differences and alpha level( 0.05 )
+## 
+## Treatments with the same letter are not significantly different.
+## 
+##                      Estimate.box groups
+## Arid:Loess soil             4.595      a
+## Arid:Rock                   2.783      b
+## Hyperarid:Loess soil        2.779      b
+## Hyperarid:Rock              2.328     bc
+## Arid:Dust                   1.998     bc
+## Hyperarid:Dust              0.483      c
+```
+
+```
+## $statistics
+##   MSerror Df Mean   CV
+##     0.666 28  2.6 31.4
+## 
+## $parameters
+##    test             name.t ntr StudentizedRange alpha
+##   Tukey Climate:Uni.Source   6             4.32  0.05
+## 
+## $means
+##                      Estimate.box    std  r    Min  Max   Q25   Q50   Q75
+## Arid:Dust                   1.998 1.5634  2  0.892 3.10 1.445 1.998 2.551
+## Arid:Loess soil             4.595 0.0319  3  4.563 4.63 4.579 4.595 4.611
+## Arid:Rock                   2.783 1.0940 12 -0.509 3.61 2.687 3.058 3.327
+## Hyperarid:Dust              0.483 0.8891  2 -0.145 1.11 0.169 0.483 0.798
+## Hyperarid:Loess soil        2.779 0.8513  3  1.811 3.41 2.463 3.115 3.263
+## Hyperarid:Rock              2.328 0.2684 12  1.856 2.66 2.128 2.391 2.552
+## 
+## $comparison
+## NULL
+## 
+## $groups
+##                      Estimate.box groups
+## Arid:Loess soil             4.595      a
+## Arid:Rock                   2.783      b
+## Hyperarid:Loess soil        2.779      b
+## Hyperarid:Rock              2.328     bc
+## Arid:Dust                   1.998     bc
+## Hyperarid:Dust              0.483      c
+## 
+## attr(,"class")
+## [1] "group"
+```
+
+```r
+posthocTGH(y = data2test$Estimate, x = data2test$Climate.Source)
+```
+
+```
+##                       n means variances
+## Arid limestone       12   3.8     1.197
+## Arid dust             2   3.0     2.444
+## Arid loess soil       3   5.6     0.001
+## Hyperarid dolomite   12   3.3     0.072
+## Hyperarid dust        2   1.5     0.791
+## Hyperarid loess soil  3   3.8     0.725
+## 
+##                                            diff ci.lo ci.hi       t   df    p
+## Arid dust-Arid limestone                -0.7846   NaN   NaN  0.6824  1.2 <NA>
+## Arid loess soil-Arid limestone           1.8124  0.73  2.89  5.7292 11.1 <.01
+## Hyperarid dolomite-Arid limestone       -0.4544 -1.54  0.63  1.3973 12.3  .73
+## Hyperarid dust-Arid limestone           -2.2993   NaN   NaN  3.2681  1.6 <NA>
+## Hyperarid loess soil-Arid limestone     -0.0031 -2.82  2.82  0.0053  3.9    1
+## Arid loess soil-Arid dust                2.5970   NaN   NaN  2.3488  1.0 <NA>
+## Hyperarid dolomite-Arid dust             0.3302   NaN   NaN  0.2980  1.0 <NA>
+## Hyperarid dust-Arid dust                -1.5147   NaN   NaN  1.1910  1.6 <NA>
+## Hyperarid loess soil-Arid dust           0.7815   NaN   NaN  0.6459  1.4 <NA>
+## Hyperarid dolomite-Arid loess soil      -2.2667 -2.53 -2.00 28.4608 12.1 <.01
+## Hyperarid dust-Arid loess soil          -4.1116   NaN   NaN  6.5371  1.0 <NA>
+## Hyperarid loess soil-Arid loess soil    -1.8155 -5.88  2.25  3.6911  2.0  .22
+## Hyperarid dust-Hyperarid dolomite       -1.8449   NaN   NaN  2.9125  1.0 <NA>
+## Hyperarid loess soil-Hyperarid dolomite  0.4512 -3.45  4.36  0.9069  2.1  .92
+## Hyperarid loess soil-Hyperarid dust      2.2961 -3.70  8.29  2.8773  2.2  .31
+```
+
+```r
+data2test <- Richness_Diversity_long[Richness_Diversity_long$Metric == "ACE", ] 
+mod_data <- TestAlpha(data = data2test, boxcox.trans = FALSE)
+```
+
+```
+## Levene's Test for Homogeneity of Variance (center = median)
+##       Df F value Pr(>F)  
+## group  5    2.57  0.049 *
+##       28                 
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## Call:
+##    aov(formula = as.formula(paste(response_name, paste(factor_names[1], 
+##     factor_names[2], sep = " * "), sep = " ~ ")), data = data2test)
+## 
+## Terms:
+##                 Climate Uni.Source Climate:Uni.Source Residuals
+## Sum of Squares    54110     370724              73390    221546
+## Deg. of Freedom       1          2                  2        28
+## 
+## Residual standard error: 89
+## Estimated effects may be unbalanced
+```
+
+![](Rock_weathering_figures/test alpha-5.svg)<!-- -->
+
+```
+##                    Df Sum Sq Mean Sq F value  Pr(>F)    
+## Climate             1  54110   54110    6.84   0.014 *  
+## Uni.Source          2 370724  185362   23.43 1.1e-06 ***
+## Climate:Uni.Source  2  73390   36695    4.64   0.018 *  
+## Residuals          28 221546    7912                    
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## Tables of means
+## Grand mean
+##     
+## 381 
+## 
+##  Climate 
+##     Arid Hyperarid
+##      421       341
+## rep   17        17
+## 
+##  Uni.Source 
+##     Rock Dust Loess soil
+##      334  323        606
+## rep   24    4          6
+## 
+##  Climate:Uni.Source 
+##            Uni.Source
+## Climate     Rock Dust Loess soil
+##   Arid      354  335  746       
+##   rep        12    2    3       
+##   Hyperarid 315  311  466       
+##   rep        12    2    3
+```
+
+```r
+TukeyHSD(mod_data)
+```
+
+```
+##   Tukey multiple comparisons of means
+##     95% family-wise confidence level
+## 
+## Fit: aov(formula = as.formula(paste(response_name, paste(factor_names[1], factor_names[2], sep = " * "), sep = " ~ ")), data = data2test)
+## 
+## $Climate
+##                 diff  lwr   upr p adj
+## Hyperarid-Arid -79.8 -142 -17.3 0.014
+## 
+## $Uni.Source
+##                  diff  lwr upr p adj
+## Dust-Rock       -11.4 -130 107 0.969
+## Loess soil-Rock 272.1  172 373 0.000
+## Loess soil-Dust 283.5  141 426 0.000
+## 
+## $`Climate:Uni.Source`
+##                                         diff    lwr   upr p adj
+## Hyperarid:Rock-Arid:Rock              -39.04 -150.0  71.9 0.887
+## Arid:Dust-Arid:Rock                   -19.13 -226.7 188.5 1.000
+## Hyperarid:Dust-Arid:Rock              -42.73 -250.3 164.9 0.988
+## Arid:Loess soil-Arid:Rock             392.72  217.3 568.2 0.000
+## Hyperarid:Loess soil-Arid:Rock        112.48  -63.0 287.9 0.390
+## Arid:Dust-Hyperarid:Rock               19.91 -187.7 227.5 1.000
+## Hyperarid:Dust-Hyperarid:Rock          -3.69 -211.3 203.9 1.000
+## Arid:Loess soil-Hyperarid:Rock        431.75  256.3 607.2 0.000
+## Hyperarid:Loess soil-Hyperarid:Rock   151.52  -23.9 327.0 0.121
+## Hyperarid:Dust-Arid:Dust              -23.60 -295.4 248.2 1.000
+## Arid:Loess soil-Arid:Dust             411.85  163.7 660.0 0.000
+## Hyperarid:Loess soil-Arid:Dust        131.61 -116.5 379.7 0.592
+## Arid:Loess soil-Hyperarid:Dust        435.45  187.3 683.6 0.000
+## Hyperarid:Loess soil-Hyperarid:Dust   155.21  -92.9 403.4 0.416
+## Hyperarid:Loess soil-Arid:Loess soil -280.24 -502.2 -58.3 0.007
+```
+
+```r
+(ph_ACE <- HSD.test(mod_data, factors2test, group = TRUE, console = TRUE))
+```
+
+```
+## 
+## Study: mod_data ~ factors2test
+## 
+## HSD Test for Estimate 
+## 
+## Mean Square Error:  7912 
+## 
+## Climate:Uni.Source,  means
+## 
+##                      Estimate   std  r Min Max
+## Arid:Dust                 335 143.6  2 233 436
+## Arid:Loess soil           746  20.8  3 723 761
+## Arid:Rock                 354  68.8 12 238 462
+## Hyperarid:Dust            311 182.8  2 182 440
+## Hyperarid:Loess soil      466  42.6  3 417 494
+## Hyperarid:Rock            315 100.4 12 136 499
+## 
+## Alpha: 0.05 ; DF Error: 28 
+## Critical Value of Studentized Range: 4.32 
+## 
+## Groups according to probability of means differences and alpha level( 0.05 )
+## 
+## Treatments with the same letter are not significantly different.
+## 
+##                      Estimate groups
+## Arid:Loess soil           746      a
+## Hyperarid:Loess soil      466      b
+## Arid:Rock                 354      b
+## Arid:Dust                 335      b
+## Hyperarid:Rock            315      b
+## Hyperarid:Dust            311      b
+```
+
+```
+## $statistics
+##   MSerror Df Mean   CV
+##      7912 28  381 23.4
+## 
+## $parameters
+##    test             name.t ntr StudentizedRange alpha
+##   Tukey Climate:Uni.Source   6             4.32  0.05
+## 
+## $means
+##                      Estimate   std  r Min Max Q25 Q50 Q75
+## Arid:Dust                 335 143.6  2 233 436 284 335 385
+## Arid:Loess soil           746  20.8  3 723 761 739 755 758
+## Arid:Rock                 354  68.8 12 238 462 297 375 395
+## Hyperarid:Dust            311 182.8  2 182 440 246 311 376
+## Hyperarid:Loess soil      466  42.6  3 417 494 453 488 491
+## Hyperarid:Rock            315 100.4 12 136 499 251 308 372
+## 
+## $comparison
+## NULL
+## 
+## $groups
+##                      Estimate groups
+## Arid:Loess soil           746      a
+## Hyperarid:Loess soil      466      b
+## Arid:Rock                 354      b
+## Arid:Dust                 335      b
+## Hyperarid:Rock            315      b
+## Hyperarid:Dust            311      b
+## 
+## attr(,"class")
+## [1] "group"
+```
+
+```r
+posthocTGH(y = data2test$Estimate, x = data2test$Climate.Source)
+```
+
+```
+##                       n means variances
+## Arid limestone       12   354      4735
+## Arid dust             2   335     20621
+## Arid loess soil       3   746       432
+## Hyperarid dolomite   12   315     10086
+## Hyperarid dust        2   311     33403
+## Hyperarid loess soil  3   466      1813
+## 
+##                                           diff ci.lo ci.hi      t   df    p
+## Arid dust-Arid limestone                 -19.1   NaN   NaN  0.185  1.1 <NA>
+## Arid loess soil-Arid limestone           392.7   315   471 16.920 11.8 <.01
+## Hyperarid dolomite-Arid limestone        -39.0  -150    72  1.111 19.5  .87
+## Hyperarid dust-Arid limestone            -42.7   NaN   NaN  0.327  1.0 <NA>
+## Hyperarid loess soil-Arid limestone      112.5   -22   247  3.559  5.1  .09
+## Arid loess soil-Arid dust                411.8   NaN   NaN  4.028  1.0 <NA>
+## Hyperarid dolomite-Arid dust             -19.9   NaN   NaN  0.189  1.2 <NA>
+## Hyperarid dust-Arid dust                 -23.6   NaN   NaN  0.144  1.9 <NA>
+## Hyperarid loess soil-Arid dust           131.6   NaN   NaN  1.260  1.1 <NA>
+## Hyperarid dolomite-Arid loess soil      -431.8  -536  -328 13.759 13.0 <.01
+## Hyperarid dust-Arid loess soil          -435.4   NaN   NaN  3.355  1.0 <NA>
+## Hyperarid loess soil-Arid loess soil    -280.2  -440  -121 10.243  2.9  .01
+## Hyperarid dust-Hyperarid dolomite         -3.7   NaN   NaN  0.028  1.1 <NA>
+## Hyperarid loess soil-Hyperarid dolomite  151.5    15   289  3.986  8.5  .03
+## Hyperarid loess soil-Hyperarid dust      155.2   NaN   NaN  1.180  1.1 <NA>
+```
+
+```r
+data2test <- Richness_Diversity_long[Richness_Diversity_long$Metric == "Berger Parker", ] 
+mod_data <- TestAlpha(data = data2test, boxcox.trans = TRUE)
+```
+
+```
+## Levene's Test for Homogeneity of Variance (center = median)
+##       Df F value Pr(>F)
+## group  5    0.78   0.57
+##       28               
+## [1] "Performing Box-Cox transformation of the data"
+```
+
+![](Rock_weathering_figures/test alpha-6.svg)<!-- -->
+
+```
+## [1] 0.00 0.17
+## [1] 0
+## Call:
+##    aov(formula = as.formula(paste("Estimate.box", paste(factor_names[1], 
+##     factor_names[2], sep = " * "), sep = " ~ ")), data = data2test)
+## 
+## Terms:
+##                 Climate Uni.Source Climate:Uni.Source Residuals
+## Sum of Squares    0.066      0.523              0.169     0.837
+## Deg. of Freedom       1          2                  2        28
+## 
+## Residual standard error: 0.173
+## Estimated effects may be unbalanced
+```
+
+![](Rock_weathering_figures/test alpha-7.svg)<!-- -->
+
+```
+##                    Df Sum Sq Mean Sq F value Pr(>F)   
+## Climate             1  0.066  0.0657    2.20 0.1494   
+## Uni.Source          2  0.523  0.2615    8.75 0.0011 **
+## Climate:Uni.Source  2  0.169  0.0847    2.83 0.0757 . 
+## Residuals          28  0.837  0.0299                  
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## Tables of means
+## Grand mean
+##        
+## -0.745 
+## 
+##  Climate 
+##       Arid Hyperarid
+##     -0.789    -0.701
+## rep 17.000    17.000
+## 
+##  Uni.Source 
+##       Rock   Dust Loess soil
+##     -0.783 -0.408     -0.818
+## rep 24.000  4.000      6.000
+## 
+##  Climate:Uni.Source 
+##            Uni.Source
+## Climate     Rock  Dust  Loess soil
+##   Arid      -0.78 -0.57 -0.97     
+##   rep       12.00  2.00  3.00     
+##   Hyperarid -0.78 -0.25 -0.67     
+##   rep       12.00  2.00  3.00
+```
+
+```r
+TukeyHSD(mod_data)
+```
+
+```
+##   Tukey multiple comparisons of means
+##     95% family-wise confidence level
+## 
+## Fit: aov(formula = as.formula(paste("Estimate.box", paste(factor_names[1], factor_names[2], sep = " * "), sep = " ~ ")), data = data2test)
+## 
+## $Climate
+##                  diff     lwr   upr p adj
+## Hyperarid-Arid 0.0879 -0.0336 0.209 0.149
+## 
+## $Uni.Source
+##                    diff    lwr    upr p adj
+## Dust-Rock        0.3758  0.145  0.607 0.001
+## Loess soil-Rock -0.0349 -0.230  0.160 0.898
+## Loess soil-Dust -0.4107 -0.687 -0.135 0.003
+## 
+## $`Climate:Uni.Source`
+##                                          diff    lwr     upr p adj
+## Hyperarid:Rock-Arid:Rock             -0.00308 -0.219  0.2126 1.000
+## Arid:Dust-Arid:Rock                   0.21201 -0.192  0.6155 0.602
+## Hyperarid:Dust-Arid:Rock              0.53645  0.133  0.9400 0.004
+## Arid:Loess soil-Arid:Rock            -0.18356 -0.525  0.1575 0.577
+## Hyperarid:Loess soil-Arid:Rock        0.11058 -0.230  0.4516 0.917
+## Arid:Dust-Hyperarid:Rock              0.21510 -0.188  0.6186 0.587
+## Hyperarid:Dust-Hyperarid:Rock         0.53953  0.136  0.9431 0.004
+## Arid:Loess soil-Hyperarid:Rock       -0.18048 -0.522  0.1606 0.595
+## Hyperarid:Loess soil-Hyperarid:Rock   0.11366 -0.227  0.4547 0.908
+## Hyperarid:Dust-Arid:Dust              0.32443 -0.204  0.8528 0.437
+## Arid:Loess soil-Arid:Dust            -0.39557 -0.878  0.0867 0.156
+## Hyperarid:Loess soil-Arid:Dust       -0.10144 -0.584  0.3809 0.987
+## Arid:Loess soil-Hyperarid:Dust       -0.72001 -1.202 -0.2377 0.001
+## Hyperarid:Loess soil-Hyperarid:Dust  -0.42587 -0.908  0.0564 0.107
+## Hyperarid:Loess soil-Arid:Loess soil  0.29414 -0.137  0.7255 0.324
+```
+
+```r
+(ph_BP <- HSD.test(mod_data, factors2test, group = TRUE, console = TRUE))
+```
+
+```
+## 
+## Study: mod_data ~ factors2test
+## 
+## HSD Test for Estimate.box 
+## 
+## Mean Square Error:  0.0299 
+## 
+## Climate:Uni.Source,  means
+## 
+##                      Estimate.box    std  r    Min     Max
+## Arid:Dust                  -0.570 0.3235  2 -0.799 -0.3411
+## Arid:Loess soil            -0.965 0.0079  3 -0.972 -0.9567
+## Arid:Rock                  -0.782 0.2319 12 -0.938 -0.0714
+## Hyperarid:Dust             -0.245 0.1168  2 -0.328 -0.1629
+## Hyperarid:Loess soil       -0.671 0.1500  3 -0.776 -0.4995
+## Hyperarid:Rock             -0.785 0.0864 12 -0.877 -0.5707
+## 
+## Alpha: 0.05 ; DF Error: 28 
+## Critical Value of Studentized Range: 4.32 
+## 
+## Groups according to probability of means differences and alpha level( 0.05 )
+## 
+## Treatments with the same letter are not significantly different.
+## 
+##                      Estimate.box groups
+## Hyperarid:Dust             -0.245      a
+## Arid:Dust                  -0.570     ab
+## Hyperarid:Loess soil       -0.671     ab
+## Arid:Rock                  -0.782      b
+## Hyperarid:Rock             -0.785      b
+## Arid:Loess soil            -0.965      b
+```
+
+```
+## $statistics
+##   MSerror Df   Mean    CV
+##    0.0299 28 -0.745 -23.2
+## 
+## $parameters
+##    test             name.t ntr StudentizedRange alpha
+##   Tukey Climate:Uni.Source   6             4.32  0.05
+## 
+## $means
+##                      Estimate.box    std  r    Min     Max    Q25    Q50    Q75
+## Arid:Dust                  -0.570 0.3235  2 -0.799 -0.3411 -0.684 -0.570 -0.455
+## Arid:Loess soil            -0.965 0.0079  3 -0.972 -0.9567 -0.970 -0.967 -0.962
+## Arid:Rock                  -0.782 0.2319 12 -0.938 -0.0714 -0.887 -0.838 -0.782
+## Hyperarid:Dust             -0.245 0.1168  2 -0.328 -0.1629 -0.287 -0.245 -0.204
+## Hyperarid:Loess soil       -0.671 0.1500  3 -0.776 -0.4995 -0.757 -0.738 -0.619
+## Hyperarid:Rock             -0.785 0.0864 12 -0.877 -0.5707 -0.842 -0.799 -0.770
+## 
+## $comparison
+## NULL
+## 
+## $groups
+##                      Estimate.box groups
+## Hyperarid:Dust             -0.245      a
+## Arid:Dust                  -0.570     ab
+## Hyperarid:Loess soil       -0.671     ab
+## Arid:Rock                  -0.782      b
+## Hyperarid:Rock             -0.785      b
+## Arid:Loess soil            -0.965      b
+## 
+## attr(,"class")
+## [1] "group"
+```
+
+```r
+posthocTGH(y = data2test$Estimate, x = data2test$Climate.Source)
+```
+
+```
+##                       n means variances
+## Arid limestone       12 0.218   5.4e-02
+## Arid dust             2 0.430   1.0e-01
+## Arid loess soil       3 0.035   6.2e-05
+## Hyperarid dolomite   12 0.215   7.5e-03
+## Hyperarid dust        2 0.755   1.4e-02
+## Hyperarid loess soil  3 0.329   2.3e-02
+## 
+##                                            diff  ci.lo ci.hi     t   df    p
+## Arid dust-Arid limestone                 0.2120    NaN   NaN 0.889  1.2 <NA>
+## Arid loess soil-Arid limestone          -0.1836 -0.412 0.045 2.736 11.1  .14
+## Hyperarid dolomite-Arid limestone       -0.0031 -0.237 0.231 0.043 14.0    1
+## Hyperarid dust-Arid limestone            0.5364 -0.131 1.204 5.047  2.6  .08
+## Hyperarid loess soil-Arid limestone      0.1106 -0.365 0.586 1.010  4.8   .9
+## Arid loess soil-Arid dust               -0.3956    NaN   NaN 1.729  1.0 <NA>
+## Hyperarid dolomite-Arid dust            -0.2151    NaN   NaN 0.935  1.0 <NA>
+## Hyperarid dust-Arid dust                 0.3244    NaN   NaN 1.334  1.3 <NA>
+## Hyperarid loess soil-Arid dust          -0.1014    NaN   NaN 0.415  1.3 <NA>
+## Hyperarid dolomite-Arid loess soil       0.1805  0.095 0.266 7.116 11.7 <.01
+## Hyperarid dust-Arid loess soil           0.7200    NaN   NaN 8.707  1.0 <NA>
+## Hyperarid loess soil-Arid loess soil     0.2941 -0.421 1.009 3.391  2.0  .25
+## Hyperarid dust-Hyperarid dolomite        0.5395    NaN   NaN 6.255  1.2 <NA>
+## Hyperarid loess soil-Hyperarid dolomite  0.1137 -0.518 0.745 1.261  2.3  .79
+## Hyperarid loess soil-Hyperarid dust     -0.4259 -1.154 0.302 3.559  2.7  .18
+```
 
 #### Plot all alpha diversity metrics together
 
@@ -1686,80 +2542,19 @@ Is there a difference between the two sites. However, since we know that that sa
 ## 
 ## Terms added sequentially (first to last)
 ## 
-##                  Df SumsOfSqs MeanSqs F.Model    R2 Pr(>F)    
-## Climate           1      2.53   2.530   21.38 0.216 0.0001 ***
-## Source            3      4.71   1.569   13.26 0.402 0.0001 ***
-## Location          1      0.49   0.487    4.12 0.042 0.0042 ** 
-## Climate:Source    1      0.44   0.440    3.72 0.038 0.0039 ** 
-## Climate:Location  1      0.46   0.461    3.89 0.039 0.0042 ** 
-## Source:Location   1      0.11   0.114    0.97 0.010 0.4907    
-## Residuals        25      2.96   0.118         0.253           
-## Total            33     11.70                 1.000           
+##                  Df SumsOfSqs MeanSqs F.Model      R2 Pr(>F)    
+## Climate           1    2.5299 2.52988 21.3820 0.21632 0.0001 ***
+## Source            3    4.7060 1.56865 13.2579 0.40238 0.0001 ***
+## Location          1    0.4870 0.48696  4.1157 0.04164 0.0042 ** 
+## Climate:Source    1    0.4397 0.43972  3.7164 0.03760 0.0039 ** 
+## Climate:Location  1    0.4605 0.46052  3.8922 0.03938 0.0042 ** 
+## Source:Location   1    0.1142 0.11421  0.9653 0.00977 0.4902    
+## Residuals        25    2.9580 0.11832         0.25292           
+## Total            33   11.6952                 1.00000           
 ## ---
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ```
-
-```r
-Rock_weathering_filt3_GMPR_Arid <- subset_samples(Rock_weathering_filt3_GMPR, Climate == "Arid")
-Rock_weathering_filt3_GMPR_Arid <- filter_taxa(Rock_weathering_filt3_GMPR_Arid, function(x) sum(x) > 0, TRUE)
-(mod2 <-  adonis(
-  otu_table(Rock_weathering_filt3_GMPR_Arid) ~ Source * Location,
-  data = as(sample_data(Rock_weathering_filt3_GMPR_Arid), "data.frame"),
-  method = "horn",
-  permutations = 9999
-))
-```
-
-```
-## 
-## Call:
-## adonis(formula = otu_table(Rock_weathering_filt3_GMPR_Arid) ~      Source * Location, data = as(sample_data(Rock_weathering_filt3_GMPR_Arid),      "data.frame"), permutations = 9999, method = "horn") 
-## 
-## Permutation: free
-## Number of permutations: 9999
-## 
-## Terms added sequentially (first to last)
-## 
-##           Df SumsOfSqs MeanSqs F.Model    R2 Pr(>F)    
-## Source     2      2.31   1.153    7.34 0.479 0.0001 ***
-## Location   1      0.47   0.469    2.99 0.097 0.0143 *  
-## Residuals 13      2.04   0.157         0.424           
-## Total     16      4.82                 1.000           
-## ---
-## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-```
-
-```r
-Rock_weathering_filt3_GMPR_Hyperarid <- subset_samples(Rock_weathering_filt3_GMPR, Climate == "Hyperarid")
-Rock_weathering_filt3_GMPR_Hyperarid <- filter_taxa(Rock_weathering_filt3_GMPR_Hyperarid, function(x) sum(x) > 0, TRUE)
-(mod3 <-  adonis(
-  otu_table(Rock_weathering_filt3_GMPR_Hyperarid) ~ Source * Location,
-  data = as(sample_data(Rock_weathering_filt3_GMPR_Hyperarid), "data.frame"),
-  method = "horn",
-  permutations = 9999
-))
-```
-
-```
-## 
-## Call:
-## adonis(formula = otu_table(Rock_weathering_filt3_GMPR_Hyperarid) ~      Source * Location, data = as(sample_data(Rock_weathering_filt3_GMPR_Hyperarid),      "data.frame"), permutations = 9999, method = "horn") 
-## 
-## Permutation: free
-## Number of permutations: 9999
-## 
-## Terms added sequentially (first to last)
-## 
-##                 Df SumsOfSqs MeanSqs F.Model    R2 Pr(>F)    
-## Source           2      2.85   1.423   18.62 0.654 0.0001 ***
-## Location         1      0.47   0.473    6.19 0.109 0.0113 *  
-## Source:Location  1      0.11   0.114    1.49 0.026 0.2420    
-## Residuals       12      0.92   0.076         0.211           
-## Total           16      4.35                 1.000           
-## ---
-## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-```
-#According to this model we see that indeed there's an effect of site on the community (p = 0.001), and that effect accounts for about 17% of the variance. Also, considering that Location is only borderline significant and explains very little of the data, we could probably take it out of the model to make a minimal adequate model.
+According to this model we see that indeed there's an effect of site (climate) on the community (p = 0.001), and that effect accounts for about 22% of the variance. Also, considering that Location is only borderline significant and explains very little of the data, we could probably take it out of the model to make a minimal adequate model.
 
 
 ```r
