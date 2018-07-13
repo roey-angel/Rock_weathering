@@ -1272,10 +1272,6 @@ Rock_weathering_filt3_glom_rel_DF_2plot %>%
   filter(Phylum == "Rare") %>% 
   summarise(`Rares (%)` = sum(Abundance * 100)) -> 
   Rares
-# Percentage of reads classified as rare 
-kable(Rares, 
-      digits = 2, 
-      caption = "Percentage of reads per sample classified as rare:")
 
 sample_order <- match(Rares$Sample, row.names(sample_data(Rock_weathering_filt3_glom)))
 Rares %<>% arrange(., sample_order)
@@ -1287,9 +1283,9 @@ Rares %>%
   Rares_merged
 
 # Percentage of reads classified as rare 
-kable(Rares, 
-      digits = 2, 
-      caption = "Percentage of reads per sample type classified as rare:")
+Rares %>% 
+  kable(., digits = 2, caption = "Percentage of reads per sample type classified as rare:") %>%
+  kable_styling(bootstrap_options = c("striped", "hover", "condensed", "responsive"), full_width = F)
 
 Rock_weathering_filt3_glom_rel_DF_2plot %>% 
   group_by(Phylum) %>% 
@@ -1678,9 +1674,10 @@ mod_all <- lm(`Residual water content (%)` ~ poly(`Time (h)`, 2, raw = TRUE), da
 mod_treatment <- lm(`Residual water content (%)` ~ poly(`Time (h)`, 2, raw = TRUE) * Crust, data = Desiccation_long[Desiccation_long$Rock == "Dolomite", ])
 anova(mod_all, mod_treatment)
 
-kable(Desiccation_mods, 
-      digits = 1, 
-      caption = "Model coefficients")
+Desiccation_mods %>% 
+  kable(., digits = 1, caption = "Model coefficients") %>%
+  kable_styling(bootstrap_options = c("striped", "hover", "condensed", "responsive"), full_width = F)
+
 
 p_dessication <-
   ggplot(
