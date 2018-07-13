@@ -48,11 +48,11 @@ repo <- "http://cran.wu.ac.at"
   "ggtern" # An Extension to 'ggplot2', for the Creation of Ternary Diagrams
 ) 
 
-.inst <- .cran_libs %in% installed.packages()
-if (any(!.inst)) {
-  install.packages(.cran_libs[!.inst],
-                   repos = repo)
-}
+# .inst <- .cran_libs %in% installed.packages()
+# if (any(!.inst)) {
+#   install.packages(.cran_libs[!.inst],
+#                    repos = repo)
+# }
 
 .bioc_libs <- c(
   "phyloseq", # Handling and analysis of high-throughput phylogenetic sequence data
@@ -60,19 +60,19 @@ if (any(!.inst)) {
   "vsn" # Variance stabilization and calibration for microarray data
 )
 
-if (!"phyloseq" %in% installed.packages()) {
-  source(
-    "https://raw.githubusercontent.com/joey711/phyloseq/master/inst/scripts/installer.R",
-    local = TRUE
- )
-}
+# if (!"phyloseq" %in% installed.packages()) {
+#   source(
+#     "https://raw.githubusercontent.com/joey711/phyloseq/master/inst/scripts/installer.R",
+#     local = TRUE
+#  )
+# }
 
-.inst <- .bioc_libs %in% installed.packages()
-if (any(!.inst)) {
-  source("http://bioconductor.org/biocLite.R")
-  biocLite(ask = F, lib = Sys.getenv("R_LIBS_USER")) # upgrade bioC packages
-  biocLite(.bioc_libs[!.inst], ask = F)
-}
+# .inst <- .bioc_libs %in% installed.packages()
+# if (any(!.inst)) {
+#   source("http://bioconductor.org/biocLite.R")
+#   biocLite(ask = F, lib = Sys.getenv("R_LIBS_USER")) # upgrade bioC packages
+#   biocLite(.bioc_libs[!.inst], ask = F)
+# }
 
 .github_libs <- c(
   "pmartinezarbizu/pairwiseAdonis/pairwiseAdonis", # pairwise adonis test
@@ -82,11 +82,11 @@ if (any(!.inst)) {
 
 .github_lib_names <- stringr::str_replace(.github_libs, ".*/(.*)$", "\\1")
 
-.github_inst <- .github_lib_names %in% installed.packages()
-if (any(!.github_inst)) {
-  devtools::install_github(.github_libs[!.github_inst],
-                           dependencies = TRUE)
-}
+# .github_inst <- .github_lib_names %in% installed.packages()
+# if (any(!.github_inst)) {
+#   devtools::install_github(.github_libs[!.github_inst],
+#                            dependencies = TRUE)
+# }
 
 # Load packages into session, and print package version
 (loaded.libs <- sapply(c(.cran_libs, .bioc_libs, .github_lib_names), require, character.only = TRUE))

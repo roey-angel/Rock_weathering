@@ -3032,161 +3032,7 @@ Rock_weathering_filt3_glom_rel_DF_2plot %>%
   filter(Phylum == "Rare") %>% 
   summarise(`Rares (%)` = sum(Abundance * 100)) -> 
   Rares
-# Percentage of reads classified as rare 
-kable(Rares, 
-      digits = 2, 
-      caption = "Percentage of reads per sample classified as rare:")
-```
 
-<table>
-<caption>Percentage of reads per sample classified as rare:</caption>
- <thead>
-  <tr>
-   <th style="text-align:left;"> Sample </th>
-   <th style="text-align:right;"> Rares (%) </th>
-  </tr>
- </thead>
-<tbody>
-  <tr>
-   <td style="text-align:left;"> SbDust1S14 </td>
-   <td style="text-align:right;"> 2.05 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> SbDust2S31 </td>
-   <td style="text-align:right;"> 0.43 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> SbSlp1SNW49 </td>
-   <td style="text-align:right;"> 0.82 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> SbSlp2SNW50 </td>
-   <td style="text-align:right;"> 0.91 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> SbSlp3SNW51 </td>
-   <td style="text-align:right;"> 0.85 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> SbSlp4SNW52 </td>
-   <td style="text-align:right;"> 1.99 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> SbSlp5SNW53 </td>
-   <td style="text-align:right;"> 0.72 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> SbSlp6SNW54 </td>
-   <td style="text-align:right;"> 1.59 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> SbSoil1SA10 </td>
-   <td style="text-align:right;"> 9.80 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> SbSoil2SA11 </td>
-   <td style="text-align:right;"> 10.41 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> SbSoil3SA12 </td>
-   <td style="text-align:right;"> 9.62 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> SbWad1SNW55 </td>
-   <td style="text-align:right;"> 2.90 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> SbWad2SNW56 </td>
-   <td style="text-align:right;"> 0.48 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> SbWad3SNW57 </td>
-   <td style="text-align:right;"> 0.42 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> SbWad4SNW58 </td>
-   <td style="text-align:right;"> 0.20 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> SbWad5SNW59 </td>
-   <td style="text-align:right;"> 0.47 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> SbWad6SNW60 </td>
-   <td style="text-align:right;"> 1.47 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> UvDust1S32 </td>
-   <td style="text-align:right;"> 1.60 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> UvDust2S33 </td>
-   <td style="text-align:right;"> 0.12 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> UvSlp1GS70 </td>
-   <td style="text-align:right;"> 1.09 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> UvSlp2GS71 </td>
-   <td style="text-align:right;"> 0.42 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> UvSlp3CS25 </td>
-   <td style="text-align:right;"> 0.77 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> UvSlp3GS72 </td>
-   <td style="text-align:right;"> 0.85 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> UvSlp4GS73 </td>
-   <td style="text-align:right;"> 0.64 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> UvSlp5GS74 </td>
-   <td style="text-align:right;"> 0.72 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> UvSlp6GS75 </td>
-   <td style="text-align:right;"> 0.34 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> UvWad1GS76 </td>
-   <td style="text-align:right;"> 9.37 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> UvWad2CS23 </td>
-   <td style="text-align:right;"> 2.17 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> UvWad2GS77 </td>
-   <td style="text-align:right;"> 0.75 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> UvWad3CS27 </td>
-   <td style="text-align:right;"> 2.96 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> UvWad3GS78 </td>
-   <td style="text-align:right;"> 0.16 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> UvWad4GS79 </td>
-   <td style="text-align:right;"> 0.77 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> UvWad5GS80 </td>
-   <td style="text-align:right;"> 0.30 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> UvWad6GS81 </td>
-   <td style="text-align:right;"> 0.38 </td>
-  </tr>
-</tbody>
-</table>
-
-```r
 sample_order <- match(Rares$Sample, row.names(sample_data(Rock_weathering_filt3_glom)))
 Rares %<>% arrange(., sample_order)
 
@@ -3197,12 +3043,12 @@ Rares %>%
   Rares_merged
 
 # Percentage of reads classified as rare 
-kable(Rares, 
-      digits = 2, 
-      caption = "Percentage of reads per sample type classified as rare:")
+Rares %>% 
+  kable(., digits = 2, caption = "Percentage of reads per sample type classified as rare:") %>%
+  kable_styling(bootstrap_options = c("striped", "hover", "condensed", "responsive"), full_width = F)
 ```
 
-<table>
+<table class="table table-striped table-hover table-condensed table-responsive" style="width: auto !important; margin-left: auto; margin-right: auto;">
 <caption>Percentage of reads per sample type classified as rare:</caption>
  <thead>
   <tr>
@@ -6865,12 +6711,12 @@ anova(mod_all, mod_treatment)
 </div>
 
 ```r
-kable(Desiccation_mods, 
-      digits = 1, 
-      caption = "Model coefficients")
+Desiccation_mods %>% 
+  kable(., digits = 1, caption = "Model coefficients") %>%
+  kable_styling(bootstrap_options = c("striped", "hover", "condensed", "responsive"), full_width = F)
 ```
 
-<table>
+<table class="table table-striped table-hover table-condensed table-responsive" style="width: auto !important; margin-left: auto; margin-right: auto;">
 <caption>Model coefficients</caption>
  <thead>
   <tr>
