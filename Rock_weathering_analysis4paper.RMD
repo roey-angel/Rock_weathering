@@ -34,16 +34,21 @@ repo <- "http://cran.wu.ac.at"
   "MASS", # Support Functions and Datasets for Venables and Ripley's MASS
   "rcompanion", #Functions to Support Extension Education Program Evaluation
   "tidyverse", # for dplyr forcats ggplot2 readr tibble
+  # "broom", # Convert Statistical Analysis Objects into Tidy Data Frames (should be part of tidyverse)
+  # "gridExtra", # Miscellaneous Functions for "Grid" Graphics
   "cowplot", # wrappers for ggplot
+  # "ggsci", # Scientific Journal and Sci-Fi Themed Color Palettes for 'ggplot2'
+  # "ggrepel", # Repulsive Text and Label Geoms for 'ggplot2'
   "magrittr", # pipes
   "scales", # Generic plot scaling methods
   "svglite", # for svg files
   "car", # Companion to Applied Regression
-  "agricolae", # Statistical Procedures for Agricultural Research
+  # "agricolae", # Statistical Procedures for Agricultural Research
   "userfriendlyscience", # Quantitative Analysis Made Accessible
   "vegan", # community ecology methods
   "doParallel", # parallel backend for the foreach/%dopar% function
   "BiodiversityR", # Package for Community Ecology and Suitability Analysis
+  # "ade4", # Analysis of Ecological Data
   "hexbin", # Hexagonal Binning Routines
   "ggtern" # An Extension to 'ggplot2', for the Creation of Ternary Diagrams
 ) 
@@ -60,12 +65,12 @@ repo <- "http://cran.wu.ac.at"
   "vsn" # Variance stabilization and calibration for microarray data
 )
 
-# if (!"phyloseq" %in% installed.packages()) {
-#   source(
-#     "https://raw.githubusercontent.com/joey711/phyloseq/master/inst/scripts/installer.R",
-#     local = TRUE
-#  )
-# }
+if (!"phyloseq" %in% installed.packages()) {
+  source(
+    "https://raw.githubusercontent.com/joey711/phyloseq/master/inst/scripts/installer.R",
+    local = TRUE
+ )
+}
 
 # .inst <- .bioc_libs %in% installed.packages()
 # if (any(!.inst)) {
@@ -75,18 +80,17 @@ repo <- "http://cran.wu.ac.at"
 # }
 
 .github_libs <- c(
-  "pmartinezarbizu/pairwiseAdonis/pairwiseAdonis", # pairwise adonis test
   "gadenbuie/ggpomological", # Pomological plot themes for ggplot2
   "datarootsio/artyfarty" # Themes for ggplot2
 )
 
 .github_lib_names <- stringr::str_replace(.github_libs, ".*/(.*)$", "\\1")
 
-# .github_inst <- .github_lib_names %in% installed.packages()
-# if (any(!.github_inst)) {
-#   devtools::install_github(.github_libs[!.github_inst],
-#                            dependencies = TRUE)
-# }
+.github_inst <- .github_lib_names %in% installed.packages()
+if (any(!.github_inst)) {
+  devtools::install_github(.github_libs[!.github_inst],
+                           dependencies = TRUE)
+}
 
 # Load packages into session, and print package version
 (loaded.libs <- sapply(c(.cran_libs, .bioc_libs, .github_lib_names), require, character.only = TRUE))
@@ -1019,7 +1023,7 @@ write.csv(Diversity, file = "Results/Rock_weathering_Diversity.csv")
 ```
 
 Test the differences in alpha diversity.
-```{r test alpha, cache=T}
+```{r test alpha, cache=T, include=F}
 # make combined richness diversity
 Richness_Diversity <- cbind(Richness, Diversity)
 ses <- grep("\\.se", colnames(Richness_Diversity))
@@ -1152,8 +1156,26 @@ Is there a difference between the two sites. However, since we know that that sa
   method = "horn",
   permutations = 9999
 ))
+
+Rock_weathering_filt3_GMPR_Arid <- subset_samples(Rock_weathering_filt3_GMPR, Climate == "Arid")
+Rock_weathering_filt3_GMPR_Arid <- filter_taxa(Rock_weathering_filt3_GMPR_Arid, function(x) sum(x) > 0, TRUE)
+(mod2 <-  adonis(
+  otu_table(Rock_weathering_filt3_GMPR_Arid) ~ Source * Location,
+  data = as(sample_data(Rock_weathering_filt3_GMPR_Arid), "data.frame"),
+  method = "horn",
+  permutations = 9999
+))
+
+Rock_weathering_filt3_GMPR_Hyperarid <- subset_samples(Rock_weathering_filt3_GMPR, Climate == "Hyperarid")
+Rock_weathering_filt3_GMPR_Hyperarid <- filter_taxa(Rock_weathering_filt3_GMPR_Hyperarid, function(x) sum(x) > 0, TRUE)
+(mod3 <-  adonis(
+  otu_table(Rock_weathering_filt3_GMPR_Hyperarid) ~ Source * Location,
+  data = as(sample_data(Rock_weathering_filt3_GMPR_Hyperarid), "data.frame"),
+  method = "horn",
+  permutations = 9999
+))
 ```
-According to this model we see that indeed there's an effect of site (climate) on the community (p = 0.001), and that effect accounts for about 22% of the variance. Also, considering that Location is only borderline significant and explains very little of the data, we could probably take it out of the model to make a minimal adequate model.
+#According to this model we see that indeed there's an effect of site on the community (p = 0.001), and that effect accounts for about 17% of the variance. Also, considering that Location is only borderline significant and explains very little of the data, we could probably take it out of the model to make a minimal adequate model.
 
 ```{r ADONIS reduced, cache=T}
 (mod4 <-  adonis(
@@ -1272,6 +1294,10 @@ Rock_weathering_filt3_glom_rel_DF_2plot %>%
   filter(Phylum == "Rare") %>% 
   summarise(`Rares (%)` = sum(Abundance * 100)) -> 
   Rares
+# Percentage of reads classified as rare 
+kable(Rares, 
+      digits = 2, 
+      caption = "Percentage of reads per sample classified as rare:")
 
 sample_order <- match(Rares$Sample, row.names(sample_data(Rock_weathering_filt3_glom)))
 Rares %<>% arrange(., sample_order)
@@ -1283,9 +1309,9 @@ Rares %>%
   Rares_merged
 
 # Percentage of reads classified as rare 
-Rares %>% 
-  kable(., digits = 2, caption = "Percentage of reads per sample type classified as rare:") %>%
-  kable_styling(bootstrap_options = c("striped", "hover", "condensed", "responsive"), full_width = F)
+kable(Rares, 
+      digits = 2, 
+      caption = "Percentage of reads per sample type classified as rare:")
 
 Rock_weathering_filt3_glom_rel_DF_2plot %>% 
   group_by(Phylum) %>% 
@@ -1556,7 +1582,6 @@ print(p_aldex2_all)
 
 ## Other plots
 Other plots in the paper which are not based on sequence data
-
 ### Isotopes profile
 ```{r isotopes, cache=T}
 Isotopes <-
@@ -1675,12 +1700,11 @@ mod_all <- lm(`Residual water content (%)` ~ poly(`Time (h)`, 2, raw = TRUE), da
 mod_treatment <- lm(`Residual water content (%)` ~ poly(`Time (h)`, 2, raw = TRUE) * Crust, data = Desiccation_long[Desiccation_long$Rock == "Dolomite", ])
 anova(mod_all, mod_treatment)
 
-Desiccation_mods %>% 
-  kable(., digits = 5, caption = "Model coefficients") %>%
-  kable_styling(bootstrap_options = c("striped", "hover", "condensed", "responsive"), full_width = F)
+kable(Desiccation_mods, 
+      digits = 1, 
+      caption = "Model coefficients")
 
-
-p_dessication <-
+p_desiccation <-
   ggplot(
     Desiccation_long,
     aes(
@@ -1697,7 +1721,7 @@ p_dessication <-
   scale_y_continuous(limits = c(0, 100), expand = c(0.01, 0.01)) +
   scale_x_continuous(limits = c(0, 50), expand = c(0.01, 0.01)) +
   scale_color_manual(values = pom4)
-print(p_dessication)
+print(p_desiccation)
 ```
 
 ```{r session_info, echo=T, results="markdown"}
