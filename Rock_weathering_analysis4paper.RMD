@@ -1675,6 +1675,10 @@ for (i in unique(Desiccation_long$Sample)) {
   j <- j + 1
 }
 
+Desiccation_mods %>% 
+  kable(., digits = c(1, 1, 2, 2, 3, 2)) %>%
+  kable_styling(bootstrap_options = c("hover", "condensed", "responsive"), full_width = F)
+
 # comapre with and without crust
 data2model <- Desiccation_long
 colnames(data2model) <- c("Time", "Replicate", "BRC", "Rock", "RWC", "Sample")
@@ -1701,22 +1705,20 @@ mod_all <- lme(RWC ~ poly(Time, 2, raw = TRUE), random = ~0 + Time|Replicate, da
 mod_treatment <- lme(RWC ~ poly(Time, 2, raw = TRUE) * BRC, random = ~0 + Time|Replicate, data = data2model[data2model$Rock == "Dolomite", ])
 anova(mod_all, mod_treatment)
 
-kable(Desiccation_mods, 
-      digits = 1, 
-      caption = "Model coefficients")
 
 p_desiccation <-
   ggplot(
     Desiccation_long,
     aes(
-      `Time (h)`,
-      `Residual water content (%)`,
+      x = `Time (h)`,
+      y = `Residual water content (%)`,
       colour = Rock,
       # fill = Rock,
-      shape = BRC
+      shape = BRC,
+      linetype = BRC
     )
   ) +
-  geom_point(size = 3, alpha = 2/3) +
+  geom_point(size = 2, alpha = 2/3) +
   # geom_smooth(method = "lm", se = FALSE, alpha = 1/2, formula = (y ~ sqrt(1/(x+1)))) +
   geom_smooth(method = "lm", se = TRUE, alpha = 1/3, formula = (y ~ poly(x, 2)), size = 1) +
   # geom_line(alpha = 1/2) +

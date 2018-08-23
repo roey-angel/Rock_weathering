@@ -44,3 +44,5 @@ bindrcpp
 gdtools
 hexbin
 matrixStats
+nlme
+MuMIn
