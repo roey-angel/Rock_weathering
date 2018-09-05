@@ -1,7 +1,7 @@
 ---
 title: "Role of BRC in arid rock weathering"
 subtitle: "Data analysis and plotting for publication"
-author: "Roey Angel"
+author: "Roey Angel (<roey.angel@bc.cas.cz>)"
 date: "`r Sys.Date()`"
 bibliography: references.bib
 link-citations: yes
