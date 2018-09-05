@@ -1,0 +1,44 @@
+Sample.code,Site,Source,Location,Climate,Rock.type,Batch,Replicate,sample_title
+SbDust1S14,Sede boqer,Dust,Dust,Arid,Settled Dust,1,1,Arid_Settled Dust_1
+UvSlp1DS16,Uvda,Loess soil,Slope,Hyperarid,Loess soil,1,1,Hyperarid_Loess soil_1
+UvSlp1CS17,Uvda,Loess soil,Slope,Hyperarid,Loess soil,1,2,Hyperarid_Loess soil_2
+UvWad1DS18,Uvda,Loess soil,Wadi,Hyperarid,Loess soil,1,3,Hyperarid_Loess soil_3
+UvWaD1CS19,Uvda,Loess soil,Wadi,Hyperarid,Loess soil,1,4,Hyperarid_Loess soil_4
+UvSlp2DS20,Uvda,Loess soil,Slope,Hyperarid,Loess soil,1,5,Hyperarid_Loess soil_5
+UvSlp2CS21,Uvda,Loess soil,Slope,Hyperarid,Loess soil,1,6,Hyperarid_Loess soil_6
+UvWad2DS22,Uvda,Loess soil,Wadi,Hyperarid,Loess soil,1,7,Hyperarid_Loess soil_7
+UvWad2CS23,Uvda,Loess soil,Wadi,Hyperarid,Loess soil,1,8,Hyperarid_Loess soil_8
+UvSlp3DS24,Uvda,Loess soil,Slope,Hyperarid,Loess soil,1,9,Hyperarid_Loess soil_9
+UvSlp3CS25,Uvda,Loess soil,Slope,Hyperarid,Loess soil,1,10,Hyperarid_Loess soil_10
+UvWad3DS26,Uvda,Loess soil,Wadi,Hyperarid,Loess soil,1,11,Hyperarid_Loess soil_11
+UvWad3CS27,Uvda,Loess soil,Wadi,Hyperarid,Loess soil,1,12,Hyperarid_Loess soil_12
+SbDust2S31,Sede boqer,Dust,Dust,Arid,Settled Dust,1,2,Arid_Settled Dust_2
+UvDust1S32,Uvda,Dust,Dust,Hyperarid,Settled Dust,1,1,Hyperarid_Settled Dust_1
+UvDust2S33,Uvda,Dust,Dust,Hyperarid,Settled Dust,1,2,Hyperarid_Settled Dust_2
+SbSlp1SNW49,Sede boqer,Limestone,Slope,Arid,Limestone,1,1,Arid_Limestone_1
+SbSlp2SNW50,Sede boqer,Limestone,Slope,Arid,Limestone,1,2,Arid_Limestone_2
+SbSlp3SNW51,Sede boqer,Limestone,Slope,Arid,Limestone,1,3,Arid_Limestone_3
+SbSlp4SNW52,Sede boqer,Limestone,Slope,Arid,Limestone,1,4,Arid_Limestone_4
+SbSlp5SNW53,Sede boqer,Limestone,Slope,Arid,Limestone,1,5,Arid_Limestone_5
+SbSlp6SNW54,Sede boqer,Limestone,Slope,Arid,Limestone,1,6,Arid_Limestone_6
+SbWad1SNW55,Sede boqer,Limestone,Wadi,Arid,Limestone,1,7,Arid_Limestone_7
+SbWad2SNW56,Sede boqer,Limestone,Wadi,Arid,Limestone,1,8,Arid_Limestone_8
+SbWad3SNW57,Sede boqer,Limestone,Wadi,Arid,Limestone,1,9,Arid_Limestone_9
+SbWad4SNW58,Sede boqer,Limestone,Wadi,Arid,Limestone,1,10,Arid_Limestone_10
+SbWad5SNW59,Sede boqer,Limestone,Wadi,Arid,Limestone,1,11,Arid_Limestone_11
+SbWad6SNW60,Sede boqer,Limestone,Wadi,Arid,Limestone,1,12,Arid_Limestone_12
+UvSlp1GS70,Uvda,Dolomite,Slope,Hyperarid,Dolomite,2,1,Hyperarid_Dolomite_1
+UvSlp2GS71,Uvda,Dolomite,Slope,Hyperarid,Dolomite,2,2,Hyperarid_Dolomite_2
+UvSlp3GS72,Uvda,Dolomite,Slope,Hyperarid,Dolomite,2,3,Hyperarid_Dolomite_3
+UvSlp4GS73,Uvda,Dolomite,Slope,Hyperarid,Dolomite,2,4,Hyperarid_Dolomite_4
+UvSlp5GS74,Uvda,Dolomite,Slope,Hyperarid,Dolomite,2,5,Hyperarid_Dolomite_5
+UvSlp6GS75,Uvda,Dolomite,Slope,Hyperarid,Dolomite,2,6,Hyperarid_Dolomite_6
+UvWad1GS76,Uvda,Dolomite,Wadi,Hyperarid,Dolomite,2,7,Hyperarid_Dolomite_7
+UvWad2GS77,Uvda,Dolomite,Wadi,Hyperarid,Dolomite,2,8,Hyperarid_Dolomite_8
+UvWad3GS78,Uvda,Dolomite,Wadi,Hyperarid,Dolomite,2,9,Hyperarid_Dolomite_9
+UvWad4GS79,Uvda,Dolomite,Wadi,Hyperarid,Dolomite,2,10,Hyperarid_Dolomite_10
+UvWad5GS80,Uvda,Dolomite,Wadi,Hyperarid,Dolomite,2,11,Hyperarid_Dolomite_11
+UvWad6GS81,Uvda,Dolomite,Wadi,Hyperarid,Dolomite,2,12,Hyperarid_Dolomite_12
+SbSoil1SA10,Sede boqer,Loess soil,Slope,Arid,Loess soil,2,1,Arid_Loess soil_1
+SbSoil2SA11,Sede boqer,Loess soil,Slope,Arid,Loess soil,2,2,Arid_Loess soil_2
+SbSoil3SA12,Sede boqer,Loess soil,Slope,Arid,Loess soil,2,3,Arid_Loess soil_3
