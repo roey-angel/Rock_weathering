@@ -11,13 +11,13 @@ Abstract
 Overview
 --------
     ├── Data          # Primary data
-    │   ├── desiccation_data.csv
+    │   ├── desiccation_data_full.csv
     │   ├── Isotopes_data.csv
     │   ├── Rock_weathering_metadata_RA.csv
     │   ├── Rock_weathering_new2_otuTab.txt
     │   └── Rock_weathering_new2_silva.nrv119.taxonomy
-    ├── LICENCE.txt          # Copyright information
-    ├── packrat.tgz          # R packages needed by the RMD file (needs to be unpacked before running the script)
+    ├── LICENCE            # Copyright information
+    ├── packrat.tgz          # R packages needed by the RMD file (available upon request)
     ├── README.md          # Overview of the repo
     ├── references.bib          # Bibtex formatted refereces cited in the RMD file
     ├── Results         # Result files generated while running the RMD file
@@ -33,7 +33,6 @@ Overview
     ├── Rock_weathering_analysis4paper.html          # HTML output of the RMD file
     ├── Rock_weathering_analysis4paper.md          # MD output of the RMD file
     ├── Rock_weathering_analysis4paper.RMD            # Executable R markdown script
-    ├── Rock_weathering_cache/          # Cache files generated while running the RMD file
     ├── Rock_weathering_figures/          # Figure files generated while running the RMD file
     └── Rock_weathering_process_sequences.sh          # Shell excecutable for processing the sequence data
 
