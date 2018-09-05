@@ -34,21 +34,15 @@ repo <- "http://cran.wu.ac.at"
   "MASS", # Support Functions and Datasets for Venables and Ripley's MASS
   "rcompanion", #Functions to Support Extension Education Program Evaluation
   "tidyverse", # for dplyr forcats ggplot2 readr tibble
-  # "broom", # Convert Statistical Analysis Objects into Tidy Data Frames (should be part of tidyverse)
-  # "gridExtra", # Miscellaneous Functions for "Grid" Graphics
   "cowplot", # wrappers for ggplot
-  # "ggsci", # Scientific Journal and Sci-Fi Themed Color Palettes for 'ggplot2'
-  # "ggrepel", # Repulsive Text and Label Geoms for 'ggplot2'
   "magrittr", # pipes
   "scales", # Generic plot scaling methods
   "svglite", # for svg files
   "car", # Companion to Applied Regression
-  # "agricolae", # Statistical Procedures for Agricultural Research
   "userfriendlyscience", # Quantitative Analysis Made Accessible
   "vegan", # community ecology methods
   "doParallel", # parallel backend for the foreach/%dopar% function
   "BiodiversityR", # Package for Community Ecology and Suitability Analysis
-  # "ade4", # Analysis of Ecological Data
   "hexbin", # Hexagonal Binning Routines
   "ggtern", # An Extension to 'ggplot2', for the Creation of Ternary Diagrams
   "nlme", # Linear and Nonlinear Mixed Effects Models 
