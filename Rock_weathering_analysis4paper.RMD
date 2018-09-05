@@ -1,7 +1,7 @@
 ---
 title: "Role of BRC in arid rock weathering"
 subtitle: "Data analysis and plotting for publication"
-author: "Roey Angel"
+author: "Roey Angel (<roey.angel@bc.cas.cz>)"
 date: "`r Sys.Date()`"
 bibliography: references.bib
 link-citations: yes
@@ -50,9 +50,7 @@ repo <- "http://cran.wu.ac.at"
   "BiodiversityR", # Package for Community Ecology and Suitability Analysis
   # "ade4", # Analysis of Ecological Data
   "hexbin", # Hexagonal Binning Routines
-  "ggtern", # An Extension to 'ggplot2', for the Creation of Ternary Diagrams
-  "nlme", # Linear and Nonlinear Mixed Effects Models 
-  "MuMIn" # Multi-Model Inference
+  "ggtern" # An Extension to 'ggplot2', for the Creation of Ternary Diagrams
 ) 
 
 # .inst <- .cran_libs %in% installed.packages()
@@ -67,12 +65,12 @@ repo <- "http://cran.wu.ac.at"
   "vsn" # Variance stabilization and calibration for microarray data
 )
 
-# if (!"phyloseq" %in% installed.packages()) {
-#   source(
-#     "https://raw.githubusercontent.com/joey711/phyloseq/master/inst/scripts/installer.R",
-#     local = TRUE
-#  )
-# }
+if (!"phyloseq" %in% installed.packages()) {
+  source(
+    "https://raw.githubusercontent.com/joey711/phyloseq/master/inst/scripts/installer.R",
+    local = TRUE
+ )
+}
 
 # .inst <- .bioc_libs %in% installed.packages()
 # if (any(!.inst)) {
@@ -88,11 +86,11 @@ repo <- "http://cran.wu.ac.at"
 
 .github_lib_names <- stringr::str_replace(.github_libs, ".*/(.*)$", "\\1")
 
-# .github_inst <- .github_lib_names %in% installed.packages()
-# if (any(!.github_inst)) {
-#   devtools::install_github(.github_libs[!.github_inst],
-#                            dependencies = TRUE)
-# }
+.github_inst <- .github_lib_names %in% installed.packages()
+if (any(!.github_inst)) {
+  devtools::install_github(.github_libs[!.github_inst],
+                           dependencies = TRUE)
+}
 
 # Load packages into session, and print package version
 (loaded.libs <- sapply(c(.cran_libs, .bioc_libs, .github_lib_names), require, character.only = TRUE))
@@ -1177,7 +1175,7 @@ Rock_weathering_filt3_GMPR_Hyperarid <- filter_taxa(Rock_weathering_filt3_GMPR_H
   permutations = 9999
 ))
 ```
-According to this model we see that indeed there's an effect of site on the community (p = 0.001), and that effect accounts for about 17% of the variance. Also, considering that Location is only borderline significant and explains very little of the data, we could probably take it out of the model to make a minimal adequate model.
+#According to this model we see that indeed there's an effect of site on the community (p = 0.001), and that effect accounts for about 17% of the variance. Also, considering that Location is only borderline significant and explains very little of the data, we could probably take it out of the model to make a minimal adequate model.
 
 ```{r ADONIS reduced, cache=T}
 (mod4 <-  adonis(
@@ -1297,9 +1295,9 @@ Rock_weathering_filt3_glom_rel_DF_2plot %>%
   summarise(`Rares (%)` = sum(Abundance * 100)) -> 
   Rares
 # Percentage of reads classified as rare 
-Rares %>% 
-  kable(., digits = 2, caption = "Percentage of reads per sample type classified as rare:") %>%
-  kable_styling(bootstrap_options = c("striped", "hover", "condensed", "responsive"), full_width = F)
+kable(Rares, 
+      digits = 2, 
+      caption = "Percentage of reads per sample classified as rare:")
 
 sample_order <- match(Rares$Sample, row.names(sample_data(Rock_weathering_filt3_glom)))
 Rares %<>% arrange(., sample_order)
@@ -1311,9 +1309,9 @@ Rares %>%
   Rares_merged
 
 # Percentage of reads classified as rare 
-Rares %>% 
-  kable(., digits = 2, caption = "Percentage of reads per sample type classified as rare:") %>%
-  kable_styling(bootstrap_options = c("striped", "hover", "condensed", "responsive"), full_width = F)
+kable(Rares, 
+      digits = 2, 
+      caption = "Percentage of reads per sample type classified as rare:")
 
 Rock_weathering_filt3_glom_rel_DF_2plot %>% 
   group_by(Phylum) %>% 
@@ -1649,84 +1647,81 @@ print(p_isotopes)
 
 ### Desiccation experiment
 ```{r desiccation, cache=T}
-read_csv("Data/desiccation_data_full.csv") ->
+read_csv("Data/desiccation_data.csv") %>%
+  select(-c(`Capped Marly dolomite`, `Bare Marly dolomite`)) %>%
+  gather(., Sample, `Residual water content (%)`, -`Time (h)`) %>%
+  cbind(., str_split(.$Sample, "\\s", simplify = TRUE)) %>%
+  dplyr::rename("Crust" = "1" , "Rock" = "2") ->
   Desiccation_long
+
 Desiccation_long$Rock %<>% fct_relevel(., "Limestone")
-Desiccation_long$BRC %<>% 
+Desiccation_long$Crust %<>% 
+  fct_recode(., Present = "Capped", Removed = "Bare") %>% 
   fct_relevel(., "Present")
-Desiccation_long$Sample <- with(Desiccation_long, paste(Rock, BRC))
 
 Desiccation_mods <- tibble(Sample = character(), Intercept = numeric(), b = numeric(), a = numeric(), P = numeric(), R2 = numeric())
 mods <- list()
 j <- 1
 for (i in unique(Desiccation_long$Sample)) {
   data2model <- Desiccation_long[Desiccation_long$Sample == i, ]
-  colnames(data2model) <- c("Time", "Replicate", "BRC", "Rock", "RWC", "Sample")
-  (mod <- lme(RWC ~ poly(Time, 2, raw = TRUE), random = ~0 + Time|Replicate, data = data2model))
-  intervals(mod)
+  mod <- lm(`Residual water content (%)` ~ poly(`Time (h)`,2, raw = TRUE), data = data2model)
   # mod <- lm(`Residual water content (%)` ~ sqrt(1/(`Time (h)` + 1)), data = data2model)
   mods[[j]] <- mod
   Desiccation_mods[j, "Sample"] <- i
-  Desiccation_mods[j, "Intercept"] <- mod$coefficients$fixed[1]
-  Desiccation_mods[j, "b"] <- mod$coefficients$fixed[2]
-  Desiccation_mods[j, "a"] <- mod$coefficients$fixed[3]
-  Desiccation_mods[j, "P"] <- anova(mod)$`p-value`[2]
-  Desiccation_mods[j, "R2"] <- r.squaredGLMM(mod)[, "R2c"]
-  j <- j + 1
+  Desiccation_mods[j, "Intercept"] <- mod$coefficients[1]
+  Desiccation_mods[j, "b"] <- mod$coefficients[2]
+  Desiccation_mods[j, "a"] <- mod$coefficients[3]
+  Desiccation_mods[j, "P"] <- summary(mod)$coefficients[2, "Pr(>|t|)"]
+  Desiccation_mods[j, "R2"] <- summary(mod)$adj.r.squared
+  j <- j + 1 
 }
 
-Desiccation_mods %>% 
-  kable(., digits = c(1, 1, 2, 2, 3, 2)) %>%
-  kable_styling(bootstrap_options = c("hover", "condensed", "responsive"), full_width = F)
-
 # comapre with and without crust
-data2model <- Desiccation_long
-colnames(data2model) <- c("Time", "Replicate", "BRC", "Rock", "RWC", "Sample")
-mod_all <- lme(RWC ~ poly(Time, 2, raw = TRUE), random = ~0 + Time|Replicate, data = data2model)
-mod_treatment <- lme(RWC ~ poly(Time, 2, raw = TRUE) * BRC, random = ~0 + Time|Replicate, data = data2model)
+mod_all <- lm(`Residual water content (%)` ~ poly(`Time (h)`, 2, raw = TRUE), data = Desiccation_long)
+mod_treatment <- lm(`Residual water content (%)` ~ poly(`Time (h)`, 2, raw = TRUE) * Crust, data = Desiccation_long)
 anova(mod_all, mod_treatment)
 
 # comapre limestone vs dolomite - with crust
-mod_all <- lme(RWC ~ poly(Time, 2, raw = TRUE), random = ~0 + Time|Replicate, data = data2model[data2model$BRC == "Present", ])
-mod_treatment <- lme(RWC ~ poly(Time, 2, raw = TRUE) * Rock, random = ~0 + Time|Replicate, data = data2model[data2model$BRC == "Present", ])
+mod_all <- lm(`Residual water content (%)` ~ poly(`Time (h)`, 2, raw = TRUE), data = Desiccation_long[Desiccation_long$Crust == "Present", ])
+mod_treatment <- lm(`Residual water content (%)` ~ poly(`Time (h)`, 2, raw = TRUE) * Rock, data = Desiccation_long[Desiccation_long$Crust == "Present", ])
 anova(mod_all, mod_treatment)
 
 # comapre limestone vs dolomite - without crust
-mod_all <- lme(RWC ~ poly(Time, 2, raw = TRUE), random = ~0 + Time|Replicate, data = data2model[data2model$BRC == "Removed", ])
-mod_treatment <- lme(RWC ~ poly(Time, 2, raw = TRUE) * Rock, random = ~0 + Time|Replicate, data = data2model[data2model$BRC == "Removed", ])
+mod_all <- lm(`Residual water content (%)` ~ poly(`Time (h)`, 2, raw = TRUE), data = Desiccation_long[Desiccation_long$Crust == "Removed", ])
+mod_treatment <- lm(`Residual water content (%)` ~ poly(`Time (h)`, 2, raw = TRUE) * Rock, data = Desiccation_long[Desiccation_long$Crust == "Removed", ])
 anova(mod_all, mod_treatment)
 
 # comapre with and without crust - limestone
-mod_all <- lme(RWC ~ poly(Time, 2, raw = TRUE), random = ~0 + Time|Replicate, data = data2model[data2model$Rock == "Limestone", ])
-mod_treatment <- lme(RWC ~ poly(Time, 2, raw = TRUE) * BRC, random = ~0 + Time|Replicate, data = data2model[data2model$Rock == "Limestone", ])
+mod_all <- lm(`Residual water content (%)` ~ poly(`Time (h)`, 2, raw = TRUE), data = Desiccation_long[Desiccation_long$Rock == "Limestone", ])
+mod_treatment <- lm(`Residual water content (%)` ~ poly(`Time (h)`, 2, raw = TRUE) * Crust, data = Desiccation_long[Desiccation_long$Rock == "Limestone", ])
 anova(mod_all, mod_treatment)
 
-mod_all <- lme(RWC ~ poly(Time, 2, raw = TRUE), random = ~0 + Time|Replicate, data = data2model[data2model$Rock == "Dolomite", ])
-mod_treatment <- lme(RWC ~ poly(Time, 2, raw = TRUE) * BRC, random = ~0 + Time|Replicate, data = data2model[data2model$Rock == "Dolomite", ])
+mod_all <- lm(`Residual water content (%)` ~ poly(`Time (h)`, 2, raw = TRUE), data = Desiccation_long[Desiccation_long$Rock == "Dolomite", ])
+mod_treatment <- lm(`Residual water content (%)` ~ poly(`Time (h)`, 2, raw = TRUE) * Crust, data = Desiccation_long[Desiccation_long$Rock == "Dolomite", ])
 anova(mod_all, mod_treatment)
 
+kable(Desiccation_mods, 
+      digits = 1, 
+      caption = "Model coefficients")
 
-p_desiccation <-
+p_dessication <-
   ggplot(
     Desiccation_long,
     aes(
-      x = `Time (h)`,
-      y = `Residual water content (%)`,
+      `Time (h)`,
+      `Residual water content (%)`,
       colour = Rock,
-      # fill = Rock,
-      shape = BRC,
-      linetype = BRC
+      shape = Crust
     )
   ) +
-  geom_point(size = 2, alpha = 2/3) +
+  geom_point(size = 4, alpha = 2/3) +
   # geom_smooth(method = "lm", se = FALSE, alpha = 1/2, formula = (y ~ sqrt(1/(x+1)))) +
-  geom_smooth(method = "lm", se = TRUE, alpha = 1/3, formula = (y ~ poly(x, 2)), size = 1) +
+  geom_smooth(method = "lm", se = FALSE, alpha = 1/2, formula = (y ~ poly(x, 2)), size = 0.5) +
   # geom_line(alpha = 1/2) +
   scale_y_continuous(limits = c(0, 100), expand = c(0.01, 0.01)) +
   scale_x_continuous(limits = c(0, 50), expand = c(0.01, 0.01)) +
-  # scale_fill_manual(values = pom4) +
   scale_color_manual(values = pom4)
-print(p_desiccation)
+print(p_dessication)
 ```
 
 ```{r session_info, echo=T, results="markdown"}

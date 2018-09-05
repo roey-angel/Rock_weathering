@@ -1,8 +1,8 @@
 ---
 title: "Role of BRC in arid rock weathering"
 subtitle: "Data analysis and plotting for publication"
-author: "Roey Angel"
-date: "2018-08-23"
+author: "Roey Angel (<roey.angel@bc.cas.cz>)"
+date: "2018-09-05"
 bibliography: references.bib
 link-citations: yes
 output:
@@ -1758,7 +1758,7 @@ Rock_weathering_filt3_GMPR_Hyperarid <- filter_taxa(Rock_weathering_filt3_GMPR_H
 ## ---
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ```
-According to this model we see that indeed there's an effect of site on the community (p = 0.001), and that effect accounts for about 17% of the variance. Also, considering that Location is only borderline significant and explains very little of the data, we could probably take it out of the model to make a minimal adequate model.
+#According to this model we see that indeed there's an effect of site on the community (p = 0.001), and that effect accounts for about 17% of the variance. Also, considering that Location is only borderline significant and explains very little of the data, we could probably take it out of the model to make a minimal adequate model.
 
 
 ```r
@@ -2237,13 +2237,13 @@ Rock_weathering_filt3_glom_rel_DF_2plot %>%
   summarise(`Rares (%)` = sum(Abundance * 100)) -> 
   Rares
 # Percentage of reads classified as rare 
-Rares %>% 
-  kable(., digits = 2, caption = "Percentage of reads per sample type classified as rare:") %>%
-  kable_styling(bootstrap_options = c("striped", "hover", "condensed", "responsive"), full_width = F)
+kable(Rares, 
+      digits = 2, 
+      caption = "Percentage of reads per sample classified as rare:")
 ```
 
-<table class="table table-striped table-hover table-condensed table-responsive" style="width: auto !important; margin-left: auto; margin-right: auto;">
-<caption>Percentage of reads per sample type classified as rare:</caption>
+<table>
+<caption>Percentage of reads per sample classified as rare:</caption>
  <thead>
   <tr>
    <th style="text-align:left;"> Sample </th>
@@ -2401,12 +2401,12 @@ Rares %>%
   Rares_merged
 
 # Percentage of reads classified as rare 
-Rares %>% 
-  kable(., digits = 2, caption = "Percentage of reads per sample type classified as rare:") %>%
-  kable_styling(bootstrap_options = c("striped", "hover", "condensed", "responsive"), full_width = F)
+kable(Rares, 
+      digits = 2, 
+      caption = "Percentage of reads per sample type classified as rare:")
 ```
 
-<table class="table table-striped table-hover table-condensed table-responsive" style="width: auto !important; margin-left: auto; margin-right: auto;">
+<table>
 <caption>Percentage of reads per sample type classified as rare:</caption>
  <thead>
   <tr>
@@ -5831,38 +5831,251 @@ print(p_isotopes)
 ### Desiccation experiment
 
 ```r
-read_csv("Data/desiccation_data_full.csv") ->
+read_csv("Data/desiccation_data.csv") %>%
+  select(-c(`Capped Marly dolomite`, `Bare Marly dolomite`)) %>%
+  gather(., Sample, `Residual water content (%)`, -`Time (h)`) %>%
+  cbind(., str_split(.$Sample, "\\s", simplify = TRUE)) %>%
+  dplyr::rename("Crust" = "1" , "Rock" = "2") ->
   Desiccation_long
+
 Desiccation_long$Rock %<>% fct_relevel(., "Limestone")
-Desiccation_long$BRC %<>% 
+Desiccation_long$Crust %<>% 
+  fct_recode(., Present = "Capped", Removed = "Bare") %>% 
   fct_relevel(., "Present")
-Desiccation_long$Sample <- with(Desiccation_long, paste(Rock, BRC))
 
 Desiccation_mods <- tibble(Sample = character(), Intercept = numeric(), b = numeric(), a = numeric(), P = numeric(), R2 = numeric())
 mods <- list()
 j <- 1
 for (i in unique(Desiccation_long$Sample)) {
   data2model <- Desiccation_long[Desiccation_long$Sample == i, ]
-  colnames(data2model) <- c("Time", "Replicate", "BRC", "Rock", "RWC", "Sample")
-  (mod <- lme(RWC ~ poly(Time, 2, raw = TRUE), random = ~0 + Time|Replicate, data = data2model))
-  intervals(mod)
+  mod <- lm(`Residual water content (%)` ~ poly(`Time (h)`,2, raw = TRUE), data = data2model)
   # mod <- lm(`Residual water content (%)` ~ sqrt(1/(`Time (h)` + 1)), data = data2model)
   mods[[j]] <- mod
   Desiccation_mods[j, "Sample"] <- i
-  Desiccation_mods[j, "Intercept"] <- mod$coefficients$fixed[1]
-  Desiccation_mods[j, "b"] <- mod$coefficients$fixed[2]
-  Desiccation_mods[j, "a"] <- mod$coefficients$fixed[3]
-  Desiccation_mods[j, "P"] <- anova(mod)$`p-value`[2]
-  Desiccation_mods[j, "R2"] <- r.squaredGLMM(mod)[, "R2c"]
-  j <- j + 1
+  Desiccation_mods[j, "Intercept"] <- mod$coefficients[1]
+  Desiccation_mods[j, "b"] <- mod$coefficients[2]
+  Desiccation_mods[j, "a"] <- mod$coefficients[3]
+  Desiccation_mods[j, "P"] <- summary(mod)$coefficients[2, "Pr(>|t|)"]
+  Desiccation_mods[j, "R2"] <- summary(mod)$adj.r.squared
+  j <- j + 1 
 }
 
-Desiccation_mods %>% 
-  kable(., digits = c(1, 1, 2, 2, 3, 2)) %>%
-  kable_styling(bootstrap_options = c("hover", "condensed", "responsive"), full_width = F)
+# comapre with and without crust
+mod_all <- lm(`Residual water content (%)` ~ poly(`Time (h)`, 2, raw = TRUE), data = Desiccation_long)
+mod_treatment <- lm(`Residual water content (%)` ~ poly(`Time (h)`, 2, raw = TRUE) * Crust, data = Desiccation_long)
+anova(mod_all, mod_treatment)
 ```
 
-<table class="table table-hover table-condensed table-responsive" style="width: auto !important; margin-left: auto; margin-right: auto;">
+<div class="kable-table">
+
+<table>
+ <thead>
+  <tr>
+   <th style="text-align:right;"> Res.Df </th>
+   <th style="text-align:right;"> RSS </th>
+   <th style="text-align:right;"> Df </th>
+   <th style="text-align:right;"> Sum of Sq </th>
+   <th style="text-align:right;"> F </th>
+   <th style="text-align:right;"> Pr(&gt;F) </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:right;"> 29 </td>
+   <td style="text-align:right;"> 12348.671 </td>
+   <td style="text-align:right;"> NA </td>
+   <td style="text-align:right;"> NA </td>
+   <td style="text-align:right;"> NA </td>
+   <td style="text-align:right;"> NA </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 26 </td>
+   <td style="text-align:right;"> 1925.944 </td>
+   <td style="text-align:right;"> 3 </td>
+   <td style="text-align:right;"> 10422.73 </td>
+   <td style="text-align:right;"> 46.90184 </td>
+   <td style="text-align:right;"> 0 </td>
+  </tr>
+</tbody>
+</table>
+
+</div>
+
+```r
+# comapre limestone vs dolomite - with crust
+mod_all <- lm(`Residual water content (%)` ~ poly(`Time (h)`, 2, raw = TRUE), data = Desiccation_long[Desiccation_long$Crust == "Present", ])
+mod_treatment <- lm(`Residual water content (%)` ~ poly(`Time (h)`, 2, raw = TRUE) * Rock, data = Desiccation_long[Desiccation_long$Crust == "Present", ])
+anova(mod_all, mod_treatment)
+```
+
+<div class="kable-table">
+
+<table>
+ <thead>
+  <tr>
+   <th style="text-align:right;"> Res.Df </th>
+   <th style="text-align:right;"> RSS </th>
+   <th style="text-align:right;"> Df </th>
+   <th style="text-align:right;"> Sum of Sq </th>
+   <th style="text-align:right;"> F </th>
+   <th style="text-align:right;"> Pr(&gt;F) </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:right;"> 13 </td>
+   <td style="text-align:right;"> 195.42714 </td>
+   <td style="text-align:right;"> NA </td>
+   <td style="text-align:right;"> NA </td>
+   <td style="text-align:right;"> NA </td>
+   <td style="text-align:right;"> NA </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 10 </td>
+   <td style="text-align:right;"> 15.60204 </td>
+   <td style="text-align:right;"> 3 </td>
+   <td style="text-align:right;"> 179.8251 </td>
+   <td style="text-align:right;"> 38.41914 </td>
+   <td style="text-align:right;"> 8.5e-06 </td>
+  </tr>
+</tbody>
+</table>
+
+</div>
+
+```r
+# comapre limestone vs dolomite - without crust
+mod_all <- lm(`Residual water content (%)` ~ poly(`Time (h)`, 2, raw = TRUE), data = Desiccation_long[Desiccation_long$Crust == "Removed", ])
+mod_treatment <- lm(`Residual water content (%)` ~ poly(`Time (h)`, 2, raw = TRUE) * Rock, data = Desiccation_long[Desiccation_long$Crust == "Removed", ])
+anova(mod_all, mod_treatment)
+```
+
+<div class="kable-table">
+
+<table>
+ <thead>
+  <tr>
+   <th style="text-align:right;"> Res.Df </th>
+   <th style="text-align:right;"> RSS </th>
+   <th style="text-align:right;"> Df </th>
+   <th style="text-align:right;"> Sum of Sq </th>
+   <th style="text-align:right;"> F </th>
+   <th style="text-align:right;"> Pr(&gt;F) </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:right;"> 13 </td>
+   <td style="text-align:right;"> 1730.5166 </td>
+   <td style="text-align:right;"> NA </td>
+   <td style="text-align:right;"> NA </td>
+   <td style="text-align:right;"> NA </td>
+   <td style="text-align:right;"> NA </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 10 </td>
+   <td style="text-align:right;"> 519.6724 </td>
+   <td style="text-align:right;"> 3 </td>
+   <td style="text-align:right;"> 1210.844 </td>
+   <td style="text-align:right;"> 7.766716 </td>
+   <td style="text-align:right;"> 0.0057221 </td>
+  </tr>
+</tbody>
+</table>
+
+</div>
+
+```r
+# comapre with and without crust - limestone
+mod_all <- lm(`Residual water content (%)` ~ poly(`Time (h)`, 2, raw = TRUE), data = Desiccation_long[Desiccation_long$Rock == "Limestone", ])
+mod_treatment <- lm(`Residual water content (%)` ~ poly(`Time (h)`, 2, raw = TRUE) * Crust, data = Desiccation_long[Desiccation_long$Rock == "Limestone", ])
+anova(mod_all, mod_treatment)
+```
+
+<div class="kable-table">
+
+<table>
+ <thead>
+  <tr>
+   <th style="text-align:right;"> Res.Df </th>
+   <th style="text-align:right;"> RSS </th>
+   <th style="text-align:right;"> Df </th>
+   <th style="text-align:right;"> Sum of Sq </th>
+   <th style="text-align:right;"> F </th>
+   <th style="text-align:right;"> Pr(&gt;F) </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:right;"> 13 </td>
+   <td style="text-align:right;"> 7255.187 </td>
+   <td style="text-align:right;"> NA </td>
+   <td style="text-align:right;"> NA </td>
+   <td style="text-align:right;"> NA </td>
+   <td style="text-align:right;"> NA </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 10 </td>
+   <td style="text-align:right;"> 347.053 </td>
+   <td style="text-align:right;"> 3 </td>
+   <td style="text-align:right;"> 6908.134 </td>
+   <td style="text-align:right;"> 66.35042 </td>
+   <td style="text-align:right;"> 7e-07 </td>
+  </tr>
+</tbody>
+</table>
+
+</div>
+
+```r
+mod_all <- lm(`Residual water content (%)` ~ poly(`Time (h)`, 2, raw = TRUE), data = Desiccation_long[Desiccation_long$Rock == "Dolomite", ])
+mod_treatment <- lm(`Residual water content (%)` ~ poly(`Time (h)`, 2, raw = TRUE) * Crust, data = Desiccation_long[Desiccation_long$Rock == "Dolomite", ])
+anova(mod_all, mod_treatment)
+```
+
+<div class="kable-table">
+
+<table>
+ <thead>
+  <tr>
+   <th style="text-align:right;"> Res.Df </th>
+   <th style="text-align:right;"> RSS </th>
+   <th style="text-align:right;"> Df </th>
+   <th style="text-align:right;"> Sum of Sq </th>
+   <th style="text-align:right;"> F </th>
+   <th style="text-align:right;"> Pr(&gt;F) </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:right;"> 13 </td>
+   <td style="text-align:right;"> 3961.8047 </td>
+   <td style="text-align:right;"> NA </td>
+   <td style="text-align:right;"> NA </td>
+   <td style="text-align:right;"> NA </td>
+   <td style="text-align:right;"> NA </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 10 </td>
+   <td style="text-align:right;"> 188.2214 </td>
+   <td style="text-align:right;"> 3 </td>
+   <td style="text-align:right;"> 3773.583 </td>
+   <td style="text-align:right;"> 66.82881 </td>
+   <td style="text-align:right;"> 6e-07 </td>
+  </tr>
+</tbody>
+</table>
+
+</div>
+
+```r
+kable(Desiccation_mods, 
+      digits = 1, 
+      caption = "Model coefficients")
+```
+
+<table>
+<caption>Model coefficients</caption>
  <thead>
   <tr>
    <th style="text-align:left;"> Sample </th>
@@ -5875,333 +6088,59 @@ Desiccation_mods %>%
  </thead>
 <tbody>
   <tr>
-   <td style="text-align:left;"> Dolomite Present </td>
-   <td style="text-align:right;"> 97.2 </td>
-   <td style="text-align:right;"> -0.85 </td>
-   <td style="text-align:right;"> 0.01 </td>
-   <td style="text-align:right;"> 0.002 </td>
-   <td style="text-align:right;"> 0.86 </td>
+   <td style="text-align:left;"> Capped Dolomite </td>
+   <td style="text-align:right;"> 99.0 </td>
+   <td style="text-align:right;"> -0.4 </td>
+   <td style="text-align:right;"> 0.0 </td>
+   <td style="text-align:right;"> 0 </td>
+   <td style="text-align:right;"> 1.0 </td>
   </tr>
   <tr>
-   <td style="text-align:left;"> Dolomite Removed </td>
+   <td style="text-align:left;"> Bare Dolomite </td>
+   <td style="text-align:right;"> 90.8 </td>
+   <td style="text-align:right;"> -3.0 </td>
+   <td style="text-align:right;"> 0.0 </td>
+   <td style="text-align:right;"> 0 </td>
+   <td style="text-align:right;"> 0.9 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Capped Limestone </td>
+   <td style="text-align:right;"> 97.9 </td>
+   <td style="text-align:right;"> -0.8 </td>
+   <td style="text-align:right;"> 0.0 </td>
+   <td style="text-align:right;"> 0 </td>
+   <td style="text-align:right;"> 1.0 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Bare Limestone </td>
    <td style="text-align:right;"> 91.9 </td>
-   <td style="text-align:right;"> -2.42 </td>
-   <td style="text-align:right;"> 0.03 </td>
-   <td style="text-align:right;"> 0.004 </td>
-   <td style="text-align:right;"> 0.77 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> Limestone Present </td>
-   <td style="text-align:right;"> 97.4 </td>
-   <td style="text-align:right;"> -0.99 </td>
-   <td style="text-align:right;"> 0.01 </td>
-   <td style="text-align:right;"> 0.000 </td>
-   <td style="text-align:right;"> 0.96 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> Limestone Removed </td>
-   <td style="text-align:right;"> 92.5 </td>
-   <td style="text-align:right;"> -3.83 </td>
-   <td style="text-align:right;"> 0.05 </td>
-   <td style="text-align:right;"> 0.000 </td>
-   <td style="text-align:right;"> 0.92 </td>
-  </tr>
-</tbody>
-</table>
-
-```r
-# comapre with and without crust
-data2model <- Desiccation_long
-colnames(data2model) <- c("Time", "Replicate", "BRC", "Rock", "RWC", "Sample")
-mod_all <- lme(RWC ~ poly(Time, 2, raw = TRUE), random = ~0 + Time|Replicate, data = data2model)
-mod_treatment <- lme(RWC ~ poly(Time, 2, raw = TRUE) * BRC, random = ~0 + Time|Replicate, data = data2model)
-anova(mod_all, mod_treatment)
-```
-
-<div class="kable-table">
-
-<table>
- <thead>
-  <tr>
-   <th style="text-align:left;">   </th>
-   <th style="text-align:left;"> call </th>
-   <th style="text-align:right;"> Model </th>
-   <th style="text-align:right;"> df </th>
-   <th style="text-align:right;"> AIC </th>
-   <th style="text-align:right;"> BIC </th>
-   <th style="text-align:right;"> logLik </th>
-   <th style="text-align:left;"> Test </th>
-   <th style="text-align:right;"> L.Ratio </th>
-   <th style="text-align:right;"> p-value </th>
-  </tr>
- </thead>
-<tbody>
-  <tr>
-   <td style="text-align:left;"> mod_all </td>
-   <td style="text-align:left;"> lme.formula(fixed = RWC ~ poly(Time, 2, raw = TRUE), data = data2model,     random = ~0 + Time | Replicate) </td>
-   <td style="text-align:right;"> 1 </td>
-   <td style="text-align:right;"> 5 </td>
-   <td style="text-align:right;"> 1108.742 </td>
-   <td style="text-align:right;"> 1122.884 </td>
-   <td style="text-align:right;"> -549.3711 </td>
-   <td style="text-align:left;">  </td>
-   <td style="text-align:right;"> NA </td>
-   <td style="text-align:right;"> NA </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> mod_treatment </td>
-   <td style="text-align:left;"> lme.formula(fixed = RWC ~ poly(Time, 2, raw = TRUE) * BRC, data = data2model,     random = ~0 + Time | Replicate) </td>
-   <td style="text-align:right;"> 2 </td>
-   <td style="text-align:right;"> 8 </td>
-   <td style="text-align:right;"> 1024.040 </td>
-   <td style="text-align:right;"> 1046.472 </td>
-   <td style="text-align:right;"> -504.0198 </td>
-   <td style="text-align:left;"> 1 vs 2 </td>
-   <td style="text-align:right;"> 90.70266 </td>
+   <td style="text-align:right;"> -5.0 </td>
+   <td style="text-align:right;"> 0.1 </td>
    <td style="text-align:right;"> 0 </td>
+   <td style="text-align:right;"> 0.9 </td>
   </tr>
 </tbody>
 </table>
 
-</div>
-
 ```r
-# comapre limestone vs dolomite - with crust
-mod_all <- lme(RWC ~ poly(Time, 2, raw = TRUE), random = ~0 + Time|Replicate, data = data2model[data2model$BRC == "Present", ])
-mod_treatment <- lme(RWC ~ poly(Time, 2, raw = TRUE) * Rock, random = ~0 + Time|Replicate, data = data2model[data2model$BRC == "Present", ])
-anova(mod_all, mod_treatment)
-```
-
-<div class="kable-table">
-
-<table>
- <thead>
-  <tr>
-   <th style="text-align:left;">   </th>
-   <th style="text-align:left;"> call </th>
-   <th style="text-align:right;"> Model </th>
-   <th style="text-align:right;"> df </th>
-   <th style="text-align:right;"> AIC </th>
-   <th style="text-align:right;"> BIC </th>
-   <th style="text-align:right;"> logLik </th>
-   <th style="text-align:left;"> Test </th>
-   <th style="text-align:right;"> L.Ratio </th>
-   <th style="text-align:right;"> p-value </th>
-  </tr>
- </thead>
-<tbody>
-  <tr>
-   <td style="text-align:left;"> mod_all </td>
-   <td style="text-align:left;"> lme.formula(fixed = RWC ~ poly(Time, 2, raw = TRUE), data = data2model[data2model$BRC ==     &quot;Present&quot;, ], random = ~0 + Time | Replicate) </td>
-   <td style="text-align:right;"> 1 </td>
-   <td style="text-align:right;"> 5 </td>
-   <td style="text-align:right;"> 409.0114 </td>
-   <td style="text-align:right;"> 419.5658 </td>
-   <td style="text-align:right;"> -199.5057 </td>
-   <td style="text-align:left;">  </td>
-   <td style="text-align:right;"> NA </td>
-   <td style="text-align:right;"> NA </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> mod_treatment </td>
-   <td style="text-align:left;"> lme.formula(fixed = RWC ~ poly(Time, 2, raw = TRUE) * Rock, data = data2model[data2model$BRC ==     &quot;Present&quot;, ], random = ~0 + Time | Replicate) </td>
-   <td style="text-align:right;"> 2 </td>
-   <td style="text-align:right;"> 8 </td>
-   <td style="text-align:right;"> 409.0676 </td>
-   <td style="text-align:right;"> 425.5512 </td>
-   <td style="text-align:right;"> -196.5338 </td>
-   <td style="text-align:left;"> 1 vs 2 </td>
-   <td style="text-align:right;"> 5.943792 </td>
-   <td style="text-align:right;"> 0.1143771 </td>
-  </tr>
-</tbody>
-</table>
-
-</div>
-
-```r
-# comapre limestone vs dolomite - without crust
-mod_all <- lme(RWC ~ poly(Time, 2, raw = TRUE), random = ~0 + Time|Replicate, data = data2model[data2model$BRC == "Removed", ])
-mod_treatment <- lme(RWC ~ poly(Time, 2, raw = TRUE) * Rock, random = ~0 + Time|Replicate, data = data2model[data2model$BRC == "Removed", ])
-anova(mod_all, mod_treatment)
-```
-
-<div class="kable-table">
-
-<table>
- <thead>
-  <tr>
-   <th style="text-align:left;">   </th>
-   <th style="text-align:left;"> call </th>
-   <th style="text-align:right;"> Model </th>
-   <th style="text-align:right;"> df </th>
-   <th style="text-align:right;"> AIC </th>
-   <th style="text-align:right;"> BIC </th>
-   <th style="text-align:right;"> logLik </th>
-   <th style="text-align:left;"> Test </th>
-   <th style="text-align:right;"> L.Ratio </th>
-   <th style="text-align:right;"> p-value </th>
-  </tr>
- </thead>
-<tbody>
-  <tr>
-   <td style="text-align:left;"> mod_all </td>
-   <td style="text-align:left;"> lme.formula(fixed = RWC ~ poly(Time, 2, raw = TRUE), data = data2model[data2model$BRC ==     &quot;Removed&quot;, ], random = ~0 + Time | Replicate) </td>
-   <td style="text-align:right;"> 1 </td>
-   <td style="text-align:right;"> 5 </td>
-   <td style="text-align:right;"> 530.3667 </td>
-   <td style="text-align:right;"> 540.9211 </td>
-   <td style="text-align:right;"> -260.1834 </td>
-   <td style="text-align:left;">  </td>
-   <td style="text-align:right;"> NA </td>
-   <td style="text-align:right;"> NA </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> mod_treatment </td>
-   <td style="text-align:left;"> lme.formula(fixed = RWC ~ poly(Time, 2, raw = TRUE) * Rock, data = data2model[data2model$BRC ==     &quot;Removed&quot;, ], random = ~0 + Time | Replicate) </td>
-   <td style="text-align:right;"> 2 </td>
-   <td style="text-align:right;"> 8 </td>
-   <td style="text-align:right;"> 525.9703 </td>
-   <td style="text-align:right;"> 542.4538 </td>
-   <td style="text-align:right;"> -254.9851 </td>
-   <td style="text-align:left;"> 1 vs 2 </td>
-   <td style="text-align:right;"> 10.39642 </td>
-   <td style="text-align:right;"> 0.0154802 </td>
-  </tr>
-</tbody>
-</table>
-
-</div>
-
-```r
-# comapre with and without crust - limestone
-mod_all <- lme(RWC ~ poly(Time, 2, raw = TRUE), random = ~0 + Time|Replicate, data = data2model[data2model$Rock == "Limestone", ])
-mod_treatment <- lme(RWC ~ poly(Time, 2, raw = TRUE) * BRC, random = ~0 + Time|Replicate, data = data2model[data2model$Rock == "Limestone", ])
-anova(mod_all, mod_treatment)
-```
-
-<div class="kable-table">
-
-<table>
- <thead>
-  <tr>
-   <th style="text-align:left;">   </th>
-   <th style="text-align:left;"> call </th>
-   <th style="text-align:right;"> Model </th>
-   <th style="text-align:right;"> df </th>
-   <th style="text-align:right;"> AIC </th>
-   <th style="text-align:right;"> BIC </th>
-   <th style="text-align:right;"> logLik </th>
-   <th style="text-align:left;"> Test </th>
-   <th style="text-align:right;"> L.Ratio </th>
-   <th style="text-align:right;"> p-value </th>
-  </tr>
- </thead>
-<tbody>
-  <tr>
-   <td style="text-align:left;"> mod_all </td>
-   <td style="text-align:left;"> lme.formula(fixed = RWC ~ poly(Time, 2, raw = TRUE), data = data2model[data2model$Rock ==     &quot;Limestone&quot;, ], random = ~0 + Time | Replicate) </td>
-   <td style="text-align:right;"> 1 </td>
-   <td style="text-align:right;"> 5 </td>
-   <td style="text-align:right;"> 562.9452 </td>
-   <td style="text-align:right;"> 573.4996 </td>
-   <td style="text-align:right;"> -276.4726 </td>
-   <td style="text-align:left;">  </td>
-   <td style="text-align:right;"> NA </td>
-   <td style="text-align:right;"> NA </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> mod_treatment </td>
-   <td style="text-align:left;"> lme.formula(fixed = RWC ~ poly(Time, 2, raw = TRUE) * BRC, data = data2model[data2model$Rock ==     &quot;Limestone&quot;, ], random = ~0 + Time | Replicate) </td>
-   <td style="text-align:right;"> 2 </td>
-   <td style="text-align:right;"> 8 </td>
-   <td style="text-align:right;"> 497.8492 </td>
-   <td style="text-align:right;"> 514.3328 </td>
-   <td style="text-align:right;"> -240.9246 </td>
-   <td style="text-align:left;"> 1 vs 2 </td>
-   <td style="text-align:right;"> 71.09599 </td>
-   <td style="text-align:right;"> 0 </td>
-  </tr>
-</tbody>
-</table>
-
-</div>
-
-```r
-mod_all <- lme(RWC ~ poly(Time, 2, raw = TRUE), random = ~0 + Time|Replicate, data = data2model[data2model$Rock == "Dolomite", ])
-mod_treatment <- lme(RWC ~ poly(Time, 2, raw = TRUE) * BRC, random = ~0 + Time|Replicate, data = data2model[data2model$Rock == "Dolomite", ])
-anova(mod_all, mod_treatment)
-```
-
-<div class="kable-table">
-
-<table>
- <thead>
-  <tr>
-   <th style="text-align:left;">   </th>
-   <th style="text-align:left;"> call </th>
-   <th style="text-align:right;"> Model </th>
-   <th style="text-align:right;"> df </th>
-   <th style="text-align:right;"> AIC </th>
-   <th style="text-align:right;"> BIC </th>
-   <th style="text-align:right;"> logLik </th>
-   <th style="text-align:left;"> Test </th>
-   <th style="text-align:right;"> L.Ratio </th>
-   <th style="text-align:right;"> p-value </th>
-  </tr>
- </thead>
-<tbody>
-  <tr>
-   <td style="text-align:left;"> mod_all </td>
-   <td style="text-align:left;"> lme.formula(fixed = RWC ~ poly(Time, 2, raw = TRUE), data = data2model[data2model$Rock ==     &quot;Dolomite&quot;, ], random = ~0 + Time | Replicate) </td>
-   <td style="text-align:right;"> 1 </td>
-   <td style="text-align:right;"> 5 </td>
-   <td style="text-align:right;"> 555.4483 </td>
-   <td style="text-align:right;"> 566.0027 </td>
-   <td style="text-align:right;"> -272.7241 </td>
-   <td style="text-align:left;">  </td>
-   <td style="text-align:right;"> NA </td>
-   <td style="text-align:right;"> NA </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> mod_treatment </td>
-   <td style="text-align:left;"> lme.formula(fixed = RWC ~ poly(Time, 2, raw = TRUE) * BRC, data = data2model[data2model$Rock ==     &quot;Dolomite&quot;, ], random = ~0 + Time | Replicate) </td>
-   <td style="text-align:right;"> 2 </td>
-   <td style="text-align:right;"> 8 </td>
-   <td style="text-align:right;"> 529.4140 </td>
-   <td style="text-align:right;"> 545.8975 </td>
-   <td style="text-align:right;"> -256.7070 </td>
-   <td style="text-align:left;"> 1 vs 2 </td>
-   <td style="text-align:right;"> 32.03428 </td>
-   <td style="text-align:right;"> 5e-07 </td>
-  </tr>
-</tbody>
-</table>
-
-</div>
-
-```r
-p_desiccation <-
+p_dessication <-
   ggplot(
     Desiccation_long,
     aes(
-      x = `Time (h)`,
-      y = `Residual water content (%)`,
+      `Time (h)`,
+      `Residual water content (%)`,
       colour = Rock,
-      # fill = Rock,
-      shape = BRC,
-      linetype = BRC
+      shape = Crust
     )
   ) +
-  geom_point(size = 2, alpha = 2/3) +
+  geom_point(size = 4, alpha = 2/3) +
   # geom_smooth(method = "lm", se = FALSE, alpha = 1/2, formula = (y ~ sqrt(1/(x+1)))) +
-  geom_smooth(method = "lm", se = TRUE, alpha = 1/3, formula = (y ~ poly(x, 2)), size = 1) +
+  geom_smooth(method = "lm", se = FALSE, alpha = 1/2, formula = (y ~ poly(x, 2)), size = 0.5) +
   # geom_line(alpha = 1/2) +
   scale_y_continuous(limits = c(0, 100), expand = c(0.01, 0.01)) +
   scale_x_continuous(limits = c(0, 50), expand = c(0.01, 0.01)) +
-  # scale_fill_manual(values = pom4) +
   scale_color_manual(values = pom4)
-print(p_desiccation)
+print(p_dessication)
 ```
 
 ![](Rock_weathering_figures/desiccation-1.svg)<!-- -->
