@@ -5,7 +5,7 @@ Arid_rock_weathering
 [![DOI](https://zenodo.org/badge/140607356.svg)](https://zenodo.org/badge/latestdoi/140607356)
 
 
-Data, sequence analysis and ploting scripts for figures included in the paper: [New insights into the role of epilithic biological crust in arid rock weathering]().
+Data, sequence analysis and plotting scripts for figures included in the paper: [New insights into the role of epilithic biological crust in arid rock weathering]().
 
 Abstract
 --------
