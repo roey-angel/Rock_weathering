@@ -2,6 +2,8 @@ Arid_rock_weathering
 ========
 
 [![Twitter Follow](https://img.shields.io/twitter/follow/espadrine.svg?style=social&label=Follow)](https://twitter.com/RoeyAngel)   ![license](https://img.shields.io/github/license/mashape/apistatus.svg?style=flat-square)
+[![DOI](https://zenodo.org/badge/140607356.svg)](https://zenodo.org/badge/latestdoi/140607356)
+
 
 Data, sequence analysis ploting for figures included in the paper: [New insights into the role of epilithic biological crust in arid rock weathering]().
 
