@@ -2,14 +2,16 @@
 title: "Role of BRC in arid rock weathering"
 subtitle: "Data analysis and plotting for publication"
 author: "Roey Angel (<roey.angel@bc.cas.cz>)"
-date: "2018-09-05"
+date: "2019-01-04"
 bibliography: references.bib
 link-citations: yes
+always_allow_html: yes
 output:
   rmarkdown::html_document:
     toc: true
     toc_float: true
     keep_md: true
+    keep_tex: true
     number_sections: false
     highlight: "pygments"
     theme: "flatly"
@@ -1515,146 +1517,146 @@ Richness_Diversity_long2plot %>%
   <tr>
    <td style="text-align:left;"> S obs. </td>
    <td style="text-align:left;"> Arid limestone </td>
-   <td style="text-align:right;"> 181.62 </td>
-   <td style="text-align:right;"> 51.168 </td>
+   <td style="text-align:right;"> 181.614750 </td>
+   <td style="text-align:right;"> 51.1677757 </td>
    <td style="text-align:right;"> 12 </td>
-   <td style="text-align:right;"> 14.771 </td>
+   <td style="text-align:right;"> 14.7708645 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> S obs. </td>
    <td style="text-align:left;"> Arid dust </td>
-   <td style="text-align:right;"> 169.25 </td>
-   <td style="text-align:right;"> 109.015 </td>
+   <td style="text-align:right;"> 169.249500 </td>
+   <td style="text-align:right;"> 109.0153596 </td>
    <td style="text-align:right;"> 2 </td>
-   <td style="text-align:right;"> 77.085 </td>
+   <td style="text-align:right;"> 77.0855000 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> S obs. </td>
    <td style="text-align:left;"> Arid loess soil </td>
-   <td style="text-align:right;"> 416.02 </td>
-   <td style="text-align:right;"> 8.277 </td>
+   <td style="text-align:right;"> 416.015667 </td>
+   <td style="text-align:right;"> 8.2772347 </td>
    <td style="text-align:right;"> 3 </td>
-   <td style="text-align:right;"> 4.779 </td>
+   <td style="text-align:right;"> 4.7788637 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> S obs. </td>
    <td style="text-align:left;"> Hyperarid dolomite </td>
-   <td style="text-align:right;"> 128.76 </td>
-   <td style="text-align:right;"> 31.256 </td>
+   <td style="text-align:right;"> 128.760500 </td>
+   <td style="text-align:right;"> 31.2564362 </td>
    <td style="text-align:right;"> 12 </td>
-   <td style="text-align:right;"> 9.023 </td>
+   <td style="text-align:right;"> 9.0229559 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> S obs. </td>
    <td style="text-align:left;"> Hyperarid dust </td>
-   <td style="text-align:right;"> 107.26 </td>
-   <td style="text-align:right;"> 88.726 </td>
+   <td style="text-align:right;"> 107.261000 </td>
+   <td style="text-align:right;"> 88.7263447 </td>
    <td style="text-align:right;"> 2 </td>
-   <td style="text-align:right;"> 62.739 </td>
+   <td style="text-align:right;"> 62.7390000 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> S obs. </td>
    <td style="text-align:left;"> Hyperarid loess soil </td>
-   <td style="text-align:right;"> 220.41 </td>
-   <td style="text-align:right;"> 54.399 </td>
+   <td style="text-align:right;"> 220.405000 </td>
+   <td style="text-align:right;"> 54.3993291 </td>
    <td style="text-align:right;"> 3 </td>
-   <td style="text-align:right;"> 31.407 </td>
+   <td style="text-align:right;"> 31.4074673 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> ACE </td>
    <td style="text-align:left;"> Arid limestone </td>
-   <td style="text-align:right;"> 353.78 </td>
-   <td style="text-align:right;"> 68.810 </td>
+   <td style="text-align:right;"> 353.781788 </td>
+   <td style="text-align:right;"> 68.8104346 </td>
    <td style="text-align:right;"> 12 </td>
-   <td style="text-align:right;"> 19.864 </td>
+   <td style="text-align:right;"> 19.8638615 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> ACE </td>
    <td style="text-align:left;"> Arid dust </td>
-   <td style="text-align:right;"> 334.65 </td>
-   <td style="text-align:right;"> 143.601 </td>
+   <td style="text-align:right;"> 334.651440 </td>
+   <td style="text-align:right;"> 143.6013458 </td>
    <td style="text-align:right;"> 2 </td>
-   <td style="text-align:right;"> 101.541 </td>
+   <td style="text-align:right;"> 101.5414854 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> ACE </td>
    <td style="text-align:left;"> Arid loess soil </td>
-   <td style="text-align:right;"> 746.50 </td>
-   <td style="text-align:right;"> 20.794 </td>
+   <td style="text-align:right;"> 746.497431 </td>
+   <td style="text-align:right;"> 20.7936696 </td>
    <td style="text-align:right;"> 3 </td>
-   <td style="text-align:right;"> 12.005 </td>
+   <td style="text-align:right;"> 12.0052307 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> ACE </td>
    <td style="text-align:left;"> Hyperarid dolomite </td>
-   <td style="text-align:right;"> 314.74 </td>
-   <td style="text-align:right;"> 100.430 </td>
+   <td style="text-align:right;"> 314.743324 </td>
+   <td style="text-align:right;"> 100.4297817 </td>
    <td style="text-align:right;"> 12 </td>
-   <td style="text-align:right;"> 28.992 </td>
+   <td style="text-align:right;"> 28.9915808 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> ACE </td>
    <td style="text-align:left;"> Hyperarid dust </td>
-   <td style="text-align:right;"> 311.05 </td>
-   <td style="text-align:right;"> 182.765 </td>
+   <td style="text-align:right;"> 311.050796 </td>
+   <td style="text-align:right;"> 182.7650780 </td>
    <td style="text-align:right;"> 2 </td>
-   <td style="text-align:right;"> 129.234 </td>
+   <td style="text-align:right;"> 129.2344260 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> ACE </td>
    <td style="text-align:left;"> Hyperarid loess soil </td>
-   <td style="text-align:right;"> 466.26 </td>
-   <td style="text-align:right;"> 42.579 </td>
+   <td style="text-align:right;"> 466.260376 </td>
+   <td style="text-align:right;"> 42.5794120 </td>
    <td style="text-align:right;"> 3 </td>
-   <td style="text-align:right;"> 24.583 </td>
+   <td style="text-align:right;"> 24.5832350 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> Shannon </td>
    <td style="text-align:left;"> Arid limestone </td>
-   <td style="text-align:right;"> 3.78 </td>
-   <td style="text-align:right;"> 1.094 </td>
+   <td style="text-align:right;"> 3.782559 </td>
+   <td style="text-align:right;"> 1.0939745 </td>
    <td style="text-align:right;"> 12 </td>
-   <td style="text-align:right;"> 0.316 </td>
+   <td style="text-align:right;"> 0.3158033 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> Shannon </td>
    <td style="text-align:left;"> Arid dust </td>
-   <td style="text-align:right;"> 3.00 </td>
-   <td style="text-align:right;"> 1.563 </td>
+   <td style="text-align:right;"> 2.997964 </td>
+   <td style="text-align:right;"> 1.5634435 </td>
    <td style="text-align:right;"> 2 </td>
-   <td style="text-align:right;"> 1.106 </td>
+   <td style="text-align:right;"> 1.1055215 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> Shannon </td>
    <td style="text-align:left;"> Arid loess soil </td>
-   <td style="text-align:right;"> 5.59 </td>
-   <td style="text-align:right;"> 0.032 </td>
+   <td style="text-align:right;"> 5.594932 </td>
+   <td style="text-align:right;"> 0.0319481 </td>
    <td style="text-align:right;"> 3 </td>
-   <td style="text-align:right;"> 0.018 </td>
+   <td style="text-align:right;"> 0.0184452 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> Shannon </td>
    <td style="text-align:left;"> Hyperarid dolomite </td>
-   <td style="text-align:right;"> 3.33 </td>
-   <td style="text-align:right;"> 0.268 </td>
+   <td style="text-align:right;"> 3.328207 </td>
+   <td style="text-align:right;"> 0.2683934 </td>
    <td style="text-align:right;"> 12 </td>
-   <td style="text-align:right;"> 0.077 </td>
+   <td style="text-align:right;"> 0.0774785 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> Shannon </td>
    <td style="text-align:left;"> Hyperarid dust </td>
-   <td style="text-align:right;"> 1.48 </td>
-   <td style="text-align:right;"> 0.889 </td>
+   <td style="text-align:right;"> 1.483307 </td>
+   <td style="text-align:right;"> 0.8891069 </td>
    <td style="text-align:right;"> 2 </td>
-   <td style="text-align:right;"> 0.629 </td>
+   <td style="text-align:right;"> 0.6286935 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> Shannon </td>
    <td style="text-align:left;"> Hyperarid loess soil </td>
-   <td style="text-align:right;"> 3.78 </td>
-   <td style="text-align:right;"> 0.851 </td>
+   <td style="text-align:right;"> 3.779445 </td>
+   <td style="text-align:right;"> 0.8513243 </td>
    <td style="text-align:right;"> 3 </td>
-   <td style="text-align:right;"> 0.492 </td>
+   <td style="text-align:right;"> 0.4915123 </td>
   </tr>
 </tbody>
 </table>
@@ -1688,10 +1690,10 @@ Is there a difference between the two sites. However, since we know that that sa
 ##                  Df SumsOfSqs MeanSqs F.Model      R2 Pr(>F)    
 ## Climate           1    2.5299 2.52988 21.3820 0.21632 0.0001 ***
 ## Source            3    4.7060 1.56865 13.2579 0.40238 0.0001 ***
-## Location          1    0.4870 0.48696  4.1157 0.04164 0.0042 ** 
-## Climate:Source    1    0.4397 0.43972  3.7164 0.03760 0.0039 ** 
-## Climate:Location  1    0.4605 0.46052  3.8922 0.03938 0.0042 ** 
-## Source:Location   1    0.1142 0.11421  0.9653 0.00977 0.4902    
+## Location          1    0.4870 0.48696  4.1157 0.04164 0.0033 ** 
+## Climate:Source    1    0.4397 0.43972  3.7164 0.03760 0.0026 ** 
+## Climate:Location  1    0.4605 0.46052  3.8922 0.03938 0.0056 ** 
+## Source:Location   1    0.1142 0.11421  0.9653 0.00977 0.4812    
 ## Residuals        25    2.9580 0.11832         0.25292           
 ## Total            33   11.6952                 1.00000           
 ## ---
@@ -1721,7 +1723,7 @@ Rock_weathering_filt3_GMPR_Arid <- filter_taxa(Rock_weathering_filt3_GMPR_Arid, 
 ## 
 ##           Df SumsOfSqs MeanSqs F.Model      R2 Pr(>F)    
 ## Source     2    2.3058 1.15288  7.3438 0.47881 0.0001 ***
-## Location   1    0.4691 0.46905  2.9878 0.09740 0.0144 *  
+## Location   1    0.4691 0.46905  2.9878 0.09740 0.0132 *  
 ## Residuals 13    2.0408 0.15699         0.42379           
 ## Total     16    4.8156                 1.00000           
 ## ---
@@ -1751,8 +1753,8 @@ Rock_weathering_filt3_GMPR_Hyperarid <- filter_taxa(Rock_weathering_filt3_GMPR_H
 ## 
 ##                 Df SumsOfSqs MeanSqs F.Model      R2 Pr(>F)    
 ## Source           2    2.8454 1.42270 18.6150 0.65416 0.0001 ***
-## Location         1    0.4729 0.47295  6.1882 0.10873 0.0112 *  
-## Source:Location  1    0.1142 0.11421  1.4944 0.02626 0.2422    
+## Location         1    0.4729 0.47295  6.1882 0.10873 0.0102 *  
+## Source:Location  1    0.1142 0.11421  1.4944 0.02626 0.2334    
 ## Residuals       12    0.9171 0.07643         0.21085           
 ## Total           16    4.3497                 1.00000           
 ## ---
@@ -1780,12 +1782,12 @@ According to this model we see that indeed there's an effect of site on the comm
 ## 
 ## Terms added sequentially (first to last)
 ## 
-##                Df SumsOfSqs MeanSqs F.Model    R2 Pr(>F)    
-## Climate         1      2.53   2.530   17.65 0.216 0.0001 ***
-## Source          3      4.71   1.569   10.94 0.402 0.0001 ***
-## Climate:Source  1      0.45   0.445    3.11 0.038 0.0086 ** 
-## Residuals      28      4.01   0.143         0.343           
-## Total          33     11.70                 1.000           
+##                Df SumsOfSqs MeanSqs F.Model      R2 Pr(>F)    
+## Climate         1    2.5299 2.52988 17.6466 0.21632  1e-04 ***
+## Source          3    4.7060 1.56865 10.9418 0.40238  1e-04 ***
+## Climate:Source  1    0.4452 0.44521  3.1055 0.03807  8e-03 ** 
+## Residuals      28    4.0142 0.14336         0.34323           
+## Total          33   11.6952                 1.00000           
 ## ---
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ```
@@ -1809,10 +1811,10 @@ According to this model we see that indeed there's an effect of site on the comm
 ## 
 ## Terms added sequentially (first to last)
 ## 
-##           Df SumsOfSqs MeanSqs F.Model    R2 Pr(>F)    
-## Source     2      2.31   1.153    6.43 0.479  2e-04 ***
-## Residuals 14      2.51   0.179         0.521           
-## Total     16      4.82                 1.000           
+##           Df SumsOfSqs MeanSqs F.Model      R2 Pr(>F)    
+## Source     2    2.3058 1.15288  6.4307 0.47881  2e-04 ***
+## Residuals 14    2.5099 0.17928         0.52119           
+## Total     16    4.8156                 1.00000           
 ## ---
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ```
@@ -1836,10 +1838,10 @@ According to this model we see that indeed there's an effect of site on the comm
 ## 
 ## Terms added sequentially (first to last)
 ## 
-##           Df SumsOfSqs MeanSqs F.Model    R2 Pr(>F)    
-## Source     2      2.85   1.423    13.2 0.654  1e-04 ***
-## Residuals 14      1.50   0.107         0.346           
-## Total     16      4.35                 1.000           
+##           Df SumsOfSqs MeanSqs F.Model      R2 Pr(>F)    
+## Source     2    2.8454 1.42270  13.241 0.65416  2e-04 ***
+## Residuals 14    1.5043 0.10745         0.34584           
+## Total     16    4.3497                 1.00000           
 ## ---
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ```
@@ -1860,12 +1862,12 @@ print(mod4)
 ## 
 ## Terms added sequentially (first to last)
 ## 
-##                Df SumsOfSqs MeanSqs F.Model    R2 Pr(>F)    
-## Climate         1      2.53   2.530   17.65 0.216 0.0001 ***
-## Source          3      4.71   1.569   10.94 0.402 0.0001 ***
-## Climate:Source  1      0.45   0.445    3.11 0.038 0.0086 ** 
-## Residuals      28      4.01   0.143         0.343           
-## Total          33     11.70                 1.000           
+##                Df SumsOfSqs MeanSqs F.Model      R2 Pr(>F)    
+## Climate         1    2.5299 2.52988 17.6466 0.21632  1e-04 ***
+## Source          3    4.7060 1.56865 10.9418 0.40238  1e-04 ***
+## Climate:Source  1    0.4452 0.44521  3.1055 0.03807  8e-03 ** 
+## Residuals      28    4.0142 0.14336         0.34323           
+## Total          33   11.6952                 1.00000           
 ## ---
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ```
@@ -1882,38 +1884,38 @@ print(mod4_pairwise)
 ```
 
 ```
-##                                         pairs total.DF F.Model    R2 p.value p.adjusted
-## 1           Arid dust vs Hyperarid loess soil        4    4.80 0.616  0.1000     0.1154
-## 2                 Arid dust vs Hyperarid dust        3    2.99 0.599  0.3333     0.3333
-## 3                 Arid dust vs Arid limestone       13    4.61 0.277  0.0094     0.0223
-## 4             Arid dust vs Hyperarid dolomite       13    6.59 0.355  0.0119     0.0223
-## 5                Arid dust vs Arid loess soil        4    5.36 0.641  0.1000     0.1154
-## 6      Hyperarid loess soil vs Hyperarid dust        4   10.87 0.784  0.2000     0.2143
-## 7      Hyperarid loess soil vs Arid limestone       14    5.59 0.301  0.0078     0.0223
-## 8  Hyperarid loess soil vs Hyperarid dolomite       14   16.02 0.552  0.0028     0.0105
-## 9     Hyperarid loess soil vs Arid loess soil        5   95.51 0.960  0.1000     0.1154
-## 10           Hyperarid dust vs Arid limestone       13    5.34 0.308  0.0327     0.0545
-## 11       Hyperarid dust vs Hyperarid dolomite       13   11.62 0.492  0.0118     0.0223
-## 12          Hyperarid dust vs Arid loess soil        4  205.85 0.986  0.1000     0.1154
-## 13       Arid limestone vs Hyperarid dolomite       23   21.90 0.499  0.0001     0.0015
-## 14          Arid limestone vs Arid loess soil       14    9.11 0.412  0.0018     0.0090
-## 15      Hyperarid dolomite vs Arid loess soil       14   16.84 0.564  0.0017     0.0090
-##    sig
-## 1     
-## 2     
-## 3    .
-## 4    .
-## 5     
-## 6     
-## 7    .
-## 8    .
-## 9     
-## 10    
-## 11   .
-## 12    
-## 13   *
-## 14   *
-## 15   *
+##                                         pairs total.DF    F.Model        R2   p.value
+## 1           Arid dust vs Hyperarid loess soil        4   4.803200 0.6155424 0.1000000
+## 2                 Arid dust vs Hyperarid dust        3   2.992098 0.5993669 0.3333333
+## 3                 Arid dust vs Arid limestone       13   4.606432 0.2773884 0.0117000
+## 4             Arid dust vs Hyperarid dolomite       13   6.594183 0.3546369 0.0119000
+## 5                Arid dust vs Arid loess soil        4   5.363663 0.6413055 0.1000000
+## 6      Hyperarid loess soil vs Hyperarid dust        4  10.866238 0.7836472 0.2000000
+## 7      Hyperarid loess soil vs Arid limestone       14   5.593760 0.3008407 0.0070000
+## 8  Hyperarid loess soil vs Hyperarid dolomite       14  16.022459 0.5520710 0.0026000
+## 9     Hyperarid loess soil vs Arid loess soil        5  95.510242 0.9598031 0.1000000
+## 10           Hyperarid dust vs Arid limestone       13   5.343419 0.3080949 0.0313000
+## 11       Hyperarid dust vs Hyperarid dolomite       13  11.619149 0.4919377 0.0094000
+## 12          Hyperarid dust vs Arid loess soil        4 205.847549 0.9856355 0.1000000
+## 13       Arid limestone vs Hyperarid dolomite       23  21.900583 0.4988677 0.0001000
+## 14          Arid limestone vs Arid loess soil       14   9.112582 0.4120994 0.0018000
+## 15      Hyperarid dolomite vs Arid loess soil       14  16.841743 0.5643686 0.0032000
+##    p.adjusted sig
+## 1  0.11538462    
+## 2  0.33333333    
+## 3  0.02231250   .
+## 4  0.02231250   .
+## 5  0.11538462    
+## 6  0.21428571    
+## 7  0.02100000   .
+## 8  0.01200000   .
+## 9  0.11538462    
+## 10 0.05216667    
+## 11 0.02231250   .
+## 12 0.11538462    
+## 13 0.00150000   *
+## 14 0.01200000   .
+## 15 0.01200000   .
 ```
 
 ```r
@@ -1926,230 +1928,286 @@ simper(otu_table(Rock_weathering_filt3_GMPR), sample_data(Rock_weathering_filt3_
 ## cumulative contributions of most influential species:
 ## 
 ## $`Arid dust_Hyperarid loess soil`
-##    OTU6   OTU65  OTU838   OTU90  OTU596   OTU11  OTU187   OTU93  OTU746  OTU167  OTU711 
-##   0.222   0.368   0.406   0.430   0.453   0.469   0.484   0.496   0.509   0.521   0.532 
-##  OTU121  OTU144   OTU99  OTU194  OTU105  OTU356  OTU340  OTU115  OTU640   OTU55  OTU298 
-##   0.543   0.553   0.562   0.571   0.579   0.586   0.593   0.599   0.606   0.612   0.619 
-##  OTU715   OTU88  OTU197   OTU48  OTU221  OTU301 OTU1047  OTU322   OTU16  OTU586   OTU46 
-##   0.625   0.631   0.638   0.643   0.649   0.654   0.659   0.665   0.669   0.674   0.678 
-##  OTU172  OTU386   OTU67  OTU333  OTU854  OTU883 
-##   0.683   0.687   0.691   0.695   0.698   0.702 
+##      OTU6     OTU65    OTU838     OTU90    OTU596     OTU11    OTU187     OTU93    OTU746 
+## 0.2223516 0.3677866 0.4056901 0.4304991 0.4528999 0.4693262 0.4837166 0.4963321 0.5089143 
+##    OTU167    OTU711    OTU121    OTU144     OTU99    OTU194    OTU105    OTU356    OTU340 
+## 0.5206772 0.5323162 0.5428037 0.5526841 0.5624404 0.5714645 0.5787230 0.5859611 0.5926902 
+##    OTU115    OTU640     OTU55    OTU298    OTU715     OTU88    OTU197     OTU48    OTU221 
+## 0.5992910 0.6058761 0.6123625 0.6187386 0.6250711 0.6313974 0.6376038 0.6433882 0.6488153 
+##    OTU301   OTU1047    OTU322     OTU16    OTU586     OTU46    OTU172    OTU386     OTU67 
+## 0.6541319 0.6593526 0.6645414 0.6694651 0.6739228 0.6782800 0.6825173 0.6866930 0.6908583 
+##    OTU333    OTU854    OTU883 
+## 0.6945572 0.6981826 0.7016897 
 ## 
 ## $`Arid dust_Hyperarid dust`
-##   OTU6  OTU65 OTU838  OTU55 
-##  0.492  0.652  0.697  0.730 
+##      OTU6     OTU65    OTU838     OTU55 
+## 0.4922822 0.6517818 0.6971512 0.7299602 
 ## 
 ## $`Arid dust_Arid limestone`
-##    OTU6   OTU65   OTU20   OTU40  OTU838  OTU225  OTU422  OTU596   OTU73   OTU46   OTU11 
-##   0.112   0.222   0.292   0.357   0.385   0.402   0.419   0.435   0.451   0.464   0.477 
-##  OTU388  OTU119   OTU29   OTU18   OTU34  OTU746  OTU711   OTU16  OTU235  OTU854  OTU174 
-##   0.488   0.499   0.509   0.519   0.529   0.538   0.547   0.556   0.564   0.573   0.581 
-##  OTU299  OTU194   OTU68  OTU545   OTU37  OTU925   OTU41  OTU115  OTU140  OTU356   OTU60 
-##   0.589   0.596   0.603   0.609   0.616   0.623   0.629   0.635   0.640   0.646   0.651 
-##  OTU137  OTU197  OTU166  OTU605   OTU69   OTU55 OTU1089   OTU27  OTU218   OTU48   OTU45 
-##   0.656   0.661   0.666   0.671   0.676   0.681   0.685   0.690   0.694   0.698   0.702 
+##      OTU6     OTU65     OTU20     OTU40    OTU838    OTU225    OTU422    OTU596     OTU73 
+## 0.1123216 0.2223095 0.2918201 0.3566264 0.3846318 0.4019503 0.4188998 0.4354418 0.4510851 
+##     OTU46     OTU11    OTU388    OTU119     OTU29     OTU18     OTU34    OTU746    OTU711 
+## 0.4642743 0.4766768 0.4880677 0.4986328 0.5091612 0.5193871 0.5289518 0.5383129 0.5469937 
+##     OTU16    OTU235    OTU854    OTU174    OTU299    OTU194     OTU68    OTU545     OTU37 
+## 0.5556579 0.5642893 0.5727110 0.5809073 0.5890471 0.5960083 0.6028022 0.6094612 0.6160857 
+##    OTU925     OTU41    OTU115    OTU140    OTU356     OTU60    OTU137    OTU197    OTU166 
+## 0.6225697 0.6287094 0.6345215 0.6403150 0.6457386 0.6510360 0.6562074 0.6613174 0.6663109 
+##    OTU605     OTU69     OTU55   OTU1089     OTU27    OTU218     OTU48     OTU45 
+## 0.6712870 0.6762240 0.6810537 0.6854239 0.6895759 0.6936273 0.6976757 0.7016868 
 ## 
 ## $`Arid dust_Hyperarid dolomite`
-##   OTU1   OTU2   OTU3   OTU7   OTU5  OTU65   OTU9  OTU18   OTU8  OTU17  OTU41  OTU16 
-##  0.153  0.236  0.317  0.382  0.415  0.445  0.470  0.495  0.517  0.538  0.559  0.576 
-##  OTU11 OTU936  OTU20  OTU28  OTU12  OTU10   OTU6  OTU15  OTU33  OTU14 
-##  0.593  0.609  0.624  0.638  0.653  0.666  0.677  0.687  0.696  0.706 
+##      OTU1      OTU2      OTU3      OTU7      OTU5     OTU65      OTU9     OTU18      OTU8 
+## 0.1527495 0.2363471 0.3165709 0.3820169 0.4147143 0.4454892 0.4704565 0.4947935 0.5170144 
+##     OTU17     OTU41     OTU16     OTU11    OTU936     OTU20     OTU28     OTU12     OTU10 
+## 0.5378908 0.5586779 0.5762334 0.5933941 0.6090247 0.6239327 0.6383626 0.6526239 0.6663706 
+##      OTU6     OTU15     OTU33     OTU14 
+## 0.6767124 0.6869395 0.6964878 0.7058854 
 ## 
 ## $`Arid dust_Arid loess soil`
-##   OTU65   OTU25   OTU88   OTU62   OTU11  OTU838   OTU68  OTU596  OTU177   OTU78  OTU133 
-##  0.0760  0.0986  0.1205  0.1406  0.1597  0.1783  0.1907  0.2015  0.2119  0.2224  0.2320 
-##  OTU144   OTU46  OTU115   OTU67   OTU16  OTU156  OTU388  OTU116  OTU137  OTU197  OTU100 
-##  0.2412  0.2501  0.2587  0.2669  0.2742  0.2815  0.2885  0.2950  0.3013  0.3076  0.3139 
-##   OTU91  OTU687  OTU746  OTU711   OTU73  OTU412  OTU194  OTU422  OTU160  OTU218  OTU152 
-##  0.3198  0.3256  0.3312  0.3367  0.3423  0.3473  0.3521  0.3569  0.3615  0.3661  0.3705 
-##   OTU53  OTU131  OTU135  OTU356  OTU125  OTU163   OTU37  OTU556  OTU311  OTU130  OTU214 
-##  0.3749  0.3789  0.3827  0.3866  0.3904  0.3940  0.3975  0.4011  0.4046  0.4081  0.4116 
-##  OTU227  OTU240  OTU341  OTU233  OTU854  OTU648  OTU101   OTU92   OTU55  OTU716  OTU220 
-##  0.4150  0.4184  0.4217  0.4250  0.4283  0.4315  0.4348  0.4380  0.4412  0.4443  0.4474 
-##  OTU139  OTU140  OTU278   OTU20  OTU103   OTU60  OTU253  OTU171 OTU1235  OTU107  OTU365 
-##  0.4505  0.4536  0.4565  0.4594  0.4623  0.4651  0.4679  0.4706  0.4733  0.4760  0.4787 
-##  OTU294  OTU301  OTU647  OTU206  OTU136  OTU231  OTU479 OTU1050 OTU1288   OTU82  OTU248 
-##  0.4813  0.4839  0.4864  0.4890  0.4916  0.4941  0.4966  0.4991  0.5015  0.5039  0.5064 
-##  OTU360  OTU181  OTU434  OTU945  OTU638 OTU1102  OTU315 OTU1184  OTU457   OTU44  OTU491 
-##  0.5087  0.5111  0.5134  0.5157  0.5180  0.5203  0.5226  0.5249  0.5271  0.5294  0.5316 
-##  OTU472  OTU938  OTU184  OTU471  OTU182  OTU538  OTU352  OTU169  OTU586  OTU191  OTU190 
-##  0.5338  0.5360  0.5382  0.5404  0.5425  0.5446  0.5467  0.5488  0.5509  0.5530  0.5551 
-##  OTU751  OTU304  OTU251  OTU164  OTU667   OTU69  OTU619  OTU170  OTU154  OTU992 OTU1013 
-##  0.5571  0.5592  0.5612  0.5632  0.5652  0.5672  0.5692  0.5712  0.5731  0.5751  0.5771 
-##  OTU707  OTU302  OTU725  OTU430 OTU1116  OTU132  OTU466  OTU364  OTU489  OTU166   OTU33 
-##  0.5790  0.5809  0.5828  0.5847  0.5866  0.5885  0.5904  0.5922  0.5941  0.5959  0.5978 
-## OTU1218  OTU421 OTU1319  OTU545  OTU309  OTU456  OTU562  OTU635  OTU468  OTU610  OTU347 
-##  0.5996  0.6015  0.6033  0.6051  0.6068  0.6086  0.6103  0.6121  0.6138  0.6155  0.6171 
-##  OTU833  OTU582   OTU41  OTU333    OTU6   OTU27   OTU86  OTU451  OTU162  OTU561  OTU439 
-##  0.6188  0.6205  0.6222  0.6238  0.6255  0.6271  0.6287  0.6302  0.6318  0.6334  0.6349 
-##  OTU579  OTU255  OTU653  OTU279  OTU368  OTU783   OTU93  OTU298  OTU323 OTU1024 OTU1005 
-##  0.6364  0.6380  0.6395  0.6410  0.6425  0.6440  0.6455  0.6470  0.6484  0.6499  0.6513 
-##  OTU389  OTU799  OTU348  OTU543  OTU524  OTU258  OTU953  OTU929  OTU174 OTU1100  OTU999 
-##  0.6528  0.6542  0.6556  0.6570  0.6584  0.6598  0.6612  0.6625  0.6639  0.6652  0.6665 
-##  OTU705  OTU199 OTU1049 OTU1242  OTU449  OTU303  OTU232  OTU765  OTU499   OTU10 OTU1011 
-##  0.6678  0.6691  0.6704  0.6717  0.6730  0.6742  0.6754  0.6767  0.6779  0.6791  0.6803 
-##  OTU595  OTU697  OTU548  OTU353  OTU310   OTU28 OTU1170  OTU404  OTU141  OTU277  OTU469 
-##  0.6815  0.6827  0.6839  0.6851  0.6863  0.6875  0.6887  0.6898  0.6910  0.6922  0.6933 
-##  OTU883  OTU557   OTU95   OTU29 OTU1108  OTU641 
-##  0.6944  0.6956  0.6967  0.6978  0.6990  0.7001 
+##      OTU65      OTU25      OTU88      OTU62      OTU11     OTU838      OTU68     OTU596 
+## 0.07600412 0.09862665 0.12048117 0.14055785 0.15967703 0.17826462 0.19067874 0.20145631 
+##     OTU177      OTU78     OTU133     OTU144      OTU46     OTU115      OTU67      OTU16 
+## 0.21192993 0.22239646 0.23195007 0.24115456 0.25014254 0.25870758 0.26685638 0.27420872 
+##     OTU156     OTU388     OTU116     OTU137     OTU197     OTU100      OTU91     OTU687 
+## 0.28151396 0.28845987 0.29497148 0.30133776 0.30763580 0.31387308 0.31978477 0.32560209 
+##     OTU746     OTU711      OTU73     OTU412     OTU194     OTU422     OTU160     OTU218 
+## 0.33120586 0.33673375 0.34225822 0.34731488 0.35212805 0.35690940 0.36151216 0.36607842 
+##     OTU152      OTU53     OTU131     OTU135     OTU356     OTU125     OTU163      OTU37 
+## 0.37046694 0.37485116 0.37885223 0.38274887 0.38655530 0.39035864 0.39395340 0.39753331 
+##     OTU556     OTU311     OTU130     OTU214     OTU227     OTU240     OTU341     OTU233 
+## 0.40109574 0.40463803 0.40814028 0.41156987 0.41498306 0.41836142 0.42169721 0.42499571 
+##     OTU854     OTU648     OTU101      OTU92      OTU55     OTU716     OTU220     OTU139 
+## 0.42827522 0.43153536 0.43476556 0.43797394 0.44115558 0.44428602 0.44740514 0.45049071 
+##     OTU140     OTU278      OTU20     OTU103      OTU60     OTU253     OTU171    OTU1235 
+## 0.45356227 0.45649184 0.45941847 0.46234298 0.46512485 0.46790496 0.47063934 0.47334811 
+##     OTU107     OTU365     OTU294     OTU301     OTU647     OTU206     OTU136     OTU231 
+## 0.47601073 0.47866935 0.48128416 0.48386623 0.48644557 0.48901761 0.49157714 0.49411399 
+##     OTU479    OTU1050    OTU1288      OTU82     OTU248     OTU360     OTU181     OTU434 
+## 0.49659608 0.49905562 0.50151265 0.50394266 0.50636675 0.50871712 0.51105399 0.51337992 
+##     OTU945     OTU638    OTU1102     OTU315    OTU1184     OTU457      OTU44     OTU491 
+## 0.51570002 0.51801894 0.52031981 0.52260630 0.52487989 0.52712302 0.52935591 0.53158523 
+##     OTU472     OTU938     OTU184     OTU471     OTU182     OTU538     OTU352     OTU169 
+## 0.53380813 0.53602510 0.53823459 0.54042578 0.54253898 0.54464035 0.54673555 0.54882651 
+##     OTU586     OTU191     OTU190     OTU751     OTU304     OTU251     OTU164     OTU667 
+## 0.55091733 0.55300683 0.55508810 0.55712859 0.55915785 0.56117530 0.56318056 0.56518015 
+##      OTU69     OTU619     OTU170     OTU154     OTU992    OTU1013     OTU707     OTU302 
+## 0.56717714 0.56916832 0.57115385 0.57313482 0.57509789 0.57705219 0.57900145 0.58092857 
+##     OTU725     OTU430    OTU1116     OTU132     OTU466     OTU364     OTU489     OTU166 
+## 0.58282302 0.58471488 0.58660087 0.58848567 0.59036511 0.59223482 0.59409227 0.59593839 
+##      OTU33    OTU1218     OTU421    OTU1319     OTU545     OTU309     OTU456     OTU562 
+## 0.59778312 0.59962319 0.60146290 0.60326476 0.60505799 0.60683960 0.60859329 0.61034045 
+##     OTU635     OTU468     OTU610     OTU347     OTU833     OTU582      OTU41     OTU333 
+## 0.61206287 0.61376517 0.61546266 0.61714945 0.61882254 0.62049477 0.62216179 0.62381474 
+##       OTU6      OTU27      OTU86     OTU451     OTU162     OTU561     OTU439     OTU579 
+## 0.62545802 0.62705709 0.62865264 0.63024097 0.63181778 0.63338508 0.63491568 0.63644400 
+##     OTU255     OTU653     OTU279     OTU368     OTU783      OTU93     OTU298     OTU323 
+## 0.63797113 0.63949107 0.64100660 0.64251744 0.64400822 0.64549236 0.64697241 0.64843615 
+##    OTU1024    OTU1005     OTU389     OTU799     OTU348     OTU543     OTU524     OTU258 
+## 0.64988797 0.65133108 0.65277123 0.65418616 0.65559921 0.65699846 0.65838960 0.65977752 
+##     OTU953     OTU929     OTU174    OTU1100     OTU999     OTU705     OTU199    OTU1049 
+## 0.66116274 0.66251874 0.66386908 0.66520644 0.66653398 0.66783135 0.66912435 0.67041127 
+##    OTU1242     OTU449     OTU303     OTU232     OTU765     OTU499      OTU10    OTU1011 
+## 0.67169466 0.67295718 0.67420516 0.67544956 0.67668808 0.67792553 0.67913601 0.68034452 
+##     OTU595     OTU697     OTU548     OTU353     OTU310      OTU28    OTU1170     OTU404 
+## 0.68154983 0.68274660 0.68394090 0.68513515 0.68632833 0.68750914 0.68868372 0.68984795 
+##     OTU141     OTU277     OTU469     OTU883     OTU557      OTU95      OTU29    OTU1108 
+## 0.69101177 0.69216462 0.69330654 0.69444839 0.69558676 0.69671804 0.69784612 0.69896224 
+##     OTU641 
+## 0.70007721 
 ## 
 ## $`Hyperarid loess soil_Hyperarid dust`
-##    OTU6   OTU55   OTU90   OTU11   OTU94  OTU187   OTU93  OTU167  OTU121   OTU99  OTU144 
-##   0.455   0.493   0.518   0.536   0.551   0.565   0.578   0.589   0.600   0.610   0.619 
-##    OTU9  OTU105  OTU340  OTU298  OTU115  OTU640  OTU715   OTU88  OTU197  OTU221  OTU322 
-##   0.627   0.634   0.641   0.648   0.654   0.661   0.667   0.674   0.680   0.685   0.690 
-## OTU1047   OTU16  OTU484 
-##   0.695   0.700   0.704 
+##      OTU6     OTU55     OTU90     OTU11     OTU94    OTU187     OTU93    OTU167    OTU121 
+## 0.4547139 0.4932104 0.5179318 0.5361943 0.5506355 0.5649686 0.5775294 0.5893159 0.5997621 
+##     OTU99    OTU144      OTU9    OTU105    OTU340    OTU298    OTU115    OTU640    OTU715 
+## 0.6095933 0.6193616 0.6270627 0.6343667 0.6410613 0.6476927 0.6542631 0.6608232 0.6672825 
+##     OTU88    OTU197    OTU221    OTU322   OTU1047     OTU16    OTU484 
+## 0.6735780 0.6797532 0.6851539 0.6903247 0.6951534 0.6999152 0.7044646 
 ## 
 ## $`Hyperarid loess soil_Arid limestone`
-##    OTU6   OTU20   OTU40   OTU90  OTU225   OTU11   OTU73  OTU422  OTU119   OTU29  OTU187 
-##   0.207   0.274   0.338   0.356   0.373   0.389   0.403   0.418   0.429   0.439   0.449 
-##   OTU46  OTU388   OTU18  OTU167   OTU34   OTU93  OTU299  OTU235  OTU121  OTU174   OTU99 
-##   0.459   0.469   0.478   0.487   0.495   0.504   0.512   0.520   0.527   0.535   0.541 
-##  OTU925  OTU854  OTU545  OTU144   OTU37  OTU197  OTU140   OTU68   OTU16  OTU340  OTU298 
-##   0.548   0.554   0.560   0.566   0.572   0.578   0.584   0.589   0.594   0.599   0.604 
-##  OTU605  OTU640   OTU69  OTU715  OTU105   OTU41  OTU137   OTU88   OTU27 OTU1089   OTU60 
-##   0.609   0.614   0.618   0.623   0.628   0.632   0.637   0.641   0.645   0.649   0.653 
-##   OTU45  OTU221  OTU166  OTU218  OTU261  OTU163   OTU81  OTU115  OTU322  OTU259 OTU1047 
-##   0.658   0.662   0.665   0.669   0.673   0.677   0.680   0.684   0.687   0.690   0.693 
-##  OTU172  OTU939   OTU67 
-##   0.696   0.699   0.702 
+##      OTU6     OTU20     OTU40     OTU90    OTU225     OTU11     OTU73    OTU422    OTU119 
+## 0.2070926 0.2740292 0.3382045 0.3562460 0.3732290 0.3885619 0.4034598 0.4178979 0.4286859 
+##     OTU29    OTU187     OTU46    OTU388     OTU18    OTU167     OTU34     OTU93    OTU299 
+## 0.4392449 0.4494930 0.4594962 0.4689023 0.4780078 0.4868025 0.4953853 0.5038895 0.5120122 
+##    OTU235    OTU121    OTU174     OTU99    OTU925    OTU854    OTU545    OTU144     OTU37 
+## 0.5198446 0.5274965 0.5347188 0.5412268 0.5476305 0.5539799 0.5600864 0.5661491 0.5721572 
+##    OTU197    OTU140     OTU68     OTU16    OTU340    OTU298    OTU605    OTU640     OTU69 
+## 0.5779404 0.5835652 0.5888852 0.5940274 0.5989837 0.6039133 0.6088284 0.6136372 0.6183414 
+##    OTU715    OTU105     OTU41    OTU137     OTU88     OTU27   OTU1089     OTU60     OTU45 
+## 0.6230415 0.6277280 0.6323451 0.6367965 0.6411466 0.6453214 0.6494391 0.6534993 0.6575361 
+##    OTU221    OTU166    OTU218    OTU261    OTU163     OTU81    OTU115    OTU322    OTU259 
+## 0.6615384 0.6654843 0.6693905 0.6731251 0.6767907 0.6804246 0.6836906 0.6868900 0.6900614 
+##   OTU1047    OTU172    OTU939     OTU67 
+## 0.6931820 0.6962866 0.6993799 0.7024051 
 ## 
 ## $`Hyperarid loess soil_Hyperarid dolomite`
-##   OTU1   OTU2   OTU3   OTU7   OTU6   OTU5   OTU9  OTU18   OTU8  OTU17  OTU41  OTU16 
-##  0.150  0.232  0.312  0.374  0.421  0.454  0.478  0.501  0.523  0.544  0.564  0.580 
-## OTU936  OTU11  OTU28  OTU12  OTU20  OTU10  OTU15  OTU14  OTU13  OTU45 
-##  0.595  0.610  0.625  0.639  0.653  0.666  0.676  0.686  0.694  0.703 
+##      OTU1      OTU2      OTU3      OTU7      OTU6      OTU5      OTU9     OTU18      OTU8 
+## 0.1495788 0.2321174 0.3117152 0.3744107 0.4214125 0.4537922 0.4782802 0.5014206 0.5233406 
+##     OTU17     OTU41     OTU16    OTU936     OTU11     OTU28     OTU12     OTU20     OTU10 
+## 0.5440341 0.5638310 0.5798466 0.5953299 0.6102815 0.6246998 0.6387122 0.6525475 0.6660844 
+##     OTU15     OTU14     OTU13     OTU45 
+## 0.6762133 0.6855007 0.6942967 0.7030461 
 ## 
 ## $`Hyperarid loess soil_Arid loess soil`
-##    OTU6   OTU25   OTU62   OTU88   OTU90   OTU11   OTU68  OTU177   OTU78  OTU133  OTU156 
-##   0.117   0.141   0.161   0.180   0.192   0.204   0.216   0.226   0.237   0.247   0.254 
-##  OTU187   OTU46  OTU116   OTU67  OTU137  OTU100  OTU687  OTU388  OTU115  OTU121   OTU73 
-##   0.262   0.269   0.275   0.281   0.287   0.293   0.299   0.305   0.311   0.316   0.321 
-##  OTU412   OTU91  OTU167   OTU93   OTU16   OTU99  OTU160  OTU218  OTU144  OTU131  OTU135 
-##   0.327   0.332   0.337   0.342   0.347   0.352   0.357   0.361   0.366   0.370   0.374 
-##   OTU53  OTU556  OTU152  OTU130  OTU125  OTU227  OTU340  OTU214  OTU233  OTU640  OTU341 
-##   0.378   0.381   0.385   0.389   0.392   0.396   0.399   0.403   0.406   0.410   0.413 
-##  OTU311  OTU648  OTU422  OTU716  OTU105  OTU197  OTU163  OTU140   OTU44   OTU37   OTU92 
-##   0.416   0.420   0.423   0.426   0.430   0.433   0.436   0.439   0.442   0.445   0.448 
-##  OTU240  OTU715  OTU139  OTU253  OTU221  OTU298  OTU101  OTU171 OTU1235  OTU107  OTU365 
-##   0.451   0.454   0.457   0.460   0.463   0.466   0.469   0.472   0.474   0.477   0.480 
-##  OTU491  OTU103  OTU647  OTU479 OTU1047 OTU1288  OTU278  OTU322  OTU136 OTU1102 OTU1050 
-##   0.482   0.485   0.488   0.490   0.493   0.495   0.498   0.500   0.503   0.506   0.508 
-##  OTU206  OTU360  OTU220  OTU248  OTU231   OTU48  OTU638  OTU945  OTU315  OTU294  OTU181 
-##   0.510   0.513   0.515   0.518   0.520   0.522   0.525   0.527   0.529   0.531   0.534 
-##  OTU190  OTU471  OTU172  OTU169  OTU457   OTU82  OTU191 OTU1013  OTU472  OTU182  OTU251 
-##   0.536   0.538   0.540   0.542   0.545   0.547   0.549   0.551   0.553   0.555   0.557 
-##  OTU619  OTU184  OTU352  OTU938  OTU154  OTU707  OTU304  OTU538  OTU386 OTU1116  OTU582 
-##   0.559   0.561   0.564   0.566   0.568   0.570   0.572   0.574   0.576   0.578   0.580 
-##  OTU751  OTU434   OTU20 OTU1319 OTU1218  OTU992  OTU309  OTU456  OTU364  OTU302   OTU69 
-##   0.582   0.583   0.585   0.587   0.589   0.591   0.593   0.595   0.597   0.598   0.600 
-##  OTU468  OTU725   OTU86  OTU466  OTU562 OTU1184  OTU347  OTU430  OTU164   OTU60  OTU451 
-##   0.602   0.604   0.605   0.607   0.609   0.611   0.612   0.614   0.616   0.617   0.619 
-##  OTU635  OTU489  OTU854  OTU610  OTU132  OTU439  OTU255 OTU1046  OTU421  OTU170  OTU543 
-##   0.621   0.622   0.624   0.625   0.627   0.629   0.630   0.632   0.633   0.635   0.636 
-##  OTU579 OTU1024   OTU27  OTU323  OTU929  OTU368  OTU953  OTU799  OTU545  OTU258 OTU1282 
-##   0.638   0.639   0.641   0.642   0.644   0.645   0.647   0.648   0.650   0.651   0.652 
-##  OTU267   OTU28 OTU1100  OTU277  OTU279  OTU667  OTU199  OTU705  OTU999  OTU232   OTU95 
-##   0.654   0.655   0.657   0.658   0.659   0.661   0.662   0.663   0.665   0.666   0.667 
-##  OTU303  OTU836 OTU1242  OTU653    OTU3  OTU141  OTU697  OTU273  OTU499   OTU29 OTU1011 
-##   0.669   0.670   0.671   0.672   0.674   0.675   0.676   0.677   0.679   0.680   0.681 
-##  OTU389  OTU162 OTU1108  OTU166  OTU595  OTU524  OTU185  OTU765   OTU41  OTU404  OTU641 
-##   0.682   0.683   0.685   0.686   0.687   0.688   0.689   0.691   0.692   0.693   0.694 
-##  OTU557 OTU1005 OTU1049   OTU10 OTU1101  OTU449 
-##   0.695   0.696   0.698   0.699   0.700   0.701 
+##      OTU6     OTU25     OTU62     OTU88     OTU90     OTU11     OTU68    OTU177     OTU78 
+## 0.1171964 0.1409598 0.1605516 0.1798885 0.1922238 0.2043007 0.2156943 0.2264171 0.2370192 
+##    OTU133    OTU156    OTU187     OTU46    OTU116     OTU67    OTU137    OTU100    OTU687 
+## 0.2468319 0.2543986 0.2615122 0.2685441 0.2751451 0.2813878 0.2874536 0.2934299 0.2993293 
+##    OTU388    OTU115    OTU121     OTU73    OTU412     OTU91    OTU167     OTU93     OTU16 
+## 0.3051050 0.3105215 0.3159249 0.3213181 0.3265045 0.3316752 0.3368401 0.3418967 0.3469359 
+##     OTU99    OTU160    OTU218    OTU144    OTU131    OTU135     OTU53    OTU556    OTU152 
+## 0.3517643 0.3565360 0.3611535 0.3655646 0.3697266 0.3738519 0.3776564 0.3814527 0.3852354 
+##    OTU130    OTU125    OTU227    OTU340    OTU214    OTU233    OTU640    OTU341    OTU311 
+## 0.3888725 0.3924354 0.3958973 0.3993476 0.4027687 0.4061872 0.4095931 0.4129866 0.4163480 
+##    OTU648    OTU422    OTU716    OTU105    OTU197    OTU163    OTU140     OTU44     OTU37 
+## 0.4196998 0.4230194 0.4263048 0.4295726 0.4328230 0.4359927 0.4391577 0.4422934 0.4454224 
+##     OTU92    OTU240    OTU715    OTU139    OTU253    OTU221    OTU298    OTU101    OTU171 
+## 0.4484404 0.4514561 0.4544639 0.4573782 0.4602606 0.4631238 0.4659602 0.4687870 0.4716058 
+##   OTU1235    OTU107    OTU365    OTU491    OTU103    OTU647    OTU479   OTU1047   OTU1288 
+## 0.4744165 0.4771309 0.4797889 0.4824360 0.4850823 0.4876817 0.4902569 0.4928293 0.4953810 
+##    OTU278    OTU322    OTU136   OTU1102   OTU1050    OTU206    OTU360    OTU220    OTU248 
+## 0.4979283 0.5004747 0.5030146 0.5055356 0.5080079 0.5104620 0.5128571 0.5152382 0.5176119 
+##    OTU231     OTU48    OTU638    OTU945    OTU315    OTU294    OTU181    OTU190    OTU471 
+## 0.5199597 0.5222842 0.5245825 0.5268765 0.5291585 0.5314373 0.5337155 0.5359310 0.5381211 
+##    OTU172    OTU169    OTU457     OTU82    OTU191   OTU1013    OTU472    OTU182    OTU251 
+## 0.5403020 0.5424802 0.5446509 0.5468014 0.5489293 0.5510565 0.5531619 0.5552609 0.5573352 
+##    OTU619    OTU184    OTU352    OTU938    OTU154    OTU707    OTU304    OTU538    OTU386 
+## 0.5594017 0.5614639 0.5635207 0.5655628 0.5675880 0.5696106 0.5716293 0.5736343 0.5756356 
+##   OTU1116    OTU582    OTU751    OTU434     OTU20   OTU1319   OTU1218    OTU992    OTU309 
+## 0.5776195 0.5795812 0.5815142 0.5834436 0.5853509 0.5872476 0.5891360 0.5910228 0.5929026 
+##    OTU456    OTU364    OTU302     OTU69    OTU468    OTU725     OTU86    OTU466    OTU562 
+## 0.5947562 0.5965751 0.5983597 0.6001340 0.6019002 0.6036514 0.6053964 0.6071295 0.6088489 
+##   OTU1184    OTU347    OTU430    OTU164     OTU60    OTU451    OTU635    OTU489    OTU854 
+## 0.6105629 0.6122639 0.6139634 0.6156620 0.6173343 0.6189824 0.6206193 0.6222384 0.6238543 
+##    OTU610    OTU132    OTU439    OTU255   OTU1046    OTU421    OTU170    OTU543    OTU579 
+## 0.6254567 0.6270446 0.6286319 0.6302162 0.6317761 0.6333278 0.6348784 0.6363976 0.6379151 
+##   OTU1024     OTU27    OTU323    OTU929    OTU368    OTU953    OTU799    OTU545    OTU258 
+## 0.6394210 0.6409169 0.6423915 0.6438630 0.6453326 0.6467955 0.6482429 0.6496722 0.6510934 
+##   OTU1282    OTU267     OTU28   OTU1100    OTU277    OTU279    OTU667    OTU199    OTU705 
+## 0.6524991 0.6538874 0.6552578 0.6566268 0.6579884 0.6593460 0.6606965 0.6620386 0.6633559 
+##    OTU999    OTU232     OTU95    OTU303    OTU836   OTU1242    OTU653      OTU3    OTU141 
+## 0.6646697 0.6659821 0.6672939 0.6685879 0.6698524 0.6711151 0.6723738 0.6736310 0.6748814 
+##    OTU697    OTU273    OTU499     OTU29   OTU1011    OTU389    OTU162   OTU1108    OTU166 
+## 0.6761230 0.6773607 0.6785955 0.6798301 0.6810609 0.6822766 0.6834907 0.6847033 0.6859052 
+##    OTU595    OTU524    OTU185    OTU765     OTU41    OTU404    OTU641    OTU557   OTU1005 
+## 0.6871070 0.6883061 0.6894992 0.6906885 0.6918492 0.6930093 0.6941662 0.6953181 0.6964525 
+##   OTU1049     OTU10   OTU1101    OTU449 
+## 0.6975821 0.6987054 0.6998284 0.7009432 
 ## 
 ## $`Hyperarid dust_Arid limestone`
-##   OTU6  OTU20  OTU40  OTU55 OTU225 OTU422  OTU73  OTU11  OTU46  OTU94 OTU388  OTU29 
-##  0.383  0.442  0.497  0.524  0.539  0.553  0.566  0.578  0.589  0.600  0.609  0.618 
-## OTU119  OTU18  OTU34 OTU235  OTU16 OTU854 OTU174 OTU299  OTU68 OTU545   OTU9  OTU37 
-##  0.627  0.636  0.644  0.651  0.659  0.666  0.673  0.680  0.685  0.691  0.697  0.702 
+##      OTU6     OTU20     OTU40     OTU55    OTU225    OTU422     OTU73     OTU11     OTU46 
+## 0.3830030 0.4418277 0.4965700 0.5241168 0.5387383 0.5528407 0.5659891 0.5778580 0.5889906 
+##     OTU94    OTU388     OTU29    OTU119     OTU18     OTU34    OTU235     OTU16    OTU854 
+## 0.5996827 0.6092874 0.6183609 0.6273489 0.6359934 0.6440744 0.6514858 0.6587135 0.6657503 
+##    OTU174    OTU299     OTU68    OTU545      OTU9     OTU37 
+## 0.6726643 0.6795149 0.6852951 0.6910019 0.6966084 0.7021179 
 ## 
 ## $`Hyperarid dust_Hyperarid dolomite`
-##   OTU6   OTU1   OTU2   OTU3   OTU7   OTU5  OTU18   OTU9   OTU8  OTU17  OTU41  OTU11 
-##  0.144  0.281  0.357  0.430  0.487  0.517  0.538  0.559  0.579  0.598  0.617  0.633 
-##  OTU16 OTU936  OTU28  OTU20  OTU12 
-##  0.648  0.662  0.676  0.689  0.701 
+##      OTU6      OTU1      OTU2      OTU3      OTU7      OTU5     OTU18      OTU9      OTU8 
+## 0.1443995 0.2811765 0.3569750 0.4302446 0.4872402 0.5170148 0.5383456 0.5591551 0.5792831 
+##     OTU17     OTU41     OTU11     OTU16    OTU936     OTU28     OTU20     OTU12 
+## 0.5983333 0.6167381 0.6326139 0.6480207 0.6622816 0.6756378 0.6885866 0.7014489 
 ## 
 ## $`Hyperarid dust_Arid loess soil`
-##    OTU6   OTU55   OTU25   OTU88   OTU11   OTU62   OTU68  OTU177   OTU78   OTU94  OTU133 
-##   0.272   0.292   0.310   0.327   0.343   0.359   0.369   0.377   0.385   0.393   0.401 
-##  OTU144   OTU46  OTU115   OTU67  OTU156   OTU16  OTU388  OTU116  OTU137  OTU197  OTU100 
-##   0.408   0.415   0.422   0.428   0.434   0.440   0.445   0.450   0.455   0.460   0.465 
-##  OTU687   OTU91   OTU73  OTU412  OTU218    OTU9  OTU422  OTU160   OTU53  OTU152  OTU125 
-##   0.470   0.474   0.479   0.482   0.486   0.490   0.494   0.497   0.501   0.504   0.508 
-##  OTU135  OTU131  OTU311  OTU556  OTU163  OTU130  OTU484  OTU214  OTU227  OTU240   OTU37 
-##   0.511   0.514   0.517   0.520   0.523   0.526   0.528   0.531   0.534   0.536   0.539 
-##  OTU341  OTU233  OTU854  OTU101  OTU648  OTU140  OTU716   OTU92  OTU220  OTU139   OTU44 
-##   0.542   0.544   0.547   0.549   0.552   0.554   0.557   0.559   0.562   0.564   0.567 
-##  OTU491   OTU20  OTU278  OTU103  OTU253   OTU60 OTU1235  OTU206  OTU171  OTU107  OTU365 
-##   0.569   0.571   0.574   0.576   0.578   0.580   0.582   0.584   0.587   0.589   0.591 
-##  OTU294  OTU647  OTU136  OTU231 OTU1050 OTU1102  OTU479 OTU1288   OTU82  OTU248  OTU434 
-##   0.593   0.595   0.597   0.599   0.601   0.603   0.605   0.607   0.609   0.610   0.612 
-##  OTU638  OTU360  OTU945  OTU181  OTU457  OTU472  OTU938 OTU1184  OTU184  OTU315   OTU33 
-##   0.614   0.616   0.618   0.619   0.621   0.623   0.625   0.626   0.628   0.630   0.632 
-##  OTU667  OTU471  OTU190 OTU1013  OTU182  OTU538  OTU352  OTU191   OTU86  OTU169  OTU586 
-##   0.633   0.635   0.637   0.638   0.640   0.642   0.643   0.645   0.647   0.648   0.650 
-##  OTU304  OTU251  OTU164  OTU619  OTU170  OTU751 OTU1116  OTU707  OTU582  OTU302  OTU154 
-##   0.651   0.653   0.655   0.656   0.658   0.659   0.661   0.662   0.664   0.665   0.667 
-##   OTU69  OTU466  OTU725  OTU430  OTU132  OTU545  OTU489  OTU166   OTU48  OTU992  OTU421 
-##   0.668   0.670   0.671   0.673   0.674   0.676   0.677   0.679   0.680   0.682   0.683 
-## OTU1218 OTU1319  OTU456  OTU309  OTU364  OTU635  OTU437  OTU610  OTU562  OTU298  OTU468 
-##   0.685   0.686   0.687   0.689   0.690   0.692   0.693   0.694   0.696   0.697   0.698 
-##  OTU347  OTU333 
-##   0.700   0.701 
+##      OTU6     OTU55     OTU25     OTU88     OTU11     OTU62     OTU68    OTU177     OTU78 
+## 0.2717856 0.2922788 0.3102694 0.3274254 0.3433223 0.3590820 0.3688505 0.3770737 0.3852909 
+##     OTU94    OTU133    OTU144     OTU46    OTU115     OTU67    OTU156     OTU16    OTU388 
+## 0.3931965 0.4006953 0.4078863 0.4149436 0.4216680 0.4280641 0.4338043 0.4395276 0.4449791 
+##    OTU116    OTU137    OTU197    OTU100    OTU687     OTU91     OTU73    OTU412    OTU218 
+## 0.4500254 0.4550249 0.4599696 0.4648655 0.4695628 0.4742035 0.4785067 0.4824756 0.4864272 
+##      OTU9    OTU422    OTU160     OTU53    OTU152    OTU125    OTU135    OTU131    OTU311 
+## 0.4902632 0.4938776 0.4974534 0.5009364 0.5043806 0.5077056 0.5109572 0.5141610 0.5171316 
+##    OTU556    OTU163    OTU130    OTU484    OTU214    OTU227    OTU240     OTU37    OTU341 
+## 0.5200525 0.5228985 0.5256494 0.5283896 0.5310817 0.5337605 0.5364127 0.5390503 0.5416516 
+##    OTU233    OTU854    OTU101    OTU648    OTU140    OTU716     OTU92    OTU220    OTU139 
+## 0.5442391 0.5467798 0.5493151 0.5518255 0.5543313 0.5568296 0.5592989 0.5617475 0.5641704 
+##     OTU44    OTU491     OTU20    OTU278    OTU103    OTU253     OTU60   OTU1235    OTU206 
+## 0.5665825 0.5689943 0.5713301 0.5736308 0.5759258 0.5781072 0.5802428 0.5823693 0.5844926 
+##    OTU171    OTU107    OTU365    OTU294    OTU647    OTU136    OTU231   OTU1050   OTU1102 
+## 0.5865914 0.5886821 0.5907679 0.5928210 0.5948466 0.5968391 0.5988303 0.6007964 0.6027482 
+##    OTU479   OTU1288     OTU82    OTU248    OTU434    OTU638    OTU360    OTU945    OTU181 
+## 0.6046967 0.6066266 0.6085347 0.6104021 0.6122693 0.6140896 0.6158867 0.6176719 0.6194314 
+##    OTU457    OTU472    OTU938   OTU1184    OTU184    OTU315     OTU33    OTU667    OTU471 
+## 0.6211887 0.6229334 0.6246741 0.6264112 0.6281455 0.6298719 0.6315934 0.6333143 0.6350343 
+##    OTU190   OTU1013    OTU182    OTU538    OTU352    OTU191     OTU86    OTU169    OTU586 
+## 0.6367102 0.6383722 0.6400307 0.6416807 0.6433256 0.6449655 0.6465947 0.6482236 0.6498470 
+##    OTU304    OTU251    OTU164    OTU619    OTU170    OTU751   OTU1116    OTU707    OTU582 
+## 0.6514406 0.6530247 0.6545987 0.6561620 0.6577205 0.6592749 0.6608170 0.6623473 0.6638686 
+##    OTU302    OTU154     OTU69    OTU466    OTU725    OTU430    OTU132    OTU545    OTU489 
+## 0.6653819 0.6668883 0.6683903 0.6698868 0.6713743 0.6728597 0.6743389 0.6758092 0.6772674 
+##    OTU166     OTU48    OTU992    OTU421   OTU1218   OTU1319    OTU456    OTU309    OTU364 
+## 0.6787234 0.6801775 0.6816228 0.6830672 0.6845111 0.6859461 0.6873638 0.6887794 0.6901816 
+##    OTU635    OTU437    OTU610    OTU562    OTU298    OTU468    OTU347    OTU333 
+## 0.6915755 0.6929580 0.6943383 0.6957096 0.6970803 0.6984166 0.6997406 0.7010381 
 ## 
 ## $`Arid limestone_Hyperarid dolomite`
-##   OTU1   OTU2   OTU3   OTU6   OTU7   OTU5   OTU9   OTU8  OTU18  OTU17  OTU41  OTU40 
-##  0.144  0.224  0.302  0.361  0.419  0.451  0.474  0.496  0.516  0.537  0.554  0.570 
-##  OTU11 OTU936  OTU16  OTU28  OTU12  OTU20  OTU10  OTU15  OTU14  OTU13  OTU33 
-##  0.585  0.600  0.615  0.629  0.642  0.656  0.669  0.679  0.688  0.696  0.705 
+##      OTU1      OTU2      OTU3      OTU6      OTU7      OTU5      OTU9      OTU8     OTU18 
+## 0.1440378 0.2242599 0.3019930 0.3607941 0.4191722 0.4507340 0.4744385 0.4957463 0.5163290 
+##     OTU17     OTU41     OTU40     OTU11    OTU936     OTU16     OTU28     OTU12     OTU20 
+## 0.5365375 0.5544474 0.5699925 0.5851556 0.6002748 0.6145844 0.6287286 0.6422857 0.6555544 
+##     OTU10     OTU15     OTU14     OTU13     OTU33 
+## 0.6687285 0.6786126 0.6876539 0.6962099 0.7045072 
 ## 
 ## $`Arid limestone_Arid loess soil`
-##    OTU6   OTU40   OTU20   OTU25   OTU88   OTU62   OTU11  OTU225  OTU177   OTU78  OTU133 
-##  0.0976  0.1375  0.1768  0.1973  0.2164  0.2334  0.2485  0.2580  0.2674  0.2765  0.2848 
-##   OTU73   OTU68  OTU119  OTU144   OTU67  OTU156  OTU422   OTU18   OTU29   OTU34  OTU100 
-##  0.2931  0.3001  0.3071  0.3139  0.3207  0.3273  0.3334  0.3394  0.3450  0.3506  0.3560 
-##  OTU116   OTU91  OTU687   OTU46  OTU299  OTU388  OTU235  OTU197  OTU115  OTU218  OTU412 
-##  0.3613  0.3664  0.3714  0.3762  0.3810  0.3858  0.3906  0.3952  0.3995  0.4039  0.4082 
-##  OTU160  OTU174   OTU53  OTU152  OTU925  OTU135  OTU137   OTU37  OTU854  OTU545  OTU163 
-##  0.4123  0.4163  0.4202  0.4242  0.4281  0.4317  0.4353  0.4386  0.4420  0.4452  0.4484 
-##  OTU125  OTU130  OTU131  OTU556  OTU605  OTU311   OTU69  OTU140  OTU341  OTU214   OTU27 
-##  0.4516  0.4547  0.4578  0.4609  0.4639  0.4670  0.4700  0.4729  0.4758  0.4788  0.4817 
-##  OTU233  OTU648  OTU240   OTU16   OTU92   OTU44  OTU491  OTU139  OTU220  OTU227  OTU278 
-##  0.4846  0.4874  0.4903  0.4931  0.4959  0.4987  0.5014  0.5041  0.5068  0.5094  0.5121 
-##  OTU101 OTU1089  OTU103  OTU171   OTU45  OTU253  OTU107  OTU261  OTU365  OTU206  OTU231 
-##  0.5147  0.5172  0.5198  0.5222  0.5246  0.5270  0.5294  0.5317  0.5341  0.5363  0.5386 
-## OTU1235   OTU41  OTU479 OTU1288 OTU1102   OTU81 OTU1050  OTU294  OTU181   OTU60  OTU945 
-##  0.5409  0.5431  0.5453  0.5475  0.5497  0.5519  0.5540  0.5561  0.5581  0.5602  0.5622 
-##   OTU82   OTU48  OTU360  OTU472  OTU471  OTU136  OTU169  OTU248  OTU315  OTU184  OTU638 
-##  0.5642  0.5661  0.5681  0.5701  0.5721  0.5740  0.5759  0.5779  0.5798  0.5817  0.5836 
-##  OTU182  OTU352  OTU716  OTU647  OTU191  OTU349  OTU457  OTU938 OTU1013  OTU751  OTU619 
-##  0.5855  0.5874  0.5892  0.5911  0.5930  0.5948  0.5966  0.5984  0.6002  0.6020  0.6038 
-##  OTU164  OTU166  OTU251  OTU190  OTU154  OTU434  OTU707 OTU1116 OTU1218  OTU302  OTU489 
-##  0.6055  0.6073  0.6090  0.6107  0.6124  0.6141  0.6157  0.6174  0.6190  0.6207  0.6223 
-##  OTU421  OTU582  OTU286    OTU7  OTU259  OTU667  OTU364  OTU456 OTU1319  OTU298  OTU992 
-##  0.6240  0.6256  0.6272  0.6288  0.6304  0.6320  0.6336  0.6351  0.6367  0.6383  0.6398 
-##  OTU562  OTU304  OTU468  OTU610  OTU170  OTU347  OTU939   OTU86  OTU430  OTU246  OTU239 
-##  0.6413  0.6428  0.6443  0.6458  0.6473  0.6488  0.6503  0.6517  0.6531  0.6545  0.6558 
-##  OTU949  OTU255  OTU439  OTU466  OTU132  OTU530  OTU579  OTU368  OTU362   OTU28  OTU451 
-##  0.6572  0.6586  0.6599  0.6613  0.6626  0.6639  0.6652  0.6665  0.6678  0.6691  0.6704 
-##  OTU653 OTU1299  OTU309  OTU333  OTU399  OTU323  OTU953  OTU348  OTU162 OTU1024  OTU389 
-##  0.6717  0.6730  0.6743  0.6755  0.6768  0.6781  0.6793  0.6806  0.6818  0.6830  0.6842 
-## OTU1005  OTU929  OTU524 OTU1100  OTU586   OTU95  OTU279  OTU799   OTU87 OTU1101  OTU232 
-##  0.6854  0.6866  0.6878  0.6890  0.6901  0.6913  0.6924  0.6936  0.6947  0.6959  0.6970 
-##  OTU725  OTU303  OTU999 
-##  0.6981  0.6993  0.7004 
+##       OTU6      OTU40      OTU20      OTU25      OTU88      OTU62      OTU11     OTU225 
+## 0.09760135 0.13750741 0.17679560 0.19728621 0.21638051 0.23340169 0.24845894 0.25799747 
+##     OTU177      OTU78     OTU133      OTU73      OTU68     OTU119     OTU144      OTU67 
+## 0.26735411 0.27646905 0.28479143 0.29307840 0.30008547 0.30708372 0.31394618 0.32068762 
+##     OTU156     OTU422      OTU18      OTU29      OTU34     OTU100     OTU116      OTU91 
+## 0.32725867 0.33341009 0.33935962 0.34499496 0.35056556 0.35599894 0.36127683 0.36643832 
+##     OTU687      OTU46     OTU299     OTU388     OTU235     OTU197     OTU115     OTU218 
+## 0.37138684 0.37623323 0.38103236 0.38580627 0.39057213 0.39516382 0.39952480 0.40388431 
+##     OTU412     OTU160     OTU174      OTU53     OTU152     OTU925     OTU135     OTU137 
+## 0.40821727 0.41229126 0.41633319 0.42024901 0.42416096 0.42806201 0.43172259 0.43528646 
+##      OTU37     OTU854     OTU545     OTU163     OTU125     OTU130     OTU131     OTU556 
+## 0.43864358 0.44196239 0.44519165 0.44838886 0.45155916 0.45469790 0.45781670 0.46088453 
+##     OTU605     OTU311      OTU69     OTU140     OTU341     OTU214      OTU27     OTU233 
+## 0.46394974 0.46699883 0.46996880 0.47291024 0.47584516 0.47876919 0.48167258 0.48457197 
+##     OTU648     OTU240      OTU16      OTU92      OTU44     OTU491     OTU139     OTU220 
+## 0.48743615 0.49029565 0.49310940 0.49591666 0.49871621 0.50143167 0.50413985 0.50682390 
+##     OTU227     OTU278     OTU101    OTU1089     OTU103     OTU171      OTU45     OTU253 
+## 0.50944639 0.51205855 0.51465647 0.51723675 0.51980481 0.52223855 0.52464256 0.52704332 
+##     OTU107     OTU261     OTU365     OTU206     OTU231    OTU1235      OTU41     OTU479 
+## 0.52941636 0.53174517 0.53406670 0.53634794 0.53861594 0.54087696 0.54311887 0.54534212 
+##    OTU1288    OTU1102      OTU81    OTU1050     OTU294     OTU181      OTU60     OTU945 
+## 0.54753509 0.54972106 0.55189155 0.55399097 0.55607199 0.55813344 0.56016996 0.56216653 
+##      OTU82      OTU48     OTU360     OTU472     OTU471     OTU136     OTU169     OTU248 
+## 0.56416015 0.56614595 0.56813109 0.57010003 0.57205708 0.57400361 0.57593588 0.57786729 
+##     OTU315     OTU184     OTU638     OTU182     OTU352     OTU716     OTU647     OTU191 
+## 0.57978907 0.58169843 0.58360105 0.58549541 0.58737150 0.58924686 0.59110929 0.59295132 
+##     OTU349     OTU457     OTU938    OTU1013     OTU751     OTU619     OTU164     OTU166 
+## 0.59479300 0.59662297 0.59843435 0.60023859 0.60201582 0.60378025 0.60554228 0.60727629 
+##     OTU251     OTU190     OTU154     OTU434     OTU707    OTU1116    OTU1218     OTU302 
+## 0.60900472 0.61070425 0.61239395 0.61407383 0.61574542 0.61739401 0.61904009 0.62068001 
+##     OTU489     OTU421     OTU582     OTU286       OTU7     OTU259     OTU667     OTU364 
+## 0.62231663 0.62395222 0.62557826 0.62718663 0.62878593 0.63037948 0.63196953 0.63355404 
+##     OTU456    OTU1319     OTU298     OTU992     OTU562     OTU304     OTU468     OTU610 
+## 0.63512882 0.63670199 0.63825851 0.63979366 0.64131334 0.64282784 0.64433016 0.64582281 
+##     OTU170     OTU347     OTU939      OTU86     OTU430     OTU246     OTU239     OTU949 
+## 0.64730766 0.64879001 0.65025643 0.65166808 0.65307432 0.65445899 0.65584235 0.65720240 
+##     OTU255     OTU439     OTU466     OTU132     OTU530     OTU579     OTU368     OTU362 
+## 0.65856178 0.65991755 0.66125549 0.66259309 0.66392616 0.66524781 0.66654856 0.66784058 
+##      OTU28     OTU451     OTU653    OTU1299     OTU309     OTU333     OTU399     OTU323 
+## 0.66913171 0.67042259 0.67170906 0.67298919 0.67426714 0.67554482 0.67680684 0.67806486 
+##     OTU953     OTU348     OTU162    OTU1024     OTU389    OTU1005     OTU929     OTU524 
+## 0.67931748 0.68056959 0.68181843 0.68303243 0.68424157 0.68543316 0.68662133 0.68779205 
+##    OTU1100     OTU586      OTU95     OTU279     OTU799      OTU87    OTU1101     OTU232 
+## 0.68895982 0.69012713 0.69129203 0.69244608 0.69359440 0.69473764 0.69587999 0.69701440 
+##     OTU725     OTU303     OTU999 
+## 0.69814422 0.69925971 0.70036244 
 ## 
 ## $`Hyperarid dolomite_Arid loess soil`
-##   OTU1   OTU2   OTU3   OTU7   OTU5   OTU9  OTU18   OTU8  OTU17  OTU41 OTU936  OTU28 
-##  0.132  0.206  0.279  0.331  0.360  0.382  0.402  0.421  0.440  0.457  0.471  0.484 
-##  OTU12  OTU16  OTU10  OTU11  OTU20   OTU6  OTU15  OTU14  OTU13  OTU24  OTU33  OTU45 
-##  0.497  0.509  0.521  0.533  0.543  0.553  0.562  0.571  0.579  0.586  0.593  0.601 
-##  OTU88  OTU25  OTU54  OTU62  OTU34  OTU39  OTU47  OTU19  OTU22  OTU35  OTU68  OTU32 
-##  0.608  0.615  0.622  0.628  0.634  0.640  0.646  0.651  0.656  0.660  0.664  0.668 
-##  OTU29 OTU756  OTU23  OTU37  OTU78  OTU26 OTU177  OTU30 OTU133  OTU46 
-##  0.671  0.675  0.678  0.682  0.685  0.689  0.692  0.695  0.698  0.702
+##      OTU1      OTU2      OTU3      OTU7      OTU5      OTU9     OTU18      OTU8     OTU17 
+## 0.1319013 0.2062641 0.2786385 0.3307085 0.3600777 0.3818384 0.4015745 0.4212911 0.4401489 
+##     OTU41    OTU936     OTU28     OTU12     OTU16     OTU10     OTU11     OTU20      OTU6 
+## 0.4571149 0.4711765 0.4842321 0.4967527 0.5091024 0.5210569 0.5325276 0.5434614 0.5531014 
+##     OTU15     OTU14     OTU13     OTU24     OTU33     OTU45     OTU88     OTU25     OTU54 
+## 0.5622927 0.5706666 0.5785943 0.5859354 0.5932440 0.6005279 0.6077454 0.6147879 0.6216491 
+##     OTU62     OTU34     OTU39     OTU47     OTU19     OTU22     OTU35     OTU68     OTU32 
+## 0.6280701 0.6340900 0.6399058 0.6455094 0.6510462 0.6560153 0.6601594 0.6640414 0.6677063 
+##     OTU29    OTU756     OTU23     OTU37     OTU78     OTU26    OTU177     OTU30    OTU133 
+## 0.6713117 0.6748203 0.6783113 0.6817969 0.6852336 0.6886605 0.6920868 0.6953067 0.6984351 
+##     OTU46 
+## 0.7015026
 ```
 
 ```r
@@ -2604,108 +2662,108 @@ Taxa_tests_phylum <- STAMPR(Rock_weathering_filt3_GMPR, "Phylum", sig_pairs)
 ## DV:  Abundance 
 ## Observations:  34 
 ## D:  1 
-## MS total:  99.2 
+## MS total:  99.16667 
 ## 
-##                Df Sum Sq     H p.value
-## Climate         1   1118 11.28   0.001
-## Source          3    412  4.16   0.245
-## Climate:Source  1      2  0.02   0.876
-## Residuals      28   1740              
-## 
-## 	Wilcoxon rank sum test with continuity correction
-## 
-## data:  Abundance by Climate.Source
-## W = 5, p-value = 0.2
-## alternative hypothesis: true location shift is not equal to 0
-## 95 percent confidence interval:
-##  -57.3  77.1
-## sample estimates:
-## difference in location 
-##                  -8.84 
-## 
+##                Df  Sum Sq       H p.value
+## Climate         1 1118.38 11.2778 0.00078
+## Source          3  412.13  4.1560 0.24511
+## Climate:Source  1    2.40  0.0242 0.87637
+## Residuals      28 1739.58                
 ## 
 ## 	Wilcoxon rank sum test with continuity correction
 ## 
 ## data:  Abundance by Climate.Source
-## W = 10, p-value = 0.9
+## W = 5, p-value = 0.2353
 ## alternative hypothesis: true location shift is not equal to 0
 ## 95 percent confidence interval:
-##  -45.1  61.7
+##  -57.31870  77.10514
 ## sample estimates:
 ## difference in location 
-##                   3.71 
+##              -8.837742 
 ## 
 ## 
 ## 	Wilcoxon rank sum test with continuity correction
 ## 
 ## data:  Abundance by Climate.Source
-## W = 3, p-value = 0.04
+## W = 13, p-value = 0.9273
 ## alternative hypothesis: true location shift is not equal to 0
 ## 95 percent confidence interval:
-##  -44.6 -10.5
+##  -45.05308  61.68040
 ## sample estimates:
 ## difference in location 
-##                  -24.3 
+##               3.711094 
 ## 
 ## 
 ## 	Wilcoxon rank sum test with continuity correction
 ## 
 ## data:  Abundance by Climate.Source
-## W = 20, p-value = 0.6
+## W = 3, p-value = 0.03636
 ## alternative hypothesis: true location shift is not equal to 0
 ## 95 percent confidence interval:
-##  -31.6  23.3
+##  -44.64033 -10.50860
 ## sample estimates:
 ## difference in location 
-##                   2.73 
+##              -24.33348 
 ## 
 ## 
 ## 	Wilcoxon rank sum test with continuity correction
 ## 
 ## data:  Abundance by Climate.Source
-## W = 0, p-value = 0.04
+## W = 22, p-value = 0.6134
 ## alternative hypothesis: true location shift is not equal to 0
 ## 95 percent confidence interval:
-##  -92.7 -22.9
+##  -31.61913  23.25576
 ## sample estimates:
 ## difference in location 
-##                  -41.8 
+##               2.734424 
 ## 
 ## 
 ## 	Wilcoxon rank sum test with continuity correction
 ## 
 ## data:  Abundance by Climate.Source
-## W = 20, p-value = 0.006
+## W = 0, p-value = 0.03576
 ## alternative hypothesis: true location shift is not equal to 0
 ## 95 percent confidence interval:
-##  -43.7 -14.5
+##  -92.69994 -22.88429
 ## sample estimates:
 ## difference in location 
-##                  -31.9 
+##               -41.7985 
 ## 
 ## 
 ## 	Wilcoxon rank sum test with continuity correction
 ## 
 ## data:  Abundance by Climate.Source
-## W = 10, p-value = 0.4
+## W = 24, p-value = 0.006099
 ## alternative hypothesis: true location shift is not equal to 0
 ## 95 percent confidence interval:
-##  -9.15  9.09
+##  -43.71818 -14.50227
 ## sample estimates:
 ## difference in location 
-##                  -3.91 
+##              -31.94182 
 ## 
 ## 
 ## 	Wilcoxon rank sum test with continuity correction
 ## 
 ## data:  Abundance by Climate.Source
-## W = 3, p-value = 0.04
+## W = 12, p-value = 0.4273
 ## alternative hypothesis: true location shift is not equal to 0
 ## 95 percent confidence interval:
-##  -43.18  -5.63
+##  -9.149286  9.089127
 ## sample estimates:
 ## difference in location 
-##                  -35.8 
+##              -3.911288 
+## 
+## 
+## 	Wilcoxon rank sum test with continuity correction
+## 
+## data:  Abundance by Climate.Source
+## W = 3, p-value = 0.03636
+## alternative hypothesis: true location shift is not equal to 0
+## 95 percent confidence interval:
+##  -43.181793  -5.626402
+## sample estimates:
+## difference in location 
+##              -35.79785 
 ## 
 ## Taxonomy Table:     [1 taxa by 1 taxonomic ranks]:
 ##      Phylum               
@@ -2714,108 +2772,108 @@ Taxa_tests_phylum <- STAMPR(Rock_weathering_filt3_GMPR, "Phylum", sig_pairs)
 ## DV:  Abundance 
 ## Observations:  34 
 ## D:  1 
-## MS total:  99.2 
+## MS total:  99.16667 
 ## 
-##                Df Sum Sq     H p.value
-## Climate         1    213  2.14   0.143
-## Source          3   1475 14.87   0.002
-## Climate:Source  1     73  0.73   0.392
-## Residuals      28   1513              
-## 
-## 	Wilcoxon rank sum test with continuity correction
-## 
-## data:  Abundance by Climate.Source
-## W = 20, p-value = 0.04
-## alternative hypothesis: true location shift is not equal to 0
-## 95 percent confidence interval:
-##   0.116 28.897
-## sample estimates:
-## difference in location 
-##                   3.76 
-## 
+##                Df Sum Sq       H p.value
+## Climate         1  212.5  2.1429 0.14323
+## Source          3 1474.7 14.8713 0.00193
+## Climate:Source  1   72.6  0.7321 0.39220
+## Residuals      28 1512.7                
 ## 
 ## 	Wilcoxon rank sum test with continuity correction
 ## 
 ## data:  Abundance by Climate.Source
-## W = 0, p-value = 0.04
+## W = 24, p-value = 0.03576
 ## alternative hypothesis: true location shift is not equal to 0
 ## 95 percent confidence interval:
-##  -16.47  -6.63
+##   0.1159525 28.8971507
 ## sample estimates:
 ## difference in location 
-##                  -12.4 
+##               3.763569 
 ## 
 ## 
 ## 	Wilcoxon rank sum test with continuity correction
 ## 
 ## data:  Abundance by Climate.Source
-## W = 20, p-value = 1
+## W = 0, p-value = 0.03576
 ## alternative hypothesis: true location shift is not equal to 0
 ## 95 percent confidence interval:
-##  -8.04 20.82
+##  -16.468193  -6.626912
 ## sample estimates:
 ## difference in location 
-##                  0.132 
+##              -12.42899 
 ## 
 ## 
 ## 	Wilcoxon rank sum test with continuity correction
 ## 
 ## data:  Abundance by Climate.Source
-## W = 30, p-value = 0.07
+## W = 18, p-value = 1
 ## alternative hypothesis: true location shift is not equal to 0
 ## 95 percent confidence interval:
-##  -1.56 12.95
+##  -8.035956 20.819838
 ## sample estimates:
 ## difference in location 
-##                   6.28 
+##              0.1319845 
 ## 
 ## 
 ## 	Wilcoxon rank sum test with continuity correction
 ## 
 ## data:  Abundance by Climate.Source
-## W = 20, p-value = 0.04
+## W = 31, p-value = 0.0712
 ## alternative hypothesis: true location shift is not equal to 0
 ## 95 percent confidence interval:
-##   6.55 16.59
+##  -1.559324 12.947540
 ## sample estimates:
 ## difference in location 
-##                     12 
+##               6.279289 
 ## 
 ## 
 ## 	Wilcoxon rank sum test with continuity correction
 ## 
 ## data:  Abundance by Climate.Source
-## W = 50, p-value = 0.3
+## W = 24, p-value = 0.03576
 ## alternative hypothesis: true location shift is not equal to 0
 ## 95 percent confidence interval:
-##  -11.37   7.95
+##   6.553372 16.590053
 ## sample estimates:
 ## difference in location 
-##                  -5.99 
+##               11.95774 
 ## 
 ## 
 ## 	Wilcoxon rank sum test with continuity correction
 ## 
 ## data:  Abundance by Climate.Source
-## W = 40, p-value = 0.02
+## W = 53, p-value = 0.2855
 ## alternative hypothesis: true location shift is not equal to 0
 ## 95 percent confidence interval:
-##   0.173 24.992
+##  -11.37397   7.94874
 ## sample estimates:
 ## difference in location 
-##                   2.55 
+##              -5.992007 
 ## 
 ## 
 ## 	Wilcoxon rank sum test with continuity correction
 ## 
 ## data:  Abundance by Climate.Source
-## W = 0, p-value = 0.01
+## W = 35, p-value = 0.01724
 ## alternative hypothesis: true location shift is not equal to 0
 ## 95 percent confidence interval:
-##  -16.14  -6.64
+##   0.1726432 24.9922558
 ## sample estimates:
 ## difference in location 
-##                    -12 
+##               2.545225 
+## 
+## 
+## 	Wilcoxon rank sum test with continuity correction
+## 
+## data:  Abundance by Climate.Source
+## W = 0, p-value = 0.01154
+## alternative hypothesis: true location shift is not equal to 0
+## 95 percent confidence interval:
+##  -16.14293  -6.64311
+## sample estimates:
+## difference in location 
+##              -11.97071 
 ## 
 ## Taxonomy Table:     [1 taxa by 1 taxonomic ranks]:
 ##      Phylum         
@@ -2824,108 +2882,108 @@ Taxa_tests_phylum <- STAMPR(Rock_weathering_filt3_GMPR, "Phylum", sig_pairs)
 ## DV:  Abundance 
 ## Observations:  34 
 ## D:  1 
-## MS total:  99.2 
+## MS total:  99.16667 
 ## 
-##                Df Sum Sq    H p.value
-## Climate         1     13 0.13   0.718
-## Source          3    822 8.29   0.040
-## Climate:Source  1     75 0.75   0.385
-## Residuals      28   2363             
-## 
-## 	Wilcoxon rank sum test with continuity correction
-## 
-## data:  Abundance by Climate.Source
-## W = 5, p-value = 0.2
-## alternative hypothesis: true location shift is not equal to 0
-## 95 percent confidence interval:
-##  -68.3  14.0
-## sample estimates:
-## difference in location 
-##                  -27.2 
-## 
+##                Df  Sum Sq      H p.value
+## Climate         1   12.97 0.1308 0.71761
+## Source          3  821.88 8.2879 0.04042
+## Climate:Source  1   74.82 0.7545 0.38507
+## Residuals      28 2362.83               
 ## 
 ## 	Wilcoxon rank sum test with continuity correction
 ## 
 ## data:  Abundance by Climate.Source
-## W = 20, p-value = 0.5
+## W = 5, p-value = 0.2353
 ## alternative hypothesis: true location shift is not equal to 0
 ## 95 percent confidence interval:
-##  -10.4  67.9
+##  -68.34270  13.97676
 ## sample estimates:
 ## difference in location 
-##                   29.6 
+##              -27.18296 
 ## 
 ## 
 ## 	Wilcoxon rank sum test with continuity correction
 ## 
 ## data:  Abundance by Climate.Source
-## W = 30, p-value = 0.3
+## W = 16, p-value = 0.5228
 ## alternative hypothesis: true location shift is not equal to 0
 ## 95 percent confidence interval:
-##  -1.35  4.99
+##  -10.44161  67.94132
 ## sample estimates:
 ## difference in location 
-##                   2.07 
+##               29.64229 
 ## 
 ## 
 ## 	Wilcoxon rank sum test with continuity correction
 ## 
 ## data:  Abundance by Climate.Source
-## W = 30, p-value = 0.2
+## W = 26, p-value = 0.279
 ## alternative hypothesis: true location shift is not equal to 0
 ## 95 percent confidence interval:
-##  -0.995 10.098
+##  -1.354092  4.988486
 ## sample estimates:
 ## difference in location 
-##                   5.63 
+##               2.066666 
 ## 
 ## 
 ## 	Wilcoxon rank sum test with continuity correction
 ## 
 ## data:  Abundance by Climate.Source
-## W = 20, p-value = 0.08
+## W = 28, p-value = 0.1703
 ## alternative hypothesis: true location shift is not equal to 0
 ## 95 percent confidence interval:
-##  -0.822 15.087
+##  -0.9948177 10.0975854
 ## sample estimates:
 ## difference in location 
-##                   7.65 
+##                5.62787 
 ## 
 ## 
 ## 	Wilcoxon rank sum test with continuity correction
 ## 
 ## data:  Abundance by Climate.Source
-## W = 50, p-value = 0.2
+## W = 22, p-value = 0.08284
 ## alternative hypothesis: true location shift is not equal to 0
 ## 95 percent confidence interval:
-##  -6.95  1.65
+##  -0.8221862 15.0872946
 ## sample estimates:
 ## difference in location 
-##                  -3.57 
+##               7.651679 
 ## 
 ## 
 ## 	Wilcoxon rank sum test with continuity correction
 ## 
 ## data:  Abundance by Climate.Source
-## W = 10, p-value = 0.3
+## W = 51, p-value = 0.2366
 ## alternative hypothesis: true location shift is not equal to 0
 ## 95 percent confidence interval:
-##  -5.57  2.83
+##  -6.951583  1.649500
 ## sample estimates:
 ## difference in location 
-##                  -1.64 
+##              -3.570295 
 ## 
 ## 
 ## 	Wilcoxon rank sum test with continuity correction
 ## 
 ## data:  Abundance by Climate.Source
-## W = 20, p-value = 0.7
+## W = 10, p-value = 0.279
 ## alternative hypothesis: true location shift is not equal to 0
 ## 95 percent confidence interval:
-##  -7.94  5.14
+##  -5.569969  2.833986
 ## sample estimates:
 ## difference in location 
-##                  -2.62 
+##              -1.641379 
+## 
+## 
+## 	Wilcoxon rank sum test with continuity correction
+## 
+## data:  Abundance by Climate.Source
+## W = 15, p-value = 0.7182
+## alternative hypothesis: true location shift is not equal to 0
+## 95 percent confidence interval:
+##  -7.943049  5.141081
+## sample estimates:
+## difference in location 
+##              -2.618944 
 ## 
 ## Taxonomy Table:     [1 taxa by 1 taxonomic ranks]:
 ##      Phylum         
@@ -2934,108 +2992,108 @@ Taxa_tests_phylum <- STAMPR(Rock_weathering_filt3_GMPR, "Phylum", sig_pairs)
 ## DV:  Abundance 
 ## Observations:  34 
 ## D:  1 
-## MS total:  99.2 
+## MS total:  99.16667 
 ## 
-##                Df Sum Sq    H p.value
-## Climate         1     96 0.96   0.326
-## Source          3    853 8.61   0.035
-## Climate:Source  1     45 0.45   0.500
-## Residuals      28   2278             
-## 
-## 	Wilcoxon rank sum test with continuity correction
-## 
-## data:  Abundance by Climate.Source
-## W = 20, p-value = 0.2
-## alternative hypothesis: true location shift is not equal to 0
-## 95 percent confidence interval:
-##  -2.46 18.18
-## sample estimates:
-## difference in location 
-##                   2.96 
-## 
+##                Df  Sum Sq      H p.value
+## Climate         1   95.56 0.9636 0.32628
+## Source          3  853.37 8.6055 0.03502
+## Climate:Source  1   45.07 0.4545 0.50023
+## Residuals      28 2278.50               
 ## 
 ## 	Wilcoxon rank sum test with continuity correction
 ## 
 ## data:  Abundance by Climate.Source
-## W = 6, p-value = 0.3
+## W = 19, p-value = 0.2353
 ## alternative hypothesis: true location shift is not equal to 0
 ## 95 percent confidence interval:
-##  -37.74   2.34
+##  -2.455407 18.180308
 ## sample estimates:
 ## difference in location 
-##                  -3.32 
+##               2.957942 
 ## 
 ## 
 ## 	Wilcoxon rank sum test with continuity correction
 ## 
 ## data:  Abundance by Climate.Source
-## W = 30, p-value = 0.04
+## W = 6, p-value = 0.3153
 ## alternative hypothesis: true location shift is not equal to 0
 ## 95 percent confidence interval:
-##   0.671 18.087
+##  -37.738611   2.344579
 ## sample estimates:
 ## difference in location 
-##                   3.08 
+##              -3.324833 
 ## 
 ## 
 ## 	Wilcoxon rank sum test with continuity correction
 ## 
 ## data:  Abundance by Climate.Source
-## W = 30, p-value = 0.03
+## W = 33, p-value = 0.03636
 ## alternative hypothesis: true location shift is not equal to 0
 ## 95 percent confidence interval:
-##   0.0686 24.4378
+##   0.6713462 18.0874183
 ## sample estimates:
 ## difference in location 
-##                   5.27 
+##               3.080276 
 ## 
 ## 
 ## 	Wilcoxon rank sum test with continuity correction
 ## 
 ## data:  Abundance by Climate.Source
-## W = 20, p-value = 0.2
+## W = 34, p-value = 0.02527
 ## alternative hypothesis: true location shift is not equal to 0
 ## 95 percent confidence interval:
-##  -0.591 37.801
+##   0.06861458 24.43779425
 ## sample estimates:
 ## difference in location 
-##                   4.21 
+##               5.272126 
 ## 
 ## 
 ## 	Wilcoxon rank sum test with continuity correction
 ## 
 ## data:  Abundance by Climate.Source
-## W = 70, p-value = 1
+## W = 20, p-value = 0.1709
 ## alternative hypothesis: true location shift is not equal to 0
 ## 95 percent confidence interval:
-##  -7.31  5.10
+##  -0.5906178 37.8005207
 ## sample estimates:
 ## difference in location 
-##                  0.263 
+##               4.208215 
 ## 
 ## 
 ## 	Wilcoxon rank sum test with continuity correction
 ## 
 ## data:  Abundance by Climate.Source
-## W = 20, p-value = 0.7
+## W = 73, p-value = 0.977
 ## alternative hypothesis: true location shift is not equal to 0
 ## 95 percent confidence interval:
-##  -3.69 14.61
+##  -7.311598  5.103880
 ## sample estimates:
 ## difference in location 
-##                   1.13 
+##              0.2627632 
 ## 
 ## 
 ## 	Wilcoxon rank sum test with continuity correction
 ## 
 ## data:  Abundance by Climate.Source
-## W = 20, p-value = 0.8
+## W = 21, p-value = 0.7182
 ## alternative hypothesis: true location shift is not equal to 0
 ## 95 percent confidence interval:
-##  -23.70   4.78
+##  -3.692326 14.614652
 ## sample estimates:
 ## difference in location 
-##                  -1.64 
+##                1.12547 
+## 
+## 
+## 	Wilcoxon rank sum test with continuity correction
+## 
+## data:  Abundance by Climate.Source
+## W = 16, p-value = 0.8286
+## alternative hypothesis: true location shift is not equal to 0
+## 95 percent confidence interval:
+##  -23.702686   4.781333
+## sample estimates:
+## difference in location 
+##              -1.638922 
 ## 
 ## Taxonomy Table:     [1 taxa by 1 taxonomic ranks]:
 ##       Phylum         
@@ -3044,108 +3102,108 @@ Taxa_tests_phylum <- STAMPR(Rock_weathering_filt3_GMPR, "Phylum", sig_pairs)
 ## DV:  Abundance 
 ## Observations:  34 
 ## D:  1 
-## MS total:  99.2 
+## MS total:  99.16667 
 ## 
-##                Df Sum Sq     H p.value
-## Climate         1      2  0.02   0.877
-## Source          3   1299 13.10   0.004
-## Climate:Source  1     70  0.71   0.399
-## Residuals      28   1900              
-## 
-## 	Wilcoxon rank sum test with continuity correction
-## 
-## data:  Abundance by Climate.Source
-## W = 10, p-value = 0.8
-## alternative hypothesis: true location shift is not equal to 0
-## 95 percent confidence interval:
-##  -1.88  6.84
-## sample estimates:
-## difference in location 
-##                   -0.2 
-## 
+##                Df  Sum Sq       H p.value
+## Climate         1    2.38  0.0240 0.87682
+## Source          3 1299.20 13.1012 0.00442
+## Climate:Source  1   70.42  0.7101 0.39942
+## Residuals      28 1900.50                
 ## 
 ## 	Wilcoxon rank sum test with continuity correction
 ## 
 ## data:  Abundance by Climate.Source
-## W = 5, p-value = 0.2
+## W = 10, p-value = 0.7842
 ## alternative hypothesis: true location shift is not equal to 0
 ## 95 percent confidence interval:
-##  -3.89  1.99
+##  -1.875998  6.843540
 ## sample estimates:
 ## difference in location 
-##                  -1.61 
+##             -0.2000774 
 ## 
 ## 
 ## 	Wilcoxon rank sum test with continuity correction
 ## 
 ## data:  Abundance by Climate.Source
-## W = 20, p-value = 1
+## W = 5, p-value = 0.2353
 ## alternative hypothesis: true location shift is not equal to 0
 ## 95 percent confidence interval:
-##  -1.44  1.14
+##  -3.891498  1.987482
 ## sample estimates:
 ## difference in location 
-##               -0.00745 
+##              -1.607997 
 ## 
 ## 
 ## 	Wilcoxon rank sum test with continuity correction
 ## 
 ## data:  Abundance by Climate.Source
-## W = 30, p-value = 0.2
+## W = 18, p-value = 1
 ## alternative hypothesis: true location shift is not equal to 0
 ## 95 percent confidence interval:
-##  -0.80  2.81
+##  -1.440454  1.139749
 ## sample estimates:
 ## difference in location 
-##                   1.67 
+##           -0.007451021 
 ## 
 ## 
 ## 	Wilcoxon rank sum test with continuity correction
 ## 
 ## data:  Abundance by Climate.Source
-## W = 20, p-value = 0.1
+## W = 28, p-value = 0.1703
 ## alternative hypothesis: true location shift is not equal to 0
 ## 95 percent confidence interval:
-##  -0.874  4.205
+##  -0.8000388  2.8098831
 ## sample estimates:
 ## difference in location 
-##                   2.41 
+##                1.66951 
 ## 
 ## 
 ## 	Wilcoxon rank sum test with continuity correction
 ## 
 ## data:  Abundance by Climate.Source
-## W = 40, p-value = 0.07
+## W = 21, p-value = 0.1207
 ## alternative hypothesis: true location shift is not equal to 0
 ## 95 percent confidence interval:
-##  -2.538  0.111
+##  -0.8738157  4.2049748
 ## sample estimates:
 ## difference in location 
-##                  -1.54 
+##               2.407387 
 ## 
 ## 
 ## 	Wilcoxon rank sum test with continuity correction
 ## 
 ## data:  Abundance by Climate.Source
-## W = 0, p-value = 0.01
+## W = 40, p-value = 0.06896
 ## alternative hypothesis: true location shift is not equal to 0
 ## 95 percent confidence interval:
-##  -10.42  -7.39
+##  -2.5382471  0.1114779
 ## sample estimates:
 ## difference in location 
-##                   -8.6 
+##              -1.540419 
 ## 
 ## 
 ## 	Wilcoxon rank sum test with continuity correction
 ## 
 ## data:  Abundance by Climate.Source
-## W = 40, p-value = 0.01
+## W = 0, p-value = 0.01154
 ## alternative hypothesis: true location shift is not equal to 0
 ## 95 percent confidence interval:
-##  5.71 9.48
+##  -10.418316  -7.394329
 ## sample estimates:
 ## difference in location 
-##                   7.04 
+##               -8.59669 
+## 
+## 
+## 	Wilcoxon rank sum test with continuity correction
+## 
+## data:  Abundance by Climate.Source
+## W = 36, p-value = 0.01154
+## alternative hypothesis: true location shift is not equal to 0
+## 95 percent confidence interval:
+##  5.710241 9.481740
+## sample estimates:
+## difference in location 
+##               7.038468 
 ## 
 ## Taxonomy Table:     [1 taxa by 1 taxonomic ranks]:
 ##       Phylum          
@@ -3154,108 +3212,108 @@ Taxa_tests_phylum <- STAMPR(Rock_weathering_filt3_GMPR, "Phylum", sig_pairs)
 ## DV:  Abundance 
 ## Observations:  34 
 ## D:  1 
-## MS total:  99.2 
+## MS total:  99.16667 
 ## 
-##                Df Sum Sq    H p.value
-## Climate         1    585 5.90   0.015
-## Source          3    761 7.68   0.053
-## Climate:Source  1      1 0.01   0.928
-## Residuals      28   1926             
-## 
-## 	Wilcoxon rank sum test with continuity correction
-## 
-## data:  Abundance by Climate.Source
-## W = 20, p-value = 0.08
-## alternative hypothesis: true location shift is not equal to 0
-## 95 percent confidence interval:
-##  -10.1  56.9
-## sample estimates:
-## difference in location 
-##                   36.9 
-## 
+##                Df  Sum Sq      H p.value
+## Climate         1  584.74 5.8965 0.01517
+## Source          3  761.45 7.6785 0.05315
+## Climate:Source  1    0.82 0.0082 0.92769
+## Residuals      28 1925.50               
 ## 
 ## 	Wilcoxon rank sum test with continuity correction
 ## 
 ## data:  Abundance by Climate.Source
-## W = 7, p-value = 0.4
+## W = 22, p-value = 0.08284
 ## alternative hypothesis: true location shift is not equal to 0
 ## 95 percent confidence interval:
-##  -44.93   9.86
+##  -10.12738  56.93452
 ## sample estimates:
 ## difference in location 
-##                  -6.64 
+##               36.90999 
 ## 
 ## 
 ## 	Wilcoxon rank sum test with continuity correction
 ## 
 ## data:  Abundance by Climate.Source
-## W = 30, p-value = 0.1
+## W = 7, p-value = 0.4113
 ## alternative hypothesis: true location shift is not equal to 0
 ## 95 percent confidence interval:
-##  -6.17 41.74
+##  -44.932741   9.863263
 ## sample estimates:
 ## difference in location 
-##                   20.6 
+##              -6.636044 
 ## 
 ## 
 ## 	Wilcoxon rank sum test with continuity correction
 ## 
 ## data:  Abundance by Climate.Source
-## W = 10, p-value = 0.6
+## W = 29, p-value = 0.1296
 ## alternative hypothesis: true location shift is not equal to 0
 ## 95 percent confidence interval:
-##  -23.1  22.2
+##  -6.174561 41.738766
 ## sample estimates:
 ## difference in location 
-##                  -6.06 
+##               20.55627 
 ## 
 ## 
 ## 	Wilcoxon rank sum test with continuity correction
 ## 
 ## data:  Abundance by Climate.Source
-## W = 20, p-value = 0.06
+## W = 14, p-value = 0.6134
 ## alternative hypothesis: true location shift is not equal to 0
 ## 95 percent confidence interval:
-##  -1.95 46.69
+##  -23.05721  22.19200
 ## sample estimates:
 ## difference in location 
-##                   12.8 
+##              -6.063935 
 ## 
 ## 
 ## 	Wilcoxon rank sum test with continuity correction
 ## 
 ## data:  Abundance by Climate.Source
-## W = 100, p-value = 0.01
+## W = 23, p-value = 0.05523
 ## alternative hypothesis: true location shift is not equal to 0
 ## 95 percent confidence interval:
-##   7.17 40.31
+##  -1.954275 46.692652
 ## sample estimates:
 ## difference in location 
-##                   21.9 
+##               12.84274 
 ## 
 ## 
 ## 	Wilcoxon rank sum test with continuity correction
 ## 
 ## data:  Abundance by Climate.Source
-## W = 30, p-value = 0.2
+## W = 115, p-value = 0.01414
 ## alternative hypothesis: true location shift is not equal to 0
 ## 95 percent confidence interval:
-##  -11.0  33.2
+##   7.16780 40.31334
 ## sample estimates:
 ## difference in location 
-##                   17.1 
+##                21.9016 
 ## 
 ## 
 ## 	Wilcoxon rank sum test with continuity correction
 ## 
 ## data:  Abundance by Climate.Source
-## W = 20, p-value = 0.3
+## W = 27, p-value = 0.2199
 ## alternative hypothesis: true location shift is not equal to 0
 ## 95 percent confidence interval:
-##  -19.1  25.8
+##  -11.03421  33.22758
 ## sample estimates:
 ## difference in location 
-##                   15.9 
+##               17.11401 
+## 
+## 
+## 	Wilcoxon rank sum test with continuity correction
+## 
+## data:  Abundance by Climate.Source
+## W = 25, p-value = 0.3481
+## alternative hypothesis: true location shift is not equal to 0
+## 95 percent confidence interval:
+##  -19.10688  25.75876
+## sample estimates:
+## difference in location 
+##               15.87242 
 ## 
 ## Taxonomy Table:     [1 taxa by 1 taxonomic ranks]:
 ##       Phylum      
@@ -3264,108 +3322,108 @@ Taxa_tests_phylum <- STAMPR(Rock_weathering_filt3_GMPR, "Phylum", sig_pairs)
 ## DV:  Abundance 
 ## Observations:  34 
 ## D:  1 
-## MS total:  99.2 
+## MS total:  99.16667 
 ## 
-##                Df Sum Sq     H p.value
-## Climate         1    362  3.65   0.056
-## Source          3   1570 15.83   0.001
-## Climate:Source  1      1  0.01   0.917
-## Residuals      28   1339              
-## 
-## 	Wilcoxon rank sum test with continuity correction
-## 
-## data:  Abundance by Climate.Source
-## W = 0, p-value = 0.04
-## alternative hypothesis: true location shift is not equal to 0
-## 95 percent confidence interval:
-##  -8.62 -4.81
-## sample estimates:
-## difference in location 
-##                  -6.67 
-## 
+##                Df  Sum Sq       H p.value
+## Climate         1  362.38  3.6543 0.05593
+## Source          3 1569.80 15.8299 0.00123
+## Climate:Source  1    1.07  0.0108 0.91740
+## Residuals      28 1339.25                
 ## 
 ## 	Wilcoxon rank sum test with continuity correction
 ## 
 ## data:  Abundance by Climate.Source
-## W = 20, p-value = 0.04
+## W = 0, p-value = 0.03576
 ## alternative hypothesis: true location shift is not equal to 0
 ## 95 percent confidence interval:
-##  0.255 8.721
+##  -8.618072 -4.812207
 ## sample estimates:
 ## difference in location 
-##                   5.34 
+##              -6.671831 
 ## 
 ## 
 ## 	Wilcoxon rank sum test with continuity correction
 ## 
 ## data:  Abundance by Climate.Source
-## W = 2, p-value = 0.03
+## W = 24, p-value = 0.03576
 ## alternative hypothesis: true location shift is not equal to 0
 ## 95 percent confidence interval:
-##  -1.0126 -0.0336
+##  0.2551915 8.7211006
 ## sample estimates:
 ## difference in location 
-##                 -0.346 
+##               5.343429 
 ## 
 ## 
 ## 	Wilcoxon rank sum test with continuity correction
 ## 
 ## data:  Abundance by Climate.Source
-## W = 20, p-value = 0.5
+## W = 2, p-value = 0.02527
 ## alternative hypothesis: true location shift is not equal to 0
 ## 95 percent confidence interval:
-##  -0.667  2.129
+##  -1.01263008 -0.03357744
 ## sample estimates:
 ## difference in location 
-##                  0.128 
+##             -0.3462271 
 ## 
 ## 
 ## 	Wilcoxon rank sum test with continuity correction
 ## 
 ## data:  Abundance by Climate.Source
-## W = 8, p-value = 0.5
+## W = 23, p-value = 0.516
 ## alternative hypothesis: true location shift is not equal to 0
 ## 95 percent confidence interval:
-##  -2.27  4.52
+##  -0.6665798  2.1292269
 ## sample estimates:
 ## difference in location 
-##                 -0.205 
+##              0.1278182 
 ## 
 ## 
 ## 	Wilcoxon rank sum test with continuity correction
 ## 
 ## data:  Abundance by Climate.Source
-## W = 20, p-value = 0.003
+## W = 8, p-value = 0.5228
 ## alternative hypothesis: true location shift is not equal to 0
 ## 95 percent confidence interval:
-##  -1.661 -0.204
+##  -2.274515  4.521171
 ## sample estimates:
 ## difference in location 
-##                 -0.533 
+##             -0.2052955 
 ## 
 ## 
 ## 	Wilcoxon rank sum test with continuity correction
 ## 
 ## data:  Abundance by Climate.Source
-## W = 0, p-value = 0.01
+## W = 20, p-value = 0.002946
 ## alternative hypothesis: true location shift is not equal to 0
 ## 95 percent confidence interval:
-##  -1.267 -0.788
+##  -1.6614044 -0.2036041
 ## sample estimates:
 ## difference in location 
-##                 -0.998 
+##             -0.5325774 
 ## 
 ## 
 ## 	Wilcoxon rank sum test with continuity correction
 ## 
 ## data:  Abundance by Climate.Source
-## W = 20, p-value = 0.6
+## W = 0, p-value = 0.01154
 ## alternative hypothesis: true location shift is not equal to 0
 ## 95 percent confidence interval:
-##  -1.51  1.12
+##  -1.2671454 -0.7882357
 ## sample estimates:
 ## difference in location 
-##                  0.522 
+##             -0.9980437 
+## 
+## 
+## 	Wilcoxon rank sum test with continuity correction
+## 
+## data:  Abundance by Climate.Source
+## W = 22, p-value = 0.6134
+## alternative hypothesis: true location shift is not equal to 0
+## 95 percent confidence interval:
+##  -1.505982  1.119910
+## sample estimates:
+## difference in location 
+##              0.5223647 
 ## 
 ## Taxonomy Table:     [1 taxa by 1 taxonomic ranks]:
 ##        Phylum            
@@ -3374,108 +3432,108 @@ Taxa_tests_phylum <- STAMPR(Rock_weathering_filt3_GMPR, "Phylum", sig_pairs)
 ## DV:  Abundance 
 ## Observations:  34 
 ## D:  1 
-## MS total:  99.2 
+## MS total:  99.16667 
 ## 
-##                Df Sum Sq     H p.value
-## Climate         1    536  5.41   0.020
-## Source          3   1335 13.46   0.004
-## Climate:Source  1     29  0.30   0.586
-## Residuals      28   1372              
-## 
-## 	Wilcoxon rank sum test with continuity correction
-## 
-## data:  Abundance by Climate.Source
-## W = 10, p-value = 0.9
-## alternative hypothesis: true location shift is not equal to 0
-## 95 percent confidence interval:
-##  -1.56  2.37
-## sample estimates:
-## difference in location 
-##                   0.11 
-## 
+##                Df  Sum Sq       H p.value
+## Climate         1  536.03  5.4053 0.02008
+## Source          3 1335.07 13.4629 0.00374
+## Climate:Source  1   29.40  0.2965 0.58610
+## Residuals      28 1372.00                
 ## 
 ## 	Wilcoxon rank sum test with continuity correction
 ## 
 ## data:  Abundance by Climate.Source
-## W = 10, p-value = 0.8
+## W = 13, p-value = 0.9273
 ## alternative hypothesis: true location shift is not equal to 0
 ## 95 percent confidence interval:
-##  -0.594  1.579
+##  -1.563363  2.368097
 ## sample estimates:
 ## difference in location 
-##                  0.493 
+##              0.1096169 
 ## 
 ## 
 ## 	Wilcoxon rank sum test with continuity correction
 ## 
 ## data:  Abundance by Climate.Source
-## W = 5, p-value = 0.07
+## W = 14, p-value = 0.7842
 ## alternative hypothesis: true location shift is not equal to 0
 ## 95 percent confidence interval:
-##  -2.630  0.147
+##  -0.5939111  1.5794065
 ## sample estimates:
 ## difference in location 
-##                  -1.28 
+##              0.4927523 
 ## 
 ## 
 ## 	Wilcoxon rank sum test with continuity correction
 ## 
 ## data:  Abundance by Climate.Source
-## W = 0, p-value = 0.01
+## W = 5, p-value = 0.0712
 ## alternative hypothesis: true location shift is not equal to 0
 ## 95 percent confidence interval:
-##  -2.865 -0.966
+##  -2.6300118  0.1465505
 ## sample estimates:
 ## difference in location 
-##                  -1.92 
+##              -1.280392 
 ## 
 ## 
 ## 	Wilcoxon rank sum test with continuity correction
 ## 
 ## data:  Abundance by Climate.Source
-## W = 20, p-value = 0.1
+## W = 0, p-value = 0.01154
 ## alternative hypothesis: true location shift is not equal to 0
 ## 95 percent confidence interval:
-##  -0.115  0.699
+##  -2.8652168 -0.9657726
 ## sample estimates:
 ## difference in location 
-##                  0.226 
+##              -1.923801 
 ## 
 ## 
 ## 	Wilcoxon rank sum test with continuity correction
 ## 
 ## data:  Abundance by Climate.Source
-## W = 100, p-value = 0.01
+## W = 21, p-value = 0.1207
 ## alternative hypothesis: true location shift is not equal to 0
 ## 95 percent confidence interval:
-##  0.068 1.125
+##  -0.1146488  0.6986154
 ## sample estimates:
 ## difference in location 
-##                  0.575 
+##              0.2262944 
 ## 
 ## 
 ## 	Wilcoxon rank sum test with continuity correction
 ## 
 ## data:  Abundance by Climate.Source
-## W = 0, p-value = 0.01
+## W = 115, p-value = 0.01414
 ## alternative hypothesis: true location shift is not equal to 0
 ## 95 percent confidence interval:
-##  -5.20 -3.07
+##  0.06797809 1.12543652
 ## sample estimates:
 ## difference in location 
-##                  -4.26 
+##               0.575367 
 ## 
 ## 
 ## 	Wilcoxon rank sum test with continuity correction
 ## 
 ## data:  Abundance by Climate.Source
-## W = 40, p-value = 0.01
+## W = 0, p-value = 0.01154
 ## alternative hypothesis: true location shift is not equal to 0
 ## 95 percent confidence interval:
-##  4.37 5.33
+##  -5.196120 -3.074545
 ## sample estimates:
 ## difference in location 
-##                   4.96 
+##              -4.256295 
+## 
+## 
+## 	Wilcoxon rank sum test with continuity correction
+## 
+## data:  Abundance by Climate.Source
+## W = 36, p-value = 0.01154
+## alternative hypothesis: true location shift is not equal to 0
+## 95 percent confidence interval:
+##  4.371457 5.332202
+## sample estimates:
+## difference in location 
+##               4.958494 
 ## 
 ## Taxonomy Table:     [1 taxa by 1 taxonomic ranks]:
 ##        Phylum       
@@ -3484,108 +3542,108 @@ Taxa_tests_phylum <- STAMPR(Rock_weathering_filt3_GMPR, "Phylum", sig_pairs)
 ## DV:  Abundance 
 ## Observations:  34 
 ## D:  1 
-## MS total:  99.2 
+## MS total:  99.16667 
 ## 
-##                Df Sum Sq     H p.value
-## Climate         1    725  7.31   0.007
-## Source          3   1423 14.35   0.002
-## Climate:Source  1     17  0.17   0.678
-## Residuals      28   1107              
-## 
-## 	Wilcoxon rank sum test with continuity correction
-## 
-## data:  Abundance by Climate.Source
-## W = 20, p-value = 0.08
-## alternative hypothesis: true location shift is not equal to 0
-## 95 percent confidence interval:
-##  -1.89 27.56
-## sample estimates:
-## difference in location 
-##                   8.69 
-## 
+##                Df  Sum Sq       H p.value
+## Climate         1  724.97  7.3106 0.00685
+## Source          3 1423.13 14.3509 0.00246
+## Climate:Source  1   17.07  0.1721 0.67825
+## Residuals      28 1107.33                
 ## 
 ## 	Wilcoxon rank sum test with continuity correction
 ## 
 ## data:  Abundance by Climate.Source
-## W = 10, p-value = 0.9
+## W = 22, p-value = 0.08284
 ## alternative hypothesis: true location shift is not equal to 0
 ## 95 percent confidence interval:
-##  -2.39  2.13
+##  -1.888273 27.556451
 ## sample estimates:
 ## difference in location 
-##                  0.262 
+##                8.68754 
 ## 
 ## 
 ## 	Wilcoxon rank sum test with continuity correction
 ## 
 ## data:  Abundance by Climate.Source
-## W = 6, p-value = 0.1
+## W = 13, p-value = 0.9273
 ## alternative hypothesis: true location shift is not equal to 0
 ## 95 percent confidence interval:
-##  -19.84   5.73
+##  -2.388231  2.129751
 ## sample estimates:
 ## difference in location 
-##                   -8.4 
+##              0.2617992 
 ## 
 ## 
 ## 	Wilcoxon rank sum test with continuity correction
 ## 
 ## data:  Abundance by Climate.Source
-## W = 0, p-value = 0.01
+## W = 6, p-value = 0.09694
 ## alternative hypothesis: true location shift is not equal to 0
 ## 95 percent confidence interval:
-##  -23.2 -10.8
+##  -19.842294   5.726156
 ## sample estimates:
 ## difference in location 
-##                  -21.1 
+##              -8.397385 
 ## 
 ## 
 ## 	Wilcoxon rank sum test with continuity correction
 ## 
 ## data:  Abundance by Climate.Source
-## W = 10, p-value = 0.8
+## W = 0, p-value = 0.01154
 ## alternative hypothesis: true location shift is not equal to 0
 ## 95 percent confidence interval:
-##  -1.82  2.77
+##  -23.17677 -10.76493
 ## sample estimates:
 ## difference in location 
-##                  0.134 
+##              -21.05372 
 ## 
 ## 
 ## 	Wilcoxon rank sum test with continuity correction
 ## 
 ## data:  Abundance by Climate.Source
-## W = 100, p-value = 5e-04
+## W = 14, p-value = 0.7842
 ## alternative hypothesis: true location shift is not equal to 0
 ## 95 percent confidence interval:
-##   4.22 15.57
+##  -1.822953  2.765635
 ## sample estimates:
 ## difference in location 
-##                   8.96 
+##              0.1344354 
 ## 
 ## 
 ## 	Wilcoxon rank sum test with continuity correction
 ## 
 ## data:  Abundance by Climate.Source
-## W = 10, p-value = 0.3
+## W = 133, p-value = 0.0004777
 ## alternative hypothesis: true location shift is not equal to 0
 ## 95 percent confidence interval:
-##  -15.09   6.63
+##   4.219769 15.572571
 ## sample estimates:
 ## difference in location 
-##                  -6.71 
+##               8.960243 
 ## 
 ## 
 ## 	Wilcoxon rank sum test with continuity correction
 ## 
 ## data:  Abundance by Climate.Source
-## W = 40, p-value = 0.01
+## W = 10, p-value = 0.279
 ## alternative hypothesis: true location shift is not equal to 0
 ## 95 percent confidence interval:
-##  13.7 17.4
+##  -15.090981   6.626764
 ## sample estimates:
 ## difference in location 
-##                   16.2
+##              -6.713824 
+## 
+## 
+## 	Wilcoxon rank sum test with continuity correction
+## 
+## data:  Abundance by Climate.Source
+## W = 36, p-value = 0.01154
+## alternative hypothesis: true location shift is not equal to 0
+## 95 percent confidence interval:
+##  13.68642 17.40189
+## sample estimates:
+## difference in location 
+##                16.2042
 ```
 
 ```r
@@ -3600,108 +3658,108 @@ Taxa_tests_order <- STAMPR(Rock_weathering_filt3_GMPR, "Order", sig_pairs)
 ## DV:  Abundance 
 ## Observations:  34 
 ## D:  1 
-## MS total:  99.2 
+## MS total:  99.16667 
 ## 
-##                Df Sum Sq     H p.value
-## Climate         1    901  9.08   0.003
-## Source          3   1292 13.03   0.005
-## Climate:Source  1     79  0.80   0.371
-## Residuals      28   1000              
-## 
-## 	Wilcoxon rank sum test with continuity correction
-## 
-## data:  Abundance by Climate.Source
-## W = 0, p-value = 0.04
-## alternative hypothesis: true location shift is not equal to 0
-## 95 percent confidence interval:
-##  -41.19  -3.36
-## sample estimates:
-## difference in location 
-##                  -22.3 
-## 
+##                Df  Sum Sq       H p.value
+## Climate         1  900.74  9.0830 0.00258
+## Source          3 1292.08 13.0294 0.00457
+## Climate:Source  1   79.35  0.8002 0.37104
+## Residuals      28 1000.33                
 ## 
 ## 	Wilcoxon rank sum test with continuity correction
 ## 
 ## data:  Abundance by Climate.Source
-## W = 10, p-value = 1
+## W = 0, p-value = 0.03576
 ## alternative hypothesis: true location shift is not equal to 0
 ## 95 percent confidence interval:
-##  -40.2  41.2
+##  -41.194215  -3.356289
 ## sample estimates:
 ## difference in location 
-##                 -0.356 
+##              -22.27526 
 ## 
 ## 
 ## 	Wilcoxon rank sum test with continuity correction
 ## 
 ## data:  Abundance by Climate.Source
-## W = 2, p-value = 0.03
+## W = 12, p-value = 1
 ## alternative hypothesis: true location shift is not equal to 0
 ## 95 percent confidence interval:
-##  -0.455 -0.126
+##  -40.18183  41.15491
 ## sample estimates:
 ## difference in location 
-##                 -0.297 
+##             -0.3563909 
 ## 
 ## 
 ## 	Wilcoxon rank sum test with continuity correction
 ## 
 ## data:  Abundance by Climate.Source
-## W = 30, p-value = 0.04
+## W = 2, p-value = 0.02527
 ## alternative hypothesis: true location shift is not equal to 0
 ## 95 percent confidence interval:
-##  12.7 40.8
+##  -0.4548998 -0.1261025
 ## sample estimates:
 ## difference in location 
-##                   34.2 
+##             -0.2969459 
 ## 
 ## 
 ## 	Wilcoxon rank sum test with continuity correction
 ## 
 ## data:  Abundance by Climate.Source
-## W = 20, p-value = 0.08
+## W = 33, p-value = 0.03636
 ## alternative hypothesis: true location shift is not equal to 0
 ## 95 percent confidence interval:
-##  -0.325 43.909
+##  12.65335 40.77171
 ## sample estimates:
 ## difference in location 
-##                   34.8 
+##               34.15781 
 ## 
 ## 
 ## 	Wilcoxon rank sum test with continuity correction
 ## 
 ## data:  Abundance by Climate.Source
-## W = 9, p-value = 3e-04
+## W = 22, p-value = 0.08284
 ## alternative hypothesis: true location shift is not equal to 0
 ## 95 percent confidence interval:
-##  -36.5 -15.3
+##  -0.325322 43.909135
 ## sample estimates:
 ## difference in location 
-##                  -34.7 
+##                34.7954 
 ## 
 ## 
 ## 	Wilcoxon rank sum test with continuity correction
 ## 
 ## data:  Abundance by Climate.Source
-## W = 0, p-value = 0.01
+## W = 9, p-value = 0.000308
 ## alternative hypothesis: true location shift is not equal to 0
 ## 95 percent confidence interval:
-##  -1.134 -0.393
+##  -36.54463 -15.27047
 ## sample estimates:
 ## difference in location 
-##                 -0.743 
+##              -34.67256 
 ## 
 ## 
 ## 	Wilcoxon rank sum test with continuity correction
 ## 
 ## data:  Abundance by Climate.Source
-## W = 3, p-value = 0.04
+## W = 0, p-value = 0.01154
 ## alternative hypothesis: true location shift is not equal to 0
 ## 95 percent confidence interval:
-##  -40.5 -12.0
+##  -1.1343499 -0.3934692
 ## sample estimates:
 ## difference in location 
-##                  -33.8 
+##               -0.74279 
+## 
+## 
+## 	Wilcoxon rank sum test with continuity correction
+## 
+## data:  Abundance by Climate.Source
+## W = 3, p-value = 0.03636
+## alternative hypothesis: true location shift is not equal to 0
+## 95 percent confidence interval:
+##  -40.52361 -11.97382
+## sample estimates:
+## difference in location 
+##              -33.78455 
 ## 
 ## Taxonomy Table:     [1 taxa by 1 taxonomic ranks]:
 ##      Order               
@@ -3710,108 +3768,108 @@ Taxa_tests_order <- STAMPR(Rock_weathering_filt3_GMPR, "Order", sig_pairs)
 ## DV:  Abundance 
 ## Observations:  34 
 ## D:  1 
-## MS total:  99.2 
+## MS total:  99.16667 
 ## 
-##                Df Sum Sq     H p.value
-## Climate         1    184  1.85   0.174
-## Source          3   1245 12.56   0.006
-## Climate:Source  1     11  0.11   0.736
-## Residuals      28   1833              
-## 
-## 	Wilcoxon rank sum test with continuity correction
-## 
-## data:  Abundance by Climate.Source
-## W = 8, p-value = 0.5
-## alternative hypothesis: true location shift is not equal to 0
-## 95 percent confidence interval:
-##  -1.110  0.842
-## sample estimates:
-## difference in location 
-##                 -0.309 
-## 
+##                Df  Sum Sq       H p.value
+## Climate         1  183.56  1.8510 0.17367
+## Source          3 1245.17 12.5564 0.00570
+## Climate:Source  1   11.27  0.1136 0.73607
+## Residuals      28 1832.50                
 ## 
 ## 	Wilcoxon rank sum test with continuity correction
 ## 
 ## data:  Abundance by Climate.Source
-## W = 5, p-value = 0.2
+## W = 8, p-value = 0.5228
 ## alternative hypothesis: true location shift is not equal to 0
 ## 95 percent confidence interval:
-##  -13.08   1.13
+##  -1.1104079  0.8423098
 ## sample estimates:
 ## difference in location 
-##                  -6.12 
+##             -0.3089557 
 ## 
 ## 
 ## 	Wilcoxon rank sum test with continuity correction
 ## 
 ## data:  Abundance by Climate.Source
-## W = 20, p-value = 0.7
+## W = 5, p-value = 0.2353
 ## alternative hypothesis: true location shift is not equal to 0
 ## 95 percent confidence interval:
-##  -0.664  0.764
+##  -13.082829   1.131093
 ## sample estimates:
 ## difference in location 
-##                 0.0192 
+##              -6.123185 
 ## 
 ## 
 ## 	Wilcoxon rank sum test with continuity correction
 ## 
 ## data:  Abundance by Climate.Source
-## W = 30, p-value = 0.1
+## W = 21, p-value = 0.7182
 ## alternative hypothesis: true location shift is not equal to 0
 ## 95 percent confidence interval:
-##  -0.51 10.25
+##  -0.6640484  0.7639180
 ## sample estimates:
 ## difference in location 
-##                   6.49 
+##             0.01919754 
 ## 
 ## 
 ## 	Wilcoxon rank sum test with continuity correction
 ## 
 ## data:  Abundance by Climate.Source
-## W = 20, p-value = 0.1
+## W = 30, p-value = 0.09694
 ## alternative hypothesis: true location shift is not equal to 0
 ## 95 percent confidence interval:
-##  -0.478 13.695
+##  -0.5096519 10.2461215
 ## sample estimates:
 ## difference in location 
-##                   6.46 
+##               6.491376 
 ## 
 ## 
 ## 	Wilcoxon rank sum test with continuity correction
 ## 
 ## data:  Abundance by Climate.Source
-## W = 20, p-value = 0.005
+## W = 21, p-value = 0.1207
 ## alternative hypothesis: true location shift is not equal to 0
 ## 95 percent confidence interval:
-##  -8.517 -0.853
+##  -0.4782018 13.6953205
 ## sample estimates:
 ## difference in location 
-##                  -6.14 
+##                6.46166 
 ## 
 ## 
 ## 	Wilcoxon rank sum test with continuity correction
 ## 
 ## data:  Abundance by Climate.Source
-## W = 0, p-value = 0.01
+## W = 23, p-value = 0.005108
 ## alternative hypothesis: true location shift is not equal to 0
 ## 95 percent confidence interval:
-##  -4.33 -1.61
+##  -8.5172328 -0.8528489
 ## sample estimates:
 ## difference in location 
-##                     -3 
+##              -6.135539 
 ## 
 ## 
 ## 	Wilcoxon rank sum test with continuity correction
 ## 
 ## data:  Abundance by Climate.Source
-## W = 10, p-value = 0.6
+## W = 0, p-value = 0.01154
 ## alternative hypothesis: true location shift is not equal to 0
 ## 95 percent confidence interval:
-##  -8.04  3.57
+##  -4.329414 -1.612209
 ## sample estimates:
 ## difference in location 
-##                  -3.72 
+##              -3.002078 
+## 
+## 
+## 	Wilcoxon rank sum test with continuity correction
+## 
+## data:  Abundance by Climate.Source
+## W = 14, p-value = 0.6134
+## alternative hypothesis: true location shift is not equal to 0
+## 95 percent confidence interval:
+##  -8.039024  3.572766
+## sample estimates:
+## difference in location 
+##              -3.718278 
 ## 
 ## Taxonomy Table:     [1 taxa by 1 taxonomic ranks]:
 ##      Order              
@@ -3820,108 +3878,108 @@ Taxa_tests_order <- STAMPR(Rock_weathering_filt3_GMPR, "Order", sig_pairs)
 ## DV:  Abundance 
 ## Observations:  34 
 ## D:  1 
-## MS total:  99.2 
+## MS total:  99.16667 
 ## 
-##                Df Sum Sq     H p.value
-## Climate         1     71  0.71   0.399
-## Source          3   2314 23.34   0.000
-## Climate:Source  1     64  0.65   0.422
-## Residuals      28    824              
-## 
-## 	Wilcoxon rank sum test with continuity correction
-## 
-## data:  Abundance by Climate.Source
-## W = 20, p-value = 0.2
-## alternative hypothesis: true location shift is not equal to 0
-## 95 percent confidence interval:
-##  -0.571 91.132
-## sample estimates:
-## difference in location 
-##                   3.55 
-## 
+##                Df  Sum Sq       H p.value
+## Climate         1   70.62  0.7121 0.39874
+## Source          3 2314.23 23.3368 0.00003
+## Climate:Source  1   64.07  0.6461 0.42153
+## Residuals      28  823.58                
 ## 
 ## 	Wilcoxon rank sum test with continuity correction
 ## 
 ## data:  Abundance by Climate.Source
-## W = 20, p-value = 0.08
+## W = 20, p-value = 0.1709
 ## alternative hypothesis: true location shift is not equal to 0
 ## 95 percent confidence interval:
-##  -10.44   1.91
+##  -0.5713626 91.1323680
 ## sample estimates:
 ## difference in location 
-##                   1.69 
+##               3.553661 
 ## 
 ## 
 ## 	Wilcoxon rank sum test with continuity correction
 ## 
 ## data:  Abundance by Climate.Source
-## W = 3, p-value = 0.04
+## W = 22, p-value = 0.08284
 ## alternative hypothesis: true location shift is not equal to 0
 ## 95 percent confidence interval:
-##  -49.50  -5.47
+##  -10.437379   1.912076
 ## sample estimates:
 ## difference in location 
-##                  -21.5 
+##                1.69055 
 ## 
 ## 
 ## 	Wilcoxon rank sum test with continuity correction
 ## 
 ## data:  Abundance by Climate.Source
-## W = 0, p-value = 0.01
+## W = 3, p-value = 0.03636
 ## alternative hypothesis: true location shift is not equal to 0
 ## 95 percent confidence interval:
-##  -51.7 -22.4
+##  -49.501489  -5.472717
 ## sample estimates:
 ## difference in location 
-##                  -26.6 
+##              -21.46237 
 ## 
 ## 
 ## 	Wilcoxon rank sum test with continuity correction
 ## 
 ## data:  Abundance by Climate.Source
-## W = 0, p-value = 0.04
+## W = 0, p-value = 0.01154
 ## alternative hypothesis: true location shift is not equal to 0
 ## 95 percent confidence interval:
-##  -84.2 -55.6
+##  -51.68982 -22.42206
 ## sample estimates:
 ## difference in location 
-##                  -69.9 
+##              -26.58309 
 ## 
 ## 
 ## 	Wilcoxon rank sum test with continuity correction
 ## 
 ## data:  Abundance by Climate.Source
-## W = 100, p-value = 4e-04
+## W = 0, p-value = 0.03576
 ## alternative hypothesis: true location shift is not equal to 0
 ## 95 percent confidence interval:
-##  1.93 8.06
+##  -84.18527 -55.63994
 ## sample estimates:
 ## difference in location 
-##                   5.11 
+##              -69.91261 
 ## 
 ## 
 ## 	Wilcoxon rank sum test with continuity correction
 ## 
 ## data:  Abundance by Climate.Source
-## W = 40, p-value = 0.01
+## W = 134, p-value = 0.0003842
 ## alternative hypothesis: true location shift is not equal to 0
 ## 95 percent confidence interval:
-##   1.3 17.4
+##  1.932528 8.058776
 ## sample estimates:
 ## difference in location 
-##                   5.33 
+##                5.11499 
 ## 
 ## 
 ## 	Wilcoxon rank sum test with continuity correction
 ## 
 ## data:  Abundance by Climate.Source
-## W = 8, p-value = 0.2
+## W = 36, p-value = 0.01154
 ## alternative hypothesis: true location shift is not equal to 0
 ## 95 percent confidence interval:
-##  -0.5844  0.0654
+##   1.298489 17.365156
 ## sample estimates:
 ## difference in location 
-##                 -0.103 
+##               5.334665 
+## 
+## 
+## 	Wilcoxon rank sum test with continuity correction
+## 
+## data:  Abundance by Climate.Source
+## W = 8, p-value = 0.1703
+## alternative hypothesis: true location shift is not equal to 0
+## 95 percent confidence interval:
+##  -0.58435850  0.06542455
+## sample estimates:
+## difference in location 
+##             -0.1028499 
 ## 
 ## Taxonomy Table:     [1 taxa by 1 taxonomic ranks]:
 ##      Order         
@@ -3930,108 +3988,108 @@ Taxa_tests_order <- STAMPR(Rock_weathering_filt3_GMPR, "Order", sig_pairs)
 ## DV:  Abundance 
 ## Observations:  34 
 ## D:  1 
-## MS total:  99.2 
+## MS total:  99.16667 
 ## 
-##                Df Sum Sq    H p.value
-## Climate         1    174 1.76   0.185
-## Source          3    717 7.23   0.065
-## Climate:Source  1      2 0.02   0.876
-## Residuals      28   2379             
-## 
-## 	Wilcoxon rank sum test with continuity correction
-## 
-## data:  Abundance by Climate.Source
-## W = 10, p-value = 0.8
-## alternative hypothesis: true location shift is not equal to 0
-## 95 percent confidence interval:
-##  -1.05 14.87
-## sample estimates:
-## difference in location 
-##                  0.195 
-## 
+##                Df  Sum Sq      H p.value
+## Climate         1  174.38 1.7585 0.18481
+## Source          3  716.55 7.2257 0.06504
+## Climate:Source  1    2.40 0.0242 0.87637
+## Residuals      28 2379.17               
 ## 
 ## 	Wilcoxon rank sum test with continuity correction
 ## 
 ## data:  Abundance by Climate.Source
-## W = 4, p-value = 0.2
+## W = 14, p-value = 0.7842
 ## alternative hypothesis: true location shift is not equal to 0
 ## 95 percent confidence interval:
-##  -33.557   0.854
+##  -1.04641 14.86629
 ## sample estimates:
 ## difference in location 
-##                  -3.54 
+##              0.1945796 
 ## 
 ## 
 ## 	Wilcoxon rank sum test with continuity correction
 ## 
 ## data:  Abundance by Climate.Source
-## W = 20, p-value = 0.6
+## W = 4, p-value = 0.1709
 ## alternative hypothesis: true location shift is not equal to 0
 ## 95 percent confidence interval:
-##  -0.27  9.15
+##  -33.5566632   0.8541497
 ## sample estimates:
 ## difference in location 
-##                  0.518 
+##              -3.536299 
 ## 
 ## 
 ## 	Wilcoxon rank sum test with continuity correction
 ## 
 ## data:  Abundance by Climate.Source
-## W = 30, p-value = 0.03
+## W = 22, p-value = 0.6134
 ## alternative hypothesis: true location shift is not equal to 0
 ## 95 percent confidence interval:
-##   0.158 23.911
+##  -0.2696644  9.1526642
 ## sample estimates:
 ## difference in location 
-##                   4.18 
+##              0.5183234 
 ## 
 ## 
 ## 	Wilcoxon rank sum test with continuity correction
 ## 
 ## data:  Abundance by Climate.Source
-## W = 20, p-value = 0.1
+## W = 34, p-value = 0.02527
 ## alternative hypothesis: true location shift is not equal to 0
 ## 95 percent confidence interval:
-##  -0.365 33.663
+##   0.1576628 23.9114605
 ## sample estimates:
 ## difference in location 
-##                   4.55 
+##               4.181034 
 ## 
 ## 
 ## 	Wilcoxon rank sum test with continuity correction
 ## 
 ## data:  Abundance by Climate.Source
-## W = 40, p-value = 0.08
+## W = 21, p-value = 0.1207
 ## alternative hypothesis: true location shift is not equal to 0
 ## 95 percent confidence interval:
-##  -8.94  1.06
+##  -0.3651775 33.6630338
 ## sample estimates:
 ## difference in location 
-##                  -1.22 
+##               4.549962 
 ## 
 ## 
 ## 	Wilcoxon rank sum test with continuity correction
 ## 
 ## data:  Abundance by Climate.Source
-## W = 20, p-value = 0.8
+## W = 41, p-value = 0.07825
 ## alternative hypothesis: true location shift is not equal to 0
 ## 95 percent confidence interval:
-##  -0.578  9.034
+##  -8.940779  1.057636
 ## sample estimates:
 ## difference in location 
-##                  0.213 
+##              -1.222737 
 ## 
 ## 
 ## 	Wilcoxon rank sum test with continuity correction
 ## 
 ## data:  Abundance by Climate.Source
-## W = 5, p-value = 0.07
+## W = 20, p-value = 0.8286
 ## alternative hypothesis: true location shift is not equal to 0
 ## 95 percent confidence interval:
-##  -23.792   0.123
+##  -0.5775934  9.0335277
 ## sample estimates:
 ## difference in location 
-##                  -3.89 
+##              0.2127829 
+## 
+## 
+## 	Wilcoxon rank sum test with continuity correction
+## 
+## data:  Abundance by Climate.Source
+## W = 5, p-value = 0.0712
+## alternative hypothesis: true location shift is not equal to 0
+## 95 percent confidence interval:
+##  -23.7924121   0.1227166
+## sample estimates:
+## difference in location 
+##              -3.891536 
 ## 
 ## Taxonomy Table:     [1 taxa by 1 taxonomic ranks]:
 ##      Order        
@@ -4040,108 +4098,108 @@ Taxa_tests_order <- STAMPR(Rock_weathering_filt3_GMPR, "Order", sig_pairs)
 ## DV:  Abundance 
 ## Observations:  34 
 ## D:  1 
-## MS total:  99.2 
+## MS total:  99.16667 
 ## 
-##                Df Sum Sq    H p.value
-## Climate         1    880 8.88  0.0029
-## Source          3    547 5.51  0.1378
-## Climate:Source  1    400 4.04  0.0445
-## Residuals      28   1445             
-## 
-## 	Wilcoxon rank sum test with continuity correction
-## 
-## data:  Abundance by Climate.Source
-## W = 9, p-value = 0.6
-## alternative hypothesis: true location shift is not equal to 0
-## 95 percent confidence interval:
-##  -5.88  2.95
-## sample estimates:
-## difference in location 
-##                  -1.47 
-## 
+##                Df  Sum Sq      H  p.value
+## Climate         1  880.26 8.8766 0.002888
+## Source          3  546.82 5.5141 0.137795
+## Climate:Source  1  400.42 4.0378 0.044491
+## Residuals      28 1445.00                
 ## 
 ## 	Wilcoxon rank sum test with continuity correction
 ## 
 ## data:  Abundance by Climate.Source
-## W = 6, p-value = 0.3
+## W = 9, p-value = 0.6481
 ## alternative hypothesis: true location shift is not equal to 0
 ## 95 percent confidence interval:
-##  -11.7   5.9
+##  -5.881060  2.947064
 ## sample estimates:
 ## difference in location 
-##                  -3.36 
+##              -1.466998 
 ## 
 ## 
 ## 	Wilcoxon rank sum test with continuity correction
 ## 
 ## data:  Abundance by Climate.Source
-## W = 20, p-value = 0.8
+## W = 6, p-value = 0.3153
 ## alternative hypothesis: true location shift is not equal to 0
 ## 95 percent confidence interval:
-##  -1.99  1.21
+##  -11.662705   5.901289
 ## sample estimates:
 ## difference in location 
-##                 -0.501 
+##              -3.357776 
 ## 
 ## 
 ## 	Wilcoxon rank sum test with continuity correction
 ## 
 ## data:  Abundance by Climate.Source
-## W = 30, p-value = 0.04
+## W = 16, p-value = 0.8286
 ## alternative hypothesis: true location shift is not equal to 0
 ## 95 percent confidence interval:
-##   0.976 10.129
+##  -1.990814  1.211501
 ## sample estimates:
 ## difference in location 
-##                   4.44 
+##             -0.5011302 
 ## 
 ## 
 ## 	Wilcoxon rank sum test with continuity correction
 ## 
 ## data:  Abundance by Climate.Source
-## W = 8, p-value = 0.5
+## W = 33, p-value = 0.03636
 ## alternative hypothesis: true location shift is not equal to 0
 ## 95 percent confidence interval:
-##  -7.85  4.60
+##   0.9757943 10.1285233
 ## sample estimates:
 ## difference in location 
-##                   -1.2 
+##               4.438603 
 ## 
 ## 
 ## 	Wilcoxon rank sum test with continuity correction
 ## 
 ## data:  Abundance by Climate.Source
-## W = 10, p-value = 6e-04
+## W = 8, p-value = 0.5228
 ## alternative hypothesis: true location shift is not equal to 0
 ## 95 percent confidence interval:
-##  -7.32 -2.45
+##  -7.848487  4.603742
 ## sample estimates:
 ## difference in location 
-##                  -4.61 
+##              -1.200014 
 ## 
 ## 
 ## 	Wilcoxon rank sum test with continuity correction
 ## 
 ## data:  Abundance by Climate.Source
-## W = 0, p-value = 0.01
+## W = 12, p-value = 0.000592
 ## alternative hypothesis: true location shift is not equal to 0
 ## 95 percent confidence interval:
-##  -4.59 -2.23
+##  -7.323014 -2.448342
 ## sample estimates:
 ## difference in location 
-##                  -2.96 
+##                -4.6125 
 ## 
 ## 
 ## 	Wilcoxon rank sum test with continuity correction
 ## 
 ## data:  Abundance by Climate.Source
-## W = 10, p-value = 0.4
+## W = 0, p-value = 0.01154
 ## alternative hypothesis: true location shift is not equal to 0
 ## 95 percent confidence interval:
-##  -7.27  1.28
+##  -4.588206 -2.234018
 ## sample estimates:
 ## difference in location 
-##                  -1.61 
+##              -2.956213 
+## 
+## 
+## 	Wilcoxon rank sum test with continuity correction
+## 
+## data:  Abundance by Climate.Source
+## W = 12, p-value = 0.4273
+## alternative hypothesis: true location shift is not equal to 0
+## 95 percent confidence interval:
+##  -7.265095  1.276736
+## sample estimates:
+## difference in location 
+##              -1.607365 
 ## 
 ## Taxonomy Table:     [1 taxa by 1 taxonomic ranks]:
 ##       Order       
@@ -4150,108 +4208,108 @@ Taxa_tests_order <- STAMPR(Rock_weathering_filt3_GMPR, "Order", sig_pairs)
 ## DV:  Abundance 
 ## Observations:  34 
 ## D:  1 
-## MS total:  99.2 
+## MS total:  99.16667 
 ## 
-##                Df Sum Sq     H p.value
-## Climate         1     49  0.50   0.480
-## Source          3   1315 13.26   0.004
-## Climate:Source  1     73  0.73   0.392
-## Residuals      28   1836              
-## 
-## 	Wilcoxon rank sum test with continuity correction
-## 
-## data:  Abundance by Climate.Source
-## W = 10, p-value = 0.8
-## alternative hypothesis: true location shift is not equal to 0
-## 95 percent confidence interval:
-##  -1.36  6.53
-## sample estimates:
-## difference in location 
-##                 -0.113 
-## 
+##                Df  Sum Sq       H p.value
+## Climate         1   49.44  0.4986 0.48013
+## Source          3 1314.88 13.2592 0.00411
+## Climate:Source  1   72.60  0.7321 0.39220
+## Residuals      28 1835.58                
 ## 
 ## 	Wilcoxon rank sum test with continuity correction
 ## 
 ## data:  Abundance by Climate.Source
-## W = 4, p-value = 0.2
+## W = 10, p-value = 0.7842
 ## alternative hypothesis: true location shift is not equal to 0
 ## 95 percent confidence interval:
-##  -4.08  1.32
+##  -1.355819  6.528750
 ## sample estimates:
 ## difference in location 
-##                  -1.91 
+##             -0.1126584 
 ## 
 ## 
 ## 	Wilcoxon rank sum test with continuity correction
 ## 
 ## data:  Abundance by Climate.Source
-## W = 10, p-value = 0.6
+## W = 4, p-value = 0.1709
 ## alternative hypothesis: true location shift is not equal to 0
 ## 95 percent confidence interval:
-##  -0.940  0.823
+##  -4.075922  1.321435
 ## sample estimates:
 ## difference in location 
-##                 -0.265 
+##              -1.911203 
 ## 
 ## 
 ## 	Wilcoxon rank sum test with continuity correction
 ## 
 ## data:  Abundance by Climate.Source
-## W = 30, p-value = 0.1
+## W = 14, p-value = 0.6134
 ## alternative hypothesis: true location shift is not equal to 0
 ## 95 percent confidence interval:
-##  -0.556  3.246
+##  -0.9403130  0.8227086
 ## sample estimates:
 ## difference in location 
-##                   1.83 
+##              -0.265193 
 ## 
 ## 
 ## 	Wilcoxon rank sum test with continuity correction
 ## 
 ## data:  Abundance by Climate.Source
-## W = 20, p-value = 0.08
+## W = 30, p-value = 0.09694
 ## alternative hypothesis: true location shift is not equal to 0
 ## 95 percent confidence interval:
-##  -0.612  4.277
+##  -0.5559751  3.2464937
 ## sample estimates:
 ## difference in location 
-##                    2.4 
+##               1.832547 
 ## 
 ## 
 ## 	Wilcoxon rank sum test with continuity correction
 ## 
 ## data:  Abundance by Climate.Source
-## W = 30, p-value = 0.02
+## W = 22, p-value = 0.08284
 ## alternative hypothesis: true location shift is not equal to 0
 ## 95 percent confidence interval:
-##  -2.847 -0.324
+##  -0.6122869  4.2773329
 ## sample estimates:
 ## difference in location 
-##                  -1.97 
+##               2.400129 
 ## 
 ## 
 ## 	Wilcoxon rank sum test with continuity correction
 ## 
 ## data:  Abundance by Climate.Source
-## W = 3, p-value = 0.04
+## W = 31, p-value = 0.01937
 ## alternative hypothesis: true location shift is not equal to 0
 ## 95 percent confidence interval:
-##  -6.17 -4.03
+##  -2.8472840 -0.3238103
 ## sample estimates:
 ## difference in location 
-##                   -5.3 
+##              -1.969475 
 ## 
 ## 
 ## 	Wilcoxon rank sum test with continuity correction
 ## 
 ## data:  Abundance by Climate.Source
-## W = 40, p-value = 0.01
+## W = 3, p-value = 0.03636
 ## alternative hypothesis: true location shift is not equal to 0
 ## 95 percent confidence interval:
-##  1.72 5.44
+##  -6.169976 -4.029602
 ## sample estimates:
 ## difference in location 
-##                   3.04 
+##              -5.295554 
+## 
+## 
+## 	Wilcoxon rank sum test with continuity correction
+## 
+## data:  Abundance by Climate.Source
+## W = 36, p-value = 0.01154
+## alternative hypothesis: true location shift is not equal to 0
+## 95 percent confidence interval:
+##  1.716829 5.439081
+## sample estimates:
+## difference in location 
+##               3.039978 
 ## 
 ## Taxonomy Table:     [1 taxa by 1 taxonomic ranks]:
 ##       Order             
@@ -4260,108 +4318,108 @@ Taxa_tests_order <- STAMPR(Rock_weathering_filt3_GMPR, "Order", sig_pairs)
 ## DV:  Abundance 
 ## Observations:  34 
 ## D:  1 
-## MS total:  99.2 
+## MS total:  99.16667 
 ## 
-##                Df Sum Sq    H p.value
-## Climate         1      5 0.05   0.823
-## Source          3    596 6.01   0.111
-## Climate:Source  1     66 0.67   0.414
-## Residuals      28   2605             
-## 
-## 	Wilcoxon rank sum test with continuity correction
-## 
-## data:  Abundance by Climate.Source
-## W = 10, p-value = 0.9
-## alternative hypothesis: true location shift is not equal to 0
-## 95 percent confidence interval:
-##  -5.9 12.8
-## sample estimates:
-## difference in location 
-##                   0.14 
-## 
+##                Df  Sum Sq      H p.value
+## Climate         1    4.97 0.0501 0.82285
+## Source          3  595.88 6.0089 0.11118
+## Climate:Source  1   66.15 0.6671 0.41408
+## Residuals      28 2605.50               
 ## 
 ## 	Wilcoxon rank sum test with continuity correction
 ## 
 ## data:  Abundance by Climate.Source
-## W = 9, p-value = 0.6
+## W = 13, p-value = 0.9273
 ## alternative hypothesis: true location shift is not equal to 0
 ## 95 percent confidence interval:
-##  -8.33  4.10
+##  -5.903441 12.844720
 ## sample estimates:
 ## difference in location 
-##                  -0.71 
+##                0.13997 
 ## 
 ## 
 ## 	Wilcoxon rank sum test with continuity correction
 ## 
 ## data:  Abundance by Climate.Source
-## W = 20, p-value = 0.8
+## W = 9, p-value = 0.6481
 ## alternative hypothesis: true location shift is not equal to 0
 ## 95 percent confidence interval:
-##  -4.13  5.96
+##  -8.326224  4.103880
 ## sample estimates:
 ## difference in location 
-##                  0.326 
+##             -0.7099819 
 ## 
 ## 
 ## 	Wilcoxon rank sum test with continuity correction
 ## 
 ## data:  Abundance by Climate.Source
-## W = 20, p-value = 0.6
+## W = 20, p-value = 0.8286
 ## alternative hypothesis: true location shift is not equal to 0
 ## 95 percent confidence interval:
-##  -3.23  5.51
+##  -4.128869  5.956528
 ## sample estimates:
 ## difference in location 
-##                   1.48 
+##              0.3258721 
 ## 
 ## 
 ## 	Wilcoxon rank sum test with continuity correction
 ## 
 ## data:  Abundance by Climate.Source
-## W = 20, p-value = 0.04
+## W = 22, p-value = 0.6134
 ## alternative hypothesis: true location shift is not equal to 0
 ## 95 percent confidence interval:
-##  1.38 9.58
+##  -3.226862  5.505896
 ## sample estimates:
 ## difference in location 
-##                   5.12 
+##               1.482761 
 ## 
 ## 
 ## 	Wilcoxon rank sum test with continuity correction
 ## 
 ## data:  Abundance by Climate.Source
-## W = 50, p-value = 0.3
+## W = 24, p-value = 0.03576
 ## alternative hypothesis: true location shift is not equal to 0
 ## 95 percent confidence interval:
-##  -3.50  1.09
+##  1.378665 9.581825
 ## sample estimates:
 ## difference in location 
-##                   -1.2 
+##               5.117695 
 ## 
 ## 
 ## 	Wilcoxon rank sum test with continuity correction
 ## 
 ## data:  Abundance by Climate.Source
-## W = 10, p-value = 0.4
+## W = 52, p-value = 0.2602
 ## alternative hypothesis: true location shift is not equal to 0
 ## 95 percent confidence interval:
-##  -4.00  3.07
+##  -3.503731  1.094646
 ## sample estimates:
 ## difference in location 
-##                  -1.06 
+##              -1.199836 
 ## 
 ## 
 ## 	Wilcoxon rank sum test with continuity correction
 ## 
 ## data:  Abundance by Climate.Source
-## W = 20, p-value = 0.7
+## W = 12, p-value = 0.4273
 ## alternative hypothesis: true location shift is not equal to 0
 ## 95 percent confidence interval:
-##  -2.89  2.81
+##  -3.995816  3.069399
 ## sample estimates:
 ## difference in location 
-##                 -0.536 
+##                -1.0588 
+## 
+## 
+## 	Wilcoxon rank sum test with continuity correction
+## 
+## data:  Abundance by Climate.Source
+## W = 15, p-value = 0.7182
+## alternative hypothesis: true location shift is not equal to 0
+## 95 percent confidence interval:
+##  -2.890330  2.811984
+## sample estimates:
+## difference in location 
+##             -0.5360087 
 ## 
 ## Taxonomy Table:     [1 taxa by 1 taxonomic ranks]:
 ##       Order            
@@ -4370,108 +4428,108 @@ Taxa_tests_order <- STAMPR(Rock_weathering_filt3_GMPR, "Order", sig_pairs)
 ## DV:  Abundance 
 ## Observations:  34 
 ## D:  1 
-## MS total:  99.2 
+## MS total:  99.16667 
 ## 
-##                Df Sum Sq     H p.value
-## Climate         1    431  4.34   0.037
-## Source          3   1248 12.58   0.006
-## Climate:Source  1     40  0.40   0.525
-## Residuals      28   1554              
-## 
-## 	Wilcoxon rank sum test with continuity correction
-## 
-## data:  Abundance by Climate.Source
-## W = 9, p-value = 0.6
-## alternative hypothesis: true location shift is not equal to 0
-## 95 percent confidence interval:
-##  -1.070  0.948
-## sample estimates:
-## difference in location 
-##                -0.0385 
-## 
+##                Df  Sum Sq       H p.value
+## Climate         1  430.62  4.3424 0.03718
+## Source          3 1247.53 12.5802 0.00564
+## Climate:Source  1   40.02  0.4035 0.52527
+## Residuals      28 1554.33                
 ## 
 ## 	Wilcoxon rank sum test with continuity correction
 ## 
 ## data:  Abundance by Climate.Source
-## W = 5, p-value = 0.2
+## W = 9, p-value = 0.6481
 ## alternative hypothesis: true location shift is not equal to 0
 ## 95 percent confidence interval:
-##  -2.937  0.523
+##  -1.0704490  0.9475039
 ## sample estimates:
 ## difference in location 
-##                 -0.849 
+##            -0.03852294 
 ## 
 ## 
 ## 	Wilcoxon rank sum test with continuity correction
 ## 
 ## data:  Abundance by Climate.Source
-## W = 20, p-value = 0.4
+## W = 5, p-value = 0.2353
 ## alternative hypothesis: true location shift is not equal to 0
 ## 95 percent confidence interval:
-##  -0.431  0.773
+##  -2.9373695  0.5232694
 ## sample estimates:
 ## difference in location 
-##                  0.218 
+##             -0.8493462 
 ## 
 ## 
 ## 	Wilcoxon rank sum test with continuity correction
 ## 
 ## data:  Abundance by Climate.Source
-## W = 40, p-value = 0.02
+## W = 24, p-value = 0.4273
 ## alternative hypothesis: true location shift is not equal to 0
 ## 95 percent confidence interval:
-##  0.281 2.461
+##  -0.4313298  0.7733929
 ## sample estimates:
 ## difference in location 
-##                    1.1 
+##               0.218237 
 ## 
 ## 
 ## 	Wilcoxon rank sum test with continuity correction
 ## 
 ## data:  Abundance by Climate.Source
-## W = 20, p-value = 0.04
+## W = 35, p-value = 0.01724
 ## alternative hypothesis: true location shift is not equal to 0
 ## 95 percent confidence interval:
-##  0.365 3.036
+##  0.2813935 2.4611436
 ## sample estimates:
 ## difference in location 
-##                   1.29 
+##               1.096272 
 ## 
 ## 
 ## 	Wilcoxon rank sum test with continuity correction
 ## 
 ## data:  Abundance by Climate.Source
-## W = 20, p-value = 0.002
+## W = 24, p-value = 0.03576
 ## alternative hypothesis: true location shift is not equal to 0
 ## 95 percent confidence interval:
-##  -1.680 -0.436
+##  0.3652594 3.0358987
 ## sample estimates:
 ## difference in location 
-##                 -0.921 
+##               1.288226 
 ## 
 ## 
 ## 	Wilcoxon rank sum test with continuity correction
 ## 
 ## data:  Abundance by Climate.Source
-## W = 20, p-value = 1
+## W = 17, p-value = 0.001652
 ## alternative hypothesis: true location shift is not equal to 0
 ## 95 percent confidence interval:
-##  -0.432  0.364
+##  -1.6797914 -0.4360266
 ## sample estimates:
 ## difference in location 
-##                 0.0155 
+##             -0.9214106 
 ## 
 ## 
 ## 	Wilcoxon rank sum test with continuity correction
 ## 
 ## data:  Abundance by Climate.Source
-## W = 0, p-value = 0.01
+## W = 18, p-value = 1
 ## alternative hypothesis: true location shift is not equal to 0
 ## 95 percent confidence interval:
-##  -2.0437 -0.0965
+##  -0.4322340  0.3639032
 ## sample estimates:
 ## difference in location 
-##                 -0.961 
+##             0.01551463 
+## 
+## 
+## 	Wilcoxon rank sum test with continuity correction
+## 
+## data:  Abundance by Climate.Source
+## W = 0, p-value = 0.01154
+## alternative hypothesis: true location shift is not equal to 0
+## 95 percent confidence interval:
+##  -2.043705 -0.096489
+## sample estimates:
+## difference in location 
+##             -0.9607206 
 ## 
 ## Taxonomy Table:     [1 taxa by 1 taxonomic ranks]:
 ##       Order            
@@ -4480,108 +4538,108 @@ Taxa_tests_order <- STAMPR(Rock_weathering_filt3_GMPR, "Order", sig_pairs)
 ## DV:  Abundance 
 ## Observations:  34 
 ## D:  1 
-## MS total:  99.2 
+## MS total:  99.16667 
 ## 
-##                Df Sum Sq     H p.value
-## Climate         1    362  3.65   0.056
-## Source          3   1284 12.94   0.005
-## Climate:Source  1      7  0.07   0.785
-## Residuals      28   1619              
-## 
-## 	Wilcoxon rank sum test with continuity correction
-## 
-## data:  Abundance by Climate.Source
-## W = 20, p-value = 0.04
-## alternative hypothesis: true location shift is not equal to 0
-## 95 percent confidence interval:
-##   1.34 35.28
-## sample estimates:
-## difference in location 
-##                   23.1 
-## 
+##                Df  Sum Sq       H p.value
+## Climate         1  362.38  3.6543 0.05593
+## Source          3 1283.60 12.9439 0.00476
+## Climate:Source  1    7.35  0.0741 0.78543
+## Residuals      28 1619.17                
 ## 
 ## 	Wilcoxon rank sum test with continuity correction
 ## 
 ## data:  Abundance by Climate.Source
-## W = 0, p-value = 0.04
+## W = 24, p-value = 0.03576
 ## alternative hypothesis: true location shift is not equal to 0
 ## 95 percent confidence interval:
-##  -34.3941  -0.0705
+##   1.343966 35.280345
 ## sample estimates:
 ## difference in location 
-##                   -4.2 
+##               23.05921 
 ## 
 ## 
 ## 	Wilcoxon rank sum test with continuity correction
 ## 
 ## data:  Abundance by Climate.Source
-## W = 30, p-value = 0.04
+## W = 0, p-value = 0.03576
 ## alternative hypothesis: true location shift is not equal to 0
 ## 95 percent confidence interval:
-##   5.21 27.55
+##  -34.39409979  -0.07048124
 ## sample estimates:
 ## difference in location 
-##                   17.1 
+##              -4.199694 
 ## 
 ## 
 ## 	Wilcoxon rank sum test with continuity correction
 ## 
 ## data:  Abundance by Climate.Source
-## W = 20, p-value = 0.9
+## W = 33, p-value = 0.03636
 ## alternative hypothesis: true location shift is not equal to 0
 ## 95 percent confidence interval:
-##  -6.01 27.58
+##   5.206833 27.553233
 ## sample estimates:
 ## difference in location 
-##                  0.306 
+##               17.11954 
 ## 
 ## 
 ## 	Wilcoxon rank sum test with continuity correction
 ## 
 ## data:  Abundance by Climate.Source
-## W = 20, p-value = 0.06
+## W = 19, p-value = 0.9425
 ## alternative hypothesis: true location shift is not equal to 0
 ## 95 percent confidence interval:
-##  -0.173 34.359
+##  -6.01319 27.58079
 ## sample estimates:
 ## difference in location 
-##                   4.64 
+##              0.3061655 
 ## 
 ## 
 ## 	Wilcoxon rank sum test with continuity correction
 ## 
 ## data:  Abundance by Climate.Source
-## W = 100, p-value = 0.03
+## W = 23, p-value = 0.05523
 ## alternative hypothesis: true location shift is not equal to 0
 ## 95 percent confidence interval:
-##   1.01 21.60
+##  -0.1729386 34.3585874
 ## sample estimates:
 ## difference in location 
-##                   13.5 
+##               4.639865 
 ## 
 ## 
 ## 	Wilcoxon rank sum test with continuity correction
 ## 
 ## data:  Abundance by Climate.Source
-## W = 30, p-value = 0.04
+## W = 110, p-value = 0.03038
 ## alternative hypothesis: true location shift is not equal to 0
 ## 95 percent confidence interval:
-##   5.38 24.82
+##   1.007057 21.596004
 ## sample estimates:
 ## difference in location 
-##                   16.8 
+##               13.50276 
 ## 
 ## 
 ## 	Wilcoxon rank sum test with continuity correction
 ## 
 ## data:  Abundance by Climate.Source
-## W = 20, p-value = 0.8
+## W = 33, p-value = 0.03636
 ## alternative hypothesis: true location shift is not equal to 0
 ## 95 percent confidence interval:
-##  -26.41   5.86
+##   5.377442 24.819725
 ## sample estimates:
 ## difference in location 
-##                    1.7 
+##               16.82808 
+## 
+## 
+## 	Wilcoxon rank sum test with continuity correction
+## 
+## data:  Abundance by Climate.Source
+## W = 20, p-value = 0.8286
+## alternative hypothesis: true location shift is not equal to 0
+## 95 percent confidence interval:
+##  -26.414743   5.855238
+## sample estimates:
+## difference in location 
+##                1.69516 
 ## 
 ## Taxonomy Table:     [1 taxa by 1 taxonomic ranks]:
 ##       Order         
@@ -4590,108 +4648,108 @@ Taxa_tests_order <- STAMPR(Rock_weathering_filt3_GMPR, "Order", sig_pairs)
 ## DV:  Abundance 
 ## Observations:  34 
 ## D:  1 
-## MS total:  99.2 
+## MS total:  99.16667 
 ## 
-##                Df Sum Sq     H p.value
-## Climate         1   1165 11.75   0.001
-## Source          3     45  0.45   0.929
-## Climate:Source  1    282  2.84   0.092
-## Residuals      28   1781              
-## 
-## 	Wilcoxon rank sum test with continuity correction
-## 
-## data:  Abundance by Climate.Source
-## W = 7, p-value = 0.4
-## alternative hypothesis: true location shift is not equal to 0
-## 95 percent confidence interval:
-##  -67.5  13.8
-## sample estimates:
-## difference in location 
-##                  -27.7 
-## 
+##                Df  Sum Sq       H p.value
+## Climate         1 1164.74 11.7452 0.00061
+## Source          3   44.85  0.4522 0.92925
+## Climate:Source  1  281.67  2.8403 0.09192
+## Residuals      28 1781.25                
 ## 
 ## 	Wilcoxon rank sum test with continuity correction
 ## 
 ## data:  Abundance by Climate.Source
-## W = 20, p-value = 0.04
+## W = 7, p-value = 0.4113
 ## alternative hypothesis: true location shift is not equal to 0
 ## 95 percent confidence interval:
-##   1.0 67.3
+##  -67.49137  13.79442
 ## sample estimates:
 ## difference in location 
-##                   34.9 
+##              -27.69087 
 ## 
 ## 
 ## 	Wilcoxon rank sum test with continuity correction
 ## 
 ## data:  Abundance by Climate.Source
-## W = 30, p-value = 0.3
+## W = 24, p-value = 0.03576
 ## alternative hypothesis: true location shift is not equal to 0
 ## 95 percent confidence interval:
-##  -1.07  5.47
+##   0.9995852 67.2950902
 ## sample estimates:
 ## difference in location 
-##                   1.34 
+##               34.90214 
 ## 
 ## 
 ## 	Wilcoxon rank sum test with continuity correction
 ## 
 ## data:  Abundance by Climate.Source
-## W = 10, p-value = 0.3
+## W = 26, p-value = 0.279
 ## alternative hypothesis: true location shift is not equal to 0
 ## 95 percent confidence interval:
-##  -1.839  0.353
+##  -1.069587  5.465177
 ## sample estimates:
 ## difference in location 
-##                 -0.279 
+##               1.337481 
 ## 
 ## 
 ## 	Wilcoxon rank sum test with continuity correction
 ## 
 ## data:  Abundance by Climate.Source
-## W = 20, p-value = 0.06
+## W = 10, p-value = 0.279
 ## alternative hypothesis: true location shift is not equal to 0
 ## 95 percent confidence interval:
-##  -0.195  1.887
+##  -1.8392488  0.3526159
 ## sample estimates:
 ## difference in location 
-##                  0.542 
+##             -0.2786225 
 ## 
 ## 
 ## 	Wilcoxon rank sum test with continuity correction
 ## 
 ## data:  Abundance by Climate.Source
-## W = 100, p-value = 0.01
+## W = 23, p-value = 0.05523
 ## alternative hypothesis: true location shift is not equal to 0
 ## 95 percent confidence interval:
-##  0.416 3.920
+##  -0.1948212  1.8870346
 ## sample estimates:
 ## difference in location 
-##                   2.37 
+##              0.5415788 
 ## 
 ## 
 ## 	Wilcoxon rank sum test with continuity correction
 ## 
 ## data:  Abundance by Climate.Source
-## W = 20, p-value = 0.5
+## W = 115, p-value = 0.01414
 ## alternative hypothesis: true location shift is not equal to 0
 ## 95 percent confidence interval:
-##  -1.87  5.15
+##  0.416069 3.919566
 ## sample estimates:
 ## difference in location 
-##                   1.17 
+##               2.374847 
 ## 
 ## 
 ## 	Wilcoxon rank sum test with continuity correction
 ## 
 ## data:  Abundance by Climate.Source
-## W = 30, p-value = 0.03
+## W = 23, p-value = 0.516
 ## alternative hypothesis: true location shift is not equal to 0
 ## 95 percent confidence interval:
-##  0.155 1.863
+##  -1.866692  5.145857
 ## sample estimates:
 ## difference in location 
-##                   1.16 
+##               1.171801 
+## 
+## 
+## 	Wilcoxon rank sum test with continuity correction
+## 
+## data:  Abundance by Climate.Source
+## W = 34, p-value = 0.02527
+## alternative hypothesis: true location shift is not equal to 0
+## 95 percent confidence interval:
+##  0.1545652 1.8629482
+## sample estimates:
+## difference in location 
+##               1.157305 
 ## 
 ## Taxonomy Table:     [1 taxa by 1 taxonomic ranks]:
 ##       Order          
@@ -4700,108 +4758,108 @@ Taxa_tests_order <- STAMPR(Rock_weathering_filt3_GMPR, "Order", sig_pairs)
 ## DV:  Abundance 
 ## Observations:  34 
 ## D:  1 
-## MS total:  99.2 
+## MS total:  99.16667 
 ## 
-##                Df Sum Sq    H p.value
-## Climate         1    265 2.68   0.102
-## Source          3    750 7.56   0.056
-## Climate:Source  1     34 0.34   0.560
-## Residuals      28   2223             
-## 
-## 	Wilcoxon rank sum test with continuity correction
-## 
-## data:  Abundance by Climate.Source
-## W = 2, p-value = 0.08
-## alternative hypothesis: true location shift is not equal to 0
-## 95 percent confidence interval:
-##  -5.21  4.63
-## sample estimates:
-## difference in location 
-##                  -2.18 
-## 
+##                Df  Sum Sq      H p.value
+## Climate         1  265.44 2.6767 0.10183
+## Source          3  749.89 7.5619 0.05599
+## Climate:Source  1   33.75 0.3403 0.55964
+## Residuals      28 2223.42               
 ## 
 ## 	Wilcoxon rank sum test with continuity correction
 ## 
 ## data:  Abundance by Climate.Source
-## W = 20, p-value = 0.08
+## W = 2, p-value = 0.08284
 ## alternative hypothesis: true location shift is not equal to 0
 ## 95 percent confidence interval:
-##  -3.83  5.11
+##  -5.206538  4.628937
 ## sample estimates:
 ## difference in location 
-##                   2.14 
+##              -2.182672 
 ## 
 ## 
 ## 	Wilcoxon rank sum test with continuity correction
 ## 
 ## data:  Abundance by Climate.Source
-## W = 20, p-value = 0.3
+## W = 22, p-value = 0.08284
 ## alternative hypothesis: true location shift is not equal to 0
 ## 95 percent confidence interval:
-##  -0.532  1.477
+##  -3.828908  5.114544
 ## sample estimates:
 ## difference in location 
-##                  0.271 
+##               2.137151 
 ## 
 ## 
 ## 	Wilcoxon rank sum test with continuity correction
 ## 
 ## data:  Abundance by Climate.Source
-## W = 30, p-value = 0.3
+## W = 25, p-value = 0.3481
 ## alternative hypothesis: true location shift is not equal to 0
 ## 95 percent confidence interval:
-##  -0.512  0.787
+##  -0.5320493  1.4765078
 ## sample estimates:
 ## difference in location 
-##                  0.203 
+##              0.2706085 
 ## 
 ## 
 ## 	Wilcoxon rank sum test with continuity correction
 ## 
 ## data:  Abundance by Climate.Source
-## W = 7, p-value = 0.4
+## W = 26, p-value = 0.279
 ## alternative hypothesis: true location shift is not equal to 0
 ## 95 percent confidence interval:
-##  -0.50  5.57
+##  -0.5122759  0.7866787
 ## sample estimates:
 ## difference in location 
-##                 -0.228 
+##              0.2027858 
 ## 
 ## 
 ## 	Wilcoxon rank sum test with continuity correction
 ## 
 ## data:  Abundance by Climate.Source
-## W = 80, p-value = 0.7
+## W = 7, p-value = 0.4113
 ## alternative hypothesis: true location shift is not equal to 0
 ## 95 percent confidence interval:
-##  -0.220  0.369
+##  -0.5000857  5.5661994
 ## sample estimates:
 ## difference in location 
-##                 0.0729 
+##             -0.2281722 
 ## 
 ## 
 ## 	Wilcoxon rank sum test with continuity correction
 ## 
 ## data:  Abundance by Climate.Source
-## W = 4, p-value = 0.05
+## W = 79, p-value = 0.7075
 ## alternative hypothesis: true location shift is not equal to 0
 ## 95 percent confidence interval:
-##  -1.526  0.268
+##  -0.2204756  0.3690566
 ## sample estimates:
 ## difference in location 
-##                  -1.07 
+##              0.0729464 
 ## 
 ## 
 ## 	Wilcoxon rank sum test with continuity correction
 ## 
 ## data:  Abundance by Climate.Source
-## W = 30, p-value = 0.04
+## W = 4, p-value = 0.05135
 ## alternative hypothesis: true location shift is not equal to 0
 ## 95 percent confidence interval:
-##  0.422 1.495
+##  -1.5258004  0.2675506
 ## sample estimates:
 ## difference in location 
-##                    1.1 
+##              -1.065072 
+## 
+## 
+## 	Wilcoxon rank sum test with continuity correction
+## 
+## data:  Abundance by Climate.Source
+## W = 33, p-value = 0.03636
+## alternative hypothesis: true location shift is not equal to 0
+## 95 percent confidence interval:
+##  0.4223112 1.4948001
+## sample estimates:
+## difference in location 
+##               1.103329 
 ## 
 ## Taxonomy Table:     [1 taxa by 1 taxonomic ranks]:
 ##       Order       
@@ -4810,108 +4868,108 @@ Taxa_tests_order <- STAMPR(Rock_weathering_filt3_GMPR, "Order", sig_pairs)
 ## DV:  Abundance 
 ## Observations:  34 
 ## D:  1 
-## MS total:  99.2 
+## MS total:  99.16667 
 ## 
-##                Df Sum Sq     H p.value
-## Climate         1     65 0.655   0.418
-## Source          3    263 2.649   0.449
-## Climate:Source  1     10 0.097   0.756
-## Residuals      28   2935              
-## 
-## 	Wilcoxon rank sum test with continuity correction
-## 
-## data:  Abundance by Climate.Source
-## W = 20, p-value = 0.5
-## alternative hypothesis: true location shift is not equal to 0
-## 95 percent confidence interval:
-##  -2.72 10.23
-## sample estimates:
-## difference in location 
-##                   1.11 
-## 
+##                Df  Sum Sq       H p.value
+## Climate         1   64.97 0.65517 0.41827
+## Source          3  262.68 2.64887 0.44899
+## Climate:Source  1    9.60 0.09681 0.75570
+## Residuals      28 2935.25                
 ## 
 ## 	Wilcoxon rank sum test with continuity correction
 ## 
 ## data:  Abundance by Climate.Source
-## W = 8, p-value = 0.5
+## W = 16, p-value = 0.5228
 ## alternative hypothesis: true location shift is not equal to 0
 ## 95 percent confidence interval:
-##  -6.78  2.83
+##  -2.724773 10.232076
 ## sample estimates:
 ## difference in location 
-##                 -0.485 
+##               1.105793 
 ## 
 ## 
 ## 	Wilcoxon rank sum test with continuity correction
 ## 
 ## data:  Abundance by Climate.Source
-## W = 20, p-value = 0.9
+## W = 8, p-value = 0.5228
 ## alternative hypothesis: true location shift is not equal to 0
 ## 95 percent confidence interval:
-##  -1.57  4.26
+##  -6.780411  2.832335
 ## sample estimates:
 ## difference in location 
-##                  0.298 
+##             -0.4845265 
 ## 
 ## 
 ## 	Wilcoxon rank sum test with continuity correction
 ## 
 ## data:  Abundance by Climate.Source
-## W = 20, p-value = 0.8
+## W = 19, p-value = 0.9425
 ## alternative hypothesis: true location shift is not equal to 0
 ## 95 percent confidence interval:
-##  -2.58  4.27
+##  -1.568094  4.262904
 ## sample estimates:
 ## difference in location 
-##                 -0.159 
+##              0.2980444 
 ## 
 ## 
 ## 	Wilcoxon rank sum test with continuity correction
 ## 
 ## data:  Abundance by Climate.Source
-## W = 20, p-value = 0.3
+## W = 16, p-value = 0.8286
 ## alternative hypothesis: true location shift is not equal to 0
 ## 95 percent confidence interval:
-##  -0.786  6.561
+##  -2.577901  4.274808
 ## sample estimates:
 ## difference in location 
-##                   1.09 
+##             -0.1588814 
 ## 
 ## 
 ## 	Wilcoxon rank sum test with continuity correction
 ## 
 ## data:  Abundance by Climate.Source
-## W = 80, p-value = 0.6
+## W = 18, p-value = 0.3153
 ## alternative hypothesis: true location shift is not equal to 0
 ## 95 percent confidence interval:
-##  -1.37  1.65
+##  -0.7863939  6.5607849
 ## sample estimates:
 ## difference in location 
-##                  0.569 
+##               1.092154 
 ## 
 ## 
 ## 	Wilcoxon rank sum test with continuity correction
 ## 
 ## data:  Abundance by Climate.Source
-## W = 20, p-value = 0.9
+## W = 82, p-value = 0.5834
 ## alternative hypothesis: true location shift is not equal to 0
 ## 95 percent confidence interval:
-##  -1.02  2.98
+##  -1.373038  1.650491
 ## sample estimates:
 ## difference in location 
-##                 -0.136 
+##              0.5690406 
 ## 
 ## 
 ## 	Wilcoxon rank sum test with continuity correction
 ## 
 ## data:  Abundance by Climate.Source
-## W = 20, p-value = 0.7
+## W = 17, p-value = 0.9425
 ## alternative hypothesis: true location shift is not equal to 0
 ## 95 percent confidence interval:
-##  -4.11  1.80
+##  -1.015699  2.983868
 ## sample estimates:
 ## difference in location 
-##                  0.471 
+##             -0.1357949 
+## 
+## 
+## 	Wilcoxon rank sum test with continuity correction
+## 
+## data:  Abundance by Climate.Source
+## W = 21, p-value = 0.7182
+## alternative hypothesis: true location shift is not equal to 0
+## 95 percent confidence interval:
+##  -4.105227  1.803981
+## sample estimates:
+## difference in location 
+##              0.4714685 
 ## 
 ## Taxonomy Table:     [1 taxa by 1 taxonomic ranks]:
 ##       Order          
@@ -4920,108 +4978,108 @@ Taxa_tests_order <- STAMPR(Rock_weathering_filt3_GMPR, "Order", sig_pairs)
 ## DV:  Abundance 
 ## Observations:  34 
 ## D:  1 
-## MS total:  99.2 
+## MS total:  99.16667 
 ## 
-##                Df Sum Sq     H p.value
-## Climate         1     25  0.25   0.617
-## Source          3   1445 14.57   0.002
-## Climate:Source  1    191  1.92   0.165
-## Residuals      28   1612              
-## 
-## 	Wilcoxon rank sum test with continuity correction
-## 
-## data:  Abundance by Climate.Source
-## W = 20, p-value = 0.04
-## alternative hypothesis: true location shift is not equal to 0
-## 95 percent confidence interval:
-##   0.116 28.897
-## sample estimates:
-## difference in location 
-##                   3.76 
-## 
+##                Df  Sum Sq       H p.value
+## Climate         1   24.74  0.2494 0.61748
+## Source          3 1445.20 14.5734 0.00222
+## Climate:Source  1  190.82  1.9242 0.16539
+## Residuals      28 1611.75                
 ## 
 ## 	Wilcoxon rank sum test with continuity correction
 ## 
 ## data:  Abundance by Climate.Source
-## W = 0, p-value = 0.04
+## W = 24, p-value = 0.03576
 ## alternative hypothesis: true location shift is not equal to 0
 ## 95 percent confidence interval:
-##  -7.347 -0.588
+##   0.1159525 28.8971507
 ## sample estimates:
 ## difference in location 
-##                   -2.5 
+##               3.763569 
 ## 
 ## 
 ## 	Wilcoxon rank sum test with continuity correction
 ## 
 ## data:  Abundance by Climate.Source
-## W = 20, p-value = 1
+## W = 0, p-value = 0.03576
 ## alternative hypothesis: true location shift is not equal to 0
 ## 95 percent confidence interval:
-##  -8.04 20.82
+##  -7.3472144 -0.5879807
 ## sample estimates:
 ## difference in location 
-##                  0.132 
+##              -2.500071 
 ## 
 ## 
 ## 	Wilcoxon rank sum test with continuity correction
 ## 
 ## data:  Abundance by Climate.Source
-## W = 10, p-value = 0.3
+## W = 18, p-value = 1
 ## alternative hypothesis: true location shift is not equal to 0
 ## 95 percent confidence interval:
-##  -7.13  2.03
+##  -8.04070 20.81984
 ## sample estimates:
 ## difference in location 
-##                  -2.58 
+##              0.1319845 
 ## 
 ## 
 ## 	Wilcoxon rank sum test with continuity correction
 ## 
 ## data:  Abundance by Climate.Source
-## W = 20, p-value = 0.04
+## W = 11, p-value = 0.3481
 ## alternative hypothesis: true location shift is not equal to 0
 ## 95 percent confidence interval:
-##  0.514 7.469
+##  -7.129548  2.026183
 ## sample estimates:
 ## difference in location 
-##                   2.25 
+##              -2.583399 
 ## 
 ## 
 ## 	Wilcoxon rank sum test with continuity correction
 ## 
 ## data:  Abundance by Climate.Source
-## W = 80, p-value = 0.6
+## W = 24, p-value = 0.03576
 ## alternative hypothesis: true location shift is not equal to 0
 ## 95 percent confidence interval:
-##  -1.34 18.29
+##  0.5144736 7.4691341
 ## sample estimates:
 ## difference in location 
-##                  0.952 
+##               2.253139 
 ## 
 ## 
 ## 	Wilcoxon rank sum test with continuity correction
 ## 
 ## data:  Abundance by Climate.Source
-## W = 40, p-value = 0.01
+## W = 82, p-value = 0.5834
 ## alternative hypothesis: true location shift is not equal to 0
 ## 95 percent confidence interval:
-##   0.324 25.016
+##  -1.344459 18.286424
 ## sample estimates:
 ## difference in location 
-##                   2.69 
+##              0.9522018 
 ## 
 ## 
 ## 	Wilcoxon rank sum test with continuity correction
 ## 
 ## data:  Abundance by Climate.Source
-## W = 0, p-value = 0.01
+## W = 36, p-value = 0.01154
 ## alternative hypothesis: true location shift is not equal to 0
 ## 95 percent confidence interval:
-##  -4.205 -0.685
+##   0.3237722 25.0161232
 ## sample estimates:
 ## difference in location 
-##                  -2.53 
+##               2.685594 
+## 
+## 
+## 	Wilcoxon rank sum test with continuity correction
+## 
+## data:  Abundance by Climate.Source
+## W = 0, p-value = 0.01154
+## alternative hypothesis: true location shift is not equal to 0
+## 95 percent confidence interval:
+##  -4.2047144 -0.6847059
+## sample estimates:
+## difference in location 
+##              -2.525927 
 ## 
 ## Taxonomy Table:     [1 taxa by 1 taxonomic ranks]:
 ##       Order                
@@ -5030,108 +5088,108 @@ Taxa_tests_order <- STAMPR(Rock_weathering_filt3_GMPR, "Order", sig_pairs)
 ## DV:  Abundance 
 ## Observations:  34 
 ## D:  1 
-## MS total:  99.2 
+## MS total:  99.16667 
 ## 
-##                Df Sum Sq     H p.value
-## Climate         1    671  6.76   0.009
-## Source          3   1220 12.31   0.006
-## Climate:Source  1      4  0.04   0.846
-## Residuals      28   1378              
-## 
-## 	Wilcoxon rank sum test with continuity correction
-## 
-## data:  Abundance by Climate.Source
-## W = 20, p-value = 0.08
-## alternative hypothesis: true location shift is not equal to 0
-## 95 percent confidence interval:
-##  -0.235 27.641
-## sample estimates:
-## difference in location 
-##                   4.61 
-## 
+##                Df  Sum Sq       H p.value
+## Climate         1  670.62  6.7625 0.00931
+## Source          3 1220.47 12.3072 0.00640
+## Climate:Source  1    3.75  0.0378 0.84581
+## Residuals      28 1377.67                
 ## 
 ## 	Wilcoxon rank sum test with continuity correction
 ## 
 ## data:  Abundance by Climate.Source
-## W = 5, p-value = 0.2
+## W = 22, p-value = 0.08284
 ## alternative hypothesis: true location shift is not equal to 0
 ## 95 percent confidence interval:
-##  -2.935  0.261
+##  -0.2353533 27.6409333
 ## sample estimates:
 ## difference in location 
-##                 -0.496 
+##               4.612546 
 ## 
 ## 
 ## 	Wilcoxon rank sum test with continuity correction
 ## 
 ## data:  Abundance by Climate.Source
-## W = 20, p-value = 1
+## W = 5, p-value = 0.2353
 ## alternative hypothesis: true location shift is not equal to 0
 ## 95 percent confidence interval:
-##  -4.21  9.96
+##  -2.9351537  0.2608993
 ## sample estimates:
 ## difference in location 
-##                 -0.109 
+##             -0.4958395 
 ## 
 ## 
 ## 	Wilcoxon rank sum test with continuity correction
 ## 
 ## data:  Abundance by Climate.Source
-## W = 0, p-value = 0.01
+## W = 18, p-value = 1
 ## alternative hypothesis: true location shift is not equal to 0
 ## 95 percent confidence interval:
-##  -5.29 -2.54
+##  -4.212403  9.958079
 ## sample estimates:
 ## difference in location 
-##                  -4.22 
+##             -0.1090627 
 ## 
 ## 
 ## 	Wilcoxon rank sum test with continuity correction
 ## 
 ## data:  Abundance by Climate.Source
-## W = 20, p-value = 0.1
+## W = 0, p-value = 0.01154
 ## alternative hypothesis: true location shift is not equal to 0
 ## 95 percent confidence interval:
-##  -0.176  3.066
+##  -5.293649 -2.537352
 ## sample estimates:
 ## difference in location 
-##                  0.575 
+##              -4.224644 
 ## 
 ## 
 ## 	Wilcoxon rank sum test with continuity correction
 ## 
 ## data:  Abundance by Climate.Source
-## W = 100, p-value = 0.002
+## W = 21, p-value = 0.1207
 ## alternative hypothesis: true location shift is not equal to 0
 ## 95 percent confidence interval:
-##   1.2 11.8
+##  -0.1764773  3.0664060
 ## sample estimates:
 ## difference in location 
-##                   3.69 
+##              0.5754338 
 ## 
 ## 
 ## 	Wilcoxon rank sum test with continuity correction
 ## 
 ## data:  Abundance by Climate.Source
-## W = 20, p-value = 0.9
+## W = 125, p-value = 0.002437
 ## alternative hypothesis: true location shift is not equal to 0
 ## 95 percent confidence interval:
-##  -4.31 10.07
+##   1.196491 11.780432
 ## sample estimates:
 ## difference in location 
-##                  -0.42 
+##               3.693183 
 ## 
 ## 
 ## 	Wilcoxon rank sum test with continuity correction
 ## 
 ## data:  Abundance by Climate.Source
-## W = 40, p-value = 0.01
+## W = 17, p-value = 0.9425
 ## alternative hypothesis: true location shift is not equal to 0
 ## 95 percent confidence interval:
-##  2.04 5.95
+##  -4.307577 10.065980
 ## sample estimates:
 ## difference in location 
-##                   3.96 
+##             -0.4198441 
+## 
+## 
+## 	Wilcoxon rank sum test with continuity correction
+## 
+## data:  Abundance by Climate.Source
+## W = 36, p-value = 0.01154
+## alternative hypothesis: true location shift is not equal to 0
+## 95 percent confidence interval:
+##  2.036055 5.953411
+## sample estimates:
+## difference in location 
+##               3.962095 
 ## 
 ## Taxonomy Table:     [1 taxa by 1 taxonomic ranks]:
 ##        Order             
@@ -5140,108 +5198,108 @@ Taxa_tests_order <- STAMPR(Rock_weathering_filt3_GMPR, "Order", sig_pairs)
 ## DV:  Abundance 
 ## Observations:  34 
 ## D:  1 
-## MS total:  99.2 
+## MS total:  99.16667 
 ## 
-##                Df Sum Sq     H p.value
-## Climate         1    403  4.06   0.044
-## Source          3   1958 19.75   0.000
-## Climate:Source  1     37  0.37   0.542
-## Residuals      28    875              
-## 
-## 	Wilcoxon rank sum test with continuity correction
-## 
-## data:  Abundance by Climate.Source
-## W = 20, p-value = 0.08
-## alternative hypothesis: true location shift is not equal to 0
-## 95 percent confidence interval:
-##  -0.277  1.875
-## sample estimates:
-## difference in location 
-##                  0.947 
-## 
+##                Df  Sum Sq       H p.value
+## Climate         1  402.62  4.0600 0.04391
+## Source          3 1958.32 19.7477 0.00019
+## Climate:Source  1   36.82  0.3713 0.54232
+## Residuals      28  874.75                
 ## 
 ## 	Wilcoxon rank sum test with continuity correction
 ## 
 ## data:  Abundance by Climate.Source
-## W = 8, p-value = 0.5
+## W = 22, p-value = 0.08284
 ## alternative hypothesis: true location shift is not equal to 0
 ## 95 percent confidence interval:
-##  -0.695  0.294
+##  -0.2770006  1.8753928
 ## sample estimates:
 ## difference in location 
-##                -0.0769 
+##              0.9466836 
 ## 
 ## 
 ## 	Wilcoxon rank sum test with continuity correction
 ## 
 ## data:  Abundance by Climate.Source
-## W = 0, p-value = 0.01
+## W = 8, p-value = 0.5228
 ## alternative hypothesis: true location shift is not equal to 0
 ## 95 percent confidence interval:
-##  -8.06 -2.73
+##  -0.6952939  0.2939760
 ## sample estimates:
 ## difference in location 
-##                  -4.38 
+##            -0.07693071 
 ## 
 ## 
 ## 	Wilcoxon rank sum test with continuity correction
 ## 
 ## data:  Abundance by Climate.Source
-## W = 0, p-value = 0.01
+## W = 0, p-value = 0.01154
 ## alternative hypothesis: true location shift is not equal to 0
 ## 95 percent confidence interval:
-##  -8.81 -3.72
+##  -8.055194 -2.733487
 ## sample estimates:
 ## difference in location 
-##                  -5.31 
+##              -4.376145 
 ## 
 ## 
 ## 	Wilcoxon rank sum test with continuity correction
 ## 
 ## data:  Abundance by Climate.Source
-## W = 20, p-value = 0.06
+## W = 0, p-value = 0.01154
 ## alternative hypothesis: true location shift is not equal to 0
 ## 95 percent confidence interval:
-##  -0.00973  0.70729
+##  -8.811553 -3.722903
 ## sample estimates:
 ## difference in location 
-##                  0.204 
+##              -5.306655 
 ## 
 ## 
 ## 	Wilcoxon rank sum test with continuity correction
 ## 
 ## data:  Abundance by Climate.Source
-## W = 100, p-value = 0.002
+## W = 23, p-value = 0.05523
 ## alternative hypothesis: true location shift is not equal to 0
 ## 95 percent confidence interval:
-##  0.352 1.165
+##  -0.009727731  0.707286393
 ## sample estimates:
 ## difference in location 
-##                  0.871 
+##              0.2041089 
 ## 
 ## 
 ## 	Wilcoxon rank sum test with continuity correction
 ## 
 ## data:  Abundance by Climate.Source
-## W = 0, p-value = 0.01
+## W = 125, p-value = 0.002437
 ## alternative hypothesis: true location shift is not equal to 0
 ## 95 percent confidence interval:
-##  -3.35 -1.70
+##  0.3522632 1.1649116
 ## sample estimates:
 ## difference in location 
-##                  -2.35 
+##              0.8707461 
 ## 
 ## 
 ## 	Wilcoxon rank sum test with continuity correction
 ## 
 ## data:  Abundance by Climate.Source
-## W = 40, p-value = 0.01
+## W = 0, p-value = 0.01154
 ## alternative hypothesis: true location shift is not equal to 0
 ## 95 percent confidence interval:
-##  2.65 4.11
+##  -3.351919 -1.703828
 ## sample estimates:
 ## difference in location 
-##                   3.12 
+##              -2.347733 
+## 
+## 
+## 	Wilcoxon rank sum test with continuity correction
+## 
+## data:  Abundance by Climate.Source
+## W = 36, p-value = 0.01154
+## alternative hypothesis: true location shift is not equal to 0
+## 95 percent confidence interval:
+##  2.648734 4.108222
+## sample estimates:
+## difference in location 
+##               3.124562 
 ## 
 ## Taxonomy Table:     [1 taxa by 1 taxonomic ranks]:
 ##        Order         
@@ -5250,108 +5308,108 @@ Taxa_tests_order <- STAMPR(Rock_weathering_filt3_GMPR, "Order", sig_pairs)
 ## DV:  Abundance 
 ## Observations:  34 
 ## D:  1 
-## MS total:  99.2 
+## MS total:  99.16667 
 ## 
-##                Df Sum Sq     H p.value
-## Climate         1   1051 10.59   0.001
-## Source          3   1026 10.34   0.016
-## Climate:Source  1     20  0.21   0.650
-## Residuals      28   1176              
-## 
-## 	Wilcoxon rank sum test with continuity correction
-## 
-## data:  Abundance by Climate.Source
-## W = 20, p-value = 0.08
-## alternative hypothesis: true location shift is not equal to 0
-## 95 percent confidence interval:
-##  -0.335 20.313
-## sample estimates:
-## difference in location 
-##                   4.14 
-## 
+##                Df  Sum Sq       H p.value
+## Climate         1 1050.62 10.5945 0.00113
+## Source          3 1025.72 10.3434 0.01586
+## Climate:Source  1   20.42  0.2059 0.65001
+## Residuals      28 1175.75                
 ## 
 ## 	Wilcoxon rank sum test with continuity correction
 ## 
 ## data:  Abundance by Climate.Source
-## W = 10, p-value = 0.8
+## W = 22, p-value = 0.08284
 ## alternative hypothesis: true location shift is not equal to 0
 ## 95 percent confidence interval:
-##  -0.407  0.404
+##  -0.3350587 20.3127324
 ## sample estimates:
 ## difference in location 
-##                0.00744 
+##               4.143156 
 ## 
 ## 
 ## 	Wilcoxon rank sum test with continuity correction
 ## 
 ## data:  Abundance by Climate.Source
-## W = 20, p-value = 0.9
+## W = 14, p-value = 0.7842
 ## alternative hypothesis: true location shift is not equal to 0
 ## 95 percent confidence interval:
-##  -3.84 11.81
+##  -0.4073917  0.4038865
 ## sample estimates:
 ## difference in location 
-##                  0.601 
+##            0.007441521 
 ## 
 ## 
 ## 	Wilcoxon rank sum test with continuity correction
 ## 
 ## data:  Abundance by Climate.Source
-## W = 0, p-value = 0.01
+## W = 19, p-value = 0.9425
 ## alternative hypothesis: true location shift is not equal to 0
 ## 95 percent confidence interval:
-##  -4.80 -2.22
+##  -3.843441 11.810661
 ## sample estimates:
 ## difference in location 
-##                  -4.48 
+##              0.6013048 
 ## 
 ## 
 ## 	Wilcoxon rank sum test with continuity correction
 ## 
 ## data:  Abundance by Climate.Source
-## W = 20, p-value = 0.3
+## W = 0, p-value = 0.01154
 ## alternative hypothesis: true location shift is not equal to 0
 ## 95 percent confidence interval:
-##  -0.155  0.514
+##  -4.795687 -2.220769
 ## sample estimates:
 ## difference in location 
-##                  0.116 
+##              -4.477859 
 ## 
 ## 
 ## 	Wilcoxon rank sum test with continuity correction
 ## 
 ## data:  Abundance by Climate.Source
-## W = 100, p-value = 3e-04
+## W = 18, p-value = 0.3153
 ## alternative hypothesis: true location shift is not equal to 0
 ## 95 percent confidence interval:
-##  2.58 6.32
+##  -0.1554704  0.5143634
 ## sample estimates:
 ## difference in location 
-##                   4.24 
+##              0.1156305 
 ## 
 ## 
 ## 	Wilcoxon rank sum test with continuity correction
 ## 
 ## data:  Abundance by Climate.Source
-## W = 20, p-value = 0.9
+## W = 135, p-value = 0.000308
 ## alternative hypothesis: true location shift is not equal to 0
 ## 95 percent confidence interval:
-##  -3.81 10.33
+##  2.579639 6.320156
 ## sample estimates:
 ## difference in location 
-##                 -0.209 
+##               4.241255 
 ## 
 ## 
 ## 	Wilcoxon rank sum test with continuity correction
 ## 
 ## data:  Abundance by Climate.Source
-## W = 40, p-value = 0.01
+## W = 17, p-value = 0.9425
 ## alternative hypothesis: true location shift is not equal to 0
 ## 95 percent confidence interval:
-##  3.70 4.57
+##  -3.807166 10.334104
 ## sample estimates:
 ## difference in location 
-##                    4.3
+##             -0.2087371 
+## 
+## 
+## 	Wilcoxon rank sum test with continuity correction
+## 
+## data:  Abundance by Climate.Source
+## W = 36, p-value = 0.01154
+## alternative hypothesis: true location shift is not equal to 0
+## 95 percent confidence interval:
+##  3.697211 4.574490
+## sample estimates:
+## difference in location 
+##               4.299239
 ```
 
 #### Ternary plots
@@ -5819,7 +5877,7 @@ p_isotopes <-
                      labels = c(expression(paste(delta ^ {13}, "C")),
                                 expression(paste(delta ^ {18}, "O")))) +
   ylab(expression(paste(delta ^ {13}, "C / ",
-                        delta ^ {18}, "O", " (", "\u2030", ")"
+                        delta ^ {18}, "O", " (", "\u2030", "VPDB",")"
   )))
 
 p_isotopes <- plot_grid(p_isotopes, labels = "b", label_size = 20)
@@ -5828,36 +5886,36 @@ print(p_isotopes)
 
 ![](Rock_weathering_figures/isotopes-1.svg)<!-- -->
 
-### Desiccation experiment
+### Drying experiment
 
 ```r
-read_csv("Data/desiccation_data_full.csv") ->
-  Desiccation_long
-Desiccation_long$Rock %<>% fct_relevel(., "Limestone")
-Desiccation_long$BRC %<>% 
+read_csv("Data/Drying_data_full.csv") ->
+  Drying_long
+Drying_long$Rock %<>% fct_relevel(., "Limestone")
+Drying_long$BRC %<>% 
   fct_relevel(., "Present")
-Desiccation_long$Sample <- with(Desiccation_long, paste(Rock, BRC))
+Drying_long$Sample <- with(Drying_long, paste(Rock, BRC))
 
-Desiccation_mods <- tibble(Sample = character(), Intercept = numeric(), b = numeric(), a = numeric(), P = numeric(), R2 = numeric())
+Drying_mods <- tibble(Sample = character(), Intercept = numeric(), b = numeric(), a = numeric(), P = numeric(), R2 = numeric())
 mods <- list()
 j <- 1
-for (i in unique(Desiccation_long$Sample)) {
-  data2model <- Desiccation_long[Desiccation_long$Sample == i, ]
+for (i in unique(Drying_long$Sample)) {
+  data2model <- Drying_long[Drying_long$Sample == i, ]
   colnames(data2model) <- c("Time", "Replicate", "BRC", "Rock", "RWC", "Sample")
   (mod <- lme(RWC ~ poly(Time, 2, raw = TRUE), random = ~0 + Time|Replicate, data = data2model))
   intervals(mod)
   # mod <- lm(`Residual water content (%)` ~ sqrt(1/(`Time (h)` + 1)), data = data2model)
   mods[[j]] <- mod
-  Desiccation_mods[j, "Sample"] <- i
-  Desiccation_mods[j, "Intercept"] <- mod$coefficients$fixed[1]
-  Desiccation_mods[j, "b"] <- mod$coefficients$fixed[2]
-  Desiccation_mods[j, "a"] <- mod$coefficients$fixed[3]
-  Desiccation_mods[j, "P"] <- anova(mod)$`p-value`[2]
-  Desiccation_mods[j, "R2"] <- r.squaredGLMM(mod)[, "R2c"]
+  Drying_mods[j, "Sample"] <- i
+  Drying_mods[j, "Intercept"] <- mod$coefficients$fixed[1]
+  Drying_mods[j, "b"] <- mod$coefficients$fixed[2]
+  Drying_mods[j, "a"] <- mod$coefficients$fixed[3]
+  Drying_mods[j, "P"] <- anova(mod)$`p-value`[2]
+  Drying_mods[j, "R2"] <- r.squaredGLMM(mod)[, "R2c"]
   j <- j + 1
 }
 
-Desiccation_mods %>% 
+Drying_mods %>% 
   kable(., digits = c(1, 1, 2, 2, 3, 2)) %>%
   kable_styling(bootstrap_options = c("hover", "condensed", "responsive"), full_width = F)
 ```
@@ -5911,7 +5969,7 @@ Desiccation_mods %>%
 
 ```r
 # comapre with and without crust
-data2model <- Desiccation_long
+data2model <- Drying_long
 colnames(data2model) <- c("Time", "Replicate", "BRC", "Rock", "RWC", "Sample")
 mod_all <- lme(RWC ~ poly(Time, 2, raw = TRUE), random = ~0 + Time|Replicate, data = data2model)
 mod_treatment <- lme(RWC ~ poly(Time, 2, raw = TRUE) * BRC, random = ~0 + Time|Replicate, data = data2model)
@@ -6181,9 +6239,9 @@ anova(mod_all, mod_treatment)
 </div>
 
 ```r
-p_desiccation <-
+p_drying <-
   ggplot(
-    Desiccation_long,
+    Drying_long,
     aes(
       x = `Time (h)`,
       y = `Residual water content (%)`,
@@ -6201,10 +6259,10 @@ p_desiccation <-
   scale_x_continuous(limits = c(0, 50), expand = c(0.01, 0.01)) +
   # scale_fill_manual(values = pom4) +
   scale_color_manual(values = pom4)
-print(p_desiccation)
+print(p_drying)
 ```
 
-![](Rock_weathering_figures/desiccation-1.svg)<!-- -->
+![](Rock_weathering_figures/drying-1.svg)<!-- -->
 
 
 ```r
@@ -6212,507 +6270,258 @@ devtools::session_info()
 ```
 
 ```
+## ─ Session info ─────────────────────────────────────────────────────────────────────────
 ##  setting  value                       
 ##  version  R version 3.4.4 (2018-03-15)
+##  os       KDE neon User Edition 5.14  
 ##  system   x86_64, linux-gnu           
 ##  ui       X11                         
 ##  language en_GB                       
-##  collate  en_GB.UTF-8                 
-##  tz       Europe/Prague               
-##  date     2018-07-11                  
+##  collate  en_DK.UTF-8                 
+##  ctype    en_DK.UTF-8                 
+##  tz       Europe/Vienna               
+##  date     2019-01-04                  
 ## 
-##  package              * version   date      
-##  abind                  1.4-5     2016-07-21
-##  acepack                1.4.1     2016-10-29
-##  ade4                   1.7-11    2018-04-05
-##  affy                   1.56.0    2018-07-10
-##  affyio                 1.48.0    2018-07-10
-##  agricolae            * 1.2-8     2017-09-12
-##  ALDEx2               * 1.10.0    2018-07-10
-##  AlgDesign              1.1-7.3   2014-10-15
-##  ape                    5.1       2018-04-04
-##  artyfarty            * 0.0.1     2018-07-11
-##  assertthat             0.2.0     2017-04-11
-##  backports              1.1.2     2017-12-13
-##  base                 * 3.4.4     2018-03-16
-##  base64enc              0.1-3     2015-07-28
-##  bayesm                 3.1-0.1   2017-07-21
-##  BiasedUrn              1.07      2015-12-28
-##  bindr                  0.1.1     2018-03-13
-##  bindrcpp             * 0.2.2     2018-03-29
-##  Biobase              * 2.38.0    2018-07-10
-##  BiocGenerics         * 0.24.0    2018-07-10
-##  BiocInstaller          1.28.0    2018-07-10
-##  BiocParallel           1.12.0    2018-07-10
-##  BiodiversityR        * 2.9-2     2018-02-28
-##  biomformat             1.6.0     2018-07-10
-##  Biostrings             2.46.0    2018-07-10
-##  bitops                 1.0-6     2013-08-17
-##  boot                   1.3-20    2017-07-30
-##  brew                   1.0-6     2011-04-13
-##  broom                  0.4.5     2018-07-03
-##  BSDA                   1.2.0     2017-07-30
-##  car                  * 3.0-0     2018-04-02
-##  carData              * 3.0-1     2018-03-28
-##  cellranger             1.1.0     2016-07-27
-##  checkmate              1.8.5     2017-10-24
-##  class                  7.3-14    2015-08-30
-##  cli                    1.0.0     2017-11-05
-##  cluster              * 2.0.7-1   2018-04-09
-##  coda                   0.19-1    2016-12-08
-##  codetools              0.2-15    2016-10-05
-##  coin                   1.2-2     2017-11-28
-##  colorspace             1.3-2     2016-12-14
-##  combinat               0.0-8     2012-10-29
-##  compiler               3.4.4     2018-03-16
-##  compositions           1.40-2    2018-06-14
-##  cowplot              * 0.9.2     2017-12-17
-##  crayon                 1.3.4     2017-09-16
-##  curl                   3.2       2018-03-28
-##  data.table             1.11.4    2018-05-27
-##  data.tree              0.7.6     2018-06-16
-##  datasets             * 3.4.4     2018-03-16
-##  DelayedArray           0.4.1     2018-07-10
-##  deldir                 0.1-15    2018-04-01
-##  DEoptimR               1.0-8     2016-11-19
-##  DescTools              0.99.24   2018-03-19
-##  devtools             * 1.13.6    2018-06-27
-##  DiagrammeR             1.0.0     2018-03-01
-##  digest                 0.6.15    2018-01-28
-##  diptest                0.75-7    2016-12-05
-##  doParallel           * 1.0.11    2017-09-28
-##  downloader             0.4       2015-07-09
-##  dplyr                * 0.7.6     2018-06-29
-##  e1071                  1.6-8     2017-02-02
-##  effects                4.0-2     2018-06-19
-##  EMT                    1.1       2013-01-29
-##  energy                 1.7-4     2018-05-27
-##  evaluate               0.10.1    2017-06-24
-##  expm                   0.999-2   2017-03-29
-##  extrafont            * 0.17      2014-12-08
-##  extrafontdb            1.0       2012-06-11
-##  fBasics                3042.89   2017-11-17
-##  forcats              * 0.3.0     2018-02-19
-##  foreach              * 1.4.4     2017-12-12
-##  foreign                0.8-70    2018-04-23
-##  Formula                1.2-3     2018-05-03
-##  gdata                  2.18.0    2017-06-06
-##  gdtools              * 0.1.7     2018-02-27
-##  GenomeInfoDb           1.14.0    2018-07-10
-##  GenomeInfoDbData       1.0.0     2018-07-10
-##  GenomicRanges          1.30.3    2018-07-10
-##  GGally                 1.4.0     2018-05-17
-##  ggplot2              * 2.2.1     2016-12-30
-##  ggpomological        * 0.1.2     2018-07-10
-##  ggrepel                0.8.0     2018-05-09
-##  ggridges               0.5.0     2018-04-05
-##  ggtern               * 2.2.0     2016-11-23
-##  glue                   1.2.0     2017-10-29
-##  gmodels                2.18.1    2018-06-25
-##  GPArotation            2014.11-1 2014-11-25
-##  graphics             * 3.4.4     2018-03-16
-##  grDevices            * 3.4.4     2018-03-16
-##  grid                   3.4.4     2018-03-16
-##  gridExtra              2.3       2017-09-09
-##  gtable                 0.2.0     2016-02-26
-##  gtools                 3.8.1     2018-06-26
-##  haven                  1.1.2     2018-06-27
-##  hermite                1.1.2     2018-05-17
-##  hexbin               * 1.27.2    2018-01-15
-##  highr                  0.7       2018-06-09
-##  Hmisc                  4.1-1     2018-01-03
-##  hms                    0.4.2     2018-03-10
-##  htmlTable              1.12      2018-05-26
-##  htmltools              0.3.6     2017-04-28
-##  htmlwidgets            1.2       2018-04-19
-##  httpuv                 1.4.4.2   2018-07-02
-##  httr                   1.3.1     2017-08-20
-##  igraph                 1.2.1     2018-03-10
-##  influenceR             0.1.0     2015-09-03
-##  IRanges                2.12.0    2018-07-10
-##  iterators            * 1.0.9     2017-12-12
-##  jsonlite               1.5       2017-06-01
-##  kableExtra           * 0.9.0     2018-05-21
-##  klaR                   0.6-14    2018-03-19
-##  knitr                * 1.20      2018-02-20
-##  labeling               0.3       2014-08-23
-##  later                  0.7.3     2018-06-08
-##  latex2exp              0.4.0     2015-11-30
-##  lattice              * 0.20-35   2017-03-25
-##  latticeExtra           0.6-28    2016-02-09
-##  lavaan                 0.6-1     2018-05-22
-##  lazyeval               0.2.1     2017-10-29
-##  LearnBayes             2.15.1    2018-03-18
-##  limma                  3.34.9    2018-07-10
-##  lme4                   1.1-17    2018-04-03
-##  lmtest                 0.9-36    2018-04-04
-##  lubridate              1.7.4     2018-04-11
-##  magrittr             * 1.5       2014-11-22
-##  manipulate             1.0.1     2014-12-24
-##  MASS                 * 7.3-50    2018-04-30
-##  Matrix                 1.2-14    2018-04-09
-##  matrixStats          * 0.53.1    2018-02-11
-##  maxLik                 1.3-4     2015-11-09
-##  MBESS                  4.4.3     2018-01-10
-##  mc2d                   0.1-18    2017-03-06
-##  memoise                1.1.0     2017-04-21
-##  methods              * 3.4.4     2018-03-16
-##  mgcv                   1.8-24    2018-06-18
-##  mime                   0.5       2016-07-07
-##  miniUI                 0.1.1.1   2018-05-18
-##  minpack.lm             1.2-1     2016-11-20
-##  minqa                  1.2.4     2014-10-09
-##  miscTools              0.6-22    2016-11-25
-##  mnormt                 1.5-5     2016-10-15
-##  modelr                 0.1.2     2018-05-11
-##  modeltools             0.2-21    2013-09-02
-##  multcomp               1.4-8     2017-11-08
-##  multcompView           0.1-7     2015-07-31
-##  multtest               2.34.0    2018-07-10
-##  munsell                0.5.0     2018-06-12
-##  mvtnorm                1.0-8     2018-05-31
-##  nlme                   3.1-137   2018-04-07
-##  nloptr                 1.0.4     2017-08-22
-##  nnet                   7.3-12    2016-02-02
-##  nortest                1.0-4     2015-07-30
-##  openxlsx               4.1.0     2018-05-26
-##  ordinal                2018.4-19 2018-04-19
-##  packrat                0.4.9-3   2018-06-01
-##  pairwiseAdonis       * 0.0.1     2018-07-10
-##  pander                 0.6.2     2018-07-08
-##  parallel             * 3.4.4     2018-03-16
-##  pbivnorm               0.6.0     2015-01-23
-##  permute              * 0.9-4     2016-09-09
-##  phyloseq             * 1.22.3    2018-07-10
-##  pillar                 1.2.3     2018-05-25
-##  pkgconfig              2.0.1     2017-03-21
-##  plyr                   1.8.4     2016-06-08
-##  preprocessCore         1.40.0    2018-07-10
-##  promises               1.0.1     2018-04-13
-##  proto                  1.0.0     2016-10-29
-##  psych                  1.8.4     2018-05-06
-##  purrr                * 0.2.5     2018-05-29
-##  pwr                    1.2-2     2018-03-03
-##  questionr              0.6.2     2017-11-01
-##  R6                     2.2.2     2017-06-17
-##  Rcmdr                  2.4-4     2018-04-16
-##  RcmdrMisc              1.0-10    2018-04-02
-##  RColorBrewer           1.1-2     2014-12-07
-##  rcompanion           * 1.13.2    2018-04-27
-##  Rcpp                   0.12.17   2018-05-18
-##  RCurl                  1.95-4.10 2018-01-04
-##  readr                * 1.1.1     2017-05-16
-##  readxl                 1.1.0     2018-04-20
-##  relimp                 1.0-5     2016-03-30
-##  reshape                0.8.7     2017-08-06
-##  reshape2               1.4.3     2017-12-11
-##  rgexf                  0.15.3    2015-03-24
-##  rhdf5                  2.22.0    2018-07-10
-##  rio                    0.5.10    2018-03-29
-##  rlang                  0.2.1     2018-05-30
-##  rmarkdown            * 1.10      2018-06-11
-##  robustbase             0.93-1    2018-06-23
-##  Rook                   1.1-1     2014-10-20
-##  rpart                  4.1-13    2018-02-23
-##  rprojroot              1.3-2     2018-01-03
-##  rstudioapi             0.7       2017-09-07
-##  Rttf2pt1               1.3.7     2018-06-29
-##  RVAideMemoire          0.9-69-3  2018-05-14
-##  rvest                  0.3.2     2016-06-17
-##  S4Vectors              0.16.0    2018-07-10
-##  sandwich               2.4-0     2017-07-26
-##  scales               * 0.5.0     2017-08-24
-##  SCRT                   1.2.2     2018-03-07
-##  shiny                  1.1.0     2018-05-17
-##  sp                     1.3-1     2018-06-05
-##  spatial                7.3-11    2015-08-30
-##  spData                 0.2.9.0   2018-06-17
-##  spdep                  0.7-7     2018-04-03
-##  splines                3.4.4     2018-03-16
-##  stats                * 3.4.4     2018-03-16
-##  stats4                 3.4.4     2018-03-16
-##  stringi                1.2.3     2018-06-12
-##  stringr              * 1.3.1     2018-05-10
-##  SummarizedExperiment   1.8.1     2018-07-10
-##  SuppDists              1.1-9.4   2016-09-23
-##  survey                 3.33-2    2018-03-13
-##  survival               2.42-4    2018-06-30
-##  svglite              * 1.2.1     2017-09-11
-##  tcltk                * 3.4.4     2018-03-16
-##  tcltk2                 1.2-11    2014-12-20
-##  tensorA                0.36      2010-12-01
-##  TH.data                1.0-8     2017-01-23
-##  tibble               * 1.4.2     2018-01-22
-##  tidyr                * 0.8.1     2018-05-18
-##  tidyselect             0.2.4     2018-02-26
-##  tidyverse            * 1.2.1     2017-11-14
-##  timeDate               3043.102  2018-02-21
-##  timeSeries             3042.102  2017-11-17
-##  tools                  3.4.4     2018-03-16
-##  ucminf                 1.1-4     2016-08-18
-##  userfriendlyscience  * 0.7.1     2018-05-02
-##  utils                * 3.4.4     2018-03-16
-##  vegan                * 2.5-2     2018-05-17
-##  viridis                0.5.1     2018-03-29
-##  viridisLite            0.3.0     2018-02-01
-##  visNetwork             2.0.4     2018-06-14
-##  vsn                  * 3.46.0    2018-07-10
-##  withr                  2.1.2     2018-03-15
-##  WRS2                   0.10-0    2018-06-15
-##  XML                    3.98-1.11 2018-06-11
-##  xml2                   1.2.0     2018-01-24
-##  xtable                 1.8-2     2016-02-05
-##  XVector                0.18.0    2018-07-10
-##  yaml                   2.1.19    2018-05-01
-##  zip                    1.0.0     2017-04-25
-##  zlibbioc               1.24.0    2018-07-10
-##  zoo                    1.8-2     2018-06-11
-##  source                                         
-##  CRAN (R 3.4.4)                                 
-##  CRAN (R 3.4.4)                                 
-##  CRAN (R 3.4.4)                                 
-##  Bioconductor                                   
-##  Bioconductor                                   
-##  CRAN (R 3.4.4)                                 
-##  Bioconductor                                   
-##  CRAN (R 3.4.4)                                 
-##  CRAN (R 3.4.4)                                 
-##  Github (datarootsio/artyfarty@e2b3804)         
-##  CRAN (R 3.4.4)                                 
-##  CRAN (R 3.4.4)                                 
-##  local                                          
-##  CRAN (R 3.4.4)                                 
-##  CRAN (R 3.4.4)                                 
-##  CRAN (R 3.4.4)                                 
-##  CRAN (R 3.4.4)                                 
-##  CRAN (R 3.4.4)                                 
-##  Bioconductor                                   
-##  Bioconductor                                   
-##  Bioconductor                                   
-##  Bioconductor                                   
-##  CRAN (R 3.4.4)                                 
-##  Bioconductor                                   
-##  Bioconductor                                   
-##  CRAN (R 3.4.4)                                 
-##  CRAN (R 3.4.1)                                 
-##  CRAN (R 3.4.4)                                 
-##  CRAN (R 3.4.4)                                 
-##  CRAN (R 3.4.4)                                 
-##  CRAN (R 3.4.4)                                 
-##  CRAN (R 3.4.4)                                 
-##  CRAN (R 3.4.4)                                 
-##  CRAN (R 3.4.4)                                 
-##  CRAN (R 3.4.0)                                 
-##  CRAN (R 3.4.4)                                 
-##  CRAN (R 3.4.4)                                 
-##  CRAN (R 3.4.4)                                 
-##  CRAN (R 3.3.1)                                 
-##  CRAN (R 3.4.4)                                 
-##  CRAN (R 3.4.4)                                 
-##  CRAN (R 3.4.4)                                 
-##  local                                          
-##  CRAN (R 3.4.4)                                 
-##  CRAN (R 3.4.4)                                 
-##  CRAN (R 3.4.4)                                 
-##  CRAN (R 3.4.4)                                 
-##  CRAN (R 3.4.4)                                 
-##  CRAN (R 3.4.4)                                 
-##  local                                          
-##  Bioconductor                                   
-##  CRAN (R 3.4.4)                                 
-##  CRAN (R 3.4.4)                                 
-##  CRAN (R 3.4.4)                                 
-##  CRAN (R 3.4.4)                                 
-##  CRAN (R 3.4.4)                                 
-##  CRAN (R 3.4.4)                                 
-##  CRAN (R 3.4.4)                                 
-##  CRAN (R 3.4.4)                                 
-##  CRAN (R 3.4.4)                                 
-##  CRAN (R 3.4.4)                                 
-##  CRAN (R 3.4.4)                                 
-##  CRAN (R 3.4.4)                                 
-##  CRAN (R 3.4.4)                                 
-##  CRAN (R 3.4.4)                                 
-##  CRAN (R 3.4.4)                                 
-##  CRAN (R 3.4.4)                                 
-##  CRAN (R 3.4.4)                                 
-##  CRAN (R 3.4.4)                                 
-##  CRAN (R 3.4.4)                                 
-##  CRAN (R 3.4.4)                                 
-##  CRAN (R 3.4.4)                                 
-##  CRAN (R 3.4.4)                                 
-##  CRAN (R 3.4.4)                                 
-##  CRAN (R 3.4.4)                                 
-##  CRAN (R 3.4.4)                                 
-##  Bioconductor                                   
-##  Bioconductor                                   
-##  Bioconductor                                   
-##  CRAN (R 3.4.4)                                 
-##  url                                            
-##  Github (gadenbuie/ggpomological@5d0c335)       
-##  CRAN (R 3.4.4)                                 
-##  CRAN (R 3.4.4)                                 
-##  url                                            
-##  CRAN (R 3.4.4)                                 
-##  CRAN (R 3.4.4)                                 
-##  CRAN (R 3.4.4)                                 
-##  local                                          
-##  local                                          
-##  local                                          
-##  CRAN (R 3.4.4)                                 
-##  CRAN (R 3.4.4)                                 
-##  CRAN (R 3.4.4)                                 
-##  CRAN (R 3.4.4)                                 
-##  CRAN (R 3.4.4)                                 
-##  CRAN (R 3.4.4)                                 
-##  CRAN (R 3.4.4)                                 
-##  CRAN (R 3.4.4)                                 
-##  CRAN (R 3.4.4)                                 
-##  CRAN (R 3.4.4)                                 
-##  CRAN (R 3.4.4)                                 
-##  CRAN (R 3.4.4)                                 
-##  CRAN (R 3.4.4)                                 
-##  CRAN (R 3.4.4)                                 
-##  CRAN (R 3.4.4)                                 
-##  CRAN (R 3.4.4)                                 
-##  Bioconductor                                   
-##  CRAN (R 3.4.4)                                 
-##  CRAN (R 3.4.4)                                 
-##  CRAN (R 3.4.4)                                 
-##  CRAN (R 3.4.4)                                 
-##  CRAN (R 3.4.4)                                 
-##  CRAN (R 3.4.4)                                 
-##  CRAN (R 3.4.4)                                 
-##  CRAN (R 3.4.4)                                 
-##  CRAN (R 3.3.3)                                 
-##  CRAN (R 3.4.4)                                 
-##  CRAN (R 3.4.4)                                 
-##  CRAN (R 3.4.4)                                 
-##  CRAN (R 3.4.4)                                 
-##  Bioconductor                                   
-##  CRAN (R 3.4.4)                                 
-##  CRAN (R 3.4.4)                                 
-##  CRAN (R 3.4.4)                                 
-##  CRAN (R 3.4.4)                                 
-##  CRAN (R 3.4.4)                                 
-##  CRAN (R 3.4.4)                                 
-##  CRAN (R 3.4.4)                                 
-##  CRAN (R 3.4.4)                                 
-##  CRAN (R 3.4.4)                                 
-##  CRAN (R 3.4.4)                                 
-##  CRAN (R 3.4.4)                                 
-##  CRAN (R 3.4.4)                                 
-##  local                                          
-##  CRAN (R 3.4.4)                                 
-##  CRAN (R 3.4.4)                                 
-##  CRAN (R 3.4.4)                                 
-##  CRAN (R 3.4.4)                                 
-##  CRAN (R 3.4.4)                                 
-##  CRAN (R 3.4.4)                                 
-##  CRAN (R 3.4.4)                                 
-##  CRAN (R 3.4.4)                                 
-##  CRAN (R 3.4.4)                                 
-##  CRAN (R 3.4.4)                                 
-##  CRAN (R 3.4.4)                                 
-##  Bioconductor                                   
-##  CRAN (R 3.4.4)                                 
-##  CRAN (R 3.4.4)                                 
-##  CRAN (R 3.4.4)                                 
-##  CRAN (R 3.4.4)                                 
-##  CRAN (R 3.4.0)                                 
-##  CRAN (R 3.4.4)                                 
-##  CRAN (R 3.4.4)                                 
-##  CRAN (R 3.4.4)                                 
-##  CRAN (R 3.4.4)                                 
-##  Github (pmartinezarbizu/pairwiseAdonis@17be405)
-##  CRAN (R 3.4.4)                                 
-##  local                                          
-##  CRAN (R 3.4.4)                                 
-##  CRAN (R 3.4.4)                                 
-##  Bioconductor                                   
-##  CRAN (R 3.4.4)                                 
-##  CRAN (R 3.4.4)                                 
-##  CRAN (R 3.4.4)                                 
-##  Bioconductor                                   
-##  CRAN (R 3.4.4)                                 
-##  CRAN (R 3.4.4)                                 
-##  CRAN (R 3.4.4)                                 
-##  CRAN (R 3.4.4)                                 
-##  CRAN (R 3.4.4)                                 
-##  CRAN (R 3.4.4)                                 
-##  CRAN (R 3.4.4)                                 
-##  CRAN (R 3.4.4)                                 
-##  CRAN (R 3.4.4)                                 
-##  CRAN (R 3.4.4)                                 
-##  CRAN (R 3.4.4)                                 
-##  CRAN (R 3.4.4)                                 
-##  CRAN (R 3.4.4)                                 
-##  CRAN (R 3.4.4)                                 
-##  CRAN (R 3.4.4)                                 
-##  CRAN (R 3.4.4)                                 
-##  CRAN (R 3.4.4)                                 
-##  CRAN (R 3.4.4)                                 
-##  CRAN (R 3.4.4)                                 
-##  Bioconductor                                   
-##  CRAN (R 3.4.4)                                 
-##  CRAN (R 3.4.4)                                 
-##  CRAN (R 3.4.4)                                 
-##  CRAN (R 3.4.4)                                 
-##  CRAN (R 3.4.4)                                 
-##  CRAN (R 3.4.3)                                 
-##  CRAN (R 3.4.4)                                 
-##  CRAN (R 3.4.4)                                 
-##  CRAN (R 3.4.4)                                 
-##  CRAN (R 3.4.4)                                 
-##  CRAN (R 3.4.4)                                 
-##  Bioconductor                                   
-##  CRAN (R 3.4.4)                                 
-##  CRAN (R 3.4.4)                                 
-##  CRAN (R 3.4.4)                                 
-##  CRAN (R 3.4.4)                                 
-##  CRAN (R 3.4.4)                                 
-##  CRAN (R 3.2.5)                                 
-##  CRAN (R 3.4.4)                                 
-##  CRAN (R 3.4.4)                                 
-##  local                                          
-##  local                                          
-##  local                                          
-##  CRAN (R 3.4.4)                                 
-##  CRAN (R 3.4.4)                                 
-##  Bioconductor                                   
-##  CRAN (R 3.4.4)                                 
-##  CRAN (R 3.4.4)                                 
-##  CRAN (R 3.4.4)                                 
-##  CRAN (R 3.4.4)                                 
-##  local                                          
-##  CRAN (R 3.4.4)                                 
-##  CRAN (R 3.4.4)                                 
-##  CRAN (R 3.4.4)                                 
-##  CRAN (R 3.4.4)                                 
-##  CRAN (R 3.4.4)                                 
-##  CRAN (R 3.4.4)                                 
-##  CRAN (R 3.4.4)                                 
-##  CRAN (R 3.4.4)                                 
-##  CRAN (R 3.4.4)                                 
-##  local                                          
-##  CRAN (R 3.4.4)                                 
-##  CRAN (R 3.4.4)                                 
-##  local                                          
-##  CRAN (R 3.4.4)                                 
-##  CRAN (R 3.4.4)                                 
-##  CRAN (R 3.4.4)                                 
-##  CRAN (R 3.4.4)                                 
-##  Bioconductor                                   
-##  CRAN (R 3.4.4)                                 
-##  CRAN (R 3.4.4)                                 
-##  CRAN (R 3.4.4)                                 
-##  CRAN (R 3.4.4)                                 
-##  CRAN (R 3.4.4)                                 
-##  Bioconductor                                   
-##  CRAN (R 3.4.4)                                 
-##  CRAN (R 3.4.4)                                 
-##  Bioconductor                                   
-##  CRAN (R 3.4.4)
+## ─ Packages ─────────────────────────────────────────────────────────────────────────────
+##  package              * version   date       lib source                                  
+##  abind                  1.4-5     2016-07-21 [1] CRAN (R 3.4.4)                          
+##  acepack                1.4.1     2016-10-29 [1] CRAN (R 3.5.1)                          
+##  ade4                   1.7-13    2018-08-31 [1] CRAN (R 3.5.1)                          
+##  affy                   1.58.0    2018-09-25 [1] Bioconductor                            
+##  affyio                 1.50.0    2018-09-25 [1] Bioconductor                            
+##  agricolae            * 1.2-8     2017-09-12 [1] CRAN (R 3.4.4)                          
+##  ALDEx2               * 1.10.0    2019-01-04 [1] Bioconductor                            
+##  AlgDesign              1.1-7.3   2014-10-15 [1] CRAN (R 3.5.1)                          
+##  ape                    5.2       2018-09-24 [1] CRAN (R 3.4.4)                          
+##  artyfarty            * 0.0.1     2018-09-25 [1] Github (datarootsio/artyfarty@e2b3804)  
+##  assertthat             0.2.0     2017-04-11 [1] CRAN (R 3.5.1)                          
+##  backports              1.1.3     2018-12-14 [1] CRAN (R 3.4.4)                          
+##  base64enc              0.1-3     2015-07-28 [1] CRAN (R 3.5.1)                          
+##  bayesm                 3.1-1     2018-12-21 [1] CRAN (R 3.4.4)                          
+##  BiasedUrn              1.07      2015-12-28 [1] CRAN (R 3.4.4)                          
+##  bindr                  0.1.1     2018-03-13 [1] CRAN (R 3.5.1)                          
+##  bindrcpp             * 0.2.2     2018-03-29 [1] CRAN (R 3.4.4)                          
+##  Biobase              * 2.38.0    2019-01-04 [1] Bioconductor                            
+##  BiocGenerics         * 0.24.0    2019-01-04 [1] Bioconductor                            
+##  BiocInstaller          1.28.0    2019-01-04 [1] Bioconductor                            
+##  BiocParallel           1.12.0    2019-01-04 [1] Bioconductor                            
+##  BiodiversityR        * 2.10-1    2018-07-14 [1] CRAN (R 3.4.4)                          
+##  biomformat             1.8.0     2018-09-26 [1] Bioconductor                            
+##  Biostrings             2.48.0    2018-09-25 [1] Bioconductor                            
+##  bitops                 1.0-6     2013-08-17 [1] CRAN (R 3.5.1)                          
+##  boot                   1.3-20    2017-07-30 [4] CRAN (R 3.4.2)                          
+##  brew                   1.0-6     2011-04-13 [1] CRAN (R 3.5.1)                          
+##  broom                  0.5.1     2018-12-05 [1] CRAN (R 3.4.4)                          
+##  callr                  3.1.1     2018-12-21 [1] CRAN (R 3.4.4)                          
+##  car                  * 3.0-2     2018-08-23 [1] CRAN (R 3.4.4)                          
+##  carData              * 3.0-2     2018-09-30 [1] CRAN (R 3.4.4)                          
+##  cellranger             1.1.0     2016-07-27 [1] CRAN (R 3.5.1)                          
+##  checkmate              1.8.5     2017-10-24 [1] CRAN (R 3.4.4)                          
+##  class                  7.3-15    2019-01-01 [1] CRAN (R 3.4.4)                          
+##  cli                    1.0.1     2018-09-25 [1] CRAN (R 3.5.1)                          
+##  cluster                2.0.7-1   2018-04-09 [1] CRAN (R 3.5.1)                          
+##  coda                   0.19-2    2018-10-08 [1] CRAN (R 3.4.4)                          
+##  codetools              0.2-16    2018-12-24 [4] CRAN (R 3.4.4)                          
+##  coin                   1.2-2     2017-11-28 [1] CRAN (R 3.5.1)                          
+##  colorspace             1.3-2     2016-12-14 [1] CRAN (R 3.5.1)                          
+##  combinat               0.0-8     2012-10-29 [1] CRAN (R 3.5.1)                          
+##  compositions           1.40-2    2018-06-14 [1] CRAN (R 3.5.1)                          
+##  cowplot              * 0.9.3     2018-07-15 [1] CRAN (R 3.5.1)                          
+##  crayon                 1.3.4     2017-09-16 [1] CRAN (R 3.5.1)                          
+##  curl                   3.2       2018-03-28 [1] CRAN (R 3.5.1)                          
+##  data.table             1.11.8    2018-09-30 [1] CRAN (R 3.4.4)                          
+##  data.tree              0.7.8     2018-09-24 [1] CRAN (R 3.4.4)                          
+##  DelayedArray           0.6.6     2018-09-11 [1] Bioconductor                            
+##  deldir                 0.1-15    2018-04-01 [1] CRAN (R 3.5.1)                          
+##  DEoptimR               1.0-8     2016-11-19 [1] CRAN (R 3.5.1)                          
+##  desc                   1.2.0     2018-05-01 [1] CRAN (R 3.5.1)                          
+##  DescTools              0.99.26   2018-11-13 [1] CRAN (R 3.4.4)                          
+##  devtools             * 2.0.1     2018-10-26 [1] CRAN (R 3.4.4)                          
+##  DiagrammeR             1.0.0     2018-03-01 [1] CRAN (R 3.4.4)                          
+##  digest                 0.6.18    2018-10-10 [1] CRAN (R 3.4.4)                          
+##  diptest                0.75-7    2016-12-05 [1] CRAN (R 3.4.4)                          
+##  doParallel           * 1.0.14    2018-09-24 [1] CRAN (R 3.5.1)                          
+##  downloader             0.4       2015-07-09 [1] CRAN (R 3.5.1)                          
+##  dplyr                * 0.7.8     2018-11-10 [1] CRAN (R 3.4.4)                          
+##  e1071                  1.7-0     2018-07-28 [1] CRAN (R 3.5.1)                          
+##  effects                4.0-3     2018-08-19 [1] CRAN (R 3.5.1)                          
+##  EMT                    1.1       2013-01-29 [1] CRAN (R 3.5.1)                          
+##  energy                 1.7-5     2018-08-11 [1] CRAN (R 3.4.4)                          
+##  evaluate               0.12      2018-10-09 [1] CRAN (R 3.4.4)                          
+##  expm                   0.999-3   2018-09-22 [1] CRAN (R 3.5.1)                          
+##  extrafont            * 0.17      2014-12-08 [1] CRAN (R 3.5.1)                          
+##  extrafontdb            1.0       2012-06-11 [1] CRAN (R 3.5.1)                          
+##  forcats              * 0.3.0     2018-02-19 [1] CRAN (R 3.4.4)                          
+##  foreach              * 1.4.4     2017-12-12 [1] CRAN (R 3.5.1)                          
+##  foreign                0.8-71    2018-07-20 [4] CRAN (R 3.4.4)                          
+##  Formula                1.2-3     2018-05-03 [1] CRAN (R 3.5.1)                          
+##  fs                     1.2.6     2018-08-23 [1] CRAN (R 3.4.4)                          
+##  gdata                  2.18.0    2017-06-06 [1] CRAN (R 3.5.1)                          
+##  gdtools              * 0.1.7     2018-02-27 [1] CRAN (R 3.4.4)                          
+##  generics               0.0.2     2018-11-29 [1] CRAN (R 3.4.4)                          
+##  GenomeInfoDb           1.16.0    2018-09-25 [1] Bioconductor                            
+##  GenomeInfoDbData       1.1.0     2018-09-25 [1] Bioconductor                            
+##  GenomicRanges          1.32.7    2018-09-20 [1] Bioconductor                            
+##  GGally                 1.4.0     2018-05-17 [1] CRAN (R 3.4.4)                          
+##  ggplot2              * 3.1.0     2018-10-25 [1] CRAN (R 3.4.4)                          
+##  ggpomological        * 0.1.2     2019-01-04 [1] Github (gadenbuie/ggpomological@5d0c335)
+##  ggrepel                0.8.0     2018-05-09 [1] CRAN (R 3.4.4)                          
+##  ggridges               0.5.1     2018-09-27 [1] CRAN (R 3.4.4)                          
+##  ggtern               * 3.1.0     2018-12-19 [1] CRAN (R 3.4.4)                          
+##  glue                   1.3.0     2018-07-17 [1] CRAN (R 3.5.1)                          
+##  gmodels                2.18.1    2018-06-25 [1] CRAN (R 3.5.1)                          
+##  GPArotation            2014.11-1 2014-11-25 [1] CRAN (R 3.4.4)                          
+##  gridExtra              2.3       2017-09-09 [1] CRAN (R 3.4.4)                          
+##  gtable                 0.2.0     2016-02-26 [1] CRAN (R 3.4.4)                          
+##  gtools                 3.8.1     2018-06-26 [1] CRAN (R 3.5.1)                          
+##  haven                  2.0.0     2018-11-22 [1] CRAN (R 3.4.4)                          
+##  hexbin               * 1.27.2    2018-01-15 [1] CRAN (R 3.4.4)                          
+##  highr                  0.7       2018-06-09 [1] CRAN (R 3.5.1)                          
+##  Hmisc                  4.1-1     2018-01-03 [1] CRAN (R 3.5.1)                          
+##  hms                    0.4.2     2018-03-10 [1] CRAN (R 3.5.1)                          
+##  htmlTable              1.13      2019-01-02 [1] CRAN (R 3.4.4)                          
+##  htmltools              0.3.6     2017-04-28 [1] CRAN (R 3.4.4)                          
+##  htmlwidgets            1.3       2018-09-30 [1] CRAN (R 3.4.4)                          
+##  httpuv                 1.4.5.1   2018-12-18 [1] CRAN (R 3.4.4)                          
+##  httr                   1.4.0     2018-12-11 [1] CRAN (R 3.4.4)                          
+##  igraph                 1.2.2     2018-07-27 [1] CRAN (R 3.5.1)                          
+##  influenceR             0.1.0     2015-09-03 [1] CRAN (R 3.5.1)                          
+##  IRanges                2.14.12   2018-09-20 [1] Bioconductor                            
+##  iterators            * 1.0.10    2018-07-13 [1] CRAN (R 3.5.1)                          
+##  jsonlite               1.6       2018-12-07 [1] CRAN (R 3.4.4)                          
+##  kableExtra           * 0.9.0     2018-05-21 [1] CRAN (R 3.5.1)                          
+##  klaR                   0.6-14    2018-03-19 [1] CRAN (R 3.5.1)                          
+##  knitr                * 1.21      2018-12-10 [1] CRAN (R 3.4.4)                          
+##  labeling               0.3       2014-08-23 [1] CRAN (R 3.5.1)                          
+##  later                  0.7.5     2018-09-18 [1] CRAN (R 3.4.4)                          
+##  latex2exp              0.4.0     2015-11-30 [1] CRAN (R 3.5.1)                          
+##  lattice              * 0.20-38   2018-11-04 [1] CRAN (R 3.4.4)                          
+##  latticeExtra           0.6-28    2016-02-09 [1] CRAN (R 3.5.1)                          
+##  lavaan                 0.6-3     2018-09-22 [1] CRAN (R 3.4.4)                          
+##  lazyeval               0.2.1     2017-10-29 [1] CRAN (R 3.5.1)                          
+##  LearnBayes             2.15.1    2018-03-18 [1] CRAN (R 3.5.1)                          
+##  limma                  3.36.5    2018-09-20 [1] Bioconductor                            
+##  lme4                   1.1-19    2018-11-10 [1] CRAN (R 3.4.4)                          
+##  lmtest                 0.9-36    2018-04-04 [1] CRAN (R 3.4.4)                          
+##  lubridate              1.7.4     2018-04-11 [1] CRAN (R 3.4.4)                          
+##  magrittr             * 1.5       2014-11-22 [1] CRAN (R 3.5.1)                          
+##  manipulate             1.0.1     2014-12-24 [1] CRAN (R 3.5.1)                          
+##  MASS                 * 7.3-51.1  2018-11-01 [1] CRAN (R 3.4.4)                          
+##  Matrix                 1.2-15    2018-11-01 [1] CRAN (R 3.4.4)                          
+##  matrixStats          * 0.54.0    2018-07-23 [1] CRAN (R 3.4.4)                          
+##  MBESS                  4.4.3     2018-01-10 [1] CRAN (R 3.4.4)                          
+##  memoise                1.1.0     2017-04-21 [1] CRAN (R 3.5.1)                          
+##  mgcv                   1.8-26    2018-11-21 [4] CRAN (R 3.4.4)                          
+##  mime                   0.6       2018-10-05 [1] CRAN (R 3.4.4)                          
+##  miniUI                 0.1.1.1   2018-05-18 [1] CRAN (R 3.5.1)                          
+##  minpack.lm             1.2-1     2016-11-20 [1] CRAN (R 3.4.4)                          
+##  minqa                  1.2.4     2014-10-09 [1] CRAN (R 3.4.4)                          
+##  mnormt                 1.5-5     2016-10-15 [1] CRAN (R 3.4.4)                          
+##  modelr                 0.1.2     2018-05-11 [1] CRAN (R 3.5.1)                          
+##  modeltools             0.2-22    2018-07-16 [1] CRAN (R 3.5.1)                          
+##  multcomp               1.4-8     2017-11-08 [1] CRAN (R 3.5.1)                          
+##  multcompView           0.1-7     2015-07-31 [1] CRAN (R 3.4.4)                          
+##  multtest               2.36.0    2018-09-26 [1] Bioconductor                            
+##  MuMIn                * 1.42.1    2018-07-23 [1] CRAN (R 3.4.4)                          
+##  munsell                0.5.0     2018-06-12 [1] CRAN (R 3.5.1)                          
+##  mvtnorm                1.0-8     2018-05-31 [1] CRAN (R 3.5.1)                          
+##  nlme                 * 3.1-137   2018-04-07 [1] CRAN (R 3.4.4)                          
+##  nloptr                 1.2.1     2018-10-03 [1] CRAN (R 3.4.4)                          
+##  nnet                   7.3-12    2016-02-02 [1] CRAN (R 3.5.1)                          
+##  nortest                1.0-4     2015-07-30 [1] CRAN (R 3.5.1)                          
+##  openxlsx               4.1.0     2018-05-26 [1] CRAN (R 3.4.4)                          
+##  pander                 0.6.3     2018-11-06 [1] CRAN (R 3.4.4)                          
+##  pbivnorm               0.6.0     2015-01-23 [1] CRAN (R 3.4.4)                          
+##  permute              * 0.9-4     2016-09-09 [1] CRAN (R 3.4.4)                          
+##  phyloseq             * 1.22.3    2019-01-04 [1] Bioconductor                            
+##  pillar                 1.3.1     2018-12-15 [1] CRAN (R 3.4.4)                          
+##  pkgbuild               1.0.2     2018-10-16 [1] CRAN (R 3.4.4)                          
+##  pkgconfig              2.0.2     2018-08-16 [1] CRAN (R 3.5.1)                          
+##  pkgload                1.0.2     2018-10-29 [1] CRAN (R 3.4.4)                          
+##  plyr                   1.8.4     2016-06-08 [1] CRAN (R 3.4.4)                          
+##  preprocessCore         1.42.0    2018-09-25 [1] Bioconductor                            
+##  prettyunits            1.0.2     2015-07-13 [1] CRAN (R 3.5.1)                          
+##  processx               3.2.1     2018-12-05 [1] CRAN (R 3.4.4)                          
+##  promises               1.0.1     2018-04-13 [1] CRAN (R 3.4.4)                          
+##  proto                  1.0.0     2016-10-29 [1] CRAN (R 3.5.1)                          
+##  ps                     1.3.0     2018-12-21 [1] CRAN (R 3.4.4)                          
+##  psych                  1.8.10    2018-10-31 [1] CRAN (R 3.4.4)                          
+##  purrr                * 0.2.5     2018-05-29 [1] CRAN (R 3.4.4)                          
+##  pwr                    1.2-2     2018-03-03 [1] CRAN (R 3.4.4)                          
+##  questionr              0.7.0     2018-11-26 [1] CRAN (R 3.4.4)                          
+##  R6                     2.3.0     2018-10-04 [1] CRAN (R 3.4.4)                          
+##  Rcmdr                  2.5-1     2018-09-11 [1] CRAN (R 3.5.1)                          
+##  RcmdrMisc              2.5-1     2018-09-10 [1] CRAN (R 3.5.1)                          
+##  RColorBrewer           1.1-2     2014-12-07 [1] CRAN (R 3.4.4)                          
+##  rcompanion           * 2.0.10    2019-01-03 [1] CRAN (R 3.4.4)                          
+##  Rcpp                   1.0.0     2018-11-07 [1] CRAN (R 3.4.4)                          
+##  RCurl                  1.95-4.11 2018-07-15 [1] CRAN (R 3.5.1)                          
+##  readr                * 1.3.1     2018-12-21 [1] CRAN (R 3.4.4)                          
+##  readxl                 1.2.0     2018-12-19 [1] CRAN (R 3.4.4)                          
+##  relimp                 1.0-5     2016-03-30 [1] CRAN (R 3.5.1)                          
+##  remotes                2.0.2     2018-10-30 [1] CRAN (R 3.4.4)                          
+##  reshape                0.8.8     2018-10-23 [1] CRAN (R 3.4.4)                          
+##  reshape2               1.4.3     2017-12-11 [1] CRAN (R 3.4.4)                          
+##  rgexf                  0.15.3    2015-03-24 [1] CRAN (R 3.5.1)                          
+##  rhdf5                  2.24.0    2018-09-25 [1] Bioconductor                            
+##  Rhdf5lib               1.2.1     2018-09-25 [1] Bioconductor                            
+##  rio                    0.5.16    2018-11-26 [1] CRAN (R 3.4.4)                          
+##  rlang                  0.3.0.1   2018-10-25 [1] CRAN (R 3.4.4)                          
+##  rmarkdown            * 1.11      2018-12-08 [1] CRAN (R 3.4.4)                          
+##  robustbase             0.93-3    2018-09-21 [1] CRAN (R 3.4.4)                          
+##  Rook                   1.1-1     2014-10-20 [1] CRAN (R 3.5.1)                          
+##  rpart                  4.1-13    2018-02-23 [1] CRAN (R 3.4.4)                          
+##  rprojroot              1.3-2     2018-01-03 [1] CRAN (R 3.5.1)                          
+##  rstudioapi             0.8       2018-10-02 [1] CRAN (R 3.4.4)                          
+##  Rttf2pt1               1.3.7     2018-06-29 [1] CRAN (R 3.5.1)                          
+##  rvest                  0.3.2     2016-06-17 [1] CRAN (R 3.5.1)                          
+##  S4Vectors              0.18.3    2018-09-25 [1] Bioconductor                            
+##  sandwich               2.5-0     2018-08-17 [1] CRAN (R 3.5.1)                          
+##  scales               * 1.0.0     2018-08-09 [1] CRAN (R 3.4.4)                          
+##  SCRT                   1.2.2     2018-03-07 [1] CRAN (R 3.4.4)                          
+##  sessioninfo            1.1.1     2018-11-05 [1] CRAN (R 3.4.4)                          
+##  shiny                  1.2.0     2018-11-02 [1] CRAN (R 3.4.4)                          
+##  sp                     1.3-1     2018-06-05 [1] CRAN (R 3.4.4)                          
+##  spData                 0.2.9.6   2018-12-03 [1] CRAN (R 3.4.4)                          
+##  spdep                  0.8-1     2018-11-21 [1] CRAN (R 3.4.4)                          
+##  stringi                1.2.4     2018-07-20 [1] CRAN (R 3.4.4)                          
+##  stringr              * 1.3.1     2018-05-10 [1] CRAN (R 3.5.1)                          
+##  SummarizedExperiment   1.10.1    2018-09-26 [1] Bioconductor                            
+##  SuppDists              1.1-9.4   2016-09-23 [1] CRAN (R 3.4.4)                          
+##  survey                 3.35      2018-12-17 [1] CRAN (R 3.4.4)                          
+##  survival               2.43-3    2018-11-26 [1] CRAN (R 3.4.4)                          
+##  svglite              * 1.2.1     2017-09-11 [1] CRAN (R 3.4.4)                          
+##  tcltk2                 1.2-11    2014-12-20 [1] CRAN (R 3.5.1)                          
+##  tensorA                0.36.1    2018-07-29 [1] CRAN (R 3.5.1)                          
+##  testthat               2.0.1     2018-10-13 [1] CRAN (R 3.4.4)                          
+##  TH.data                1.0-9     2018-07-10 [1] CRAN (R 3.5.1)                          
+##  tibble               * 1.4.2     2018-01-22 [1] CRAN (R 3.4.4)                          
+##  tidyr                * 0.8.2     2018-10-28 [1] CRAN (R 3.4.4)                          
+##  tidyselect             0.2.5     2018-10-11 [1] CRAN (R 3.4.4)                          
+##  tidyverse            * 1.2.1     2017-11-14 [1] CRAN (R 3.4.4)                          
+##  ufs                    0.0.1     2018-08-02 [1] CRAN (R 3.4.4)                          
+##  userfriendlyscience  * 0.7.2     2018-09-24 [1] CRAN (R 3.4.4)                          
+##  usethis              * 1.4.0     2018-08-14 [1] CRAN (R 3.4.4)                          
+##  vegan                * 2.5-3     2018-10-25 [1] CRAN (R 3.4.4)                          
+##  viridis                0.5.1     2018-03-29 [1] CRAN (R 3.4.4)                          
+##  viridisLite            0.3.0     2018-02-01 [1] CRAN (R 3.5.1)                          
+##  visNetwork             2.0.5     2018-12-05 [1] CRAN (R 3.4.4)                          
+##  vsn                  * 3.46.0    2019-01-04 [1] Bioconductor                            
+##  withr                  2.1.2     2018-03-15 [1] CRAN (R 3.5.1)                          
+##  xfun                   0.4       2018-10-23 [1] CRAN (R 3.4.4)                          
+##  XML                    3.98-1.16 2018-08-19 [1] CRAN (R 3.4.4)                          
+##  xml2                   1.2.0     2018-01-24 [1] CRAN (R 3.4.4)                          
+##  xtable                 1.8-3     2018-08-29 [1] CRAN (R 3.4.4)                          
+##  XVector                0.20.0    2018-09-25 [1] Bioconductor                            
+##  yaml                   2.2.0     2018-07-25 [1] CRAN (R 3.5.1)                          
+##  zip                    1.0.0     2017-04-25 [1] CRAN (R 3.5.1)                          
+##  zlibbioc               1.26.0    2018-09-25 [1] Bioconductor                            
+##  zoo                    1.8-4     2018-09-19 [1] CRAN (R 3.4.4)                          
+## 
+## [1] /home/angel/R/x86_64-pc-linux-gnu-library/3.5
+## [2] /usr/local/lib/R/site-library
+## [3] /usr/lib/R/site-library
+## [4] /usr/lib/R/library
 ```
 
 ## References
