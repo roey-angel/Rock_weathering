@@ -5,11 +5,13 @@ author: "Roey Angel (<roey.angel@bc.cas.cz>)"
 date: "`r Sys.Date()`"
 bibliography: references.bib
 link-citations: yes
+always_allow_html: yes
 output:
   rmarkdown::html_document:
     toc: true
     toc_float: true
     keep_md: true
+    keep_tex: true
     number_sections: false
     highlight: "pygments"
     theme: "flatly"
@@ -40,6 +42,7 @@ repo <- "http://cran.wu.ac.at"
   "svglite", # for svg files
   "car", # Companion to Applied Regression
   "userfriendlyscience", # Quantitative Analysis Made Accessible
+  "agricolae", # Statistical Procedures for Agricultural Research
   "vegan", # community ecology methods
   "doParallel", # parallel backend for the foreach/%dopar% function
   "BiodiversityR", # Package for Community Ecology and Suitability Analysis
