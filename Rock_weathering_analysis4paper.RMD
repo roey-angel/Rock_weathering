@@ -1634,47 +1634,47 @@ p_isotopes <-
                      labels = c(expression(paste(delta ^ {13}, "C")),
                                 expression(paste(delta ^ {18}, "O")))) +
   ylab(expression(paste(delta ^ {13}, "C / ",
-                        delta ^ {18}, "O", " (", "\u2030", ")"
+                        delta ^ {18}, "O", " (", "\u2030", "VPDB",")"
   )))
 
 p_isotopes <- plot_grid(p_isotopes, labels = "b", label_size = 20)
 print(p_isotopes)
 ```
 
-### Desiccation experiment
-```{r desiccation, cache=T}
-read_csv("Data/desiccation_data_full.csv") ->
-  Desiccation_long
-Desiccation_long$Rock %<>% fct_relevel(., "Limestone")
-Desiccation_long$BRC %<>% 
+### Drying experiment
+```{r drying, cache=T}
+read_csv("Data/Drying_data_full.csv") ->
+  Drying_long
+Drying_long$Rock %<>% fct_relevel(., "Limestone")
+Drying_long$BRC %<>% 
   fct_relevel(., "Present")
-Desiccation_long$Sample <- with(Desiccation_long, paste(Rock, BRC))
+Drying_long$Sample <- with(Drying_long, paste(Rock, BRC))
 
-Desiccation_mods <- tibble(Sample = character(), Intercept = numeric(), b = numeric(), a = numeric(), P = numeric(), R2 = numeric())
+Drying_mods <- tibble(Sample = character(), Intercept = numeric(), b = numeric(), a = numeric(), P = numeric(), R2 = numeric())
 mods <- list()
 j <- 1
-for (i in unique(Desiccation_long$Sample)) {
-  data2model <- Desiccation_long[Desiccation_long$Sample == i, ]
+for (i in unique(Drying_long$Sample)) {
+  data2model <- Drying_long[Drying_long$Sample == i, ]
   colnames(data2model) <- c("Time", "Replicate", "BRC", "Rock", "RWC", "Sample")
   (mod <- lme(RWC ~ poly(Time, 2, raw = TRUE), random = ~0 + Time|Replicate, data = data2model))
   intervals(mod)
   # mod <- lm(`Residual water content (%)` ~ sqrt(1/(`Time (h)` + 1)), data = data2model)
   mods[[j]] <- mod
-  Desiccation_mods[j, "Sample"] <- i
-  Desiccation_mods[j, "Intercept"] <- mod$coefficients$fixed[1]
-  Desiccation_mods[j, "b"] <- mod$coefficients$fixed[2]
-  Desiccation_mods[j, "a"] <- mod$coefficients$fixed[3]
-  Desiccation_mods[j, "P"] <- anova(mod)$`p-value`[2]
-  Desiccation_mods[j, "R2"] <- r.squaredGLMM(mod)[, "R2c"]
+  Drying_mods[j, "Sample"] <- i
+  Drying_mods[j, "Intercept"] <- mod$coefficients$fixed[1]
+  Drying_mods[j, "b"] <- mod$coefficients$fixed[2]
+  Drying_mods[j, "a"] <- mod$coefficients$fixed[3]
+  Drying_mods[j, "P"] <- anova(mod)$`p-value`[2]
+  Drying_mods[j, "R2"] <- r.squaredGLMM(mod)[, "R2c"]
   j <- j + 1
 }
 
-Desiccation_mods %>% 
+Drying_mods %>% 
   kable(., digits = c(1, 1, 2, 2, 3, 2)) %>%
   kable_styling(bootstrap_options = c("hover", "condensed", "responsive"), full_width = F)
 
 # comapre with and without crust
-data2model <- Desiccation_long
+data2model <- Drying_long
 colnames(data2model) <- c("Time", "Replicate", "BRC", "Rock", "RWC", "Sample")
 mod_all <- lme(RWC ~ poly(Time, 2, raw = TRUE), random = ~0 + Time|Replicate, data = data2model)
 mod_treatment <- lme(RWC ~ poly(Time, 2, raw = TRUE) * BRC, random = ~0 + Time|Replicate, data = data2model)
@@ -1700,9 +1700,9 @@ mod_treatment <- lme(RWC ~ poly(Time, 2, raw = TRUE) * BRC, random = ~0 + Time|R
 anova(mod_all, mod_treatment)
 
 
-p_desiccation <-
+p_drying <-
   ggplot(
-    Desiccation_long,
+    Drying_long,
     aes(
       x = `Time (h)`,
       y = `Residual water content (%)`,
@@ -1720,7 +1720,7 @@ p_desiccation <-
   scale_x_continuous(limits = c(0, 50), expand = c(0.01, 0.01)) +
   # scale_fill_manual(values = pom4) +
   scale_color_manual(values = pom4)
-print(p_desiccation)
+print(p_drying)
 ```
 
 ```{r session_info, echo=T, results="markdown"}
