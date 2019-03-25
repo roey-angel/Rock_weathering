@@ -5,7 +5,8 @@ Arid_rock_weathering
 [![DOI](https://zenodo.org/badge/140607356.svg)](https://zenodo.org/badge/latestdoi/140607356)
 
 
-Data, sequence analysis and plotting scripts for figures included in the paper: [New insights into the role of epilithic biological crust in arid rock weathering]().
+Data, sequence analysis ploting for figures included in the paper: [Wieler, N., Ginat, H., Gillor, O. and Angel, R.: The origin and role of biological rock crusts in rocky desert weathering, Biogeosciences, 16(6), 1133–1145, doi:https://doi.org/10.5194/bg-16-1133-2019, 2019.
+](https://doi.org/10.5194/bg-16-1133-2019).
 
 Abstract
 --------
